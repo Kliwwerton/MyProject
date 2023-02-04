@@ -1,16 +1,27 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from kivy.config import Config
+Config.set('graphics', 'width', 400)
+Config.set('graphics', 'height', 700)
+
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.boxlayout import BoxLayout
+# from kivy.uix.textinput import TextInput
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+class Container(ScreenManager):
+    def press(self):
+        if self.name == 'First':
+            self.button_1.text = "Нажата"
+            self.Screen = 'Second'
 
 
-# Press the green button in the gutter to run the script.
+class EngineerApp(App):
+    def build(self):
+        return Container()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    EngineerApp().run()

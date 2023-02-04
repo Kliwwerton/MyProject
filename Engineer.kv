@@ -1,0 +1,44 @@
+<Container>:
+    button_1: button_1
+
+    Screen:
+        name: 'First'
+
+        BoxLayout:
+            padding: 10
+            orientation: 'vertical'
+            spacing: 5
+            background_normal: ''
+            background_color:[0,0,1,1]
+
+            Label:
+                text: 'Юный Инженер!'
+                font_size: '40sp'
+                color: [247/255, 40/255, 40/255, 0.5]
+
+            Button:
+                id: button_1
+                text: 'Расчёт давления прессования.'
+                font_size: '25sp'
+                on_release:
+                    root.current = 'Second'
+                    root.transition.direction = 'left'
+
+            Button:
+                text: 'Расчёт химического состава.'
+                font_size: '25sp'
+
+            Button:
+                text: 'СПРАВОЧНИКИ!'
+                font_size: '25sp'
+                background_color: [35/255,186/255,232/255,.5]
+
+
+    Screen:
+        name: 'Second'
+
+        Button:
+            text: 'Press me'
+            on_release:
+                root.current = 'First'
+                root.transition.direction = 'right'
