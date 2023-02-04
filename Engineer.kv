@@ -8,15 +8,24 @@
         orientation: 'vertical'
         spacing: 10
 
+        Image:
+            source: 'image.png'
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
 
         Label:
             text: 'Выбери действие'
             font_size: '40sp'
-            color: [1, 40/255, 40/255, 0.5]
+            color: [164/255, 0, 0, 1]
+            outline_color: 50/255,0,0,1
+            outline_width: 2
         Button:
             id: button_1
             text: 'Расчёт давления прессования.'
             font_size: '25sp'
+            background_color: 0 , 1, 0.8, 1
+            size_hint: 1, 0.2
             on_release:
                 root.manager.current = 'Second'
                 root.manager.transition.direction = 'left'
@@ -24,12 +33,15 @@
         Button:
             text: 'Расчёт химического состава.'
             font_size: '25sp'
+            background_color: 0, 200/255, 0, 1
+            size_hint: 1, 0.2
 
         Button:
             id: button_guide
             text: 'СПРАВОЧНИКИ!'
             font_size: '25sp'
             background_color: 0,0,1,1
+            size_hint: 1,0.2
         Button:
             id: button_exit
             background_color: 0,0,0,0
@@ -52,8 +64,38 @@
 <Second>:
     name: 'Second'
 
-    Button:
-        text: 'Press me'
-        on_release:
-            root.manager.current = 'First'
-            root.manager.transition.direction = 'right'
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        orientation: 'vertical'
+
+        Label:
+            text: 'Расчёт давления прессования.'
+            size_hint: 1, 1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            font_size: '25sp'
+            color: [164/255, 0, 0, 1]
+            outline_color: 50/255,0,0,1
+            outline_width: 2
+
+        Spinner:
+            id: spinner_id
+
+            size_hint: 1, 0.2
+            background_color: 99/255 ,229/255, 0, 1
+            color: 99/255 ,229/255, 0, 1
+            font_size: '25sp'
+            text: 'Выбери пресс'
+            values: ['SACMI-500', 'SACMI-1000', 'ДО-542']
+
+
+        BoxLayout:
+
+
+            Button:
+                size_hint: 0.8, 0.15
+                pos_hint: {'center_x': 0.5, 'center_y': 0.08}
+                text: 'Главное меню'
+                on_release:
+                    root.manager.current = 'First'
+                    root.manager.transition.direction = 'right'

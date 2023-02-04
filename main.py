@@ -23,7 +23,6 @@ class First(Screen):
             self.ids.My_image.source = 'to_exit.png'
         else:
             self.ids.My_image.source = 'exit.png'
-        self.ids.button_guide.text = 'Нажата кнопка Exit'
 
 
 class Second(Screen):
@@ -40,4 +39,5 @@ class EngineerApp(App):
 
 
 if __name__ == '__main__':
-    EngineerApp(title='ИНЖЕНЕР НА ВСЮ ГОЛОВУ!').run()
+    EngineerApp(title='ИНЖЕНЕР НА ВСЮ ГОЛОВУ!',
+                icon='Logo.png').run()
