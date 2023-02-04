@@ -4,6 +4,7 @@ Config.set('graphics', 'width', 400)
 Config.set('graphics', 'height', 700)
 
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen, ScreenManager
@@ -13,14 +14,16 @@ from kivy.uix.boxlayout import BoxLayout
 
 class Container(ScreenManager):
 
-    def press(self):
-        if self.name == 'First':
-            self.button_1.text = "Нажата"
-            self.Screen = 'Second'
+    pass
 
 
 class First(Screen):
-    pass
+    def press(self):
+        if self.ids.My_image.source == 'exit.png':
+            self.ids.My_image.source = 'to_exit.png'
+        else:
+            self.ids.My_image.source = 'exit.png'
+        self.ids.button_guide.text = 'Нажата кнопка Exit'
 
 
 class Second(Screen):
@@ -29,6 +32,7 @@ class Second(Screen):
 
 class EngineerApp(App):
     def build(self):
+        Window.clearcolor = (0.91,.72,.99,.5)
         container = Container()
         container.add_widget(First())
         container.add_widget(Second())
@@ -36,4 +40,4 @@ class EngineerApp(App):
 
 
 if __name__ == '__main__':
-    EngineerApp().run()
+    EngineerApp(title='ИНЖЕНЕР НА ВСЮ ГОЛОВУ!').run()

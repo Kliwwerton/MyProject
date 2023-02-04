@@ -1,20 +1,18 @@
 
-
 <First>:
     name: 'First'
 
     BoxLayout:
+        background_color: [1,0,1,0.5]
         padding: 10
         orientation: 'vertical'
-        spacing: 5
-        background_normal: ''
-        background_color:[0,0,1,1]
+        spacing: 10
+
 
         Label:
-            text: 'Юный Инженер!'
+            text: 'Выбери действие'
             font_size: '40sp'
-            color: [247/255, 40/255, 40/255, 0.5]
-
+            color: [1, 40/255, 40/255, 0.5]
         Button:
             id: button_1
             text: 'Расчёт давления прессования.'
@@ -28,9 +26,27 @@
             font_size: '25sp'
 
         Button:
+            id: button_guide
             text: 'СПРАВОЧНИКИ!'
             font_size: '25sp'
-            background_color: [35/255,186/255,232/255,.5]
+            background_color: 0,0,1,1
+        Button:
+            id: button_exit
+            background_color: 0,0,0,0
+            size_hint: .2, 0.2
+
+            pos_hint: {'center_x': 0.5}
+            on_press:
+                root.press()
+            on_release:
+                app.stop()
+
+            Image:
+                id: My_image
+                source: 'exit.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 50,100
 
 
 <Second>:
