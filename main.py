@@ -12,15 +12,27 @@ from kivy.uix.boxlayout import BoxLayout
 
 
 class Container(ScreenManager):
+
     def press(self):
         if self.name == 'First':
             self.button_1.text = "Нажата"
             self.Screen = 'Second'
 
 
+class First(Screen):
+    pass
+
+
+class Second(Screen):
+    pass
+
+
 class EngineerApp(App):
     def build(self):
-        return Container()
+        container = Container()
+        container.add_widget(First())
+        container.add_widget(Second())
+        return container
 
 
 if __name__ == '__main__':
