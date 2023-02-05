@@ -9,7 +9,7 @@
         spacing: 10
 
         Image:
-            source: 'image.png'
+            source: 'Images/image.png'
             size_hint: 1, 1
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
@@ -55,7 +55,7 @@
 
             Image:
                 id: My_image
-                source: 'exit.png'
+                source: 'Images/exit.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
                 size: 50,100
@@ -67,19 +67,20 @@
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'
+        Label:
+            text: 'Расчёт давления прессования.'
+
+            font_size: '25sp'
+            color: [164/255, 0, 0, 1]
+            outline_color: 50/255,0,0,1
+            outline_width: 2
+
+
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
         padding: 10
 
-#        Label:
-#            text: 'Расчёт давления прессования.'
-#
-#
-#            pos_hint: {'anchor_x': 'center', 'anchor_y': 'top'}
-#            font_size: '25sp'
-#            color: [164/255, 0, 0, 1]
-#            outline_color: 50/255,0,0,1
-#            outline_width: 2
-#    AnchorLayout:
-#        pos_hint:{'anchor_x': 'center', 'anchor_y': 'center'}
         Spinner:
             id: spinner_id
 
@@ -90,15 +91,23 @@
             font_size: '25sp'
             text: 'Выбери пресс'
             values: ['SACMI-500', 'SACMI-1000', 'ДО-542', 'СМ-1085', 'LAEIS-1000']
-#
+
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'bottom'
+        padding: 10
 
         Button:
-            size_hint: 0.6, 0.04
+            size_hint: 0.22, 0.12
+            background_color: 0,0,0,0
 
-            text: 'Главное меню'
+
             on_release:
                 root.manager.current = 'First'
                 root.manager.transition.direction = 'right'
+
+            Image:
+                source: 'Images/Home.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 80,80

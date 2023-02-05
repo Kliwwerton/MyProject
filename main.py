@@ -19,10 +19,10 @@ class Container(ScreenManager):
 
 class First(Screen):
     def press(self):
-        if self.ids.My_image.source == 'exit.png':
-            self.ids.My_image.source = 'to_exit.png'
+        if self.ids.My_image.source == 'Images/exit.png':
+            self.ids.My_image.source = 'Images/to_exit.png'
         else:
-            self.ids.My_image.source = 'exit.png'
+            self.ids.My_image.source = 'Images/exit.png'
 
 
 class Second(Screen):
@@ -40,4 +40,4 @@ class EngineerApp(App):
 
 if __name__ == '__main__':
     EngineerApp(title='ИНЖЕНЕР НА ВСЮ ГОЛОВУ!',
-                icon='Logo.png').run()
+                icon='Images/Logo.png').run()
