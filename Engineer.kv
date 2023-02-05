@@ -64,50 +64,77 @@
 <Second>:
     name: 'Second'
 
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'top'
-        Label:
-            text: 'Расчёт давления прессования.'
+    BoxLayout:
+        orientation: 'vertical'
+        padding:10
+        spacing:10
 
-            font_size: '25sp'
-            color: [164/255, 0, 0, 1]
-            outline_color: 50/255,0,0,1
-            outline_width: 2
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
 
 
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'center'
-        padding: 10
-
-        Spinner:
-            id: spinner_id
-
-
-            size_hint: 1, 0.07
-            background_color: 99/255 ,229/255, 0, 1
-            color: 99/255 ,229/255, 0, 1
-            font_size: '25sp'
-            text: 'Выбери пресс'
-            values: ['SACMI-500', 'SACMI-1000', 'ДО-542', 'СМ-1085', 'LAEIS-1000']
-
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'bottom'
-        padding: 10
-
-        Button:
-            size_hint: 0.22, 0.12
-            background_color: 0,0,0,0
+            Label:
+                text: 'Расчёт давления прессования.'
+                font_size: '25sp'
+                size_hint: 1, 0.2
+#                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+                color: [164/255, 0, 0, 1]
+                outline_color: 50/255,0,0,1
+                outline_width: 2
 
 
-            on_release:
-                root.manager.current = 'First'
-                root.manager.transition.direction = 'right'
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            padding: 10
 
-            Image:
-                source: 'Images/Home.png'
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-                size: 80,80
+            Spinner:
+                id: spinner_id
+
+
+                size_hint: 1, 0.3
+                background_color: 99/255 ,229/255, 0, 1
+                color: 99/255 ,229/255, 0, 1
+                font_size: '25sp'
+                text: 'Выбери пресс'
+                values: ['SACMI-500', 'SACMI-1000', 'ДО-542', 'СМ-1085', 'LAEIS-1000']
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+
+                BoxLayout:
+                    padding: 10
+
+
+                    Label:
+                        text: 'Давление прессования: '
+    #                    pos_hint: {'x': 0.05, 'y': 0.1}
+                        size_hint: 1, 0.6
+                        color: 1,0,0,1
+                        font_size: '15sp'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+                    Label:
+                        text: 'None'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+
+
+            Button:
+                size_hint: 0.16, 0.34
+                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                background_color: 1,0,0,1
+
+
+                on_release:
+                    root.manager.current = 'First'
+                    root.manager.transition.direction = 'right'
+
+                Image:
+                    source: 'Images/Home.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 60,60
