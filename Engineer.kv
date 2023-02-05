@@ -64,38 +64,41 @@
 <Second>:
     name: 'Second'
 
-    BoxLayout:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
         padding: 10
-        spacing: 10
-        orientation: 'vertical'
 
-        Label:
-            text: 'Расчёт давления прессования.'
-            size_hint: 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-            font_size: '25sp'
-            color: [164/255, 0, 0, 1]
-            outline_color: 50/255,0,0,1
-            outline_width: 2
-
+#        Label:
+#            text: 'Расчёт давления прессования.'
+#
+#
+#            pos_hint: {'anchor_x': 'center', 'anchor_y': 'top'}
+#            font_size: '25sp'
+#            color: [164/255, 0, 0, 1]
+#            outline_color: 50/255,0,0,1
+#            outline_width: 2
+#    AnchorLayout:
+#        pos_hint:{'anchor_x': 'center', 'anchor_y': 'center'}
         Spinner:
             id: spinner_id
 
-            size_hint: 1, 0.2
+
+            size_hint: 1, 0.07
             background_color: 99/255 ,229/255, 0, 1
             color: 99/255 ,229/255, 0, 1
             font_size: '25sp'
             text: 'Выбери пресс'
-            values: ['SACMI-500', 'SACMI-1000', 'ДО-542']
+            values: ['SACMI-500', 'SACMI-1000', 'ДО-542', 'СМ-1085', 'LAEIS-1000']
+#
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
 
+        Button:
+            size_hint: 0.6, 0.04
 
-        BoxLayout:
-
-
-            Button:
-                size_hint: 0.8, 0.15
-                pos_hint: {'center_x': 0.5, 'center_y': 0.08}
-                text: 'Главное меню'
-                on_release:
-                    root.manager.current = 'First'
-                    root.manager.transition.direction = 'right'
+            text: 'Главное меню'
+            on_release:
+                root.manager.current = 'First'
+                root.manager.transition.direction = 'right'
