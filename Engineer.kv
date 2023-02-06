@@ -72,56 +72,105 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'top'
-
-
+            size_hint: 1, 0.3
+            padding:0,10,0,0
+#
             Label:
                 text: 'Расчёт давления прессования.'
                 font_size: '25sp'
                 size_hint: 1, 0.2
-#                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-                color: [164/255, 0, 0, 1]
+                color: [255/255, 0, 0, 1]
                 outline_color: 50/255,0,0,1
                 outline_width: 2
 
+        Spinner:
+            id: spinner_id
+            size_hint: 1, 0.15
+            background_normal: '0,0,0,0'
+            background_color: 44/255 ,164/255, 45/255, 1
+            color: 0/255 ,22/255, 203/255, 1
+            font_size: '25sp'
+            text: 'Выберите пресс'
+            values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
 
-        AnchorLayout:
-            anchor_x: 'center'
-            anchor_y: 'top'
+        Button:
+            text: 'Площадь изделия (ПОДБОР)'
+            font_size: '20sp'
+            size_hint: 1,0.15
+            background_color: 0.2, 1, 0.7, 1
+
+        BoxLayout:
+            size_hint: 1, 0.15
+
+            Label:
+                text: 'S изделия: '
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+#                size_hint: 1, 0.15
+                color: 0,0,0,1
+
+            Label:
+                id: label_S_pressing_value
+                text: ''
+                font_size: '30sp'
+
+            Label:
+                markup: True
+                font_size: 32
+                text: 'см[sup]2[/sup]'
+
+
+
+
+        GridLayout:
             padding: 10
+            spacing:10
+            cols: 3
+            size_hint: 1,0.15
+            Label:
+                text: 'Кол-во штампов: '
+                font_size: '25sp'
+                pos_hint: {'x': 0.0, 'y': 0.5}
+#                text_size: self.size
+#                halign: 'left'
+#                valign: 'middle'
 
             Spinner:
-                id: spinner_id
-
-
-                size_hint: 1, 0.3
-                background_color: 99/255 ,229/255, 0, 1
-                color: 99/255 ,229/255, 0, 1
+                id: spinner_quantity_stamps
+                size_hint: 0.2, 1
+                background_normal: '0,0,0,0'
+                background_color: 44/255 ,164/255, 45/255, 1
+                color: 0/255 ,22/255, 203/255, 1
                 font_size: '25sp'
-                text: 'Выбери пресс'
-                values: ['SACMI-500', 'SACMI-1000', 'ДО-542', 'СМ-1085', 'LAEIS-1000']
+                text: '1'
+                values: ['1', '2', '3', '4']
+            Label:
+                text: 'шт.'
+                font_size: '25sp'
+                size_hint: 0.2,1
+
+
+
+
 
         BoxLayout:
             orientation: 'vertical'
 
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'bottom'
+            BoxLayout:
+                padding: 10
 
-                BoxLayout:
-                    padding: 10
-
-
-                    Label:
-                        text: 'Давление прессования: '
-    #                    pos_hint: {'x': 0.05, 'y': 0.1}
-                        size_hint: 1, 0.6
-                        color: 1,0,0,1
-                        font_size: '15sp'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.21}
-                    Label:
-                        text: 'None'
-                        pos_hint: {'center_x': 0.5, 'center_y': 0.21}
-
+                Label:
+                    text: 'Давление прессования: '
+#                    pos_hint: {'x': 0.05, 'y': 0.1}
+                    size_hint: 1, 0.6
+                    color: 1,0,0,1
+                    font_size: '15sp'
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+                Label:
+                    text: 'None'
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.21}
 
             Button:
                 size_hint: 0.16, 0.34
