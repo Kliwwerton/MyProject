@@ -118,16 +118,16 @@
 
             Label:
                 markup: True
-                font_size: 32
+                font_size: '25sp'
                 text: 'см[sup]2[/sup]'
 
 
 
 
         GridLayout:
-
+            spacing: 10
             cols: 3
-            size_hint: 1,0.14
+            size_hint: 1,0.2
             Label:
                 text: 'Кол-во штампов: '
                 font_size: '25sp'
@@ -138,17 +138,17 @@
 
             Spinner:
                 id: spinner_quantity_stamps
-                size_hint: 0.3, 0.6
+                size_hint: 0.3, 1
                 background_normal: '0,0,0,0'
                 background_color: 44/255 ,164/255, 45/255, 1
                 color: 0/255 ,22/255, 203/255, 1
-                font_size: '20sp'
+                font_size: '15sp'
                 text: '1'
                 values: ['1', '2', '3', '4']
             Label:
                 text: 'шт.'
                 font_size: '25sp'
-                size_hint: 0.3, 1
+                size_hint: 0.4, 1
 
             Label:
                 text: 'Удельное давление: '
@@ -159,10 +159,14 @@
                 valign: 'middle'
 
             TextInput:
-                multiline: False
+                multiline: False # TODO fix this code
+                size_hint: 0.3, 1
 
-
-
+            Label:
+                markup: True
+                text: 'кг/см[sup]2[/sup]'
+                font_size: '25sp'
+                size_hint: 0.4, 1
 
 
         BoxLayout:
