@@ -125,31 +125,41 @@
 
 
         GridLayout:
-            padding: 10
-            spacing:10
+
             cols: 3
-            size_hint: 1,0.15
+            size_hint: 1,0.14
             Label:
                 text: 'Кол-во штампов: '
                 font_size: '25sp'
                 pos_hint: {'x': 0.0, 'y': 0.5}
-#                text_size: self.size
-#                halign: 'left'
-#                valign: 'middle'
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
             Spinner:
                 id: spinner_quantity_stamps
-                size_hint: 0.2, 1
+                size_hint: 0.3, 0.6
                 background_normal: '0,0,0,0'
                 background_color: 44/255 ,164/255, 45/255, 1
                 color: 0/255 ,22/255, 203/255, 1
-                font_size: '25sp'
+                font_size: '20sp'
                 text: '1'
                 values: ['1', '2', '3', '4']
             Label:
                 text: 'шт.'
                 font_size: '25sp'
-                size_hint: 0.2,1
+                size_hint: 0.3, 1
+
+            Label:
+                text: 'Удельное давление: '
+                font_size: '20sp'
+                pos_hint: {'x': 0.0, 'y': 0.5}
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            TextInput:
+                multiline: False
 
 
 
