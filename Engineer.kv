@@ -85,7 +85,7 @@
 
         Spinner:
             id: spinner_id
-            size_hint: 1, 0.15
+            size_hint: 1, 0.12
             background_normal: '0,0,0,0'
             background_color: 44/255 ,164/255, 45/255, 1
             color: 0/255 ,22/255, 203/255, 1
@@ -96,11 +96,13 @@
         Button:
             text: 'Площадь изделия (ПОДБОР)'
             font_size: '20sp'
-            size_hint: 1,0.15
+            size_hint: 1,0.12
             background_color: 0.2, 1, 0.7, 1
 
-        BoxLayout:
-            size_hint: 1, 0.15
+        GridLayout:
+            size_hint: 1, 0.4
+            spacing: 15
+            cols: 3
 
             Label:
                 text: 'S изделия: '
@@ -115,19 +117,14 @@
                 id: label_S_pressing_value
                 text: ''
                 font_size: '30sp'
+                size_hint: 0.3, 1
 
             Label:
                 markup: True
                 font_size: '25sp'
+                size_hint: 0.4, 1
                 text: 'см[sup]2[/sup]'
 
-
-
-
-        GridLayout:
-            spacing: 10
-            cols: 3
-            size_hint: 1,0.2
             Label:
                 text: 'Кол-во штампов: '
                 font_size: '25sp'
@@ -142,9 +139,10 @@
                 background_normal: '0,0,0,0'
                 background_color: 44/255 ,164/255, 45/255, 1
                 color: 0/255 ,22/255, 203/255, 1
-                font_size: '15sp'
+                font_size: '20sp'
                 text: '1'
                 values: ['1', '2', '3', '4']
+
             Label:
                 text: 'шт.'
                 font_size: '25sp'
@@ -159,8 +157,17 @@
                 valign: 'middle'
 
             TextInput:
-                multiline: False # TODO fix this code
+                id: text_input_Pud
+                multiline: False
                 size_hint: 0.3, 1
+                font_size: '20sp'
+                halign: 'center'
+                valign: 'middle'
+                input_tipe: 'number'
+                input_filter: 'int'
+                Bubble:
+                    text: 'Введи целое число'
+
 
             Label:
                 markup: True

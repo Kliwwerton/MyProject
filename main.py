@@ -2,6 +2,7 @@ from kivy.config import Config
 
 Config.set('graphics', 'width', 400)
 Config.set('graphics', 'height', 700)
+Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
 from kivy.core.window import Window
