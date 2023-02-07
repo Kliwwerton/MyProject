@@ -5,7 +5,10 @@ Config.set('graphics', 'height', 700)
 
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
+
+Builder.load_file('Engineer.kv')
 
 
 class Container(ScreenManager):
