@@ -12,13 +12,19 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 Builder.load_file('Engineer.kv')
 
-PRESS_PARAMETERS = {'LAEIS-1250':[1250, 11.98, 'N/см[sup]2[/sup]']}
+PRESS_PARAMETERS = {'LAEIS-1250':[1250, 11.98, 'N/см[sup]2[/sup]'],
+                    'SACMI-1000':[990, 350, 'Бар']}
 
 def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressure):
-    pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] * (specific_pressure/1000)) / PRESS_PARAMETERS[press][0]
-    print(pressure)
-    values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
-    return values
+    if press in PRESS_PARAMETERS:
+        pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] *
+                    (specific_pressure/1000)) / PRESS_PARAMETERS[press][0]
+        values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
+        return values
+    else:
+        pressure = False
+        return pressure
+
 
 class Container(ScreenManager):
     pass
@@ -46,9 +52,12 @@ class Second(Screen):
                                       square_pressing=float(self.ids.label_S_pressing_value.text),
                                       quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
                                       specific_pressure=int(self.ids.specific_pressure.text))
-            self.ids.label_P_pressing_text.text = 'Давление прессования:'
-            self.ids.label_P_pressing_value.text = str(data[0])
-            self.ids.unit_of_measurement.text = str(data[1])
+            if not data:
+                self.press()
+            else:
+                self.ids.label_P_pressing_text.text = 'Давление прессования:'
+                self.ids.label_P_pressing_value.text = str(data[0])
+                self.ids.unit_of_measurement.text = str(data[1])
         else:
             self.press()
 
