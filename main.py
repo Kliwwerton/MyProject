@@ -12,6 +12,13 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 Builder.load_file('Engineer.kv')
 
+PRESS_PARAMETERS = {'LAEIS-1250':[1250, 11.98, 'N/см[sup]2[/sup]']}
+
+def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressure):
+    pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] * (specific_pressure/1000)) / PRESS_PARAMETERS[press][0]
+    print(pressure)
+    values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
+    return values
 
 class Container(ScreenManager):
     pass
@@ -27,12 +34,23 @@ class First(Screen):
 
 class Second(Screen):
     def press(self):
-        self.ids.label_P_pressing_text.text = 'Давление прессования:'
-        self.ids.label_P_pressing_value.text = 'VALUE'
-        self.ids.unit_of_measurement.text = 'Пока NONE'
+        self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
+        self.ids.label_P_pressing_value.text = ''
+        self.ids.unit_of_measurement.text = ''
 
     def calculate(self):
-        pass
+        if self.ids.spinner_quantity_stamps.text == '0':
+            self.press()
+        elif self.ids.spinner_press_mark.text and self.ids.label_S_pressing_value.text and self.ids.spinner_quantity_stamps.text != '0' and self.ids.specific_pressure.text:
+            data = calculate_pressure(press=self.ids.spinner_press_mark.text,
+                                      square_pressing=float(self.ids.label_S_pressing_value.text),
+                                      quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
+                                      specific_pressure=int(self.ids.specific_pressure.text))
+            self.ids.label_P_pressing_text.text = 'Давление прессования:'
+            self.ids.label_P_pressing_value.text = str(data[0])
+            self.ids.unit_of_measurement.text = str(data[1])
+        else:
+            self.press()
 
     def press_exit(self):
         if self.ids.My_image.source == 'Images/exit.png':
@@ -49,8 +67,8 @@ class Second(Screen):
         self.ids.label_P_pressing_value.text = ''
         self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
-        self.ids.spinner_id.text = 'Выбурите пресс!'
-        self.ids.text_input_Pud.text = ''
+        self.ids.spinner_press_mark.text = 'Выбурите пресс!'
+        self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
 
     def reset_2(self):

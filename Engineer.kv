@@ -74,7 +74,7 @@
             anchor_y: 'top'
             size_hint: 1, 0.3
             padding:0,10,0,0
-#
+
             Label:
                 text: 'Расчёт давления прессования'
                 font_size: '25sp'
@@ -84,7 +84,7 @@
                 outline_width: 2
 
         Spinner:
-            id: spinner_id
+            id: spinner_press_mark
             size_hint: 1, 0.12
             background_normal: '0,0,0,0'
             background_color: 44/255 ,164/255, 45/255, 1
@@ -120,7 +120,7 @@
                 halign: 'center'
                 valign: 'middle'
                 input_tipe: 'number'
-                input_filter: 'int'
+                input_filter: 'float'
 
             Label:
                 markup: True
@@ -165,7 +165,7 @@
                 valign: 'middle'
 
             TextInput:
-                id: text_input_Pud
+                id: specific_pressure
                 multiline: False
                 size_hint: 0.3, 1
                 font_size: '20sp'
@@ -191,8 +191,8 @@
                 size_hint: 0.5, 0.6
                 background_normal: ''
                 background_color: 0.4,0,1,1
-                on_press:
-                    root.press()
+#                on_press:
+#                    root.press()
                 on_release:
                     root.calculate()
 
@@ -203,6 +203,7 @@
             Label:
                 id: label_P_pressing_text
                 text: ''
+                markup: True
                 size_hint: 1, 0.8
                 color: 1,0,0,1
                 font_size: '30sp'
@@ -214,6 +215,7 @@
 
                 Label:
                     id: label_P_pressing_value
+                    markup: True
                     text: ''
                     halign: 'right'
                     valign: 'middle'
@@ -223,6 +225,7 @@
                 Label:
                     id: unit_of_measurement
                     text: ''
+                    markup: True
                     size_hint: 0.8, 1
                     halign: 'left'
                     valign: 'middle'
