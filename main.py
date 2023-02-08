@@ -17,7 +17,7 @@ class Container(ScreenManager):
 
 
 class First(Screen):
-    def press(self):
+    def press_exit(self):
         if self.ids.My_image.source == 'Images/exit.png':
             self.ids.My_image.source = 'Images/to_exit.png'
         else:
@@ -25,7 +25,17 @@ class First(Screen):
 
 
 class Second(Screen):
-    pass
+    def press(self):
+        self.ids.label_P_pressing_text.text = 'Давление прессования: '
+
+    def unpressed(self):
+        pass
+
+    def press_exit(self):
+        if self.ids.My_image.source == 'Images/exit.png':
+            self.ids.My_image.source = 'Images/to_exit.png'
+        else:
+            self.ids.My_image.source = 'Images/exit.png'
 
 
 class EngineerApp(App):

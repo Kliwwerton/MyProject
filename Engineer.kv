@@ -49,7 +49,7 @@
 
             pos_hint: {'center_x': 0.5}
             on_press:
-                root.press()
+                root.press_exit()
             on_release:
                 app.stop()
 
@@ -100,7 +100,7 @@
             background_color: 0.2, 1, 0.7, 1
 
         GridLayout:
-            size_hint: 1, 0.4
+            size_hint: 1, 0.35
             spacing: 15
             cols: 3
 
@@ -165,9 +165,6 @@
                 valign: 'middle'
                 input_tipe: 'number'
                 input_filter: 'int'
-                Bubble:
-                    text: 'Введи целое число'
-
 
             Label:
                 markup: True
@@ -175,27 +172,53 @@
                 font_size: '25sp'
                 size_hint: 0.4, 1
 
-
-        BoxLayout:
-            orientation: 'vertical'
-
-            BoxLayout:
-                padding: 10
-
-                Label:
-                    text: 'Давление прессования: '
-#                    pos_hint: {'x': 0.05, 'y': 0.1}
-                    size_hint: 1, 0.6
-                    color: 1,0,0,1
-                    font_size: '15sp'
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.21}
-                Label:
-                    text: 'None'
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'bottom'
+            size_hint: 1, 0.2
 
             Button:
-                size_hint: 0.16, 0.34
-                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                text: 'Расчитать'
+                font_size: '25sp'
+                size_hint: 0.6, 0.7
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                background_normal: ''
+                background_color: 0.4,0,1,1
+                on_press:
+                    root.press()
+                on_release:
+                    root.unpressed()
+
+        BoxLayout:
+            size_hint: 1, 0.3
+            orientation: 'vertical'
+
+            Label:
+                id: label_P_pressing_text
+                text: ''
+                size_hint: 1, 0.8
+                color: 1,0,0,1
+                font_size: '30sp'
+#                pos_hint: {'center_x': 0.5, 'center_y': 0.21}
+
+            Label:
+                text: 'None'
+
+
+            Label:
+                id: label_P_pressing_value
+                text: ''
+
+
+        BoxLayout:
+            size_hint: 0.8, 0.2
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            padding:25
+
+
+            Button:
+#                size_hint: 0.4, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 background_color: 1,0,0,1
 
 
@@ -207,4 +230,21 @@
                     source: 'Images/Home.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
-                    size: 60,60
+                    size: 30,30
+
+            Button:
+                id: button_exit
+                background_color: 1,0,0,1
+#                size_hint: 0.4, 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_press:
+                    root.press_exit()
+                on_release:
+                    app.stop()
+
+                Image:
+                    id: My_image
+                    source: 'Images/exit.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 50,100
