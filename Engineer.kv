@@ -76,7 +76,7 @@
             padding:0,10,0,0
 #
             Label:
-                text: 'Расчёт давления прессования.'
+                text: 'Расчёт давления прессования'
                 font_size: '25sp'
                 size_hint: 1, 0.2
                 color: [255/255, 0, 0, 1]
@@ -99,31 +99,39 @@
             size_hint: 1,0.12
             background_color: 0.2, 1, 0.7, 1
 
-        GridLayout:
-            size_hint: 1, 0.35
-            spacing: 15
-            cols: 3
-
+        BoxLayout:
+            padding: 10
+            spacing: 10
+            size_hint: 1, 0.15
             Label:
                 text: 'S изделия: '
                 font_size: '20sp'
                 halign: 'left'
                 valign: 'middle'
                 text_size: self.size
-#                size_hint: 1, 0.15
+                size_hint: 0.3, 1
                 color: 0,0,0,1
 
-            Label:
+            TextInput:
                 id: label_S_pressing_value
-                text: ''
-                font_size: '30sp'
-                size_hint: 0.3, 1
+                multiline: False
+                font_size: '18sp'
+                size_hint: 0.45, 1
+                halign: 'center'
+                valign: 'middle'
+                input_tipe: 'number'
+                input_filter: 'int'
 
             Label:
                 markup: True
                 font_size: '25sp'
-                size_hint: 0.4, 1
+                size_hint: 0.2, 1
                 text: 'см[sup]2[/sup]'
+
+        GridLayout:
+            size_hint: 1, 0.25
+            spacing: 15
+            cols: 3
 
             Label:
                 text: 'Кол-во штампов: '
@@ -140,7 +148,7 @@
                 background_color: 44/255 ,164/255, 45/255, 1
                 color: 0/255 ,22/255, 203/255, 1
                 font_size: '20sp'
-                text: '1'
+                text: '0'
                 values: ['1', '2', '3', '4']
 
             Label:
@@ -180,17 +188,16 @@
             Button:
                 text: 'Расчитать'
                 font_size: '25sp'
-                size_hint: 0.6, 0.7
-                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                size_hint: 0.5, 0.6
                 background_normal: ''
                 background_color: 0.4,0,1,1
                 on_press:
                     root.press()
                 on_release:
-                    root.unpressed()
+                    root.calculate()
 
         BoxLayout:
-            size_hint: 1, 0.3
+            size_hint: 1, 0.25
             orientation: 'vertical'
 
             Label:
@@ -201,27 +208,50 @@
                 font_size: '30sp'
 #                pos_hint: {'center_x': 0.5, 'center_y': 0.21}
 
-            Label:
-                text: 'None'
+            BoxLayout:
+                padding: 10
+                spacing: 10
 
+                Label:
+                    id: label_P_pressing_value
+                    text: ''
+                    halign: 'right'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '30sp'
 
-            Label:
-                id: label_P_pressing_value
-                text: ''
+                Label:
+                    id: unit_of_measurement
+                    text: ''
+                    size_hint: 0.8, 1
+                    halign: 'left'
+                    valign: 'middle'
+                    text_size: self.size
+                    font_size: '25sp'
 
-
-        BoxLayout:
-            size_hint: 0.8, 0.2
+        Button:
+            size_hint: 0.18, 0.15
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            padding:25
+            background_color: 0,0,0,0
+            on_press:
+                root.reset()
+            on_release:
+                root.reset_2()
+            Image:
+                id: image_btn_reset
+                source: 'Images/reset.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size: 60, 100
 
+        FloatLayout:
+            size_hint: 0.8, 0.1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:
-#                size_hint: 0.4, 1
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                background_color: 1,0,0,1
-
-
+                size_hint: 0.15, 0.8
+                pos_hint: {'center_x': 0.25, 'center_y': 0.3}
+                background_color: 0,0,0,0
                 on_release:
                     root.manager.current = 'First'
                     root.manager.transition.direction = 'right'
@@ -234,9 +264,9 @@
 
             Button:
                 id: button_exit
-                background_color: 1,0,0,1
-#                size_hint: 0.4, 1
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                background_color: 0,0,0,0
+                size_hint: 0.15, 0.8
+                pos_hint: {'center_x': 0.75, 'center_y': 0.3}
                 on_press:
                     root.press_exit()
                 on_release:
