@@ -1,7 +1,7 @@
 from kivy.config import Config
 
-Config.set('graphics', 'width', 400)
-Config.set('graphics', 'height', 700)
+Config.set('graphics', 'width', 576)
+Config.set('graphics', 'height', 1024)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
@@ -91,12 +91,17 @@ class Second(Screen):
         self.sound_reset.play()
 
 
+class Third(Screen):
+    pass
+
+
 class EngineerApp(App):
     def build(self):
         Window.clearcolor = (232/255, 184/255, 1, 1)
         container = Container()
         container.add_widget(First())
         container.add_widget(Second())
+        container.add_widget(Third())
         return container
 
 
