@@ -10,22 +10,36 @@
 
         Image:
             source: 'Images/image.png'
-            size_hint: 1, 1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
         Label:
-            text: 'Выбери действие'
+            text: 'Выберите действие'
             font_size: '40sp'
+            size_hint: 1, 0.5
             color: [164/255, 0, 0, 1]
             outline_color: 50/255,0,0,1
             outline_width: 2
         Button:
             id: button_1
-            text: 'Расчёт давления прессования.'
+            text: 'Расчёт давления прессования\n через удельное.'
+            halign: 'center'
+            valign: 'middle'
             font_size: '25sp'
             background_color: 0 , 1, 0.8, 1
-            size_hint: 1, 0.2
+            size_hint: 1, 0.3
+            on_release:
+                root.manager.current = 'Second'
+                root.manager.transition.direction = 'left'
+
+        Button:
+            id: button_2
+            text: 'Расчёт удельного давления\n через прессовое.'
+            halign: 'center'
+            valign: 'middle'
+            font_size: '25sp'
+            background_color: 0 , 1, 0.8, 1
+            size_hint: 1, 0.3
             on_release:
                 root.manager.current = 'Second'
                 root.manager.transition.direction = 'left'
@@ -45,6 +59,7 @@
         Button:
             id: button_exit
             text: 'ВЫХОД'
+            font_size: '15sp'
             background_color: 1, 0, 0, 1
             size_hint: .2, 0.15
 
@@ -67,7 +82,8 @@
             padding:0,10,0,0
 
             Label:
-                text: 'Расчёт давления прессования'
+                text: 'Расчёт давления прессования\n через удельное давление.'
+                halign: 'center'
                 font_size: '25sp'
                 size_hint: 1, 0.2
                 color: [255/255, 0, 0, 1]
