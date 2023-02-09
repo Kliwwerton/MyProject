@@ -6,6 +6,7 @@ Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
@@ -46,6 +47,8 @@ class First(Screen):
 
 
 class Second(Screen):
+    sound = SoundLoader.load('sounds/sound.wav')
+    sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
     def press(self):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
         self.ids.label_P_pressing_value.text = ''
@@ -79,6 +82,13 @@ class Second(Screen):
         self.ids.spinner_press_mark.text = 'Выберите пресс!'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
+
+
+    def play_sound(self):
+        self.sound.play()
+
+    def play_sound_reset(self):
+        self.sound_reset.play()
 
 
 class EngineerApp(App):
