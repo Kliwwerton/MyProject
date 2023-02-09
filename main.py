@@ -42,11 +42,7 @@ class Container(ScreenManager):
 
 
 class First(Screen):
-    def press_exit(self):
-        if self.ids.My_image.source == 'Images/exit.png':
-            self.ids.My_image.source = 'Images/to_exit.png'
-        else:
-            self.ids.My_image.source = 'Images/exit.png'
+    pass
 
 
 class Second(Screen):
@@ -75,27 +71,14 @@ class Second(Screen):
         else:
             self.press()
 
-    def press_exit(self):
-        if self.ids.My_image.source == 'Images/exit.png':
-            self.ids.My_image.source = 'Images/to_exit.png'
-        else:
-            self.ids.My_image.source = 'Images/exit.png'
-
     def reset(self):
-        if self.ids.image_btn_reset.source == 'Images/reset.png':
-            self.ids.image_btn_reset.source = 'Images/reset_2.png'
-        else:
-            self.ids.image_btn_reset.source = 'Images/reset.png'
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_pressing_value.text = ''
         self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
-        self.ids.spinner_press_mark.text = 'Выбурите пресс!'
+        self.ids.spinner_press_mark.text = 'Выберите пресс!'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
-
-    def reset_2(self):
-        self.ids.image_btn_reset.source = 'Images/reset.png'
 
 
 class EngineerApp(App):

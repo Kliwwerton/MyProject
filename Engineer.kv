@@ -44,22 +44,13 @@
             size_hint: 1,0.2
         Button:
             id: button_exit
-            background_color: 0,0,0,0
-            size_hint: .2, 0.2
+            text: 'ВЫХОД'
+            background_color: 1, 0, 0, 1
+            size_hint: .2, 0.15
 
             pos_hint: {'center_x': 0.5}
-            on_press:
-                root.press_exit()
             on_release:
                 app.stop()
-
-            Image:
-                id: My_image
-                source: 'Images/exit.png'
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-                size: 50,100
-
 
 <Second>:
     name: 'Second'
@@ -186,13 +177,11 @@
             size_hint: 1, 0.2
 
             Button:
-                text: 'Расчитать'
+                text: 'Рассчитать'
                 font_size: '25sp'
                 size_hint: 0.5, 0.6
                 background_normal: ''
                 background_color: 0.4,0,1,1
-#                on_press:
-#                    root.press()
                 on_release:
                     root.calculate()
 
@@ -207,7 +196,6 @@
                 size_hint: 1, 0.8
                 color: 1,0,0,1
                 font_size: '30sp'
-#
 
             BoxLayout:
                 padding: 10
@@ -233,51 +221,36 @@
                     font_size: '25sp'
 
         Button:
-            size_hint: 0.18, 0.15
+            size_hint: 0.6, 0.12
+            text: 'СБРОС'
+            font_size: '25sp'
+
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            background_color: 0,0,0,0
+            background_color: 12/255,6/255,120/255,1
+            background_normal: ''
             on_press:
                 root.reset()
-            on_release:
-                root.reset_2()
-            Image:
-                id: image_btn_reset
-                source: 'Images/reset.png'
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-                size: 60, 100
 
         FloatLayout:
             size_hint: 0.8, 0.1
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:
-                size_hint: 0.15, 0.8
+                size_hint: 0.25, 0.8
+                text: 'ДОМОЙ'
+                font_size: '15sp'
                 pos_hint: {'center_x': 0.25, 'center_y': 0.3}
-                background_color: 0,0,0,0
+                background_color: 1,0,0,1
                 on_release:
                     root.manager.current = 'First'
                     root.manager.transition.direction = 'right'
 
-                Image:
-                    source: 'Images/Home.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 30,30
-
             Button:
                 id: button_exit
-                background_color: 0,0,0,0
-                size_hint: 0.15, 0.8
+                text: 'ВЫХОД'
+                font_size: '15sp'
+                background_color: 1,0,0,1
+                size_hint: 0.25, 0.8
                 pos_hint: {'center_x': 0.75, 'center_y': 0.3}
-                on_press:
-                    root.press_exit()
                 on_release:
                     app.stop()
-
-                Image:
-                    id: My_image
-                    source: 'Images/exit.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 50,100
