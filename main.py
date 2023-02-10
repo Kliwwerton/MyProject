@@ -38,8 +38,9 @@ def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressur
 
 
 def calculate_specific_pressure(press, square_pressing, quantity_stamps, pressure):
-    data = []
-    return data
+    specific_pressure = (pressure * PRESS_PARAMETERS[press][0]) / \
+                        (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1])
+    return round(specific_pressure * 1000, 2)
 
 
 def return_label(item):
@@ -105,45 +106,48 @@ class Third(Screen):
         if self.ids.spinner_quantity_stamps.text == '0':
             self.press()
         elif self.ids.spinner_press_mark.text \
-                and self.ids.label_S_pressing_value.text \
+                and self.ids.S_pressing_value.text \
                 and self.ids.spinner_quantity_stamps.text != '0' \
-                and self.ids.specific_pressure.text:
+                and self.ids.pressure.text:
             data = calculate_specific_pressure(press=self.ids.spinner_press_mark.text,
-                                               square_pressing=float(self.ids.label_S_pressing_value.text),
+                                               square_pressing=float(self.ids.S_pressing_value.text),
                                                quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
-                                               pressure=int(self.ids.specific_pressure.text))
+                                               pressure=int(self.ids.pressure.text))
             if not data:
                 self.press()
             else:
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
-                # self.ids.label_P_pressing_value.text = str(data[0])
-                # self.ids.unit_of_measurement.text = str(data[1])
+                self.ids.label_P_specific_pressure_value.text = str(data)
+                self.ids.unit_of_measurement.text = 'кг/см[sup]2[/sup]'
         else:
             self.press()
 
     def press(self):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_pressing_value.text = ''
+        self.ids.label_P_specific_pressure_value.text = ''
         self.ids.unit_of_measurement.text = ''
 
     def reset(self):
         self.ids.label_P_pressing_text.text = ''
-        self.ids.label_P_pressing_value.text = ''
+        self.ids.label_P_specific_pressure_value.text = ''
         self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
         self.ids.spinner_press_mark.text = 'Выберите пресс!'
-        self.ids.specific_pressure.text = ''
-        self.ids.label_S_pressing_value.text = ''
+        self.ids.pressure.text = ''
+        self.ids.S_pressing_value.text = ''
         self.sound_reset.play()
 
     def change_label(self):
-        self.ids.specific_pressure_unit.text = return_label(self.ids.spinner_press_mark.text)
+        if self.ids.spinner_press_mark.text == 'Выберите пресс!':
+            self.ids.pressure_unit.text = ''
+        else:
+            self.ids.pressure_unit.text = return_label(self.ids.spinner_press_mark.text)
 
 
 class EngineerApp(App):
     def build(self):
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
-        Window.fullscreen = 'auto'
+        # Window.fullscreen = 'auto'
         container = Container()
         container.add_widget(First())
         container.add_widget(Second())
