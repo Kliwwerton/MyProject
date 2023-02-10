@@ -49,12 +49,14 @@ class First(Screen):
 class Second(Screen):
     sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
+
     def press(self):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
         self.ids.label_P_pressing_value.text = ''
         self.ids.unit_of_measurement.text = ''
 
     def calculate(self):
+        self.sound.play()
         if self.ids.spinner_quantity_stamps.text == '0':
             self.press()
         elif self.ids.spinner_press_mark.text \
@@ -82,12 +84,6 @@ class Second(Screen):
         self.ids.spinner_press_mark.text = 'Выберите пресс!'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
-
-
-    def play_sound(self):
-        self.sound.play()
-
-    def play_sound_reset(self):
         self.sound_reset.play()
 
 
