@@ -112,7 +112,7 @@ class Third(Screen):
             data = calculate_specific_pressure(press=self.ids.spinner_press_mark.text,
                                                square_pressing=float(self.ids.S_pressing_value.text),
                                                quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
-                                               pressure=int(self.ids.pressure.text))
+                                               pressure=float(self.ids.pressure.text))
             if not data:
                 self.press()
             else:
