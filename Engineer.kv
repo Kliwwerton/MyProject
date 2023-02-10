@@ -288,7 +288,7 @@
             padding:10,30,10,0
 
             Label:
-                text: 'Расчёт давления прессования\n через удельное давление.'
+                text: 'Расчёт удельного давления\n через прессовое.'
                 halign: 'center'
                 valign: 'middle'
                 font_size: '30sp'
@@ -306,6 +306,8 @@
             font_size: '25sp'
             text: 'Выберите пресс'
             values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
+            on_text:
+                root.change_label()
 
         Button:
             text: 'Площадь изделия (ПОДБОР)'
@@ -371,7 +373,7 @@
                 size_hint: 0.4, 1
 
             Label:
-                text: 'Удельное давление: '
+                text: 'Прессовое давление: '
                 font_size: '25sp'
                 pos_hint: {'x': 0.0, 'y': 0.5}
                 text_size: self.size
@@ -389,8 +391,9 @@
                 input_filter: 'int'
 
             Label:
+                id: specific_pressure_unit
                 markup: True
-                text: 'кг/см[sup]2[/sup]'
+                text: ''
                 font_size: '25sp'
                 size_hint: 0.4, 1
 
