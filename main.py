@@ -1,7 +1,7 @@
 from kivy.config import Config
 
-# Config.set('graphics', 'width', 576)
-# Config.set('graphics', 'height', 1024)
+Config.set('graphics', 'width', 576)
+Config.set('graphics', 'height', 1024)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
@@ -10,6 +10,8 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
+# from kivymd.theming import ThemeManager
+
 Builder.load_file('Engineer.kv')
 
 PRESS_PARAMETERS = {'LAEIS-1250': [1250, 11.98, 'N/см[sup]2[/sup]'],
@@ -17,7 +19,7 @@ PRESS_PARAMETERS = {'LAEIS-1250': [1250, 11.98, 'N/см[sup]2[/sup]'],
                     'SACMI-500': [500, 350, 'Бар'],
                     'YPR-2500': [2500, 28.9, 'kN'],
                     'ДО-542': [1600, 320, 'Атм'],
-                    'ДА-2238(ЦИЧО)': [630, 320, 'Атм'],
+                    'ДА-2238 (ЦИЧО)': [630, 320, 'Атм'],
                     'СМ-1085': [630, 90, 'Ампер'],
                     'ПЮ': [200, 90, 'Ампер'],
                     'ПД-476 (ЦИЧО)': [160, 320, 'Атм'],
@@ -149,7 +151,6 @@ class Third(Screen):
 class EngineerApp(App):
     def build(self):
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
-        # Window.fullscreen = 'auto'
         container = Container()
         container.add_widget(First())
         container.add_widget(Second())

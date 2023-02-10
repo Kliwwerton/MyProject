@@ -1,3 +1,7 @@
+#:import MDLabel kivymd.uix.label.MDLabel
+#:import MDTextField kivymd.uix.textfield.MDTextField
+
+
 
 <First>:
     name: 'First'
@@ -113,20 +117,25 @@
             size_hint: 1, 0.15
             Label:
                 text: 'S изделия: '
-                font_size: '25sp'
+                font_size: '30dp'
                 halign: 'left'
                 valign: 'middle'
                 text_size: self.size
                 size_hint: 0.3, 1
-                color: 0,0,0,1
+                color: 64/255,64/255,64/255,1
 
             TextInput:
                 id: label_S_pressing_value
+                markup: True
+                hint_text: 'Площадь'
                 multiline: False
                 font_size: '35sp'
+                foreground_color: 64/255,64/255,64/255,1
                 size_hint: 0.45, 1
+
                 halign: 'center'
-                valign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+#
                 input_tipe: 'number'
                 input_filter: 'float'
 
@@ -135,6 +144,7 @@
                 font_size: '25sp'
                 size_hint: 0.2, 1
                 text: 'см[sup]2[/sup]'
+                color: 64/255,64/255,64/255,1
 
         GridLayout:
             size_hint: 1, 0.25
@@ -146,6 +156,7 @@
                 font_size: '25sp'
                 pos_hint: {'x': 0.0, 'y': 0.5}
                 text_size: self.size
+                color: 64/255,64/255,64/255,1
                 halign: 'left'
                 valign: 'middle'
 
@@ -154,7 +165,7 @@
                 size_hint: 0.35, 1
                 background_normal: '0,0,0,0'
                 background_color: 44/255 ,164/255, 45/255, 1
-                color: 0/255 ,22/255, 203/255, 1
+                color: 64/255,64/255,64/255,1
                 font_size: '25sp'
                 text: '0'
                 values: ['1', '2', '3', '4']
@@ -162,11 +173,13 @@
             Label:
                 text: 'шт.'
                 font_size: '25sp'
+                color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
             Label:
                 text: 'Удельное давление: '
                 font_size: '25sp'
+                color: 64/255,64/255,64/255,1
                 pos_hint: {'x': 0.0, 'y': 0.5}
                 text_size: self.size
                 halign: 'left'
@@ -177,7 +190,9 @@
                 multiline: False
                 size_hint: 0.3, 1
                 font_size: '35sp'
+                foreground_color: 64/255,64/255,64/255,1
                 halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 valign: 'middle'
                 input_tipe: 'number'
                 input_filter: 'int'
@@ -186,6 +201,7 @@
                 markup: True
                 text: 'кг/см[sup]2[/sup]'
                 font_size: '25sp'
+                color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
         AnchorLayout:
@@ -334,7 +350,7 @@
                 font_size: '35sp'
                 size_hint: 0.45, 1
                 halign: 'center'
-                valign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
 
@@ -386,7 +402,7 @@
                 size_hint: 0.3, 1
                 font_size: '35sp'
                 halign: 'center'
-                valign: 'middle'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
 
@@ -405,7 +421,7 @@
             Button:
                 text: 'Рассчитать'
                 font_size: '25sp'
-                size_hint: 0.5, 0.6
+                size_hint: 0.6, 0.6
                 background_normal: ''
                 background_color: 0.4,0,1,1
                 on_release:
