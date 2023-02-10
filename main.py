@@ -105,6 +105,8 @@ class Third(Screen):
         self.sound.play()
         if self.ids.spinner_quantity_stamps.text == '0':
             self.press()
+        elif self.ids.spinner_press_mark.text == 'Выберите пресс':
+            self.press()
         elif self.ids.spinner_press_mark.text \
                 and self.ids.S_pressing_value.text \
                 and self.ids.spinner_quantity_stamps.text != '0' \
@@ -132,13 +134,13 @@ class Third(Screen):
         self.ids.label_P_specific_pressure_value.text = ''
         self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
-        self.ids.spinner_press_mark.text = 'Выберите пресс!'
+        self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.pressure.text = ''
         self.ids.S_pressing_value.text = ''
         self.sound_reset.play()
 
     def change_label(self):
-        if self.ids.spinner_press_mark.text == 'Выберите пресс!':
+        if self.ids.spinner_press_mark.text == 'Выберите пресс':
             self.ids.pressure_unit.text = ''
         else:
             self.ids.pressure_unit.text = return_label(self.ids.spinner_press_mark.text)
