@@ -1,7 +1,7 @@
 from kivy.config import Config
 
-Config.set('graphics', 'width', 576)
-Config.set('graphics', 'height', 1024)
+# Config.set('graphics', 'width', 576)
+# Config.set('graphics', 'height', 1024)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
@@ -32,7 +32,10 @@ def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressur
     if press in PRESS_PARAMETERS:
         pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] *
                     (specific_pressure / 1000)) / PRESS_PARAMETERS[press][0]
-        values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
+        if pressure > PRESS_PARAMETERS[press][1]:
+            values = ['ПРЕСС СТОЛЬКО', 'НЕ ПОТЯНЕТ!!!']
+        else:
+            values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
         return values
     else:
         pressure = False
