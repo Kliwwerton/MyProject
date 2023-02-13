@@ -43,9 +43,12 @@ def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressur
 
 
 def calculate_specific_pressure(press, square_pressing, quantity_stamps, pressure):
-    specific_pressure = (pressure * PRESS_PARAMETERS[press][0]) / \
+    if pressure > PRESS_PARAMETERS[press][1]:
+        return 'ДАВЛЕНИЕ ПРЕССА ПРЕВЫШЕНО!!!'
+    else:
+        specific_pressure = (pressure * PRESS_PARAMETERS[press][0]) / \
                         (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1])
-    return round(specific_pressure * 1000, 2)
+        return round(specific_pressure * 1000, 2)
 
 
 def return_label(item):
@@ -122,6 +125,10 @@ class Third(Screen):
                                                pressure=float(self.ids.pressure.text))
             if not data:
                 self.press()
+            elif isinstance(data, str):
+                self.ids.label_P_pressing_text.text = data
+                self.ids.label_P_specific_pressure_value.text = ''
+                self.ids.unit_of_measurement.text = ''
             else:
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
                 self.ids.label_P_specific_pressure_value.text = str(data)
