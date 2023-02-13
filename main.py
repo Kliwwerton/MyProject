@@ -1,7 +1,7 @@
 from kivy.config import Config
 
-# Config.set('graphics', 'width', 576)
-# Config.set('graphics', 'height', 1024)
+Config.set('graphics', 'width', 360)
+Config.set('graphics', 'height', 820)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 
 from kivy.app import App
@@ -10,7 +10,7 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
-# from kivymd.theming import ThemeManager
+from kivymd.theming import ThemeManager
 
 Builder.load_file('Engineer.kv')
 

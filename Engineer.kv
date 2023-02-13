@@ -1,5 +1,5 @@
-# :import MDLabel kivymd.uix.label.MDLabel
-# :import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDLabel kivymd.uix.label.MDLabel
+#:import MDTextField kivymd.uix.textfield.MDTextField
 
 
 
@@ -19,7 +19,7 @@
 
         Label:
             text: 'Выберите действие'
-            font_size: '40sp'
+            font_size: '30sp'
             size_hint: 1, 0.5
             color: [164/255, 0, 0, 1]
             outline_color: 50/255,0,0,1
@@ -29,7 +29,7 @@
             text: 'Расчёт давления прессования\n через удельное.'
             halign: 'center'
             valign: 'middle'
-            font_size: '25sp'
+            font_size: '20sp'
             background_color: 0 , 1, 0.8, 1
             size_hint: 1, 0.3
             on_release:
@@ -41,7 +41,7 @@
             text: 'Расчёт удельного давления\n через прессовое.'
             halign: 'center'
             valign: 'middle'
-            font_size: '25sp'
+            font_size: '20sp'
             background_color: 0 , 1, 0.8, 1
             size_hint: 1, 0.3
             on_release:
@@ -50,20 +50,20 @@
 
         Button:
             text: 'Расчёт химического состава.'
-            font_size: '25sp'
+            font_size: '20sp'
             background_color: 0, 200/255, 0, 1
             size_hint: 1, 0.2
 
         Button:
             id: button_guide
             text: 'СПРАВОЧНИКИ!'
-            font_size: '25sp'
+            font_size: '20sp'
             background_color: 0,0,1,1
             size_hint: 1,0.2
         Button:
             id: button_exit
             text: 'ВЫХОД'
-            font_size: '15sp'
+            font_size: '10sp'
             background_color: 1, 0, 0, 1
             size_hint: .2, 0.15
 
@@ -89,7 +89,7 @@
                 text: 'Расчёт давления прессования\n через удельное давление.'
                 halign: 'center'
                 valign: 'middle'
-                font_size: '30sp'
+                font_size: '20sp'
                 size_hint: 1, 0.2
                 color: [255/255, 0, 0, 1]
                 outline_color: 50/255,0,0,1
@@ -101,7 +101,7 @@
             background_normal: '0,0,0,0'
             background_color: 44/255 ,164/255, 45/255, 1
             color: 0/255 ,22/255, 203/255, 1
-            font_size: '25sp'
+            font_size: '20sp'
             text: 'Выберите пресс'
             values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
 
@@ -117,7 +117,7 @@
             size_hint: 1, 0.15
             Label:
                 text: 'S изделия: '
-                font_size: '30dp'
+                font_size: '20dp'
                 halign: 'left'
                 valign: 'middle'
                 text_size: self.size
@@ -129,7 +129,7 @@
                 markup: True
                 hint_text: 'Площадь'
                 multiline: False
-                font_size: '30sp'
+                font_size: '20sp'
                 foreground_color: 64/255,64/255,64/255,1
                 size_hint: 0.45, 1
 
@@ -141,7 +141,7 @@
 
             Label:
                 markup: True
-                font_size: '25sp'
+                font_size: '20sp'
                 size_hint: 0.2, 1
                 text: 'см[sup]2[/sup]'
                 color: 64/255,64/255,64/255,1
@@ -153,7 +153,7 @@
 
             Label:
                 text: 'Кол-во штампов: '
-                font_size: '25sp'
+                font_size: '20sp'
                 pos_hint: {'x': 0.0, 'y': 0.5}
                 text_size: self.size
                 color: 64/255,64/255,64/255,1
@@ -166,19 +166,19 @@
                 background_normal: '0,0,0,0'
                 background_color: 44/255 ,164/255, 45/255, 1
                 color: 64/255,64/255,64/255,1
-                font_size: '25sp'
+                font_size: '20sp'
                 text: '0'
                 values: ['1', '2', '3', '4']
 
             Label:
                 text: 'шт.'
-                font_size: '25sp'
+                font_size: '20sp'
                 color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
             Label:
                 text: 'Удельное давление: '
-                font_size: '25sp'
+                font_size: '20sp'
                 color: 64/255,64/255,64/255,1
                 pos_hint: {'x': 0.0, 'y': 0.5}
                 text_size: self.size
@@ -189,7 +189,7 @@
                 id: specific_pressure
                 multiline: False
                 size_hint: 0.3, 1
-                font_size: '35sp'
+                font_size: '20sp'
                 foreground_color: 64/255,64/255,64/255,1
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
@@ -200,7 +200,7 @@
             Label:
                 markup: True
                 text: 'кг/см[sup]2[/sup]'
-                font_size: '25sp'
+                font_size: '20sp'
                 color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
@@ -211,7 +211,7 @@
 
             Button:
                 text: 'Рассчитать'
-                font_size: '25sp'
+                font_size: '20sp'
                 size_hint: 0.5, 0.6
                 background_normal: ''
                 background_color: 0.4,0,1,1
@@ -228,7 +228,7 @@
                 markup: True
                 size_hint: 1, 0.8
                 color: 1,0,0,1
-                font_size: '30sp'
+                font_size: '20sp'
 
             BoxLayout:
                 padding: 10
@@ -252,14 +252,13 @@
                     halign: 'left'
                     valign: 'middle'
                     text_size: self.size
-                    font_size: '25sp'
+                    font_size: '20sp'
                     color: 64/255,64/255,64/255,1
 
         Button:
             size_hint: 0.6, 0.12
             text: 'СБРОС'
-            font_size: '25sp'
-
+            font_size: '20sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             background_color: 12/255,6/255,120/255,1
             background_normal: ''
@@ -273,7 +272,7 @@
             Button:
                 size_hint: 0.25, 0.8
                 text: 'ДОМОЙ'
-                font_size: '15sp'
+                font_size: '10sp'
                 pos_hint: {'center_x': 0.25, 'center_y': 0.3}
                 background_color: 1,0,0,1
                 on_release:
@@ -283,7 +282,7 @@
             Button:
                 id: button_exit
                 text: 'ВЫХОД'
-                font_size: '15sp'
+                font_size: '10sp'
                 background_color: 1,0,0,1
                 size_hint: 0.25, 0.8
                 pos_hint: {'center_x': 0.75, 'center_y': 0.3}
