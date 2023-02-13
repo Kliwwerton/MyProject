@@ -10,9 +10,11 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
-from kivymd.theming import ThemeManager
+# from kivymd.theming import ThemeManager
 
 Builder.load_file('Engineer.kv')
+Builder.load_file('Second.kv')
+Builder.load_file('Third.kv')
 
 PRESS_PARAMETERS = {'LAEIS-1250': [1250, 11.98, 'N/см[sup]2[/sup]'],
                     'SACMI-1000': [990, 350, 'Бар'],
