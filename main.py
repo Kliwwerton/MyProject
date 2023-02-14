@@ -9,25 +9,13 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
+from variables import PRESS_PARAMETERS
 
 # from kivymd.theming import ThemeManager
 
 Builder.load_file('Engineer.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
-
-PRESS_PARAMETERS = {'LAEIS-1250': [1250, 11.98, 'N/см[sup]2[/sup]'],
-                    'SACMI-1000': [990, 350, 'Бар'],
-                    'SACMI-500': [500, 350, 'Бар'],
-                    'YPR-2500': [2500, 28.9, 'kN'],
-                    'ДО-542': [1600, 320, 'Атм'],
-                    'ДА-2238 (ЦИЧО)': [630, 320, 'Атм'],
-                    'СМ-1085': [630, 90, 'Ампер'],
-                    'ПЮ': [200, 90, 'Ампер'],
-                    'ПД-476 (ЦИЧО)': [160, 320, 'Атм'],
-                    'П-483 (ЦИЧО)': [63, 320, 'Атм'],
-                    'П-474А (ЦИЧО)': [100, 320, 'Атм'],
-                    'ИП-500М-АВТО': [50, 500, 'kN']}
 
 
 def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressure):

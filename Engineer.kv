@@ -59,15 +59,19 @@
             font_size: '20sp'
             background_color: 0,0,1,1
             size_hint: 1,0.2
-        Button:
-            id: button_exit
-            text: 'ВЫХОД'
-            font_size: '10sp'
-            background_color: 1, 0, 0, 1
-            size_hint: .2, 0.15
 
-            pos_hint: {'center_x': 0.5}
-            on_release:
-                app.stop()
+        FloatLayout:
+            size_hint: 1, 0.15
+
+            Button:
+                id: button_exit
+                text: 'ВЫХОД'
+                font_size: '10sp'
+                background_color: 1, 0, 0, 1
+                size_hint: .2, 0.8
+
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                on_release:
+                    app.stop()
 
 

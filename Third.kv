@@ -195,25 +195,26 @@
                 root.reset()
 
         FloatLayout:
-            size_hint: 0.8, 0.1
+            padding: 0,0,0,20
+            size_hint: 0.8, 0.13
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:
-                size_hint: 0.25, 0.8
+                size_hint: 0.25, 0.6
                 text: 'НАЗАД'
                 font_size: '10sp'
-                pos_hint: {'center_x': 0.25, 'center_y': 0.3}
+                pos_hint: {'center_x': 0.25, 'center_y': 0.4}
                 background_color: 1,0,0,1
                 on_release:
                     root.manager.current = 'First'
-                    root.manager.transition.direction = 'right'
+                    root.manager.transition.direction = 'down'
 
             Button:
                 id: button_exit
                 text: 'ВЫХОД'
                 font_size: '10sp'
                 background_color: 1,0,0,1
-                size_hint: 0.25, 0.8
-                pos_hint: {'center_x': 0.75, 'center_y': 0.3}
+                size_hint: 0.25, 0.6
+                pos_hint: {'center_x': 0.75, 'center_y': 0.4}
                 on_release:
                     app.stop()
