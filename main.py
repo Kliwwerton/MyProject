@@ -2,45 +2,25 @@ from kivy.config import Config
 
 Config.set('graphics', 'width', 360)
 Config.set('graphics', 'height', 820)
-# Config.set('kivy', 'keyboard_mode', 'systemanddock')
+Config.set('kivy', 'keyboard_mode', 'systemanddock')
 # Config.set('kivy', 'window_icon', 'Images/Logo.png')
 
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
+from MyPopups import SelectionOptionPopup
 
 # from kivymd.theming import ThemeManager
 
 Builder.load_file('Engineer.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
-
-
-def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressure):
-    if press in PRESS_PARAMETERS:
-        pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] *
-                    (specific_pressure / 1000)) / PRESS_PARAMETERS[press][0]
-        if pressure > PRESS_PARAMETERS[press][1]:
-            values = ['ПРЕСС СТОЛЬКО', 'НЕ ПОТЯНЕТ!!!']
-        else:
-            values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
-        return values
-    else:
-        pressure = False
-        return pressure
-
-
-# def calculate_specific_pressure(press, square_pressing, quantity_stamps, pressure):
-#     if pressure > PRESS_PARAMETERS[press][1]:
-#         return 'ДАВЛЕНИЕ ПРЕССА ПРЕВЫШЕНО!!!'
-#     else:
-#         specific_pressure = (pressure * PRESS_PARAMETERS[press][0]) / \
-#                         (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1])
-#         return round(specific_pressure * 1000, 2)
+Builder.load_file('MyPopups.kv')
 
 
 def return_label(item):
@@ -50,6 +30,8 @@ def return_label(item):
 
 class Container(ScreenManager):
     pass
+
+
 
 
 class First(Screen):
@@ -109,6 +91,10 @@ class Second(Screen):
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
         self.sound_reset.play()
+
+    def open_SelectionOptionPopup(self):
+        if self.ids.label_S_pressing_value.text == '':
+            SelectionOptionPopup().open()
 
 
 class Third(Screen):

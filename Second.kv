@@ -39,6 +39,8 @@
             font_size: '20sp'
             size_hint: 1,0.12
             background_color: 0.2, 1, 0.7, 1
+            on_press:
+                root.open_SelectionOptionPopup()
 
         BoxLayout:
             spacing: 10
@@ -124,8 +126,6 @@
                 valign: 'middle'
                 input_tipe: 'number'
                 input_filter: 'int'
-                on_focus:
-                    Factory.MyPopup().open()
 
             Label:
                 markup: True
@@ -218,35 +218,3 @@
                 pos_hint: {'center_x': 0.75, 'center_y': 0.4}
                 on_release:
                     app.stop()
-
-<MyPopup@Popup>
-    title: 'Ввод цифр'
-    size_hint: None, None
-    size: 300, 300
-    pos_hint: {'center_x': 0.5, 'top': 0.4}
-
-    GridLayout:
-        cols: 1
-        BoxLayout:
-            Button:
-                text: '1'
-            Button:
-                text: '2'
-            Button:
-                text: '3'
-
-        BoxLayout:
-            Button:
-                text: '4'
-            Button:
-                text: '5'
-            Button:
-                text: '6'
-
-
-
-        BoxLayout:
-
-            Button:
-                text: 'Не нажимай'
-                on_press: root.dismiss()
