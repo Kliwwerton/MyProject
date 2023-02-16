@@ -1,4 +1,4 @@
-
+#:import Factory kivy.factory.Factory
 
 <Second>:
     name: 'Second'
@@ -124,6 +124,8 @@
                 valign: 'middle'
                 input_tipe: 'number'
                 input_filter: 'int'
+                on_focus:
+                    Factory.MyPopup().open()
 
             Label:
                 markup: True
@@ -216,3 +218,35 @@
                 pos_hint: {'center_x': 0.75, 'center_y': 0.4}
                 on_release:
                     app.stop()
+
+<MyPopup@Popup>
+    title: 'Ввод цифр'
+    size_hint: None, None
+    size: 300, 300
+    pos_hint: {'center_x': 0.5, 'top': 0.4}
+
+    GridLayout:
+        cols: 1
+        BoxLayout:
+            Button:
+                text: '1'
+            Button:
+                text: '2'
+            Button:
+                text: '3'
+
+        BoxLayout:
+            Button:
+                text: '4'
+            Button:
+                text: '5'
+            Button:
+                text: '6'
+
+
+
+        BoxLayout:
+
+            Button:
+                text: 'Не нажимай'
+                on_press: root.dismiss()
