@@ -15,15 +15,13 @@ class SelectionGostPopup(Popup):
             for i in GOST_STANDARDS[self.ids.gost_number.text]:
                 numbers.append(str(i))
             self.ids.product_number.values = numbers
-        # elif self.ids.gost_number.text == 'ГОСТ 5341-2016 (Ковшевой)':
-        #     for i in GOST_STANDARDS[self.ids.gost_number.text]:
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
     @staticmethod
-    def opening_calculation_window(self):
+    def opening_calculation_window():
         CalculationsAreaOfRectangle().open()
 
 
