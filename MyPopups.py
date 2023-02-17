@@ -2,8 +2,6 @@ from kivy.uix.popup import Popup
 from variables import GOST_NUMBERS
 
 
-
-
 class SelectionOptionPopup(Popup):
     def open_next_popup(self):
         if self.ids.option_selection.text == 'Размеры по ГОСТ':
@@ -17,3 +15,7 @@ class SelectionGostPopup(Popup):
             for i in GOST_NUMBERS[self.ids.gost_number.text]:
                 numbers.append(str(i))
             self.ids.product_number.values = numbers
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
