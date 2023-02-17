@@ -13,7 +13,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
-from MyPopups import SelectionOptionPopup
+from MyPopups import SelectionOptionPopup, SelectionGostPopup
 
 # from kivymd.theming import ThemeManager
 
