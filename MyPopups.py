@@ -19,3 +19,10 @@ class SelectionGostPopup(Popup):
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
+
+    def opening_calculation_window(self):
+        if
+
+
+class CalculationsAreaOfRectangle(Popup):
+    pass

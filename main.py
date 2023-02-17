@@ -9,7 +9,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.uix.popup import Popup
+# from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
@@ -30,8 +30,6 @@ def return_label(item):
 
 class Container(ScreenManager):
     pass
-
-
 
 
 class First(Screen):

@@ -53,4 +53,13 @@
             id: product_number
             text: 'Номер изделия'
             values: []
+            on_text:
+                root.dismiss()
+                root.opening_calculation_window()
+
+
+<CalculationsAreaOfRectangle>
+    title: 'Расчёт площади изделия'
+    BoxLayout:
+        orientation: 'vertical'
 
