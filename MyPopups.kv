@@ -160,4 +160,17 @@
             on_press:
 
 
+<ChoosingShapeProduct>
+    title: 'Выбор формы штампа'
+    size_hint: 0.8, 0.3
+
+    BoxLayout:
+        Spinner:
+            size_hint: 1, 0.5
+            text: 'Выберите форму штампа'
+            values: ['Прямоугольник', 'Трапецеидальный клин', 'Кольцо']
+            on_text:
+                root.dismiss()
+
+
 

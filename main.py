@@ -14,6 +14,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
 from MyPopups import SelectionOptionPopup, SelectionGostPopup
+import MyPopups
 
 # from kivymd.theming import ThemeManager
 
@@ -155,7 +156,9 @@ class Third(Screen):
             self.ids.pressure_unit.text = ''
         else:
             self.ids.pressure_unit.text = return_label(self.ids.spinner_press_mark.text)
-
+    def open_SelectionOptionPopup(self):
+        if self.ids.S_pressing_value.text == '':
+            SelectionOptionPopup().open()
 
 class EngineerApp(App):
     def build(self):

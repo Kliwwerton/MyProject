@@ -6,6 +6,8 @@ class SelectionOptionPopup(Popup):
     def open_next_popup(self):
         if self.ids.option_selection.text == 'Размеры по ГОСТ':
             SelectionGostPopup().open()
+        else:
+            ChoosingShapeProduct().open()
 
 
 class SelectionGostPopup(Popup):
@@ -43,3 +45,7 @@ class CalculationsAreaOfRectangle(Popup):
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
+
+
+class ChoosingShapeProduct(Popup):
+    pass
