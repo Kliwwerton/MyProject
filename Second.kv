@@ -146,8 +146,9 @@
                 background_normal: ''
                 background_color: 0.4,0,1,1
                 on_release:
-                    root.calculate()
+                    root.calculate_pressure()
 
+# Вывод данных
         BoxLayout:
             size_hint: 1, 0.25
             orientation: 'vertical'
@@ -160,30 +161,15 @@
                 color: 1,0,0,1
                 font_size: '20sp'
 
-            BoxLayout:
-                padding: 10
-                spacing: 10
-
-                Label:
-                    id: label_P_pressing_value
-                    markup: True
-                    text: ''
-                    halign: 'right'
-                    valign: 'middle'
-                    text_size: self.size
-                    font_size: '20sp'
-                    color: 64/255,64/255,64/255,1
-
-                Label:
-                    id: unit_of_measurement
-                    text: ''
-                    markup: True
-                    size_hint: 0.8, 1
-                    halign: 'left'
-                    valign: 'middle'
-                    text_size: self.size
-                    font_size: '20sp'
-                    color: 64/255,64/255,64/255,1
+            Label:
+                id: label_P_pressing_value
+                markup: True
+                text: ''
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                font_size: '20sp'
+                color: 64/255,64/255,64/255,1
 
         Button:
             size_hint: 0.6, 0.12

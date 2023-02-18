@@ -24,64 +24,64 @@ Builder.load_file('Third.kv')
 Builder.load_file('MyPopups.kv')
 
 
-def return_label(item):
-    value = PRESS_PARAMETERS[item][2]
-    return value
-
-
 class Container(ScreenManager):
+    """Main Widget"""
     pass
 
 
 class First(Screen):
+    """First screen for the app"""
     pass
 
 
 class Second(Screen):
+    """Second Screen for the app"""
     sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
-    def press(self):
+    def return_mistake(self, data):
+        """returning wrong enter"""
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_pressing_value.text = ''
-        self.ids.unit_of_measurement.text = ''
+        self.ids.label_P_pressing_value.text = data[0] + ' ' + data[1]
 
-    def calculate(self):
+    def calculate_pressure(self):
+        """Calculating pressing pressure"""
         self.sound.play()
-        if self.ids.spinner_quantity_stamps.text == '0':
-            self.press()
-        elif self.ids.spinner_press_mark.text \
-                and self.ids.label_S_pressing_value.text \
-                and self.ids.spinner_quantity_stamps.text != '0' \
-                and self.ids.specific_pressure.text:
-            data = self.calculate_pressure(press=self.ids.spinner_press_mark.text,
-                                           square_pressing=float(self.ids.label_S_pressing_value.text),
-                                           quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
-                                           specific_pressure=int(self.ids.specific_pressure.text))
-            if not data:
-                self.press()
-            else:
-                self.ids.label_P_pressing_text.text = 'Давление прессования:'
-                self.ids.label_P_pressing_value.text = str(data[0])
-                self.ids.unit_of_measurement.text = str(data[1])
-        else:
-            self.press()
+        if self.ids.spinner_press_mark.text == 'Выберите пресс':
+            data = ['УКАЖИТЕ МАРКУ', 'ПРЕССА']
+            self.return_mistake(data)
 
-    @staticmethod
-    def calculate_pressure(press, square_pressing, quantity_stamps, specific_pressure):
-        if press in PRESS_PARAMETERS:
+        elif not self.ids.label_S_pressing_value.text:
+            data = ['УКАЖИТЕ ПЛОЩАДЬ', 'ИЗДЕЛИЯ']
+            self.return_mistake(data)
+
+        elif self.ids.spinner_quantity_stamps.text == '0':
+            data = ['УКАЖИТЕ КОЛИЧЕТВО', 'ШТАМПОВ']
+            self.return_mistake(data)
+
+        elif not self.ids.specific_pressure.text:
+            data = ['УКАЖИТЕ УДЕЛЬНОЕ', 'ДАВЛЕНИЕ']
+            self.return_mistake(data)
+
+        else:
+            press = self.ids.spinner_press_mark.text
+            square_pressing = float(self.ids.label_S_pressing_value.text)
+            quantity_stamps = int(self.ids.spinner_quantity_stamps.text)
+            specific_pressure = int(self.ids.specific_pressure.text)
+
+
             pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] *
                         (specific_pressure / 1000)) / PRESS_PARAMETERS[press][0]
             if pressure > PRESS_PARAMETERS[press][1]:
-                values = ['ПРЕСС СТОЛЬКО', 'НЕ ПОТЯНЕТ!!!']
+                data = ['ПРЕСС СТОЛЬКО', 'НЕ ПОТЯНЕТ!!!']
             else:
-                values = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
-            return values
-        else:
-            pressure = False
-            return pressure
+                data = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
+
+            self.ids.label_P_pressing_text.text = 'Давление прессования:'
+            self.ids.label_P_pressing_value.text = str(data[0]) + ' ' + str(data[1])
 
     def reset(self):
+        """reset all parameters"""
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_pressing_value.text = ''
         self.ids.unit_of_measurement.text = ''
@@ -92,6 +92,7 @@ class Second(Screen):
         self.sound_reset.play()
 
     def open_SelectionOptionPopup(self):
+        """opening popup window Selection Option"""
         if self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
@@ -142,6 +143,7 @@ class Third(Screen):
         self.ids.unit_of_measurement.text = ''
 
     def reset(self):
+        """Reset all parameters and labels text"""
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_specific_pressure_value.text = ''
         self.ids.unit_of_measurement.text = ''
@@ -152,15 +154,18 @@ class Third(Screen):
         self.sound_reset.play()
 
     def change_label(self):
+        """changing label unit of press parameters"""
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             self.ids.pressure_unit.text = ''
         else:
-            self.ids.pressure_unit.text = return_label(self.ids.spinner_press_mark.text)
+            self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
+
     def open_SelectionOptionPopup(self):
         if self.ids.S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
 class EngineerApp(App):
+    """MAIN APP ENGINEER"""
     def build(self):
         self.icon = 'Images/Logo.png'
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
