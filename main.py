@@ -42,51 +42,48 @@ class Second(Screen):
     def return_mistake(self, data):
         """returning wrong enter"""
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_pressing_value.text = data[0] + ' ' + data[1]
+        self.ids.label_P_pressing_value.text = data
 
     def calculate_pressure(self):
         """Calculating pressing pressure"""
         self.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
-            data = ['УКАЖИТЕ МАРКУ', 'ПРЕССА']
-            self.return_mistake(data)
+            self.return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
         elif not self.ids.label_S_pressing_value.text:
-            data = ['УКАЖИТЕ ПЛОЩАДЬ', 'ИЗДЕЛИЯ']
-            self.return_mistake(data)
+            self.return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         elif self.ids.spinner_quantity_stamps.text == '0':
-            data = ['УКАЖИТЕ КОЛИЧЕТВО', 'ШТАМПОВ']
-            self.return_mistake(data)
+            self.return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
 
         elif not self.ids.specific_pressure.text:
-            data = ['УКАЖИТЕ УДЕЛЬНОЕ', 'ДАВЛЕНИЕ']
-            self.return_mistake(data)
+            self.return_mistake('УКАЖИТЕ УДЕЛЬНОЕ ДАВЛЕНИЕ')
 
         else:
-            press = self.ids.spinner_press_mark.text
+            press_mark = self.ids.spinner_press_mark.text
             square_pressing = float(self.ids.label_S_pressing_value.text)
             quantity_stamps = int(self.ids.spinner_quantity_stamps.text)
             specific_pressure = int(self.ids.specific_pressure.text)
 
 
-            pressure = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1] *
-                        (specific_pressure / 1000)) / PRESS_PARAMETERS[press][0]
-            if pressure > PRESS_PARAMETERS[press][1]:
-                data = ['ПРЕСС СТОЛЬКО', 'НЕ ПОТЯНЕТ!!!']
+            data = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press_mark][1] *
+                        (specific_pressure / 1000)) / PRESS_PARAMETERS[press_mark][0]
+
+            if data > PRESS_PARAMETERS[press_mark][1]:
+                data = 'ПРЕСС СТОЛЬКО НЕ ПОТЯНЕТ!!!'
+
             else:
-                data = [round(pressure, 2), PRESS_PARAMETERS[press][2]]
+                data = str(round(data, 2)) + ' ' + PRESS_PARAMETERS[press_mark][2]
 
             self.ids.label_P_pressing_text.text = 'Давление прессования:'
-            self.ids.label_P_pressing_value.text = str(data[0]) + ' ' + str(data[1])
+            self.ids.label_P_pressing_value.text = str(data)
 
     def reset(self):
         """reset all parameters"""
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_pressing_value.text = ''
-        self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
-        self.ids.spinner_press_mark.text = 'Выберите пресс!'
+        self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
         self.sound_reset.play()
@@ -103,50 +100,47 @@ class Third(Screen):
 
     def calculate(self):
         self.sound.play()
-        if self.ids.spinner_quantity_stamps.text == '0':
-            self.press()
-        elif self.ids.spinner_press_mark.text == 'Выберите пресс':
-            self.press()
-        elif self.ids.spinner_press_mark.text \
-                and self.ids.S_pressing_value.text \
-                and self.ids.spinner_quantity_stamps.text != '0' \
-                and self.ids.pressure.text:
-            data = self.calculate_specific_pressure(press=self.ids.spinner_press_mark.text,
-                                                    square_pressing=float(self.ids.S_pressing_value.text),
-                                                    quantity_stamps=int(self.ids.spinner_quantity_stamps.text),
-                                                    pressure=float(self.ids.pressure.text))
-            if not data:
-                self.press()
-            elif isinstance(data, str):
+        if self.ids.spinner_press_mark.text == 'Выберите пресс':
+            self.return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
+
+        elif not self.ids.S_pressing_value.text:
+            self.return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
+
+        elif self.ids.spinner_quantity_stamps.text == '0':
+            self.return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
+
+        elif not self.ids.pressure.text:
+            self.return_mistake('УКАЖИТЕ ПРЕССОВОЕ ДАВЛЕНИЕ')
+
+        else:
+            press = self.ids.spinner_press_mark.text
+            square_pressing = float(self.ids.S_pressing_value.text)
+            quantity_stamps = int(self.ids.spinner_quantity_stamps.text)
+            pressure = float(self.ids.pressure.text)
+            if pressure > PRESS_PARAMETERS[press][1]:
+                data = 'ДАВЛЕНИЕ ПРЕССА ПРЕВЫШЕНО!!!'
+            else:
+                data = round((pressure * PRESS_PARAMETERS[press][0]) / \
+                       (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1]) * 1000)
+
+
+            if isinstance(data, str):
                 self.ids.label_P_pressing_text.text = data
                 self.ids.label_P_specific_pressure_value.text = ''
-                self.ids.unit_of_measurement.text = ''
             else:
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
-                self.ids.label_P_specific_pressure_value.text = str(data)
-                self.ids.unit_of_measurement.text = 'кг/см[sup]2[/sup]'
-        else:
-            self.press()
+                self.ids.label_P_specific_pressure_value.text = str(data) + ' ' + 'кг/см[sup]2[/sup]'
 
-    @staticmethod
-    def calculate_specific_pressure(press, square_pressing, quantity_stamps, pressure):
-        if pressure > PRESS_PARAMETERS[press][1]:
-            return 'ДАВЛЕНИЕ ПРЕССА ПРЕВЫШЕНО!!!'
-        else:
-            specific_pressure = (pressure * PRESS_PARAMETERS[press][0]) / \
-                                (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1])
-            return round(specific_pressure * 1000, 2)
-
-    def press(self):
+    def return_mistake(self, data):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_specific_pressure_value.text = ''
-        self.ids.unit_of_measurement.text = ''
+        self.ids.label_P_specific_pressure_value.text = data
+        # self.ids.unit_of_measurement.text = ''
 
     def reset(self):
         """Reset all parameters and labels text"""
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_specific_pressure_value.text = ''
-        self.ids.unit_of_measurement.text = ''
+        # self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.pressure.text = ''
