@@ -1,5 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
+from variables import SQUARE
 
 
 class SelectionOptionPopup(Popup):
@@ -36,16 +37,31 @@ class CalculationsAreaOfRectangle(Popup):
         self.chose_values = []
 
     def build_instance(self):
-        self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-        product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-        self.ids.length_value.text = str(product_size[0])
-        self.ids.width_value.text = str(product_size[1])
-        self.ids.thickness_value.text = str(product_size[2])
+        if len(self.chose_values) > 1:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+            self.ids.length_value.text = str(product_size[0])
+            self.ids.width_value.text = str(product_size[1])
+            self.ids.thickness_value.text = str(product_size[2])
+        else:
+            self.ids.label_gost_number.text = self.chose_values[0]
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
+    def calculation_square(self):
+        value = round(float(self.ids.length_value.text) * float(self.ids.width_value.text), 2)
+        print(value)
+        SQUARE.append(value)
+
 
 class ChoosingShapeProduct(Popup):
-    pass
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+    def choose_window(self):
+        if self.ids.spin_choose_window.text == 'Прямоугольник':
+            popup = CalculationsAreaOfRectangle()
+            popup.chose_values.append(self.ids.spin_choose_window.text)
+            popup.open()

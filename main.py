@@ -9,12 +9,12 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-# from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
-from MyPopups import SelectionOptionPopup, SelectionGostPopup
-import MyPopups
+from variables import SQUARE
+from MyPopups import SelectionOptionPopup, CalculationsAreaOfRectangle
+
 
 # from kivymd.theming import ThemeManager
 
@@ -86,12 +86,19 @@ class Second(Screen):
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
+        SQUARE.clear()
         self.sound_reset.play()
 
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
-        if self.ids.label_S_pressing_value.text == '':
+        if SQUARE:
+            self.ids.label_S_pressing_value.text = str(SQUARE[0]/100)
+        elif self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
+
+    def change_text(self):
+        if SQUARE:
+            self.ids.label_S_pressing_value.text = str(SQUARE[0])
 
 
 class Third(Screen):
@@ -155,13 +162,22 @@ class Third(Screen):
             self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
 
     def open_SelectionOptionPopup(self):
-        if self.ids.S_pressing_value.text == '':
+        if SQUARE:
+            self.ids.S_pressing_value.text = str(SQUARE[0]/100)
+        elif self.ids.S_pressing_value.text == '':
             SelectionOptionPopup().open()
+
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
-    def build(self):
+
+    def __init__(self):
+        super().__init__()
+        self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
+        self.SQUARE = []
+
+    def build(self):
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
         container = Container()
         container.add_widget(First())
@@ -171,4 +187,4 @@ class EngineerApp(App):
 
 
 if __name__ == '__main__':
-    EngineerApp(title='ИНЖЕНЕР НА ВСЮ ГОЛОВУ!').run()
+    EngineerApp().run()

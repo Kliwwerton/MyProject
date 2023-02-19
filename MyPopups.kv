@@ -60,7 +60,7 @@
 
 
 <CalculationsAreaOfRectangle>
-    title: 'Расчёт площади изделия'
+    title: 'Расчёт площади прямоугольного изделия'
     size_hint: 0.8, 0.6
     on_open:
         self.build_instance()
@@ -90,13 +90,10 @@
                 on_press:
                     root.dismiss()
 
-        BoxLayout:
-            spacing: 10
-            size_hint: 1, 0.2
-
-            Label:
-                id: label_gost_number
-                text: ''
+        Label:
+            id: label_gost_number
+            text: ''
+            size_hint: 1, 0.15
 
         Image:
             source: 'Images/Product_shape/rectangle.png'
@@ -140,7 +137,8 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Толщина(S):'
+                markup: True
+                text: 'Толщина(S)[sup]*[/sup]:'
                 text_size: self.size
                 halign: 'left'
 
@@ -158,19 +156,46 @@
             size_hint: 0.8, 0.2
             pos_hint: {'center_x': 0.5}
             on_press:
-
-
-<ChoosingShapeProduct>
-    title: 'Выбор формы штампа'
-    size_hint: 0.8, 0.3
-
-    BoxLayout:
-        Spinner:
-            size_hint: 1, 0.5
-            text: 'Выберите форму штампа'
-            values: ['Прямоугольник', 'Трапецеидальный клин', 'Кольцо']
-            on_text:
+                root.calculation_square()
                 root.dismiss()
 
 
 
+
+<ChoosingShapeProduct>
+    title: 'Выбор формы штампа'
+    size_hint: 0.8, 0.2
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: 1, 0.7
+            spacing: 5
+
+            Button:
+                text: 'Назад'
+                font_size: '15sp'
+                size_hint: 0.3, 0.6
+                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+                    root.return_beck()
+
+            Button:
+                text: 'Закрыть'
+                font_size: '15sp'
+                size_hint: 0.3, 0.6
+                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+
+        Spinner:
+            id: spin_choose_window
+            size_hint: 1, 0.5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            text: 'Выберите форму штампа'
+            values: ['Прямоугольник', 'Трапецеидальный клин', 'Кольцо']
+            on_text:
+                root.dismiss()
+                root.choose_window()
