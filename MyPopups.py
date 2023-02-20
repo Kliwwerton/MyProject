@@ -30,7 +30,6 @@ class SelectionGostPopup(Popup):
         popup.open()
 
 
-
 class CalculationsAreaOfRectangle(Popup):
     def __init__(self):
         super().__init__()
@@ -51,17 +50,30 @@ class CalculationsAreaOfRectangle(Popup):
         SelectionOptionPopup().open()
 
     def calculation_square(self):
-        value = round(float(self.ids.length_value.text) * float(self.ids.width_value.text), 2)
-        print(value)
-        SQUARE.append(value)
+        if self.ids.length_value.text and self.ids.width_value.text:
+            value = round(float(self.ids.length_value.text) * float(self.ids.width_value.text), 2)
+            print(value)
+            SQUARE.append(value)
+
+
+class CalculationsAreaOfTrapezoid(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
 
 
 class ChoosingShapeProduct(Popup):
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
+
     def choose_window(self):
         if self.ids.spin_choose_window.text == 'Прямоугольник':
             popup = CalculationsAreaOfRectangle()
+            popup.chose_values.append(self.ids.spin_choose_window.text)
+            popup.open()
+
+        elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
+            popup = CalculationsAreaOfTrapezoid()
             popup.chose_values.append(self.ids.spin_choose_window.text)
             popup.open()

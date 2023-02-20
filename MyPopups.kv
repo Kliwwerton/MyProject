@@ -151,8 +151,15 @@
                 input_tipe: 'number'
                 input_filter: 'float'
 
+        Label:
+            markup: True
+            text: '[sup]*[/sup] - размер для справки'
+            halign: 'left'
+            text_size: self.size
+            size_hint: 1, 0.2
+
         Button:
-            text: 'Расчитать'
+            text: 'Рассчитать'
             size_hint: 0.8, 0.2
             pos_hint: {'center_x': 0.5}
             on_press:
