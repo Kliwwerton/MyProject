@@ -80,10 +80,22 @@ class CalculationsAreaOfTrapezoid(Popup):
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value.text = str(product_size[1])
-            self.ids.thickness_value.text = str(product_size[2])
+            self.ids.width_value_1.text = str(product_size[1])
+            self.ids.width_value_2.text = str(product_size[2])
+            self.ids.thickness_value.text = str(product_size[3])
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation_square(self):
+        if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
+            value = round(float(self.ids.length_value.text) *
+                          ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2), 2)
+            print(value)
+            SQUARE.append(value)
 
 
 class CalculationsAreaOfRing(Popup):
