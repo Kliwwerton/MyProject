@@ -92,13 +92,13 @@ class Second(Screen):
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
         if SQUARE:
-            self.ids.label_S_pressing_value.text = str(SQUARE[0]/100)
+            self.ids.label_S_pressing_value.text = str(round(SQUARE[0]/100, 1))
         elif self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
-    def change_text(self):
-        if SQUARE:
-            self.ids.label_S_pressing_value.text = str(SQUARE[0])
+    # def change_text(self):
+    #     if SQUARE:
+    #         self.ids.label_S_pressing_value.text = str(SQUARE[0])
 
 
 class Third(Screen):
@@ -140,16 +140,15 @@ class Third(Screen):
     def return_mistake(self, data):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
         self.ids.label_P_specific_pressure_value.text = data
-        # self.ids.unit_of_measurement.text = ''
 
     def reset(self):
         """Reset all parameters and labels text"""
         self.ids.label_P_pressing_text.text = ''
         self.ids.label_P_specific_pressure_value.text = ''
-        # self.ids.unit_of_measurement.text = ''
         self.ids.spinner_quantity_stamps.text = '0'
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.pressure.text = ''
+        SQUARE.clear()
         self.ids.S_pressing_value.text = ''
         self.sound_reset.play()
 
@@ -162,7 +161,7 @@ class Third(Screen):
 
     def open_SelectionOptionPopup(self):
         if SQUARE:
-            self.ids.S_pressing_value.text = str(SQUARE[0]/100)
+            self.ids.S_pressing_value.text = str(round(SQUARE[0]/100, 1))
         elif self.ids.S_pressing_value.text == '':
             SelectionOptionPopup().open()
 

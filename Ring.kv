@@ -1,5 +1,5 @@
 <CalculationsAreaOfRing>
-    title: 'Расчёт площади прямоугольного изделия'
+    title: 'Расчёт площади кольца'
     size_hint: 0.8, 0.6
     on_open:
         self.build_instance()
@@ -49,7 +49,7 @@
                 font_size: '10sp'
 
             TextInput:
-                id: length_value
+                id: outer_diameter_D
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -68,7 +68,7 @@
                 font_size: '10sp'
 
             TextInput:
-                id: width_value
+                id: inner_diameter_d
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -86,7 +86,7 @@
                 halign: 'left'
 
             TextInput:
-                id: thickness_value
+                id: length_value
                 text: ''
                 multiline: False
                 halign: 'center'

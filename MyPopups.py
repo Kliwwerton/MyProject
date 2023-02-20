@@ -1,6 +1,7 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
 from variables import SQUARE, RECTANGLES, RING, TRAPEZOID
+from math import pi
 
 
 class SelectionOptionPopup(Popup):
@@ -65,7 +66,7 @@ class CalculationsAreaOfRectangle(Popup):
 
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value.text:
-            value = round(float(self.ids.length_value.text) * float(self.ids.width_value.text), 2)
+            value = float(self.ids.length_value.text) * float(self.ids.width_value.text)
             print(value)
             SQUARE.append(value)
 
@@ -92,8 +93,8 @@ class CalculationsAreaOfTrapezoid(Popup):
 
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
-            value = round(float(self.ids.length_value.text) *
-                          ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2), 2)
+            value = float(self.ids.length_value.text) *\
+                    ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)
             print(value)
             SQUARE.append(value)
 
@@ -107,11 +108,23 @@ class CalculationsAreaOfRing(Popup):
         if len(self.chose_values) > 1:
             self.ids.label_gost_number.text = self.chose_values[0] + ' ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value.text = str(product_size[1])
-            self.ids.thickness_value.text = str(product_size[2])
+            self.ids.outer_diameter_D.text = str(product_size[0])
+            self.ids.inner_diameter_d.text = str(product_size[1])
+            self.ids.length_value.text = str(product_size[2])
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation_square(self):
+        if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
+            D = float(self.ids.outer_diameter_D.text)
+            d = float(self.ids.inner_diameter_d.text)
+            value = ((pi * D ** 2) / 4) - ((pi * d ** 2) / 4)
+            print(value)
+            SQUARE.append(value)
 
 
 class ChoosingShapeProduct(Popup):
