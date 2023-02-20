@@ -1,0 +1,110 @@
+<CalculationsAreaOfRing>
+    title: 'Расчёт площади прямоугольного изделия'
+    size_hint: 0.8, 0.6
+    on_open:
+        self.build_instance()
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+
+        BoxLayout:
+            size_hint: 1, 0.25
+            spacing: 5
+
+            Button:
+                text: 'Назад'
+                font_size: '15sp'
+                size_hint: 0.3, 0.7
+                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+                    root.return_beck()
+
+            Button:
+                text: 'Закрыть'
+                font_size: '15sp'
+                size_hint: 0.3, 0.7
+                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+
+        Label:
+            id: label_gost_number
+            text: ''
+            size_hint: 1, 0.15
+
+        Image:
+            source: 'Images/Product_shape/stopor.png'
+            size_hint: 1, 1
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                text: 'Наружный диаметр(D):'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+                font_size: '10sp'
+
+            TextInput:
+                id: length_value
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                text: 'Внутренний диаметр(d):'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+                font_size: '10sp'
+
+            TextInput:
+                id: width_value
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                markup: True
+                text: 'Высота(L)[sup][size=24]*[/size][/sup]:'
+                text_size: self.size
+                halign: 'left'
+
+            TextInput:
+                id: thickness_value
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        Label:
+            markup: True
+            text: '[sup][size=24]*[/size][/sup] - размер для справки'
+            halign: 'left'
+            text_size: self.size
+            size_hint: 1, 0.2
+
+        Button:
+            text: 'Рассчитать'
+            size_hint: 0.8, 0.2
+            pos_hint: {'center_x': 0.5}
+            on_press:
+                root.calculation_square()
+                root.dismiss()

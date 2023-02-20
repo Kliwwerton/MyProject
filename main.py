@@ -22,6 +22,7 @@ Builder.load_file('Engineer.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
 Builder.load_file('MyPopups.kv')
+Builder.load_file('Ring.kv')
 
 
 class Container(ScreenManager):
@@ -64,10 +65,8 @@ class Second(Screen):
             square_pressing = float(self.ids.label_S_pressing_value.text)
             quantity_stamps = int(self.ids.spinner_quantity_stamps.text)
             specific_pressure = int(self.ids.specific_pressure.text)
-
-
             data = (square_pressing * quantity_stamps * PRESS_PARAMETERS[press_mark][1] *
-                        (specific_pressure / 1000)) / PRESS_PARAMETERS[press_mark][0]
+                    (specific_pressure / 1000)) / PRESS_PARAMETERS[press_mark][0]
 
             if data > PRESS_PARAMETERS[press_mark][1]:
                 data = 'ПРЕСС СТОЛЬКО НЕ ПОТЯНЕТ!!!'
@@ -127,9 +126,8 @@ class Third(Screen):
             if pressure > PRESS_PARAMETERS[press][1]:
                 data = 'ДАВЛЕНИЕ ПРЕССА ПРЕВЫШЕНО!!!'
             else:
-                data = round((pressure * PRESS_PARAMETERS[press][0]) / \
-                       (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1]) * 1000)
-
+                data = round((pressure * PRESS_PARAMETERS[press][0]) /
+                             (square_pressing * quantity_stamps * PRESS_PARAMETERS[press][1]) * 1000)
 
             if isinstance(data, str):
                 self.ids.label_P_pressing_text.text = data
