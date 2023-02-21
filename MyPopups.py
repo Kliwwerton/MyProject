@@ -25,6 +25,7 @@ class SelectionGostPopup(Popup):
         SelectionOptionPopup().open()
 
     def opening_calculation_window(self):
+        popup = None
         if self.ids.gost_number.text in RECTANGLES \
                 and self.ids.product_numbers.text in RECTANGLES[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRectangle()
