@@ -50,6 +50,13 @@ class WrongPopup(Popup):
         super().__init__()
         self.chose_values = []
 
+    def build_instance(self):
+        self.ids.label_wrong.text = 'В моей базе нет ' + \
+                                    self.chose_values[0] + \
+                                    ' или изделия под ' + \
+                                    self.chose_values[1]
+
+
 class CalculationsAreaOfRectangle(Popup):
     def __init__(self):
         super().__init__()

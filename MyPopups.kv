@@ -101,5 +101,8 @@
 
 <WrongPopup>
     size_hint: 0.8, 0.2
+    on_open:
+        self.build_instance()
     Label:
+        id: label_wrong
         text: ''
