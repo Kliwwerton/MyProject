@@ -18,7 +18,7 @@ from MyPopups import SelectionOptionPopup, CalculationsAreaOfRectangle
 
 # from kivymd.theming import ThemeManager
 
-Builder.load_file('Engineer.kv')
+Builder.load_file('First.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
 Builder.load_file('MyPopups.kv')
@@ -34,7 +34,8 @@ class Container(ScreenManager):
 
 class First(Screen):
     """First screen for the app"""
-    pass
+    def press_cow(self):
+        print('Нажата кнопка')
 
 
 class Second(Screen):
@@ -98,6 +99,7 @@ class Second(Screen):
             SelectionOptionPopup().open()
 
     def change_text(self):
+        """Changing text Textinput after calculate"""
         if SQUARE:
             self.ids.label_S_pressing_value.text = str(SQUARE[0])
 

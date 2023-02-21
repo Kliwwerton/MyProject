@@ -1,4 +1,3 @@
-
 <First>:
     name: 'First'
 
@@ -6,7 +5,7 @@
         background_color: [1,0,1,0.5]
         padding: 10
         orientation: 'vertical'
-        spacing: 10
+        spacing: 5
 
         Image:
             source: 'Images/image.png'
@@ -16,10 +15,24 @@
         Label:
             text: 'Выберите действие'
             font_size: '30sp'
-            size_hint: 1, 0.5
+            size_hint: 1, 0.3
             color: [164/255, 0, 0, 1]
             outline_color: 50/255,0,0,1
             outline_width: 2
+        AnchorLayout:
+            size_hint: 1, 0.2
+            anchor_y: 'center'
+            anchor_x: 'right'
+            Button:
+                size_hint: 0.28, 0.9
+                on_press:
+                    root.press_cow()
+                Image:
+                    id: image_cow
+                    source: 'Images/cow.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
         Button:
             id: button_1
             text: 'Расчёт давления прессования\n через удельное.'
@@ -27,7 +40,7 @@
             valign: 'middle'
             font_size: '20sp'
             background_color: 0 , 1, 0.8, 1
-            size_hint: 1, 0.3
+            size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Second'
                 root.manager.transition.direction = 'left'
@@ -39,7 +52,7 @@
             valign: 'middle'
             font_size: '20sp'
             background_color: 0 , 1, 0.8, 1
-            size_hint: 1, 0.3
+            size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Third'
                 root.manager.transition.direction = 'up'
@@ -48,14 +61,14 @@
             text: 'Расчёт химического состава.'
             font_size: '20sp'
             background_color: 0, 200/255, 0, 1
-            size_hint: 1, 0.2
+            size_hint: 1, 0.25
 
         Button:
             id: button_guide
             text: 'СПРАВОЧНИКИ!'
             font_size: '20sp'
             background_color: 0,0,1,1
-            size_hint: 1,0.2
+            size_hint: 1,0.25
 
         FloatLayout:
             size_hint: 1, 0.15
@@ -66,8 +79,7 @@
                 font_size: '10sp'
                 background_color: 1, 0, 0, 1
                 size_hint: .2, 0.8
-
-                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_release:
                     app.stop()
 
