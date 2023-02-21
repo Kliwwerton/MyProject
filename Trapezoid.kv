@@ -1,6 +1,7 @@
 <CalculationsAreaOfTrapezoid>
     title: 'Расчёт площади трапецеидального клина'
     size_hint: 0.8, 0.7
+    auto_dismiss: False
     on_open:
         self.build_instance()
 
@@ -9,7 +10,7 @@
         spacing: 5
 
         BoxLayout:
-            size_hint: 1, 0.25
+            size_hint: 1, 0.2
             spacing: 5
 
             Button:
@@ -36,7 +37,7 @@
 
         Image:
             source: 'Images/Product_shape/trapezoid.png'
-            size_hint: 1, 1
+            size_hint: 1, 1.2
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -45,6 +46,7 @@
                 text: 'Длина(L):'
                 text_size: self.size
                 halign: 'left'
+                valign: 'center'
 
             TextInput:
                 id: length_value
@@ -62,6 +64,7 @@
                 text: 'Ширина(S):'
                 text_size: self.size
                 halign: 'left'
+                valign: 'center'
 
             TextInput:
                 id: width_value_1
@@ -80,6 +83,7 @@
                 text: 'Ширина(S[sub]1[/sub]):'
                 text_size: self.size
                 halign: 'left'
+                valign: 'center'
 
             TextInput:
                 id: width_value_2
@@ -98,6 +102,7 @@
                 text: 'Толщина(H)[sup][size=20]*[/size][/sup]:'
                 text_size: self.size
                 halign: 'left'
+                valign: 'center'
 
             TextInput:
                 id: thickness_value
@@ -112,6 +117,8 @@
             markup: True
             text: '[sup][size=20]*[/size][/sup] - размер для справки'
             halign: 'left'
+            valign: 'center'
+            font_size: '10sp'
             text_size: self.size
             size_hint: 1, 0.15
 
