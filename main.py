@@ -3,7 +3,7 @@ from kivy.config import Config
 Config.set('graphics', 'width', 360)
 Config.set('graphics', 'height', 800)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
-# Config.set('kivy', 'window_icon', 'Images/Logo.png')
+Config.set('kivy', 'window_icon', 'Images/Logo.png')
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -13,7 +13,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
 from variables import SQUARE
-from MyPopups import SelectionOptionPopup, CalculationsAreaOfRectangle
+from MyPopups import SelectionOptionPopup
 
 
 # from kivymd.theming import ThemeManager

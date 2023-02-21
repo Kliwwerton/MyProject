@@ -25,26 +25,30 @@ class SelectionGostPopup(Popup):
         SelectionOptionPopup().open()
 
     def opening_calculation_window(self):
-        popup = None
         if self.ids.gost_number.text in RECTANGLES \
                 and self.ids.product_numbers.text in RECTANGLES[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRectangle()
-            popup.chose_values.append(self.ids.gost_number.text)
-            popup.chose_values.append(self.ids.product_numbers.text)
-            popup.open()
+
         elif self.ids.gost_number.text in TRAPEZOID \
                 and self.ids.product_numbers.text in TRAPEZOID[self.ids.gost_number.text]:
             popup = CalculationsAreaOfTrapezoid()
-            popup.chose_values.append(self.ids.gost_number.text)
-            popup.chose_values.append(self.ids.product_numbers.text)
-            popup.open()
+
         elif self.ids.gost_number.text in RING \
                 and self.ids.product_numbers.text in RING[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRing()
-            popup.chose_values.append(self.ids.gost_number.text)
-            popup.chose_values.append(self.ids.product_numbers.text)
-            popup.open()
 
+        else:
+            popup = WrongPopup()
+
+        popup.chose_values.append(self.ids.gost_number.text)
+        popup.chose_values.append(self.ids.product_numbers.text)
+        popup.open()
+
+
+class WrongPopup(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
 
 class CalculationsAreaOfRectangle(Popup):
     def __init__(self):
