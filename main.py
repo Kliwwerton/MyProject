@@ -92,13 +92,13 @@ class Second(Screen):
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
         if SQUARE:
-            self.ids.label_S_pressing_value.text = str(round(SQUARE[0]/100, 1))
+            self.ids.label_S_pressing_value.text = str(SQUARE[0])
         elif self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
-    # def change_text(self):
-    #     if SQUARE:
-    #         self.ids.label_S_pressing_value.text = str(SQUARE[0])
+    def change_text(self):
+        if SQUARE:
+            self.ids.label_S_pressing_value.text = str(SQUARE[0])
 
 
 class Third(Screen):
@@ -161,9 +161,13 @@ class Third(Screen):
 
     def open_SelectionOptionPopup(self):
         if SQUARE:
-            self.ids.S_pressing_value.text = str(round(SQUARE[0]/100, 1))
+            self.ids.S_pressing_value.text = str(SQUARE[0])
         elif self.ids.S_pressing_value.text == '':
             SelectionOptionPopup().open()
+
+    def change_text(self):
+        if SQUARE:
+            self.ids.S_pressing_value.text = str(SQUARE[0])
 
 
 class EngineerApp(App):
@@ -174,13 +178,16 @@ class EngineerApp(App):
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
         self.SQUARE = []
+        self.First = First()
+        self.Second = Second()
+        self.Third = Third()
 
     def build(self):
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
         container = Container()
-        container.add_widget(First())
-        container.add_widget(Second())
-        container.add_widget(Third())
+        container.add_widget(self.First)
+        container.add_widget(self.Second)
+        container.add_widget(self.Third)
         return container
 
 

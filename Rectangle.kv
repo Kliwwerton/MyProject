@@ -1,6 +1,6 @@
-<CalculationsAreaOfTrapezoid>
-    title: 'Расчёт площади трапецеидального клина'
-    size_hint: 0.8, 0.7
+<CalculationsAreaOfRectangle>
+    title: 'Расчёт площади прямоугольного изделия'
+    size_hint: 0.8, 0.6
     on_open:
         self.build_instance()
 
@@ -35,7 +35,7 @@
             size_hint: 1, 0.15
 
         Image:
-            source: 'Images/Product_shape/trapezoid.png'
+            source: 'Images/Product_shape/rectangle.png'
             size_hint: 1, 1
 
         BoxLayout:
@@ -59,12 +59,12 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Ширина(S):'
+                text: 'Ширина(H):'
                 text_size: self.size
                 halign: 'left'
 
             TextInput:
-                id: width_value_1
+                id: width_value
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -77,25 +77,7 @@
 
             Label:
                 markup: True
-                text: 'Ширина(S[sub]1[/sub]):'
-                text_size: self.size
-                halign: 'left'
-
-            TextInput:
-                id: width_value_2
-                text: ''
-                multiline: False
-                halign: 'center'
-                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
-                input_tipe: 'number'
-                input_filter: 'float'
-
-        BoxLayout:
-            size_hint: 1, 0.2
-
-            Label:
-                markup: True
-                text: 'Толщина(H)[sup][size=20]*[/size][/sup]:'
+                text: 'Толщина(S)[sup][size=20]*[/size][/sup]:'
                 text_size: self.size
                 halign: 'left'
 

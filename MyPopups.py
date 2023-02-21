@@ -66,9 +66,8 @@ class CalculationsAreaOfRectangle(Popup):
 
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value.text:
-            value = float(self.ids.length_value.text) * float(self.ids.width_value.text)
-            print(value)
-            SQUARE.append(value)
+            value = (float(self.ids.length_value.text) * float(self.ids.width_value.text)/100)
+            SQUARE.append(round(value, 1))
 
 
 class CalculationsAreaOfTrapezoid(Popup):
@@ -93,10 +92,10 @@ class CalculationsAreaOfTrapezoid(Popup):
 
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
-            value = float(self.ids.length_value.text) *\
-                    ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)
+            value = (float(self.ids.length_value.text) *\
+                    ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
             print(value)
-            SQUARE.append(value)
+            SQUARE.append(round(value, 1))
 
 
 class CalculationsAreaOfRing(Popup):
@@ -120,14 +119,15 @@ class CalculationsAreaOfRing(Popup):
 
     def calculation_square(self):
         if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
-            D = float(self.ids.outer_diameter_D.text)
+            _D = float(self.ids.outer_diameter_D.text)
             d = float(self.ids.inner_diameter_d.text)
-            value = ((pi * D ** 2) / 4) - ((pi * d ** 2) / 4)
+            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4) / 100)
             print(value)
-            SQUARE.append(value)
+            SQUARE.append(round(value, 1))
 
 
 class ChoosingShapeProduct(Popup):
+
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
