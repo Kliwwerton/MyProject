@@ -24,6 +24,7 @@ Builder.load_file('Third.kv')
 Builder.load_file('MyPopups.kv')
 Builder.load_file('Ring.kv')
 Builder.load_file('Trapezoid.kv')
+Builder.load_file('Rectangle.kv')
 
 
 class Container(ScreenManager):

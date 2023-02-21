@@ -6,16 +6,15 @@
 
     BoxLayout:
         orientation: 'vertical'
-        spacing: 10
+        spacing: 5
 
         BoxLayout:
-            size_hint: 1, 0.25
+            size_hint: 1, 0.20
             spacing: 5
 
             Button:
                 text: 'Назад'
                 font_size: '15sp'
-                size_hint: 0.3, 0.7
                 pos_hint: {'left_bottom': 0, 'center_y': 0.5}
                 on_press:
                     root.dismiss()
@@ -24,7 +23,7 @@
             Button:
                 text: 'Закрыть'
                 font_size: '15sp'
-                size_hint: 0.3, 0.7
+#                size_hint: 0.3, 0.7
                 pos_hint: {'right_bottom': 1, 'center_y': 0.5}
                 on_press:
                     root.dismiss()
@@ -36,7 +35,7 @@
 
         Image:
             source: 'Images/Product_shape/stopor.png'
-            size_hint: 1, 1
+            size_hint: 1, 1.2
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -84,6 +83,7 @@
                 text: 'Высота(L)[sup][size=24]*[/size][/sup]:'
                 text_size: self.size
                 halign: 'left'
+                valign: 'center'
 
             TextInput:
                 id: length_value
@@ -96,15 +96,19 @@
 
         Label:
             markup: True
-            text: '[sup][size=24]*[/size][/sup] - размер для справки'
+            size_hint: 1, 0.10
+            text: '[sup][size=20]*[/size][/sup] - размер для справки'
             halign: 'left'
+            valign: 'center'
             text_size: self.size
             size_hint: 1, 0.2
+            font_size: '10sp'
 
         Button:
             text: 'Рассчитать'
-            size_hint: 0.8, 0.2
+            size_hint: 0.8, 0.20
             pos_hint: {'center_x': 0.5}
             on_press:
                 root.calculation_square()
+                app.Second.change_text(), app.Third.change_text()
                 root.dismiss()

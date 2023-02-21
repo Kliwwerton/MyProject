@@ -92,8 +92,8 @@ class CalculationsAreaOfTrapezoid(Popup):
 
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
-            value = (float(self.ids.length_value.text) *\
-                    ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
+            value = (float(self.ids.length_value.text) *
+                     ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
             print(value)
             SQUARE.append(round(value, 1))
 
@@ -121,7 +121,7 @@ class CalculationsAreaOfRing(Popup):
         if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
             _D = float(self.ids.outer_diameter_D.text)
             d = float(self.ids.inner_diameter_d.text)
-            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4) / 100)
+            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
             print(value)
             SQUARE.append(round(value, 1))
 
@@ -133,17 +133,13 @@ class ChoosingShapeProduct(Popup):
         SelectionOptionPopup().open()
 
     def choose_window(self):
+        popup = None
         if self.ids.spin_choose_window.text == 'Прямоугольник':
             popup = CalculationsAreaOfRectangle()
-            popup.chose_values.append(self.ids.spin_choose_window.text)
-            popup.open()
-
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
             popup = CalculationsAreaOfTrapezoid()
-            popup.chose_values.append(self.ids.spin_choose_window.text)
-            popup.open()
-
         elif self.ids.spin_choose_window.text == 'Кольцо':
             popup = CalculationsAreaOfRing()
-            popup.chose_values.append(self.ids.spin_choose_window.text)
-            popup.open()
+
+        popup.chose_values.append(self.ids.spin_choose_window.text)
+        popup.open()
