@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import SQUARE, RECTANGLES, RING, TRAPEZOID
+from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, RIBBED
 from math import pi
 
 
@@ -32,6 +32,10 @@ class SelectionGostPopup(Popup):
         elif self.ids.gost_number.text in TRAPEZOID \
                 and self.ids.product_numbers.text in TRAPEZOID[self.ids.gost_number.text]:
             popup = CalculationsAreaOfTrapezoid()
+
+        elif self.ids.gost_number.text in RIBBED \
+                and self.ids.product_numbers.text in RIBBED[self.ids.gost_number.text]:
+            popup = CalculationsAreaOfRibbed()
 
         elif self.ids.gost_number.text in RING \
                 and self.ids.product_numbers.text in RING[self.ids.gost_number.text]:
@@ -110,6 +114,32 @@ class CalculationsAreaOfTrapezoid(Popup):
             SQUARE.append(round(value, 1))
 
 
+class CalculationsAreaOfRibbed(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
+
+    def build_instance(self):
+        if len(self.chose_values) > 1:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+            self.ids.length_value.text = str(product_size[0])
+            self.ids.width_value_1.text = str(product_size[1])
+            self.ids.width_value_2.text = str(product_size[2])
+            self.ids.thickness_value.text = str(product_size[3])
+        else:
+            self.ids.label_gost_number.text = self.chose_values[0]
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation_square(self):
+        if self.ids.length_value.text and self.ids.width_value_1.text:
+            value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
+            SQUARE.append(round(value, 1))
+
+
 class CalculationsAreaOfRing(Popup):
     def __init__(self):
         super().__init__()
@@ -150,6 +180,8 @@ class ChoosingShapeProduct(Popup):
             popup = CalculationsAreaOfRectangle()
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
             popup = CalculationsAreaOfTrapezoid()
+        elif self.ids.spin_choose_window.text == 'Ребровый клин':
+            popup = CalculationsAreaOfRibbed()
         elif self.ids.spin_choose_window.text == 'Кольцо':
             popup = CalculationsAreaOfRing()
 
