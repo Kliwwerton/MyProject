@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, RIBBED
+from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, TRAPEZOID_1, RIBBED
 from math import pi
 
 
@@ -32,6 +32,12 @@ class SelectionGostPopup(Popup):
         elif self.ids.gost_number.text in TRAPEZOID \
                 and self.ids.product_numbers.text in TRAPEZOID[self.ids.gost_number.text]:
             popup = CalculationsAreaOfTrapezoid()
+            popup.chose_values.append(TRAPEZOID['Image'])
+
+        elif self.ids.gost_number.text in TRAPEZOID_1 \
+                and self.ids.product_numbers.text in TRAPEZOID_1[self.ids.gost_number.text]:
+            popup = CalculationsAreaOfTrapezoid()
+            popup.chose_values.append(TRAPEZOID_1['Image'])
 
         elif self.ids.gost_number.text in RIBBED \
                 and self.ids.product_numbers.text in RIBBED[self.ids.gost_number.text]:
@@ -44,8 +50,8 @@ class SelectionGostPopup(Popup):
         else:
             popup = WrongPopup()
 
-        popup.chose_values.append(self.ids.gost_number.text)
-        popup.chose_values.append(self.ids.product_numbers.text)
+        popup.chose_values.insert(0, self.ids.gost_number.text)
+        popup.chose_values.insert(1, self.ids.product_numbers.text)
         popup.open()
 
 
@@ -99,6 +105,7 @@ class CalculationsAreaOfTrapezoid(Popup):
             self.ids.width_value_1.text = str(product_size[1])
             self.ids.width_value_2.text = str(product_size[2])
             self.ids.thickness_value.text = str(product_size[3])
+            self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
 
