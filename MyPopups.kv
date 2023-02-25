@@ -103,6 +103,14 @@
     size_hint: 0.8, 0.2
     on_open:
         self.build_instance()
-    Label:
-        id: label_wrong
-        text: ''
+    BoxLayout:
+        spacing: 5
+
+        Label:
+            id: label_wrong
+            text: ''
+
+        Button:
+            text: 'Закрыть'
+            on_press: root.dismiss()
+

@@ -61,6 +61,7 @@
             size_hint: 1, 0.2
 
             Label:
+                id: width_label_H
                 text: 'Ширина(H):'
                 text_size: self.size
                 halign: 'left'
@@ -79,6 +80,7 @@
             size_hint: 1, 0.2
 
             Label:
+                id: thickness_label_S
                 markup: True
                 text: 'Толщина(S)[sup][size=20]*[/size][sup]):'
                 text_size: self.size
@@ -98,6 +100,7 @@
             size_hint: 1, 0.2
 
             Label:
+                id: width_label_S1
                 markup: True
                 text: 'Толщина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
                 text_size: self.size
@@ -115,7 +118,7 @@
 
         Label:
             markup: True
-            text: '[sup][size=20]*[/size][/sup] - размер для справки'
+            text: '[sup][size=20]*[/size][/sup] - размеры для справки'
             halign: 'left'
             valign: 'center'
             font_size: '10sp'
