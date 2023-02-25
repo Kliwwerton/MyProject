@@ -75,9 +75,7 @@ class WrongPopup(Popup):
         self.chose_values = []
 
     def build_instance(self):
-        self.ids.label_wrong.text = 'В моей базе нет ' + \
-                                    self.chose_values[0] + \
-                                    ' или изделия под ' + \
+        self.ids.label_wrong.text = 'В базе пока нет изделия под № ' + \
                                     self.chose_values[1]
 
 
