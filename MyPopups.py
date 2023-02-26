@@ -110,7 +110,7 @@ class CalculationsAreaOfTrapezoid(Popup):
         self.chose_values = []
 
     def build_instance(self):
-        if len(self.chose_values) > 1:
+        if len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
@@ -120,6 +120,7 @@ class CalculationsAreaOfTrapezoid(Popup):
             self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+            self.ids.image.source = self.chose_values[1]
 
     @staticmethod
     def return_beck():
@@ -139,7 +140,7 @@ class CalculationsAreaOfRibbed(Popup):
         self.chose_values = []
 
     def build_instance(self):
-        if len(self.chose_values) > 1:
+        if len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
@@ -149,6 +150,7 @@ class CalculationsAreaOfRibbed(Popup):
             self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+            self.ids.image.source = self.chose_values[1]
 
     @staticmethod
     def return_beck():
@@ -200,10 +202,12 @@ class ChoosingShapeProduct(Popup):
             popup = CalculationsAreaOfRectangle()
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
             popup = CalculationsAreaOfTrapezoid()
+            popup.chose_values.append(TRAPEZOID_1['Image'])
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
             popup = CalculationsAreaOfRibbed()
+            popup.chose_values.append(RIBBED['Image'])
         elif self.ids.spin_choose_window.text == 'Кольцо':
             popup = CalculationsAreaOfRing()
 
-        popup.chose_values.append(self.ids.spin_choose_window.text)
+        popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()

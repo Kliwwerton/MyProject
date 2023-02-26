@@ -33,6 +33,13 @@ class Container(ScreenManager):
     pass
 
 
+class References(Screen):
+    """Window of references"""
+    def __init__(self):
+        super().__init__()
+        self.name = 'References'
+
+
 class First(Screen):
     """First screen for the app"""
     def press_cow(self):
@@ -185,6 +192,8 @@ class EngineerApp(App):
         self.First = First()
         self.Second = Second()
         self.Third = Third()
+        self.References = References()
+
 
     def build(self):
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
@@ -192,6 +201,7 @@ class EngineerApp(App):
         container.add_widget(self.First)
         container.add_widget(self.Second)
         container.add_widget(self.Third)
+        container.add_widget(self.References)
         return container
 
 
