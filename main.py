@@ -26,6 +26,7 @@ Builder.load_file('Ring.kv')
 Builder.load_file('Trapezoid.kv')
 Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
+Builder.load_file('References.kv')
 
 
 class Container(ScreenManager):
@@ -38,6 +39,7 @@ class References(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'References'
+    # pass
 
 
 class First(Screen):
