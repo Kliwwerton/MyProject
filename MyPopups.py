@@ -49,6 +49,7 @@ class SelectionGostPopup(Popup):
                 and self.ids.product_numbers.text in RIBBED_1[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRibbed()
             popup.chose_values.append(RIBBED_1['Image'])
+            print(popup.chose_values[0])
 
         elif self.ids.gost_number.text in RIBBED_2 \
                 and self.ids.product_numbers.text in RIBBED_2[self.ids.gost_number.text]:
@@ -62,9 +63,11 @@ class SelectionGostPopup(Popup):
                 and self.ids.product_numbers.text in RIBBED_3[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRibbed()
             popup.chose_values.append(RIBBED_3['Image'])
-            popup.ids.width_label_H.text = 'Ширина(S):'
-            popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
-            popup.ids.width_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+            popup.ids.length_label_L.text = 'Ширина(в)'
+            popup.ids.width_label_H.text = 'Длина(б):'
+            popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
+            popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+
 
         elif self.ids.gost_number.text in END_WEDGE \
                 and self.ids.product_numbers.text in END_WEDGE[self.ids.gost_number.text]:
@@ -73,7 +76,7 @@ class SelectionGostPopup(Popup):
             popup.ids.length_label_L.text = 'Длина(в)'
             popup.ids.width_label_H.text = 'Ширина(б):'
             popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
-            popup.ids.width_label_S1.text = 'Ширина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+            popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
             popup.title = 'Расчёт площади торцового клина'
 
         elif self.ids.gost_number.text in RING \
