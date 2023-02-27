@@ -1,6 +1,7 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2
+from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, \
+    TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3
 from math import pi
 
 
@@ -53,6 +54,14 @@ class SelectionGostPopup(Popup):
                 and self.ids.product_numbers.text in RIBBED_2[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRibbed()
             popup.chose_values.append(RIBBED_2['Image'])
+            popup.ids.width_label_H.text = 'Ширина(S):'
+            popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
+            popup.ids.width_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+
+        elif self.ids.gost_number.text in RIBBED_3 \
+                and self.ids.product_numbers.text in RIBBED_3[self.ids.gost_number.text]:
+            popup = CalculationsAreaOfRibbed()
+            popup.chose_values.append(RIBBED_3['Image'])
             popup.ids.width_label_H.text = 'Ширина(S):'
             popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
             popup.ids.width_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'

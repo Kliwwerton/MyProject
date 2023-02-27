@@ -15,7 +15,7 @@ GOST_STANDARDS = {
     'ГОСТ 8691-2018': {'1': [230, 65, 65], '2': [230, 85, 65],
                        '3': [230, 114, 100], '4': [230, 114, 75],
                        '5': [230, 114, 65], '6': [230, 114, 40],
-                       '6a': [230, 150, 65]
+                       '6a': [230, 150, 65],
                        },
     'ГОСТ 1598-2018 (ШПД)': {'1': [230, 150, 75], '2': [345, 150, 75],
                              '3': [230, 115, 75], '4': [345, 115, 75],
@@ -60,12 +60,14 @@ TRAPEZOID = {'Image': 'Images/Product_shape/trapezoid.png',
 TRAPEZOID_1 = {'Image': 'Images/Product_shape/trapezoid_1.png',
                'ГОСТ 1598-2018 (ШПД)': ['9', '10', '11', '12'],
                'ГОСТ 5341-2016': ['3', '4']}
-RIBBED = {'Image':'Images/Product_shape/ribbed.png',
+RIBBED = {'Image': 'Images/Product_shape/ribbed.png',
           'ГОСТ 1598-2018 (ШПД)': ['8']}
-RIBBED_1 = {'Image':'Images/Product_shape/ribbed_1.png',
+RIBBED_1 = {'Image': 'Images/Product_shape/ribbed_1.png',
             'ГОСТ 1598-2018 (МЛЛД)': ['5', '6', '7', '8']}
-RIBBED_2 = {'Image':'Images/Product_shape/ribbed_2.png',
+RIBBED_2 = {'Image': 'Images/Product_shape/ribbed_2.png',
             'ГОСТ 5341-2016': ['1', '2', '2а', '2б']}
+RIBBED_3 = {'Image': 'Images/Product_shape/ribbed_2.png',
+            'ГОСТ 21436-2004': []}
 RING = {'ГОСТ 5500-2001': ['ШСП-32 № 1', 'ШСП-32 № 2']}
 
 SQUARE = []
