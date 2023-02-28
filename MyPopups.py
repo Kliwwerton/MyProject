@@ -49,7 +49,6 @@ class SelectionGostPopup(Popup):
                 and self.ids.product_numbers.text in RIBBED_1[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRibbed()
             popup.chose_values.append(RIBBED_1['Image'])
-            print(popup.chose_values[0])
 
         elif self.ids.gost_number.text in RIBBED_2 \
                 and self.ids.product_numbers.text in RIBBED_2[self.ids.gost_number.text]:
@@ -152,7 +151,6 @@ class CalculationsAreaOfTrapezoid(Popup):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
             value = (float(self.ids.length_value.text) *
                      ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
-            print(value)
             SQUARE.append(round(value, 1))
 
 
@@ -208,7 +206,6 @@ class CalculationsAreaOfRing(Popup):
             _D = float(self.ids.outer_diameter_D.text)
             d = float(self.ids.inner_diameter_d.text)
             value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
-            print(value)
             SQUARE.append(round(value, 1))
 
 
