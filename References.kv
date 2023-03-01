@@ -1,5 +1,4 @@
 <References>:
-#    name: 'References'
 
     BoxLayout:
         orientation: 'vertical'
@@ -12,8 +11,6 @@
             Button:
                 text: 'НАЗАД'
                 font_size: '15sp'
-    #            size_hint: 0.3, 0.6
-    #            pos_hint: {'left_bottom': 0, 'center_y': 0.5}
                 on_press:
                     root.manager.current = 'First'
                     root.manager.transition.direction = 'right'
@@ -21,8 +18,7 @@
             Button:
                 text: 'ВЫХОД'
                 font_size: '15sp'
-    #            size_hint: 0.3, 0.6
-    #            pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+
                 on_press:
                     app.stop()
 
@@ -32,7 +28,7 @@
 #            padding: 5
 
             Button:
-                text: 'ГОСТЫ'
+                text: 'Основные требования ГОСТЫ СТО ТУ'
 
             Button:
                 text: 'Классы шамота'
