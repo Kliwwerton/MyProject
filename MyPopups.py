@@ -67,7 +67,6 @@ class SelectionGostPopup(Popup):
             popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
             popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
 
-
         elif self.ids.gost_number.text in END_WEDGE \
                 and self.ids.product_numbers.text in END_WEDGE[self.ids.gost_number.text]:
             popup = CalculationsAreaOfRibbed()
