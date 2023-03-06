@@ -1,4 +1,4 @@
-<References>:
+<Gost_standards>
 
     BoxLayout:
         orientation: 'vertical'
@@ -6,6 +6,7 @@
         padding: 5
 
         BoxLayout:
+            size_hint: 1, 0.04
             spacing: 5
 
             Button:
@@ -22,20 +23,29 @@
                 on_press:
                     app.stop()
 
-        BoxLayout:
-            orientation: 'vertical'
+        Label:
+            text: 'СТАНДАРТЫ'
+            font_size: '30sp'
+            size_hint: 1, 0.15
+            color: [164/255, 0, 0, 1]
+            outline_color: 50/255,0,0,1
+            outline_width: 2
+
+        GridLayout:
             spacing: 5
+            cols: 2
+            size_hint: 1, 0.7
 
             Button:
-                text: 'ГОСТы СТО ТУ'
-                font_size: '25sp'
+                text: 'ГОСТ 8691-2018'
+                font_size: '15sp'
                 on_press:
-                    root.manager.current = 'Gost_standards'
-                    root.manager.transition.direction = 'right'
+                    root.open_gost_8691()
 
             Button:
-                text: 'Классы шамота'
-                font_size: '25sp'
+                text: 'ГОСТ 1598-2018'
+                font_size: '15sp'
 
             Button:
-                text: ''
+                text: 'ГОСТ 5500-2002'
+                font_size: '15sp'

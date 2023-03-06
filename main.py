@@ -27,6 +27,7 @@ Builder.load_file('Trapezoid.kv')
 Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
 Builder.load_file('References.kv')
+Builder.load_file('Gost_standards.kv')
 
 
 class Container(ScreenManager):
@@ -40,6 +41,15 @@ class References(Screen):
         super().__init__()
         self.name = 'References'
 
+
+
+class Gost_standards(Screen):
+    def __init__(self):
+        super().__init__()
+        self.name = 'Gost_standards'
+
+    def open_gost_8691(self):
+        pass
 
 
 class First(Screen):
@@ -195,6 +205,7 @@ class EngineerApp(App):
         self.Second = Second()
         self.Third = Third()
         self.References = References()
+        self.Gost_standards = Gost_standards()
 
     def build(self):
         self.icon = 'Images/Logo.png'
@@ -204,6 +215,7 @@ class EngineerApp(App):
         container.add_widget(self.Second)
         container.add_widget(self.Third)
         container.add_widget(self.References)
+        container.add_widget(self.Gost_standards)
         return container
 
 
