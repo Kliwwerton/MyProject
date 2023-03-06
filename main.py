@@ -3,7 +3,7 @@ from kivy.config import Config
 Config.set('graphics', 'width', 360)
 Config.set('graphics', 'height', 800)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
-Config.set('kivy', 'window_icon', 'Images/Logo.png')
+# Config.set('kivy', 'window_icon', 'Images/Logo.png')
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -197,6 +197,7 @@ class EngineerApp(App):
         self.References = References()
 
     def build(self):
+        self.icon = 'Images/Logo.png'
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
         container = Container()
         container.add_widget(self.First)

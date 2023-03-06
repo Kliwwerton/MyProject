@@ -24,12 +24,14 @@
             anchor_y: 'center'
             anchor_x: 'right'
             Button:
-                size_hint: 0.28, 0.9
+                size_hint: 0.13, 0.85
+                background_color: 0,0,0,0
                 on_press:
                     root.press_cow()
                 Image:
                     id: image_cow
-                    source: 'Images/cow.png'
+                    size: 50, 50
+                    source: 'Images/bull.png'
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
 
@@ -39,7 +41,7 @@
             halign: 'center'
             valign: 'middle'
             font_size: '20sp'
-            background_color: 0 , 1, 0.8, 1
+            background_color: 0, 1, 0.8, 1
             size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Second'
