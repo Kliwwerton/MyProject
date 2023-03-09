@@ -1,1 +1,23 @@
 <Cows_and_bulls>
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 5
+        padding: 5
+
+        BoxLayout:
+            spacing: 5
+
+            Button:
+                text: 'НАЗАД'
+                font_size: '15sp'
+                on_press:
+                    root.manager.current = 'First'
+                    root.manager.transition.direction = 'up'
+
+            Button:
+                text: 'ВЫХОД'
+                font_size: '15sp'
+
+                on_press:
+                    app.stop()
