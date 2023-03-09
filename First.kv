@@ -27,7 +27,8 @@
                 size_hint: 0.13, 0.85
                 background_color: 0,0,0,0
                 on_press:
-                    root.press_cow()
+                    root.manager.current = 'Cows_and_bulls'
+                    root.manager.transition.direction = 'down'
                 Image:
                     id: image_cow
                     size: 50, 50

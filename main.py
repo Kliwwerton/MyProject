@@ -28,6 +28,7 @@ Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
 Builder.load_file('References.kv')
 Builder.load_file('Gost_standards.kv')
+Builder.load_file('Cows_and_bulls.kv')
 
 
 class Container(ScreenManager):
@@ -42,7 +43,6 @@ class References(Screen):
         self.name = 'References'
 
 
-
 class Gost_standards(Screen):
     def __init__(self):
         super().__init__()
@@ -52,10 +52,15 @@ class Gost_standards(Screen):
         pass
 
 
+class Cows_and_bulls(Screen):
+    def __init__(self):
+        super().__init__()
+        self.name = 'Cows_and_bulls'
+
+
 class First(Screen):
     """First screen for the app"""
-    def press_cow(self):
-        print('Нажата кнопка')
+    pass
 
 
 class Second(Screen):
@@ -206,6 +211,7 @@ class EngineerApp(App):
         self.Third = Third()
         self.References = References()
         self.Gost_standards = Gost_standards()
+        self.Cows_and_bulls = Cows_and_bulls()
 
     def build(self):
         self.icon = 'Images/Logo.png'
@@ -216,6 +222,7 @@ class EngineerApp(App):
         container.add_widget(self.Third)
         container.add_widget(self.References)
         container.add_widget(self.Gost_standards)
+        container.add_widget(self.Cows_and_bulls)
         return container
 
 
