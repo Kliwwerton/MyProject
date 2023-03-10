@@ -204,7 +204,7 @@ class CalculationsAreaOfShaped(Popup):
             self.ids.length_value.text = str(product_size[0])
             self.ids.width_value_1.text = str(product_size[1])
             self.ids.width_value_2.text = str(product_size[2])
-            self.ids.thickness_value.text = str(product_size[3])
+            self.ids.thickness_value_S.text = str(product_size[3])
             # self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]

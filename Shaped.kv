@@ -1,6 +1,6 @@
 <CalculationsAreaOfShaped>
     title: 'Расчёт площади фасонного изделия'
-    size_hint: 0.8, 0.7
+    size_hint: 0.8, 0.8
     auto_dismiss: False
     on_open:
         self.build_instance()
@@ -97,24 +97,82 @@
                 input_filter: 'float'
 
         BoxLayout:
-            size_hint: 1, 0.2
+            orientation: 'vertical'
+            size_hint: 1, 0.5
 
             Label:
-                id: thickness_label_S
-                markup: True
-                text: 'Толщина(S)[sup][size=20]*[/size][/sup]:'
-                text_size: self.size
-                halign: 'left'
-                valign: 'center'
+                size_hint: 1, 0.2
+                text: 'Толщина'
 
-            TextInput:
-                id: thickness_value
-                text: ''
-                multiline: False
-                halign: 'center'
-                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
-                input_tipe: 'number'
-                input_filter: 'float'
+            GridLayout:
+                size_hint: 1, 0.8
+                cols: 4
+
+                Label:
+                    id: thickness_label_S
+                    markup: True
+                    text: '(S):'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'center'
+
+                Label:
+                    markup: True
+                    text: '(S[sub]1[/sub]):'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'center'
+
+                Label:
+                    markup: True
+                    text: '(S[sub]2[/sub]):'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'center'
+
+                Label:
+                    markup: True
+                    text: '(S[sub]3[/sub]):'
+                    text_size: self.size
+                    halign: 'center'
+                    valign: 'center'
+
+                TextInput:
+                    id: thickness_value_S
+                    text: ''
+                    multiline: False
+                    halign: 'center'
+                    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                    input_tipe: 'number'
+                    input_filter: 'float'
+
+                TextInput:
+                    id: thickness_value_S1
+                    text: ''
+                    multiline: False
+                    halign: 'center'
+                    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                    input_tipe: 'number'
+                    input_filter: 'float'
+
+                TextInput:
+                    id:thickness_value_S2
+                    text: ''
+                    multiline: False
+                    halign: 'center'
+                    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                    input_tipe: 'number'
+                    input_filter: 'float'
+
+                TextInput:
+                    id:thickness_value_S3
+                    text: ''
+                    multiline: False
+                    halign: 'center'
+                    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                    input_tipe: 'number'
+                    input_filter: 'float'
+
 
         Label:
             markup: True
