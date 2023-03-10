@@ -128,10 +128,16 @@ class CalculationsAreaOfRectangle(Popup):
     def return_beck():
         SelectionOptionPopup().open()
 
-    def calculation_square(self):
+    def calculation(self):
         if self.ids.length_value.text and self.ids.width_value.text:
-            value = (float(self.ids.length_value.text) * float(self.ids.width_value.text)/100)
-            VALUES['square'] = (round(value, 1))
+            square = float(self.ids.length_value.text) * float(self.ids.width_value.text)
+            VALUES['square'] = (round(square / 100, 1))
+            if self.ids.thickness_value.text:
+                print(square)
+                volume = square * float(self.ids.thickness_value.text)
+                print(volume)
+                VALUES['volume'] = (round(volume / 1000, 2))
+                print(VALUES)
 
 
 class CalculationsAreaOfTrapezoid(Popup):
