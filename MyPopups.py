@@ -1,7 +1,7 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
 from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, \
-    TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2
+    TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
 
@@ -76,6 +76,16 @@ class SelectionGostPopup(Popup):
             popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
             popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
             popup.title = 'Расчёт площади торцового клина'
+
+        elif self.ids.gost_number.text in SHAPED \
+                and self.ids.product_numbers.text in SHAPED[self.ids.gost_number.text]:
+            popup = CalculationsAreaOfTrapezoid()
+            popup.chose_values.append(SHAPED['Image'])
+            popup.ids.length_label.text = 'Длина(L)'
+            popup.ids.width_label.text = 'Ширина(H):'
+            popup.ids.width_label_2.text = 'Ширина(H[sub]1[/sub]):'
+            popup.ids.thickness_label_S.text = 'Толщина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+            popup.title = 'Расчёт площади фасонного изделия'
 
         elif self.ids.gost_number.text in END_WEDGE_2 \
                 and self.ids.product_numbers.text in END_WEDGE_2[self.ids.gost_number.text]:
