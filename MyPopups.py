@@ -80,12 +80,6 @@ class SelectionGostPopup(Popup):
         elif self.ids.gost_number.text in SHAPED \
                 and self.ids.product_numbers.text in SHAPED[self.ids.gost_number.text]:
             popup = CalculationsAreaOfShaped()
-            popup.chose_values.append(SHAPED['Image'])
-            popup.ids.length_label.text = 'Длина(L)'
-            popup.ids.width_label.text = 'Ширина(H):'
-            popup.ids.width_label_2.text = 'Ширина(H[sub]1[/sub]):'
-            popup.ids.thickness_label_S.text = 'Толщина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
-            popup.title = 'Расчёт площади фасонного изделия'
 
         elif self.ids.gost_number.text in END_WEDGE_2 \
                 and self.ids.product_numbers.text in END_WEDGE_2[self.ids.gost_number.text]:
@@ -204,17 +198,17 @@ class CalculationsAreaOfShaped(Popup):
         self.chose_values = []
 
     def build_instance(self):
-        if len(self.chose_values) > 2:
+        if len(self.chose_values) > 1:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
             self.ids.width_value_1.text = str(product_size[1])
             self.ids.width_value_2.text = str(product_size[2])
             self.ids.thickness_value.text = str(product_size[3])
-            self.ids.image.source = self.chose_values[2]
+            # self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
-            self.ids.image.source = self.chose_values[1]
+            # self.ids.image.source = self.chose_values[1]
 
     @staticmethod
     def return_beck():

@@ -1,5 +1,5 @@
 <CalculationsAreaOfShaped>
-    title: 'Расчёт площади фасонного кирпича'
+    title: 'Расчёт площади фасонного изделия'
     size_hint: 0.8, 0.7
     auto_dismiss: False
     on_open:
@@ -35,7 +35,7 @@
 
         Image:
             id: image
-            source: ''
+            source: 'Images/Product_shape/shaped.png'
             size_hint: 1, 1.2
 
         BoxLayout:
@@ -62,7 +62,7 @@
 
             Label:
                 id: width_label
-                text: 'Ширина(S):'
+                text: 'Ширина(H):'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -82,7 +82,7 @@
             Label:
                 id: width_label_2
                 markup: True
-                text: 'Ширина(S[sub]1[/sub]):'
+                text: 'Ширина(H[sub]1[/sub]):'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -102,7 +102,7 @@
             Label:
                 id: thickness_label_S
                 markup: True
-                text: 'Толщина(H)[sup][size=20]*[/size][/sup]:'
+                text: 'Толщина(S)[sup][size=20]*[/size][/sup]:'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
