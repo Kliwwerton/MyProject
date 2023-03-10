@@ -12,7 +12,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
-from variables import SQUARE
+from variables import VALUES
 from MyPopups import SelectionOptionPopup
 
 
@@ -123,20 +123,20 @@ class Second(Screen):
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
-        SQUARE.clear()
+        VALUES.clear()
         self.sound_reset.play()
 
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
-        if SQUARE:
-            self.ids.label_S_pressing_value.text = str(SQUARE[0])
+        if VALUES and VALUES['square']:
+            self.ids.label_S_pressing_value.text = str(VALUES['square'])
         elif self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
     def change_text(self):
         """Changing text Textinput after calculate"""
-        if SQUARE:
-            self.ids.label_S_pressing_value.text = str(SQUARE[0])
+        if VALUES['square']:
+            self.ids.label_S_pressing_value.text = str(VALUES['square'])
 
 
 class Third(Screen):
@@ -186,7 +186,7 @@ class Third(Screen):
         self.ids.spinner_quantity_stamps.text = '0'
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.pressure.text = ''
-        SQUARE.clear()
+        VALUES.clear()
         self.ids.S_pressing_value.text = ''
         self.sound_reset.play()
 
@@ -198,14 +198,14 @@ class Third(Screen):
             self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
 
     def open_SelectionOptionPopup(self):
-        if SQUARE:
-            self.ids.S_pressing_value.text = str(SQUARE[0])
+        if VALUES and VALUES['square']:
+            self.ids.S_pressing_value.text = str(VALUES['square'])
         elif self.ids.S_pressing_value.text == '':
             SelectionOptionPopup().open()
 
     def change_text(self):
-        if SQUARE:
-            self.ids.S_pressing_value.text = str(SQUARE[0])
+        if VALUES['square']:
+            self.ids.S_pressing_value.text = str(VALUES['square'])
 
 
 class EngineerApp(App):
@@ -215,7 +215,7 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
-        self.SQUARE = []
+        # self.SQUARE = []
         self.First = First()
         self.Second = Second()
         self.Third = Third()

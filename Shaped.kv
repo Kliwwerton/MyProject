@@ -1,6 +1,6 @@
 <CalculationsAreaOfShaped>
     title: 'Расчёт площади фасонного изделия'
-    size_hint: 0.8, 0.8
+    size_hint: 0.8, 0.75
     auto_dismiss: False
     on_open:
         self.build_instance()
@@ -173,15 +173,8 @@
                     input_tipe: 'number'
                     input_filter: 'float'
 
-
         Label:
-            markup: True
-            text: '[sup][size=20]*[/size][/sup] - размер для справки'
-            halign: 'left'
-            valign: 'center'
-            font_size: '10sp'
-            text_size: self.size
-            size_hint: 1, 0.15
+            size_hint: 1, 0.1
 
         Button:
             text: 'Рассчитать'

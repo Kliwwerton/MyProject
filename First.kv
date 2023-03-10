@@ -72,9 +72,9 @@
             font_size: '20sp'
             background_color: 0,0,1,1
             size_hint: 1,0.25
-            on_press:
-                root.manager.current = 'References'
-                root.manager.transition.direction = 'left'
+#            on_press:
+#                root.manager.current = 'References'
+#                root.manager.transition.direction = 'left'
 
         FloatLayout:
             size_hint: 1, 0.15
@@ -88,5 +88,3 @@
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_release:
                     app.stop()
-
-

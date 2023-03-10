@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import SQUARE, RECTANGLES, RING, TRAPEZOID, \
+from variables import VALUES, RECTANGLES, RING, TRAPEZOID, \
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
@@ -131,7 +131,7 @@ class CalculationsAreaOfRectangle(Popup):
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value.text:
             value = (float(self.ids.length_value.text) * float(self.ids.width_value.text)/100)
-            SQUARE.append(round(value, 1))
+            VALUES['square'] = (round(value, 1))
 
 
 class CalculationsAreaOfTrapezoid(Popup):
@@ -160,7 +160,7 @@ class CalculationsAreaOfTrapezoid(Popup):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
             value = (float(self.ids.length_value.text) *
                      ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
-            SQUARE.append(round(value, 1))
+            VALUES['square'] = (round(value, 1))
 
 
 class CalculationsAreaOfRibbed(Popup):
@@ -188,7 +188,7 @@ class CalculationsAreaOfRibbed(Popup):
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text:
             value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
-            SQUARE.append(round(value, 1))
+            VALUES['square'] = (round(value, 1))
 
 
 class CalculationsAreaOfShaped(Popup):
@@ -205,6 +205,9 @@ class CalculationsAreaOfShaped(Popup):
             self.ids.width_value_1.text = str(product_size[1])
             self.ids.width_value_2.text = str(product_size[2])
             self.ids.thickness_value_S.text = str(product_size[3])
+            self.ids.thickness_value_S1.text = str(product_size[4])
+            self.ids.thickness_value_S2.text = str(product_size[5])
+            self.ids.thickness_value_S3.text = str(product_size[6])
             # self.ids.image.source = self.chose_values[2]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
@@ -217,7 +220,7 @@ class CalculationsAreaOfShaped(Popup):
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text:
             value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
-            SQUARE.append(round(value, 1))
+            VALUES['square'] = (round(value, 1))
 
 
 class CalculationsAreaOfRing(Popup):
@@ -244,7 +247,7 @@ class CalculationsAreaOfRing(Popup):
             _D = float(self.ids.outer_diameter_D.text)
             d = float(self.ids.inner_diameter_d.text)
             value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
-            SQUARE.append(round(value, 1))
+            VALUES['square'] = (round(value, 1))
 
 
 class ChoosingShapeProduct(Popup):
