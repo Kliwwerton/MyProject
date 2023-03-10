@@ -1,0 +1,135 @@
+<CalculationsAreaOfShaped>
+    title: 'Расчёт площади фасонного кирпича'
+    size_hint: 0.8, 0.7
+    auto_dismiss: False
+    on_open:
+        self.build_instance()
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 5
+
+        BoxLayout:
+            size_hint: 1, 0.2
+            spacing: 5
+
+            Button:
+                text: 'Назад'
+                font_size: '15sp'
+                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+                    root.return_beck()
+
+            Button:
+                text: 'Закрыть'
+                font_size: '15sp'
+                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+
+        Label:
+            id: label_gost_number
+            text: ''
+            size_hint: 1, 0.15
+
+        Image:
+            id: image
+            source: ''
+            size_hint: 1, 1.2
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                id: length_label
+                text: 'Длина(L):'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+
+            TextInput:
+                id: length_value
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                id: width_label
+                text: 'Ширина(S):'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+
+            TextInput:
+                id: width_value_1
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                id: width_label_2
+                markup: True
+                text: 'Ширина(S[sub]1[/sub]):'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+
+            TextInput:
+                id: width_value_2
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                id: thickness_label_S
+                markup: True
+                text: 'Толщина(H)[sup][size=20]*[/size][/sup]:'
+                text_size: self.size
+                halign: 'left'
+                valign: 'center'
+
+            TextInput:
+                id: thickness_value
+                text: ''
+                multiline: False
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+        Label:
+            markup: True
+            text: '[sup][size=20]*[/size][/sup] - размер для справки'
+            halign: 'left'
+            valign: 'center'
+            font_size: '10sp'
+            text_size: self.size
+            size_hint: 1, 0.15
+
+        Button:
+            text: 'Рассчитать'
+            size_hint: 0.8, 0.2
+            pos_hint: {'center_x': 0.5}
+            on_press:
+                root.calculation_square()
+                app.Second.change_text(), app.Third.change_text()
+                root.dismiss()

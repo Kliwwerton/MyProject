@@ -79,7 +79,7 @@ class SelectionGostPopup(Popup):
 
         elif self.ids.gost_number.text in SHAPED \
                 and self.ids.product_numbers.text in SHAPED[self.ids.gost_number.text]:
-            popup = CalculationsAreaOfTrapezoid()
+            popup = CalculationsAreaOfShaped()
             popup.chose_values.append(SHAPED['Image'])
             popup.ids.length_label.text = 'Длина(L)'
             popup.ids.width_label.text = 'Ширина(H):'
@@ -170,6 +170,35 @@ class CalculationsAreaOfTrapezoid(Popup):
 
 
 class CalculationsAreaOfRibbed(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
+
+    def build_instance(self):
+        if len(self.chose_values) > 2:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+            self.ids.length_value.text = str(product_size[0])
+            self.ids.width_value_1.text = str(product_size[1])
+            self.ids.width_value_2.text = str(product_size[2])
+            self.ids.thickness_value.text = str(product_size[3])
+            self.ids.image.source = self.chose_values[2]
+        else:
+            self.ids.label_gost_number.text = self.chose_values[0]
+            self.ids.image.source = self.chose_values[1]
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation_square(self):
+        if self.ids.length_value.text and self.ids.width_value_1.text:
+            value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
+            SQUARE.append(round(value, 1))
+
+
+class CalculationsAreaOfShaped(Popup):
+
     def __init__(self):
         super().__init__()
         self.chose_values = []

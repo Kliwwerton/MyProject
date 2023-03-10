@@ -18,16 +18,26 @@ from MyPopups import SelectionOptionPopup
 
 # from kivymd.theming import ThemeManager
 
+# Screens
 Builder.load_file('First.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
+
+# Popups
 Builder.load_file('MyPopups.kv')
+
+# Shapes
 Builder.load_file('Ring.kv')
 Builder.load_file('Trapezoid.kv')
 Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
+Builder.load_file('Shaped.kv')
+
+# Another buttons
 Builder.load_file('References.kv')
 Builder.load_file('Gost_standards.kv')
+
+# The game
 Builder.load_file('Cows_and_bulls.kv')
 
 
