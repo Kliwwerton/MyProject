@@ -83,7 +83,7 @@ class Second(Screen):
         self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
         self.ids.label_P_pressing_value.text = data
 
-    def calculate_pressure(self):
+    def calculate(self):
         """Calculating pressing pressure"""
         self.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':

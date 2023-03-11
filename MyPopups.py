@@ -121,8 +121,11 @@ class CalculationsAreaOfRectangle(Popup):
             self.ids.length_value.text = str(product_size[0])
             self.ids.width_value.text = str(product_size[1])
             self.ids.thickness_value.text = str(product_size[2])
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+            VALUES['gost'] = self.ids.label_gost_number.text
 
     @staticmethod
     def return_beck():

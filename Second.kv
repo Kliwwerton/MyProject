@@ -26,7 +26,7 @@
 
         Spinner:
             id: spinner_press_mark
-            size_hint: 1, 0.12
+            size_hint: 1, 0.15
             background_normal: '0,0,0,0'
             background_color: 44/255 ,164/255, 45/255, 1
             color: 0/255 ,22/255, 203/255, 1
@@ -37,7 +37,7 @@
         Button:
             text: 'Площадь изделия (ПОДБОР)'
             font_size: '20sp'
-            size_hint: 1,0.12
+            size_hint: 1,0.15
             background_color: 0.2, 1, 0.7, 1
             on_press:
                 root.open_SelectionOptionPopup()
@@ -135,26 +135,77 @@
                 size_hint: 0.4, 1
 
 # TODO add output information
-        GridLayout:
-            size_hint: 1, 0.2
-            cols: 2
+        BoxLayout:
+            size_hint: 1, 0.06
 
             Label:
-                text: 'Марка:'
+                id: stamp_text
+                size_hint: 0.3, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
             Label:
                 id: stamp_label
+                size_hint: 0.7, 1
                 text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+        Label:
+            id: gost_text
+            text: ''
+            size_hint: 1, 0.06
+            color: 64/255,64/255,64/255,1
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+
+        BoxLayout:
+            size_hint: 1, 0.06
 
             Label:
+                id: volume_label
+                size_hint: 0.3, 1
                 text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
             Label:
-                id: gost_label
+                id: volume_value
+                size_hint: 0.7, 1
                 text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+        BoxLayout:
+            size_hint: 1, 0.06
 
             Label:
-                text: 'Вес'
+                id: volume_weight_text
+                size_hint: 0.3, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: volume_weight_value
+                size_hint: 0.7, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
         AnchorLayout:
             anchor_x: 'center'
@@ -168,7 +219,7 @@
                 background_normal: ''
                 background_color: 0.4,0,1,1
                 on_release:
-                    root.calculate_pressure()
+                    root.calculate()
 
 # Вывод данных
         BoxLayout:
