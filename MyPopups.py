@@ -125,7 +125,7 @@ class CalculationsAreaOfRectangle(Popup):
             VALUES['number'] = self.chose_values[1]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
-            VALUES['gost'] = self.ids.label_gost_number.text
+            VALUES['gost'] = self.chose_values[0]
 
     @staticmethod
     def return_beck():
@@ -157,8 +157,11 @@ class CalculationsAreaOfTrapezoid(Popup):
             self.ids.width_value_2.text = str(product_size[2])
             self.ids.thickness_value.text = str(product_size[3])
             self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+            VALUES['gost'] = self.chose_values[0]
             self.ids.image.source = self.chose_values[1]
 
     @staticmethod

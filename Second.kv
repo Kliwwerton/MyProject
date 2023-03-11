@@ -134,13 +134,12 @@
                 color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
-# TODO add output information
         BoxLayout:
             size_hint: 1, 0.06
 
             Label:
                 id: stamp_text
-                size_hint: 0.3, 1
+                size_hint: 0.4, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
@@ -149,7 +148,7 @@
 
             Label:
                 id: stamp_label
-                size_hint: 0.7, 1
+                size_hint: 0.6, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
@@ -170,7 +169,7 @@
 
             Label:
                 id: volume_label
-                size_hint: 0.3, 1
+                size_hint: 0.4, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
@@ -179,12 +178,15 @@
 
             Label:
                 id: volume_value
-                size_hint: 0.7, 1
+                markup: True
+                size_hint: 0.6, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
                 halign: 'left'
                 valign: 'middle'
+
+# TODO add calculate volume_weight
 
         BoxLayout:
             size_hint: 1, 0.06

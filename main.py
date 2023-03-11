@@ -123,6 +123,11 @@ class Second(Screen):
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.specific_pressure.text = ''
         self.ids.label_S_pressing_value.text = ''
+        self.ids.volume_label.text = ''
+        self.ids.volume_value.text = ''
+        self.ids.gost_text.text = ''
+        self.ids.stamp_text.text = ''
+        self.ids.stamp_label.text = ''
         VALUES.clear()
         self.sound_reset.play()
 
@@ -137,6 +142,17 @@ class Second(Screen):
         """Changing text Textinput after calculate"""
         if VALUES['square']:
             self.ids.label_S_pressing_value.text = str(VALUES['square'])
+
+        if VALUES['volume']:
+            self.ids.volume_label.text = 'Объём изделия: '
+            self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
+
+        if VALUES['gost']:
+            self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+
+        if VALUES['number']:
+            self.ids.stamp_text.text = 'Номер изделия: '
+            self.ids.stamp_label.text = VALUES['number']
 
 
 class Third(Screen):
