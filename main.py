@@ -13,7 +13,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
-from MyPopups import SelectionOptionPopup
+from MyPopups import SelectionOptionPopup, choice_popup
 
 
 # from kivymd.theming import ThemeManager
@@ -133,8 +133,9 @@ class Second(Screen):
 
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
-        if VALUES and VALUES['square']:
-            self.ids.label_S_pressing_value.text = str(VALUES['square'])
+        if VALUES['gost'] and VALUES['number']:
+            choice_popup(gost=VALUES['gost'], number=VALUES['number'])
+
         elif self.ids.label_S_pressing_value.text == '':
             SelectionOptionPopup().open()
 

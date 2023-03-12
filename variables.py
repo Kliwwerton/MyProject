@@ -146,4 +146,4 @@ RING = {'ГОСТ 5500-2001': ['ШСП-32 № 1', 'ШСП-32 № 2']
 SHAPED = {'Image': 'Images/Product_shape/shaped.png',
           'ГОСТ 20901-2016': ['17', '18', '19', '20', '21', '22', '23', '24', '25', '26']}
 
-VALUES = {'square': None, 'volume': None, 'gost': None, 'number': None}
+VALUES = {'square': None, 'volume': None, 'gost': None, 'number': None, 'size': []}
