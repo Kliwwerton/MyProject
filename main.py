@@ -133,11 +133,11 @@ class Second(Screen):
 
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
-        if VALUES['gost'] and VALUES['number']:
-            choice_popup(gost=VALUES['gost'], number=VALUES['number'])
-
-        elif self.ids.label_S_pressing_value.text == '':
+        if self.ids.label_S_pressing_value.text == '' and not VALUES:
             SelectionOptionPopup().open()
+
+        elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
+            choice_popup(gost=VALUES['gost'], number=VALUES['number'], size=VALUES['size'])
 
     def change_text(self):
         """Changing text Textinput after calculate"""
