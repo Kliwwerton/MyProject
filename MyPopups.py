@@ -128,6 +128,10 @@ class WrongPopup(Popup):
                                     self.chose_values[1]
 
 
+class RessetPopup(Popup):
+    pass
+
+
 class CalculationsAreaOfRectangle(Popup):
     def __init__(self):
         super().__init__()

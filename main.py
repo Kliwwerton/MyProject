@@ -13,7 +13,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
-from MyPopups import SelectionOptionPopup, choice_popup
+from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup
 
 
 # from kivymd.theming import ThemeManager
@@ -131,6 +131,10 @@ class Second(Screen):
         VALUES.clear()
         self.sound_reset.play()
 
+    @staticmethod
+    def open_ressetPopup():
+        RessetPopup().open()
+
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
         if self.ids.label_S_pressing_value.text == '' and not VALUES:
@@ -232,7 +236,6 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
-        # self.SQUARE = []
         self.First = First()
         self.Second = Second()
         self.Third = Third()

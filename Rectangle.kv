@@ -80,7 +80,7 @@
 
             Label:
                 markup: True
-                text: 'Толщина(S)[sup][size=20]*[/size][/sup]:'
+                text: 'Толщина(S):'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -94,14 +94,15 @@
                 input_tipe: 'number'
                 input_filter: 'float'
 
-        Label:
-            markup: True
-            text: '[sup][size=20]*[/size][/sup] - размер для справки'
-            halign: 'left'
-            valign: 'center'
-            font_size: '10sp'
-            text_size: self.size
-            size_hint: 1, 0.15
+        BoxLayout:
+            size_hint: 1, 0.2
+            Label:
+                text: 'Вес изделия: '
+
+            TextInput:
+                id: weight_product
+                text: ''
+                hint_text: 'Вес изделия'
 
         Button:
             text: 'Рассчитать'
