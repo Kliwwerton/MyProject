@@ -114,6 +114,7 @@ class Second(Screen):
 
             self.ids.label_P_pressing_text.text = 'Давление прессования:'
             self.ids.label_P_pressing_value.text = str(data)
+        print(VALUES)
 
     def reset(self):
         """reset all parameters"""
@@ -140,24 +141,33 @@ class Second(Screen):
         if self.ids.label_S_pressing_value.text == '' and not VALUES:
             SelectionOptionPopup().open()
 
+        elif self.ids.label_S_pressing_value.text and not VALUES:
+            SelectionOptionPopup().open()
+
         elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
             choice_popup(gost=VALUES['gost'], number=VALUES['number'], size=VALUES['size'])
 
+        else:
+            SelectionOptionPopup().open()
+
     def change_text(self):
         """Changing text Textinput after calculate"""
-        if VALUES['square']:
-            self.ids.label_S_pressing_value.text = str(VALUES['square'])
+        if not VALUES:
+            pass
+        elif VALUES:
+            if VALUES['square']:
+                self.ids.label_S_pressing_value.text = str(VALUES['square'])
 
-        if VALUES['volume']:
-            self.ids.volume_label.text = 'Объём изделия: '
-            self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
+            if VALUES['volume']:
+                self.ids.volume_label.text = 'Объём изделия: '
+                self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
 
-        if VALUES['gost']:
-            self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+            if VALUES['gost']:
+                self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
 
-        if VALUES['number']:
-            self.ids.stamp_text.text = 'Номер изделия: '
-            self.ids.stamp_label.text = VALUES['number']
+            if VALUES['number']:
+                self.ids.stamp_text.text = 'Номер изделия: '
+                self.ids.stamp_label.text = VALUES['number']
 
 
 class Third(Screen):

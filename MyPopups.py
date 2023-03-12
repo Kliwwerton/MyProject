@@ -158,25 +158,40 @@ class CalculationsAreaOfRectangle(Popup):
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = None
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
     def calculation(self):
+
         if self.ids.length_value.text and self.ids.width_value.text:
             square = float(self.ids.length_value.text) * float(self.ids.width_value.text)
             VALUES['square'] = (round(square / 100, 1))
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
             VALUES['size'].append(self.ids.width_value.text)
+
             if self.ids.thickness_value.text:
                 print(square)
-                volume = square * float(self.ids.thickness_value.text)
+                volume = (square * float(self.ids.thickness_value.text)) / 1000
                 print(volume)
-                VALUES['volume'] = (round(volume / 1000, 2))
+                VALUES['volume'] = (round(volume, 2))
                 VALUES['size'].append(self.ids.thickness_value.text)
+
+                if self.ids.weight_product.text:
+                    volume_weight = (float(self.ids.weight_product.text) * 1000) / volume
+                    VALUES['volume_weight'] = str(volume_weight)
+                else:
+                    VALUES['volume_weight'] = None
                 print(VALUES)
+
+        else:
+            VALUES['square'] = 0
+            VALUES['size'] = 0
+            VALUES['volume'] = 0
+            VALUES['volume_weight'] = None
 
 
 class CalculationsAreaOfTrapezoid(Popup):
