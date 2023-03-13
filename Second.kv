@@ -186,28 +186,15 @@
                 halign: 'left'
                 valign: 'middle'
 
-# TODO add calculate volume_weight
-
-        BoxLayout:
+        Label:
+            id: volume_weight
+            markup: True
             size_hint: 1, 0.06
-
-            Label:
-                id: volume_weight_text
-                size_hint: 0.3, 1
-                text: ''
-                color: 64/255,64/255,64/255,1
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
-
-            Label:
-                id: volume_weight_value
-                size_hint: 0.7, 1
-                text: ''
-                color: 64/255,64/255,64/255,1
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
+            text: ''
+            color: 64/255,64/255,64/255,1
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
 
         AnchorLayout:
             anchor_x: 'center'

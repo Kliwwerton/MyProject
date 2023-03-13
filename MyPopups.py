@@ -5,7 +5,7 @@ from variables import VALUES, RECTANGLES, RING, TRAPEZOID, \
 from math import pi
 
 
-def choice_popup(gost, number, size=None):
+def choice_popup(gost, number, size=None, weight=''):
     if gost in RECTANGLES and number in RECTANGLES[gost]:
         popup = CalculationsAreaOfRectangle()
 
@@ -65,8 +65,10 @@ def choice_popup(gost, number, size=None):
 
     popup.chose_values.insert(0, gost)
     popup.chose_values.insert(1, number)
+    popup.weight = weight
     if size:
         popup.product_size = size
+
     popup.open()
 
 
@@ -137,6 +139,7 @@ class CalculationsAreaOfRectangle(Popup):
         super().__init__()
         self.chose_values = []
         self.product_size = []
+        self.weight = ''
 
     def build_instance(self):
         if self.chose_values and self.product_size:
@@ -160,6 +163,9 @@ class CalculationsAreaOfRectangle(Popup):
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = None
 
+        if self.weight:
+            self.ids.weight_product.text = self.weight
+
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
@@ -181,10 +187,12 @@ class CalculationsAreaOfRectangle(Popup):
                 VALUES['size'].append(self.ids.thickness_value.text)
 
                 if self.ids.weight_product.text:
-                    volume_weight = (float(self.ids.weight_product.text) * 1000) / volume
+                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
                 else:
                     VALUES['volume_weight'] = None
+                    VALUES['weight'] = None
                 print(VALUES)
 
         else:
@@ -192,12 +200,15 @@ class CalculationsAreaOfRectangle(Popup):
             VALUES['size'] = 0
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
+            VALUES['weight'] = None
 
 
 class CalculationsAreaOfTrapezoid(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
+
+        self.weight = ''
 
     def build_instance(self):
         if len(self.chose_values) > 2:
@@ -231,6 +242,8 @@ class CalculationsAreaOfRibbed(Popup):
         super().__init__()
         self.chose_values = []
 
+        self.weight = ''
+
     def build_instance(self):
         if len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
@@ -259,6 +272,8 @@ class CalculationsAreaOfShaped(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
+
+        self.weight = ''
 
     def build_instance(self):
         if len(self.chose_values) > 1:
@@ -290,6 +305,8 @@ class CalculationsAreaOfRing(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
+
+        self.weight = ''
 
     def build_instance(self):
         if len(self.chose_values) > 1:

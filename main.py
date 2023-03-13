@@ -129,6 +129,7 @@ class Second(Screen):
         self.ids.gost_text.text = ''
         self.ids.stamp_text.text = ''
         self.ids.stamp_label.text = ''
+        self.ids.volume_weight.text = ''
         VALUES.clear()
         self.sound_reset.play()
 
@@ -144,8 +145,16 @@ class Second(Screen):
         elif self.ids.label_S_pressing_value.text and not VALUES:
             SelectionOptionPopup().open()
 
+        elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
+            choice_popup(gost=VALUES['gost'],
+                         number=VALUES['number'],
+                         size=VALUES['size'],
+                         weight=VALUES['weight'])
+
         elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
-            choice_popup(gost=VALUES['gost'], number=VALUES['number'], size=VALUES['size'])
+            choice_popup(gost=VALUES['gost'],
+                         number=VALUES['number'],
+                         size=VALUES['size'])
 
         else:
             SelectionOptionPopup().open()
@@ -157,17 +166,32 @@ class Second(Screen):
         elif VALUES:
             if VALUES['square']:
                 self.ids.label_S_pressing_value.text = str(VALUES['square'])
+            else:
+                self.ids.label_S_pressing_value.text = ''
 
             if VALUES['volume']:
                 self.ids.volume_label.text = 'Объём изделия: '
                 self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
+            else:
+                self.ids.volume_label.text = ''
+                self.ids.volume_value.text = ''
 
             if VALUES['gost']:
                 self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+            else:
+                self.ids.gost_text.text = ''
 
             if VALUES['number']:
                 self.ids.stamp_text.text = 'Номер изделия: '
                 self.ids.stamp_label.text = VALUES['number']
+            else:
+                self.ids.stamp_text.text = ''
+                self.ids.stamp_label.text = ''
+
+            if VALUES['volume_weight']:
+                self.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
+            else:
+                self.ids.volume_weight.text = ''
 
 
 class Third(Screen):
