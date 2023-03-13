@@ -16,7 +16,6 @@
             Button:
                 text: 'Назад'
                 font_size: '15sp'
-#                size_hint: 0.3, 0.7
                 pos_hint: {'left_bottom': 0, 'center_y': 0.5}
                 on_press:
                     root.dismiss()
@@ -25,7 +24,6 @@
             Button:
                 text: 'Закрыть'
                 font_size: '15sp'
-#                size_hint: 0.3, 0.7
                 pos_hint: {'right_bottom': 1, 'center_y': 0.5}
                 on_press:
                     root.dismiss()
@@ -43,7 +41,8 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Длина(L):'
+                text: 'Длина(L), мм:'
+                size_hint: 0.6, 1
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -51,6 +50,7 @@
             TextInput:
                 id: length_value
                 text: ''
+                size_hint: 0.4, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
@@ -61,7 +61,8 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Ширина(H):'
+                text: 'Ширина(H), мм:'
+                size_hint: 0.6, 1
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -69,6 +70,7 @@
             TextInput:
                 id: width_value
                 text: ''
+                size_hint: 0.4, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
@@ -80,7 +82,8 @@
 
             Label:
                 markup: True
-                text: 'Толщина(S):'
+                size_hint: 0.6, 1
+                text: 'Толщина(S), мм:'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
@@ -88,6 +91,7 @@
             TextInput:
                 id: thickness_value
                 text: ''
+                size_hint: 0.4, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
@@ -99,6 +103,7 @@
 
             Label:
                 text: 'Вес изделия, кг: '
+                size_hint: 0.6, 1
                 halign: 'left'
                 valign: 'center'
                 text_size: self.size
@@ -108,6 +113,7 @@
             TextInput:
                 id: weight_product
                 text: ''
+                size_hint: 0.4, 1
                 hint_text: 'Вес изделия'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
