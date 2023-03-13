@@ -207,11 +207,20 @@ class CalculationsAreaOfTrapezoid(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
-
+        self.product_size = []
         self.weight = ''
 
     def build_instance(self):
-        if len(self.chose_values) > 2:
+        if self.chose_values and self.product_size:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            self.ids.length_value.text = self.product_size[0]
+            self.ids.width_value_1.text = self.product_size[1]
+            self.ids.width_value_2.text = self.product_size[2]
+            self.ids.thickness_value.text = self.product_size[3]
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+        elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
