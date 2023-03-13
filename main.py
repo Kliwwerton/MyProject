@@ -139,10 +139,7 @@ class Second(Screen):
 
     def open_SelectionOptionPopup(self):
         """opening popup window Selection Option"""
-        if self.ids.label_S_pressing_value.text == '' and not VALUES:
-            SelectionOptionPopup().open()
-
-        elif self.ids.label_S_pressing_value.text and not VALUES:
+        if not VALUES:
             SelectionOptionPopup().open()
 
         elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
@@ -176,7 +173,9 @@ class Second(Screen):
                 self.ids.volume_label.text = ''
                 self.ids.volume_value.text = ''
 
-            if VALUES['gost']:
+            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо'):
+                self.ids.gost_text.text = VALUES['gost']
+            elif VALUES['gost']:
                 self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
             else:
                 self.ids.gost_text.text = ''

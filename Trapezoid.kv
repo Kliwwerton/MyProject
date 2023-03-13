@@ -133,8 +133,6 @@
                 halign: 'left'
                 valign: 'center'
                 text_size: self.size
-                input_tipe: 'number'
-                input_filter: 'float'
 
             TextInput:
                 id: weight_product
@@ -143,12 +141,14 @@
                 hint_text: 'Вес изделия'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
 
         Button:
             text: 'Рассчитать'
             size_hint: 0.8, 0.2
             pos_hint: {'center_x': 0.5}
             on_press:
-                root.calculation_square()
+                root.calculation()
                 app.Second.change_text(), app.Third.change_text()
                 root.dismiss()

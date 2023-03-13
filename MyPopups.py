@@ -5,7 +5,7 @@ from variables import VALUES, RECTANGLES, RING, TRAPEZOID, \
 from math import pi
 
 
-def choice_popup(gost, number, size=None, weight=''):
+def choice_popup(gost, number=None, size=None, weight=''):
     if gost in RECTANGLES and number in RECTANGLES[gost]:
         popup = CalculationsAreaOfRectangle()
 
@@ -180,9 +180,7 @@ class CalculationsAreaOfRectangle(Popup):
             VALUES['size'].append(self.ids.width_value.text)
 
             if self.ids.thickness_value.text:
-                print(square)
                 volume = (square * float(self.ids.thickness_value.text)) / 1000
-                print(volume)
                 VALUES['volume'] = (round(volume, 2))
                 VALUES['size'].append(self.ids.thickness_value.text)
 
@@ -194,6 +192,11 @@ class CalculationsAreaOfRectangle(Popup):
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
                 print(VALUES)
+
+            else:
+                VALUES['volume'] = None
+                VALUES['volume_weight'] = None
+                VALUES['weight'] = None
 
         else:
             VALUES['square'] = 0
@@ -216,10 +219,12 @@ class CalculationsAreaOfTrapezoid(Popup):
             self.ids.length_value.text = self.product_size[0]
             self.ids.width_value_1.text = self.product_size[1]
             self.ids.width_value_2.text = self.product_size[2]
-            self.ids.thickness_value.text = self.product_size[3]
+            if len(self.product_size) == 4:
+                self.ids.thickness_value.text = self.product_size[3]
             self.ids.image.source = self.chose_values[2]
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
+
         elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
@@ -233,17 +238,52 @@ class CalculationsAreaOfTrapezoid(Popup):
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = 'Не определён.'
             self.ids.image.source = self.chose_values[1]
+
+        if self.weight:
+            self.ids.weight_product.text = self.weight
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
-    def calculation_square(self):
+    def calculation(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
-            value = (float(self.ids.length_value.text) *
-                     ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2)/100)
-            VALUES['square'] = (round(value, 1))
+            square = (float(self.ids.length_value.text) *
+                     ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2))
+            VALUES['square'] = (round(square / 100, 1))
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value_1.text)
+            VALUES['size'].append(self.ids.width_value_2.text)
+
+            if self.ids.thickness_value.text:
+                volume = (square * float(self.ids.thickness_value.text)) / 1000
+                VALUES['volume'] = (round(volume, 2))
+                VALUES['size'].append(self.ids.thickness_value.text)
+                print(square, volume)
+
+                if self.ids.weight_product.text:
+                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
+                else:
+                    VALUES['volume_weight'] = None
+                    VALUES['weight'] = None
+                print(VALUES)
+
+            else:
+                VALUES['volume'] = None
+                VALUES['volume_weight'] = None
+                VALUES['weight'] = None
+
+        else:
+            VALUES['square'] = 0
+            VALUES['size'] = 0
+            VALUES['volume'] = 0
+            VALUES['volume_weight'] = None
+            VALUES['weight'] = None
 
 
 class CalculationsAreaOfRibbed(Popup):
