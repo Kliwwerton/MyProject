@@ -12,6 +12,9 @@ def choice_popup(gost, number=None, size=None, weight=''):
     elif gost in TRAPEZOID and number in TRAPEZOID[gost]:
         popup = CalculationsAreaOfTrapezoid()
         popup.chose_values.append(TRAPEZOID['Image'])
+        popup.ids.length_label.text = 'Ширина(L), мм:'
+        popup.ids.width_label.text = 'Длина(S), мм:'
+        popup.ids.width_label_2.text = 'Длина(S[sub]1[/sub]), мм:'
 
     elif gost in TRAPEZOID_1 and number in TRAPEZOID_1[gost]:
         popup = CalculationsAreaOfTrapezoid()
