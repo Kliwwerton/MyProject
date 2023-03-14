@@ -33,7 +33,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup.chose_values.append(RIBBED_2['Image'])
         popup.ids.width_label_H.text = 'Ширина(S):'
         popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
-        popup.ids.width_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.thickness_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
 
     elif gost in RIBBED_3 and number in RIBBED_3[gost]:
         popup = Ribbed()
@@ -41,7 +41,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup.ids.length_label_L.text = 'Ширина(в)'
         popup.ids.width_label_H.text = 'Длина(б):'
         popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
-        popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
 
     elif gost in END_WEDGE and number in END_WEDGE[gost]:
         popup = Ribbed()
@@ -49,16 +49,16 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup.ids.length_label_L.text = 'Длина(в)'
         popup.ids.width_label_H.text = 'Ширина(б):'
         popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
-        popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
         popup.title = 'Расчёт площади торцового клина'
-
-    elif gost in SHAPED and number in SHAPED[gost]:
-        popup = CalculationsAreaOfShaped()
 
     elif gost in END_WEDGE_2 and number in END_WEDGE_2[gost]:
         popup = Ribbed()
         popup.chose_values.append(END_WEDGE_2['Image'])
         popup.title = 'Расчёт площади торцового клина'
+
+    elif gost in SHAPED and number in SHAPED[gost]:
+        popup = CalculationsAreaOfShaped()
 
     elif gost in RING and number in RING[gost]:
         popup = CalculationsAreaOfRing()
@@ -301,10 +301,11 @@ class Ribbed(Popup):
         if self.chose_values and self.product_size:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             self.ids.length_value.text = self.product_size[0]
-            self.ids.width_value_1.text = self.product_size[1]
-            self.ids.width_value_2.text = self.product_size[2]
+            self.ids.width_value.text = self.product_size[1]
+
             if len(self.product_size) == 4:
-                self.ids.thickness_value.text = self.product_size[3]
+                self.ids.thickness_value_1.text = self.product_size[2]
+                self.ids.thickness_value_2.text = self.product_size[3]
             self.ids.image.source = self.chose_values[2]
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
@@ -313,9 +314,9 @@ class Ribbed(Popup):
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value_1.text = str(product_size[1])
-            self.ids.width_value_2.text = str(product_size[2])
-            self.ids.thickness_value.text = str(product_size[3])
+            self.ids.width_value.text = str(product_size[1])
+            self.ids.thickness_value_1.text = str(product_size[2])
+            self.ids.thickness_value_2.text = str(product_size[3])
             self.ids.image.source = self.chose_values[2]
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
@@ -334,8 +335,70 @@ class Ribbed(Popup):
         SelectionOptionPopup().open()
 
     def calculation(self):
-        if self.ids.length_value.text and self.ids.width_value_1.text:
-            value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
+        if self.ids.length_value.text and self.ids.width_value.text:
+            square = (float(self.ids.length_value.text) * float(self.ids.width_value.text))
+            VALUES['square'] = (round(square / 100, 1))
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value.text)
+
+
+            if self.ids.thickness_value_1.text and self.ids.thickness_value_2.text:
+                volume = (square * ((float(self.ids.thickness_value_1.text) +
+                                     float(self.ids.thickness_value_2.text)) / 2)) / 1000
+                VALUES['volume'] = (round(volume, 2))
+                VALUES['size'].append(self.ids.thickness_value_1.text)
+                VALUES['size'].append(self.ids.thickness_value_2.text)
+                print(square, volume)
+
+                if self.ids.weight_product.text:
+                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
+                else:
+                    VALUES['volume_weight'] = None
+                    VALUES['weight'] = None
+                print(VALUES)
+
+            else:
+                VALUES['volume'] = None
+                VALUES['volume_weight'] = None
+                VALUES['weight'] = None
+
+        else:
+            VALUES['square'] = 0
+            VALUES['size'] = 0
+            VALUES['volume'] = 0
+            VALUES['volume_weight'] = None
+            VALUES['weight'] = None
+
+
+class CalculationsAreaOfRing(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
+
+        self.weight = ''
+
+    def build_instance(self):
+        if len(self.chose_values) > 1:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' ' + self.chose_values[1]
+            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+            self.ids.outer_diameter_D.text = str(product_size[0])
+            self.ids.inner_diameter_d.text = str(product_size[1])
+            self.ids.length_value.text = str(product_size[2])
+        else:
+            self.ids.label_gost_number.text = self.chose_values[0]
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation_square(self):
+        if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
+            _D = float(self.ids.outer_diameter_D.text)
+            d = float(self.ids.inner_diameter_d.text)
+            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
             VALUES['square'] = (round(value, 1))
 
 
@@ -370,33 +433,4 @@ class CalculationsAreaOfShaped(Popup):
     def calculation_square(self):
         if self.ids.length_value.text and self.ids.width_value_1.text:
             value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
-            VALUES['square'] = (round(value, 1))
-
-
-class CalculationsAreaOfRing(Popup):
-    def __init__(self):
-        super().__init__()
-        self.chose_values = []
-
-        self.weight = ''
-
-    def build_instance(self):
-        if len(self.chose_values) > 1:
-            self.ids.label_gost_number.text = self.chose_values[0] + ' ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.outer_diameter_D.text = str(product_size[0])
-            self.ids.inner_diameter_d.text = str(product_size[1])
-            self.ids.length_value.text = str(product_size[2])
-        else:
-            self.ids.label_gost_number.text = self.chose_values[0]
-
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
-
-    def calculation_square(self):
-        if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
-            _D = float(self.ids.outer_diameter_D.text)
-            d = float(self.ids.inner_diameter_d.text)
-            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
             VALUES['square'] = (round(value, 1))
