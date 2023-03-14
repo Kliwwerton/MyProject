@@ -31,17 +31,17 @@ def choice_popup(gost, number=None, size=None, weight=''):
     elif gost in RIBBED_2 and number in RIBBED_2[gost]:
         popup = Ribbed()
         popup.chose_values.append(RIBBED_2['Image'])
-        popup.ids.width_label_H.text = 'Ширина(S):'
-        popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
-        popup.ids.thickness_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.width_label_H.text = 'Ширина(S), мм:'
+        popup.ids.thickness_label_S.text = 'Толщина(H), мм:'
+        popup.ids.thickness_label_S1.text = 'Ширина(S[sub]1[/sub]), мм:'
 
     elif gost in RIBBED_3 and number in RIBBED_3[gost]:
         popup = Ribbed()
         popup.chose_values.append(RIBBED_3['Image'])
-        popup.ids.length_label_L.text = 'Ширина(в)'
-        popup.ids.width_label_H.text = 'Длина(б):'
-        popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
-        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.length_label_L.text = 'Ширина(в), мм'
+        popup.ids.width_label_H.text = 'Длина(б), мм:'
+        popup.ids.thickness_label_S.text = 'Толщина(а), мм:'
+        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub]), мм:'
 
     elif gost in END_WEDGE and number in END_WEDGE[gost]:
         popup = Ribbed()
