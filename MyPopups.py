@@ -7,36 +7,36 @@ from math import pi
 
 def choice_popup(gost, number=None, size=None, weight=''):
     if gost in RECTANGLES and number in RECTANGLES[gost]:
-        popup = CalculationsAreaOfRectangle()
+        popup = Rectangle()
 
     elif gost in TRAPEZOID and number in TRAPEZOID[gost]:
-        popup = CalculationsAreaOfTrapezoid()
+        popup = Trapezoid()
         popup.chose_values.append(TRAPEZOID['Image'])
         popup.ids.length_label.text = 'Ширина(L), мм:'
         popup.ids.width_label.text = 'Длина(S), мм:'
         popup.ids.width_label_2.text = 'Длина(S[sub]1[/sub]), мм:'
 
     elif gost in TRAPEZOID_1 and number in TRAPEZOID_1[gost]:
-        popup = CalculationsAreaOfTrapezoid()
+        popup = Trapezoid()
         popup.chose_values.append(TRAPEZOID_1['Image'])
 
     elif gost in RIBBED and number in RIBBED[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(RIBBED['Image'])
 
     elif gost in RIBBED_1 and number in RIBBED_1[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(RIBBED_1['Image'])
 
     elif gost in RIBBED_2 and number in RIBBED_2[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(RIBBED_2['Image'])
         popup.ids.width_label_H.text = 'Ширина(S):'
         popup.ids.thickness_label_S.text = 'Толщина(H)[sup][size=20]*[/size][sup]):'
         popup.ids.width_label_S1.text = 'Ширина(S[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
 
     elif gost in RIBBED_3 and number in RIBBED_3[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(RIBBED_3['Image'])
         popup.ids.length_label_L.text = 'Ширина(в)'
         popup.ids.width_label_H.text = 'Длина(б):'
@@ -44,7 +44,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup.ids.width_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
 
     elif gost in END_WEDGE and number in END_WEDGE[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(END_WEDGE['Image'])
         popup.ids.length_label_L.text = 'Длина(в)'
         popup.ids.width_label_H.text = 'Ширина(б):'
@@ -56,7 +56,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup = CalculationsAreaOfShaped()
 
     elif gost in END_WEDGE_2 and number in END_WEDGE_2[gost]:
-        popup = CalculationsAreaOfRibbed()
+        popup = Ribbed()
         popup.chose_values.append(END_WEDGE_2['Image'])
         popup.title = 'Расчёт площади торцового клина'
 
@@ -109,12 +109,12 @@ class ChoosingShapeProduct(Popup):
     def choose_window(self):
         popup = None
         if self.ids.spin_choose_window.text == 'Прямоугольник':
-            popup = CalculationsAreaOfRectangle()
+            popup = Rectangle()
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
-            popup = CalculationsAreaOfTrapezoid()
+            popup = Trapezoid()
             popup.chose_values.append(TRAPEZOID_1['Image'])
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
-            popup = CalculationsAreaOfRibbed()
+            popup = Ribbed()
             popup.chose_values.append(RIBBED['Image'])
         elif self.ids.spin_choose_window.text == 'Кольцо':
             popup = CalculationsAreaOfRing()
@@ -137,7 +137,7 @@ class RessetPopup(Popup):
     pass
 
 
-class CalculationsAreaOfRectangle(Popup):
+class Rectangle(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -209,7 +209,7 @@ class CalculationsAreaOfRectangle(Popup):
             VALUES['weight'] = None
 
 
-class CalculationsAreaOfTrapezoid(Popup):
+class Trapezoid(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -289,15 +289,27 @@ class CalculationsAreaOfTrapezoid(Popup):
             VALUES['weight'] = None
 
 
-class CalculationsAreaOfRibbed(Popup):
+class Ribbed(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
-
+        self.product_size = []
         self.weight = ''
 
     def build_instance(self):
-        if len(self.chose_values) > 2:
+
+        if self.chose_values and self.product_size:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            self.ids.length_value.text = self.product_size[0]
+            self.ids.width_value_1.text = self.product_size[1]
+            self.ids.width_value_2.text = self.product_size[2]
+            if len(self.product_size) == 4:
+                self.ids.thickness_value.text = self.product_size[3]
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
+        elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
@@ -305,15 +317,23 @@ class CalculationsAreaOfRibbed(Popup):
             self.ids.width_value_2.text = str(product_size[2])
             self.ids.thickness_value.text = str(product_size[3])
             self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             self.ids.image.source = self.chose_values[1]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = 'Не определён.'
+
+        if self.weight:
+            self.ids.weight_product.text = self.weight
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
-    def calculation_square(self):
+    def calculation(self):
         if self.ids.length_value.text and self.ids.width_value_1.text:
             value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
             VALUES['square'] = (round(value, 1))
