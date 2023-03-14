@@ -137,7 +137,8 @@ class Second(Screen):
     def open_ressetPopup():
         RessetPopup().open()
 
-    def open_SelectionOptionPopup(self):
+    @staticmethod
+    def open_SelectionOptionPopup():
         """opening popup window Selection Option"""
         if not VALUES:
             SelectionOptionPopup().open()

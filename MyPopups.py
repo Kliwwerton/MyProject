@@ -164,7 +164,7 @@ class CalculationsAreaOfRectangle(Popup):
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = None
+            VALUES['number'] = 'Не определён.'
 
         if self.weight:
             self.ids.weight_product.text = self.weight
@@ -254,7 +254,7 @@ class CalculationsAreaOfTrapezoid(Popup):
     def calculation(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
             square = (float(self.ids.length_value.text) *
-                     ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2))
+                      ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2))
             VALUES['square'] = (round(square / 100, 1))
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
