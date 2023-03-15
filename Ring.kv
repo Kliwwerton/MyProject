@@ -1,5 +1,5 @@
-<CalculationsAreaOfRing>
-    title: 'Расчёт площади кольца'
+<Ring>:
+    title: 'Расчёт площади трубки'
     size_hint: 0.8, 0.6
     auto_dismiss: False
     on_open:
@@ -41,14 +41,16 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Наружный диаметр(D):'
+                text: 'Наружный диаметр(D), мм :'
+                size_hint: 0.65, 1
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
-                font_size: '10sp'
+                font_size: '12sp'
 
             TextInput:
                 id: outer_diameter_D
+                size_hint: 0.35, 1
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -60,14 +62,16 @@
             size_hint: 1, 0.2
 
             Label:
-                text: 'Внутренний диаметр(d):'
+                text: 'Внутренний диаметр(d), мм:'
+                size_hint: 0.65, 1
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
-                font_size: '10sp'
+                font_size: '12sp'
 
             TextInput:
                 id: inner_diameter_d
+                size_hint: 0.35, 1
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -80,13 +84,15 @@
 
             Label:
                 markup: True
-                text: 'Высота(L)[sup][size=24]*[/size][/sup]:'
+                size_hint: 0.65, 1
+                text: 'Высота(L), мм:'
                 text_size: self.size
                 halign: 'left'
                 valign: 'center'
 
             TextInput:
                 id: length_value
+                size_hint: 0.35, 1
                 text: ''
                 multiline: False
                 halign: 'center'
@@ -94,15 +100,25 @@
                 input_tipe: 'number'
                 input_filter: 'float'
 
-        Label:
-            markup: True
-            size_hint: 1, 0.10
-            text: '[sup][size=20]*[/size][/sup] - размер для справки'
-            halign: 'left'
-            valign: 'center'
-            text_size: self.size
+        BoxLayout:
             size_hint: 1, 0.2
-            font_size: '10sp'
+
+            Label:
+                text: 'Вес изделия, кг: '
+                size_hint: 0.65, 1
+                halign: 'left'
+                valign: 'center'
+                text_size: self.size
+
+            TextInput:
+                id: weight_product
+                text: ''
+                size_hint: 0.35, 1
+                hint_text: 'Вес изделия'
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
 
         Button:
             text: 'Рассчитать'

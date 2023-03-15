@@ -61,7 +61,7 @@
 
 
 <ChoosingShapeProduct>
-    title: 'Выбор формы штампа'
+    title: 'Выбор формы изделия'
     auto_dismiss: False
     size_hint: 0.8, 0.2
 
@@ -93,8 +93,8 @@
             id: spin_choose_window
             size_hint: 1, 0.5
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            text: 'Выберите форму штампа'
-            values: ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо']
+            text: 'Выберите форму изделия'
+            values: ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Трубка']
             on_text:
                 root.dismiss()
                 root.choose_window()
@@ -138,7 +138,7 @@
             spacing: 5
 
             Button:
-                text: 'СБРОС ДАННЫХ'
+                text: 'СБРОС!!!'
                 size_hint: 1, 0.8
                 on_press:
                     app.Second.reset()

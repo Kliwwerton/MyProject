@@ -61,7 +61,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup = CalculationsAreaOfShaped()
 
     elif gost in RING and number in RING[gost]:
-        popup = CalculationsAreaOfRing()
+        popup = Ring()
 
     else:
         popup = WrongPopup()
@@ -116,8 +116,8 @@ class ChoosingShapeProduct(Popup):
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
             popup = Ribbed()
             popup.chose_values.append(RIBBED['Image'])
-        elif self.ids.spin_choose_window.text == 'Кольцо':
-            popup = CalculationsAreaOfRing()
+        elif self.ids.spin_choose_window.text == 'Трубка':
+            popup = Ring()
 
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()
@@ -372,11 +372,11 @@ class Ribbed(Popup):
             VALUES['weight'] = None
 
 
-class CalculationsAreaOfRing(Popup):
+class Ring(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
-
+        self.product_size = []
         self.weight = ''
 
     def build_instance(self):
