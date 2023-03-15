@@ -46,10 +46,10 @@ def choice_popup(gost, number=None, size=None, weight=''):
     elif gost in END_WEDGE and number in END_WEDGE[gost]:
         popup = Ribbed()
         popup.chose_values.append(END_WEDGE['Image'])
-        popup.ids.length_label_L.text = 'Длина(в)'
-        popup.ids.width_label_H.text = 'Ширина(б):'
-        popup.ids.thickness_label_S.text = 'Толщина(а)[sup][size=20]*[/size][sup]):'
-        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub])[sup][size=20]*[/size][/sup]:'
+        popup.ids.length_label_L.text = 'Длина(в), мм'
+        popup.ids.width_label_H.text = 'Ширина(б), мм:'
+        popup.ids.thickness_label_S.text = 'Толщина(а), мм:'
+        popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub]), мм:'
         popup.title = 'Расчёт площади торцового клина'
 
     elif gost in END_WEDGE_2 and number in END_WEDGE_2[gost]:
