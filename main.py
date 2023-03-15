@@ -27,7 +27,7 @@ Builder.load_file('Third.kv')
 Builder.load_file('MyPopups.kv')
 
 # Shapes
-Builder.load_file('Ring.kv')
+Builder.load_file('Tube.kv')
 Builder.load_file('Trapezoid.kv')
 Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')

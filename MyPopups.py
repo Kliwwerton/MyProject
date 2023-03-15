@@ -1,10 +1,10 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import VALUES, RECTANGLES, RING, TRAPEZOID, \
+from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, \
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
-
+# TODO reformat this function (Вынести все значения в модуль variables, оставить цикл
 def choice_popup(gost, number=None, size=None, weight=''):
     if gost in RECTANGLES and number in RECTANGLES[gost]:
         popup = Rectangle()
@@ -60,8 +60,9 @@ def choice_popup(gost, number=None, size=None, weight=''):
     elif gost in SHAPED and number in SHAPED[gost]:
         popup = CalculationsAreaOfShaped()
 
-    elif gost in RING and number in RING[gost]:
-        popup = Ring()
+    elif gost in TUBE and number in TUBE[gost]:
+        popup = Tube()
+        popup.chose_values.append(TUBE['Image'])
 
     else:
         popup = WrongPopup()
@@ -117,7 +118,8 @@ class ChoosingShapeProduct(Popup):
             popup = Ribbed()
             popup.chose_values.append(RIBBED['Image'])
         elif self.ids.spin_choose_window.text == 'Трубка':
-            popup = Ring()
+            popup = Tube()
+            popup.chose_values.append(TUBE['Image'])
 
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()
@@ -372,7 +374,7 @@ class Ribbed(Popup):
             VALUES['weight'] = None
 
 
-class Ring(Popup):
+class Tube(Popup):
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -380,25 +382,77 @@ class Ring(Popup):
         self.weight = ''
 
     def build_instance(self):
-        if len(self.chose_values) > 1:
+
+        if self.chose_values and self.product_size:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            self.ids.outer_diameter_D.text = self.product_size[0]
+            self.ids.inner_diameter_d.text = self.product_size[1]
+
+            if len(self.product_size) == 3:
+                self.ids.length_value.text = self.product_size[2]
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
+        elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.outer_diameter_D.text = str(product_size[0])
             self.ids.inner_diameter_d.text = str(product_size[1])
             self.ids.length_value.text = str(product_size[2])
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
+            self.ids.image.source = self.chose_values[1]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = 'Не определён.'
+
+        if self.weight:
+            self.ids.weight_product.text = self.weight
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
-    def calculation_square(self):
+    def calculation(self):
         if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
             _D = float(self.ids.outer_diameter_D.text)
             d = float(self.ids.inner_diameter_d.text)
-            value = (((pi * _D ** 2) / 4) - ((pi * d ** 2) / 4)) / 100
-            VALUES['square'] = (round(value, 1))
+            square = ((pi * (_D / 2) ** 2) - (pi * (d / 2) ** 2))
+            VALUES['square'] = (round(square / 100, 1))
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.outer_diameter_D.text)
+            VALUES['size'].append(self.ids.inner_diameter_d.text)
+
+            if self.ids.length_value.text:
+                volume = (square * float(self.ids.length_value.text)) / 1000
+                VALUES['volume'] = (round(volume, 2))
+                VALUES['size'].append(self.ids.length_value.text)
+                print(square, volume)
+
+                if self.ids.weight_product.text:
+                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
+                else:
+                    VALUES['volume_weight'] = None
+                    VALUES['weight'] = None
+                print(VALUES)
+
+            else:
+                VALUES['volume'] = None
+                VALUES['volume_weight'] = None
+                VALUES['weight'] = None
+
+        else:
+            VALUES['square'] = 0
+            VALUES['size'] = 0
+            VALUES['volume'] = 0
+            VALUES['volume_weight'] = None
+            VALUES['weight'] = None
 
 
 class CalculationsAreaOfShaped(Popup):

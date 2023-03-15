@@ -142,7 +142,8 @@ END_WEDGE_2 = {'Image': 'Images/Product_shape/end_wedge_2.png',
                                   '29', '30', '31', '32', '33', '34', '35',
                                   '36', '37', '38', '39', '40', '41']
                }
-RING = {'ГОСТ 5500-2001': ['ШСП-32 № 1', 'ШСП-32 № 2']
+TUBE = {'Image': 'Images/Product_shape/stopor.png',
+        'ГОСТ 5500-2001': ['ШСП-32 № 1', 'ШСП-32 № 2']
         }
 
 SHAPED = {'Image': 'Images/Product_shape/shaped.png',

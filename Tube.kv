@@ -1,4 +1,4 @@
-<Ring>:
+<Tube>:
     title: 'Расчёт площади трубки'
     size_hint: 0.8, 0.6
     auto_dismiss: False
@@ -34,6 +34,7 @@
             size_hint: 1, 0.15
 
         Image:
+            id: image
             source: 'Images/Product_shape/stopor.png'
             size_hint: 1, 1.2
 
@@ -125,6 +126,6 @@
             size_hint: 0.8, 0.20
             pos_hint: {'center_x': 0.5}
             on_press:
-                root.calculation_square()
+                root.calculation()
                 app.Second.change_text(), app.Third.change_text()
                 root.dismiss()
