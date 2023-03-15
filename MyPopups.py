@@ -342,7 +342,6 @@ class Ribbed(Popup):
             VALUES['size'].append(self.ids.length_value.text)
             VALUES['size'].append(self.ids.width_value.text)
 
-
             if self.ids.thickness_value_1.text and self.ids.thickness_value_2.text:
                 volume = (square * ((float(self.ids.thickness_value_1.text) +
                                      float(self.ids.thickness_value_2.text)) / 2)) / 1000
