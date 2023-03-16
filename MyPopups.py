@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, \
+from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1,\
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
@@ -63,6 +63,10 @@ def choice_popup(gost, number=None, size=None, weight=''):
     elif gost in TUBE and number in TUBE[gost]:
         popup = Tube()
         popup.chose_values.append(TUBE['Image'])
+
+    elif gost in TUBE_1 and number in TUBE_1[gost]:
+        popup = Tube()
+        popup.chose_values.append(TUBE_1['Image'])
 
     else:
         popup = WrongPopup()
@@ -395,7 +399,7 @@ class Tube(Popup):
             VALUES['number'] = self.chose_values[1]
 
         elif len(self.chose_values) > 2:
-            self.ids.label_gost_number.text = self.chose_values[0] + ' ' + self.chose_values[1]
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.outer_diameter_D.text = str(product_size[0])
             self.ids.inner_diameter_d.text = str(product_size[1])
