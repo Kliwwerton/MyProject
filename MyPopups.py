@@ -8,6 +8,8 @@ from math import pi
 # TODO reformat this function (Вынести все значения в модуль variables, оставить цикл
 
 def choice_popup(gost, number=None, size=None, weight=''):
+    """Opening new shape popup"""
+
     if gost in RECTANGLES and number in RECTANGLES[gost]:
         popup = Rectangle()
 
@@ -85,6 +87,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
 
 
 class SelectionOptionPopup(Popup):
+    """The window of chose open popup. On gost or another shape."""
     def open_next_popup(self):
         if self.ids.option_selection.text == 'Размеры по ГОСТ':
             SelectionGostPopup().open()
@@ -93,6 +96,7 @@ class SelectionOptionPopup(Popup):
 
 
 class SelectionGostPopup(Popup):
+    """Choice of gost and number of stamp"""
     def choosing_a_product_number(self):
         numbers = []
         if self.ids.gost_number.text:
@@ -148,6 +152,7 @@ class RessetPopup(Popup):
 
 
 class Rectangle(Popup):
+    """Shape of rectangle"""
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -220,6 +225,7 @@ class Rectangle(Popup):
 
 
 class Trapezoid(Popup):
+    """Shape of trapezoid"""
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -300,6 +306,7 @@ class Trapezoid(Popup):
 
 
 class Ribbed(Popup):
+    """Shape of ribbed"""
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -383,6 +390,7 @@ class Ribbed(Popup):
 
 
 class Tube(Popup):
+    """Shape of tube"""
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -464,6 +472,7 @@ class Tube(Popup):
 
 
 class Shaped(Popup):
+    """Shape of shaped"""
 
     def __init__(self):
         super().__init__()

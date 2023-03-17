@@ -1,4 +1,4 @@
-<Third>
+<Third>:
     name: 'Third'
 
     BoxLayout:
@@ -55,7 +55,7 @@
                 color: 64/255,64/255,64/255,1
 
             TextInput:
-                id: S_pressing_value
+                id: label_S_pressing_value
                 markup: True
                 multiline: False
                 font_size: '20sp'
@@ -75,7 +75,7 @@
                 text: 'см[sup]2[/sup]'
 
         GridLayout:
-            size_hint: 1, 0.25
+            size_hint: 1, 0.30
             spacing: 15
             cols: 3
 
@@ -133,15 +133,77 @@
                 font_size: '20sp'
                 size_hint: 0.4, 1
 
+        BoxLayout:
+            size_hint: 1, 0.06
+
+            Label:
+                id: stamp_text
+                size_hint: 0.4, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: stamp_label
+                size_hint: 0.6, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+        Label:
+            id: gost_text
+            text: ''
+            size_hint: 1, 0.06
+            color: 64/255,64/255,64/255,1
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+
+        BoxLayout:
+            size_hint: 1, 0.06
+
+            Label:
+                id: volume_label
+                size_hint: 0.4, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: volume_value
+                markup: True
+                size_hint: 0.6, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+        Label:
+            id: volume_weight
+            markup: True
+            size_hint: 1, 0.06
+            text: ''
+            color: 64/255,64/255,64/255,1
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'bottom'
-            size_hint: 1, 0.2
+            size_hint: 1, 0.13
 
             Button:
                 text: 'Рассчитать'
                 font_size: '20sp'
-                size_hint: 0.5, 0.6
+                size_hint: 0.5, 1
                 background_normal: ''
                 background_color: 0.4,0,1,1
                 on_release:
@@ -179,7 +241,7 @@
             background_color: 12/255,6/255,120/255,1
             background_normal: ''
             on_press:
-                root.reset()
+                root.open_ressetPopup()
 
         FloatLayout:
             padding: 0,0,0,20
@@ -194,7 +256,7 @@
                 background_color: 1,0,0,1
                 on_release:
                     root.manager.current = 'First'
-                    root.manager.transition.direction = 'down'
+#                    root.manager.transition.direction = 'down'
 
             Button:
                 id: button_exit

@@ -9,7 +9,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
@@ -116,6 +116,10 @@ class Second(Screen):
             self.ids.label_P_pressing_value.text = str(data)
         print(VALUES)
 
+    @staticmethod
+    def open_ressetPopup():
+        RessetPopup().open()
+
     def reset(self):
         """reset all parameters"""
         self.ids.label_P_pressing_text.text = ''
@@ -132,10 +136,6 @@ class Second(Screen):
         self.ids.volume_weight.text = ''
         VALUES.clear()
         self.sound_reset.play()
-
-    @staticmethod
-    def open_ressetPopup():
-        RessetPopup().open()
 
     @staticmethod
     def open_SelectionOptionPopup():
@@ -198,12 +198,16 @@ class Third(Screen):
     sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
+    def return_mistake(self, data):
+        self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
+        self.ids.label_P_specific_pressure_value.text = data
+
     def calculate(self):
         self.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             self.return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
-        elif not self.ids.S_pressing_value.text:
+        elif not self.ids.label_S_pressing_value.text:
             self.return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         elif self.ids.spinner_quantity_stamps.text == '0':
@@ -214,7 +218,7 @@ class Third(Screen):
 
         else:
             press = self.ids.spinner_press_mark.text
-            square_pressing = float(self.ids.S_pressing_value.text)
+            square_pressing = float(self.ids.label_S_pressing_value.text)
             quantity_stamps = int(self.ids.spinner_quantity_stamps.text)
             pressure = float(self.ids.pressure.text)
             if pressure > PRESS_PARAMETERS[press][1]:
@@ -230,9 +234,9 @@ class Third(Screen):
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
                 self.ids.label_P_specific_pressure_value.text = str(data) + ' ' + 'кг/см[sup]2[/sup]'
 
-    def return_mistake(self, data):
-        self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_specific_pressure_value.text = data
+    @staticmethod
+    def open_ressetPopup():
+        RessetPopup().open()
 
     def reset(self):
         """Reset all parameters and labels text"""
@@ -241,8 +245,14 @@ class Third(Screen):
         self.ids.spinner_quantity_stamps.text = '0'
         self.ids.spinner_press_mark.text = 'Выберите пресс'
         self.ids.pressure.text = ''
+        self.ids.label_S_pressing_value.text = ''
+        self.ids.volume_label.text = ''
+        self.ids.volume_value.text = ''
+        self.ids.gost_text.text = ''
+        self.ids.stamp_text.text = ''
+        self.ids.stamp_label.text = ''
+        self.ids.volume_weight.text = ''
         VALUES.clear()
-        self.ids.S_pressing_value.text = ''
         self.sound_reset.play()
 
     def change_label(self):
@@ -252,15 +262,59 @@ class Third(Screen):
         else:
             self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
 
-    def open_SelectionOptionPopup(self):
-        if VALUES and VALUES['square']:
-            self.ids.S_pressing_value.text = str(VALUES['square'])
-        elif self.ids.S_pressing_value.text == '':
+    @staticmethod
+    def open_SelectionOptionPopup():
+        if not VALUES:
+            SelectionOptionPopup().open()
+
+        elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
+            choice_popup(gost=VALUES['gost'],
+                         number=VALUES['number'],
+                         size=VALUES['size'],
+                         weight=VALUES['weight'])
+
+        elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
+            choice_popup(gost=VALUES['gost'],
+                         number=VALUES['number'],
+                         size=VALUES['size'])
+
+        else:
             SelectionOptionPopup().open()
 
     def change_text(self):
-        if VALUES['square']:
-            self.ids.S_pressing_value.text = str(VALUES['square'])
+        if not VALUES:
+            pass
+        elif VALUES:
+            if VALUES['square']:
+                self.ids.label_S_pressing_value.text = str(VALUES['square'])
+            else:
+                self.ids.label_S_pressing_value.text = ''
+
+            if VALUES['volume']:
+                self.ids.volume_label.text = 'Объём изделия: '
+                self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
+            else:
+                self.ids.volume_label.text = ''
+                self.ids.volume_value.text = ''
+
+            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо'):
+                self.ids.gost_text.text = VALUES['gost']
+            elif VALUES['gost']:
+                self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+            else:
+                self.ids.gost_text.text = ''
+
+            if VALUES['number']:
+                self.ids.stamp_text.text = 'Номер изделия: '
+                self.ids.stamp_label.text = VALUES['number']
+            else:
+                self.ids.stamp_text.text = ''
+                self.ids.stamp_label.text = ''
+
+            if VALUES['volume_weight']:
+                self.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
+            else:
+                self.ids.volume_weight.text = ''
 
 
 class EngineerApp(App):
@@ -280,7 +334,7 @@ class EngineerApp(App):
     def build(self):
         self.icon = 'Images/Logo.png'
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
-        container = Container()
+        container = Container(transition=SwapTransition())
         container.add_widget(self.First)
         container.add_widget(self.Second)
         container.add_widget(self.Third)
