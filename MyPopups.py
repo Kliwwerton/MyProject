@@ -1,10 +1,12 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1,\
+from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, \
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
+
 # TODO reformat this function (Вынести все значения в модуль variables, оставить цикл
+
 def choice_popup(gost, number=None, size=None, weight=''):
     if gost in RECTANGLES and number in RECTANGLES[gost]:
         popup = Rectangle()
@@ -58,7 +60,8 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup.title = 'Расчёт площади торцового клина'
 
     elif gost in SHAPED and number in SHAPED[gost]:
-        popup = CalculationsAreaOfShaped()
+        popup = Shaped()
+        popup.chose_values.append(SHAPED['Image'])
 
     elif gost in TUBE and number in TUBE[gost]:
         popup = Tube()
@@ -74,6 +77,7 @@ def choice_popup(gost, number=None, size=None, weight=''):
     popup.chose_values.insert(0, gost)
     popup.chose_values.insert(1, number)
     popup.weight = weight
+
     if size:
         popup.product_size = size
 
@@ -459,16 +463,32 @@ class Tube(Popup):
             VALUES['weight'] = None
 
 
-class CalculationsAreaOfShaped(Popup):
+class Shaped(Popup):
 
     def __init__(self):
         super().__init__()
         self.chose_values = []
-
+        self.product_size = []
         self.weight = ''
 
     def build_instance(self):
-        if len(self.chose_values) > 1:
+
+        if self.chose_values and self.product_size:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            self.ids.length_value.text = self.product_size[0]
+            self.ids.width_value_1.text = self.product_size[1]
+            self.ids.width_value_2.text = self.product_size[2]
+
+            if len(self.product_size) == 7:
+                self.ids.thickness_value_S.text = self.product_size[3]
+                self.ids.thickness_value_S1.text = self.product_size[4]
+                self.ids.thickness_value_S2.text = self.product_size[5]
+                self.ids.thickness_value_S3.text = self.product_size[6]
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
+        elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
             self.ids.length_value.text = str(product_size[0])
@@ -478,10 +498,18 @@ class CalculationsAreaOfShaped(Popup):
             self.ids.thickness_value_S1.text = str(product_size[4])
             self.ids.thickness_value_S2.text = str(product_size[5])
             self.ids.thickness_value_S3.text = str(product_size[6])
-            # self.ids.image.source = self.chose_values[2]
+            self.ids.image.source = self.chose_values[2]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
-            # self.ids.image.source = self.chose_values[1]
+            self.ids.image.source = self.chose_values[1]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = 'Не определён.'
+
+        if self.weight:
+            self.ids.weight_product.text = self.weight
 
     @staticmethod
     def return_beck():
