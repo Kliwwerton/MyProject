@@ -515,7 +515,47 @@ class Shaped(Popup):
     def return_beck():
         SelectionOptionPopup().open()
 
-    def calculation_square(self):
-        if self.ids.length_value.text and self.ids.width_value_1.text:
-            value = (float(self.ids.length_value.text) * float(self.ids.width_value_1.text)) / 100
-            VALUES['square'] = (round(value, 1))
+    def calculation(self):
+        if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_1.text:
+            square = (float(self.ids.length_value.text) *
+                      ((float(self.ids.width_value_1.text) + float(self.ids.width_value_2.text)) / 2))
+            VALUES['square'] = (round(square / 100, 1))
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value_1.text)
+            VALUES['size'].append(self.ids.width_value_2.text)
+
+            if self.ids.thickness_value_S.text and self.ids.thickness_value_S1.text \
+                    and self.ids.thickness_value_S2.text and self.ids.thickness_value_S3.text:
+                average_value = (float(self.ids.thickness_value_S.text)
+                                 + float(self.ids.thickness_value_S1.text)
+                                 + float(self.ids.thickness_value_S2.text)
+                                 + float(self.ids.thickness_value_S3.text)) / 4
+                volume = (square * average_value) / 1000
+                VALUES['volume'] = (round(volume, 2))
+                VALUES['size'].append(self.ids.thickness_value_S.text)
+                VALUES['size'].append(self.ids.thickness_value_S1.text)
+                VALUES['size'].append(self.ids.thickness_value_S2.text)
+                VALUES['size'].append(self.ids.thickness_value_S3.text)
+                print(square, volume)
+
+                if self.ids.weight_product.text:
+                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
+                else:
+                    VALUES['volume_weight'] = None
+                    VALUES['weight'] = None
+                print(VALUES)
+
+            else:
+                VALUES['volume'] = None
+                VALUES['volume_weight'] = None
+                VALUES['weight'] = None
+
+        else:
+            VALUES['square'] = 0
+            VALUES['size'] = 0
+            VALUES['volume'] = 0
+            VALUES['volume_weight'] = None
+            VALUES['weight'] = None
