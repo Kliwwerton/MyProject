@@ -41,6 +41,25 @@ Builder.load_file('Gost_standards.kv')
 Builder.load_file('Cows_and_bulls.kv')
 
 
+def open_OptionPopup():
+    if not VALUES:
+        SelectionOptionPopup().open()
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     size=VALUES['size'],
+                     weight=VALUES['weight'])
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     size=VALUES['size'])
+
+    else:
+        SelectionOptionPopup().open()
+
+
 class Container(ScreenManager):
     """Main Widget"""
     pass
@@ -114,7 +133,6 @@ class Second(Screen):
 
             self.ids.label_P_pressing_text.text = 'Давление прессования:'
             self.ids.label_P_pressing_value.text = str(data)
-        print(VALUES)
 
     @staticmethod
     def open_ressetPopup():
@@ -139,23 +157,7 @@ class Second(Screen):
 
     @staticmethod
     def open_SelectionOptionPopup():
-        """opening popup window Selection Option"""
-        if not VALUES:
-            SelectionOptionPopup().open()
-
-        elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
-            choice_popup(gost=VALUES['gost'],
-                         number=VALUES['number'],
-                         size=VALUES['size'],
-                         weight=VALUES['weight'])
-
-        elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
-            choice_popup(gost=VALUES['gost'],
-                         number=VALUES['number'],
-                         size=VALUES['size'])
-
-        else:
-            SelectionOptionPopup().open()
+        open_OptionPopup()
 
     def change_text(self):
         """Changing text Textinput after calculate"""
@@ -264,22 +266,7 @@ class Third(Screen):
 
     @staticmethod
     def open_SelectionOptionPopup():
-        if not VALUES:
-            SelectionOptionPopup().open()
-
-        elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
-            choice_popup(gost=VALUES['gost'],
-                         number=VALUES['number'],
-                         size=VALUES['size'],
-                         weight=VALUES['weight'])
-
-        elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
-            choice_popup(gost=VALUES['gost'],
-                         number=VALUES['number'],
-                         size=VALUES['size'])
-
-        else:
-            SelectionOptionPopup().open()
+        open_OptionPopup()
 
     def change_text(self):
         if not VALUES:
