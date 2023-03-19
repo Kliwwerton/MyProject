@@ -5,8 +5,6 @@ from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, \
 from math import pi
 
 
-# TODO reformat this function (Вынести все значения в модуль variables, оставить цикл
-
 def choice_popup(gost, number=None, size=None, weight=''):
     """Opening new shape popup"""
 
