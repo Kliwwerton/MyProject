@@ -32,6 +32,7 @@ Builder.load_file('Trapezoid.kv')
 Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
 Builder.load_file('Shaped.kv')
+Builder.load_file('Fason.kv')
 
 # Another buttons
 Builder.load_file('References.kv')

@@ -131,6 +131,9 @@ class ChoosingShapeProduct(Popup):
             popup = Tube()
             popup.chose_values.append(TUBE['Image'])
 
+        elif self.ids.spin_choose_window.text == 'Фасонное изделие':
+            popup = Fason()
+
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()
 
@@ -566,3 +569,21 @@ class Shaped(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
+
+
+class Fason(Popup):
+    def __init__(self):
+        super().__init__()
+        self.chose_values = []
+        self.product_size = []
+        self.weight = ''
+
+    def build_instance(self):
+        pass
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def calculation(self):
+        pass
