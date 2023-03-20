@@ -133,6 +133,7 @@ class ChoosingShapeProduct(Popup):
 
         elif self.ids.spin_choose_window.text == 'Фасонное изделие':
             popup = Fason()
+            print(VALUES)
 
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()

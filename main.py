@@ -160,6 +160,10 @@ class Second(Screen):
     def open_SelectionOptionPopup():
         open_OptionPopup()
 
+    def check(self):
+        if self.ids.label_S_pressing_value.text:
+            VALUES['square'] = self.ids.label_S_pressing_value.text
+
     def change_text(self):
         """Changing text Textinput after calculate"""
         if not VALUES:
