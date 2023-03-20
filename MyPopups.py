@@ -1,11 +1,11 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS
-from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, \
+from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON,\
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
 
-def choice_popup(gost, number=None, size=None, weight=''):
+def choice_popup(gost, number=None, size=None, weight='', volume=''):
     """Opening new shape popup"""
 
     if gost in RECTANGLES and number in RECTANGLES[gost]:
@@ -71,6 +71,9 @@ def choice_popup(gost, number=None, size=None, weight=''):
         popup = Tube()
         popup.chose_values.append(TUBE_1['Image'])
 
+    elif gost in FASON and number in FASON[gost]:
+        popup = Fason()
+
     else:
         popup = WrongPopup()
 
@@ -80,6 +83,8 @@ def choice_popup(gost, number=None, size=None, weight=''):
 
     if size:
         popup.product_size = size
+    if volume:
+        popup.volume = volume
 
     popup.open()
 
@@ -121,12 +126,15 @@ class ChoosingShapeProduct(Popup):
         popup = None
         if self.ids.spin_choose_window.text == 'Прямоугольник':
             popup = Rectangle()
+
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
             popup = Trapezoid()
             popup.chose_values.append(TRAPEZOID_1['Image'])
+
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
             popup = Ribbed()
             popup.chose_values.append(RIBBED['Image'])
+
         elif self.ids.spin_choose_window.text == 'Трубка':
             popup = Tube()
             popup.chose_values.append(TUBE['Image'])
@@ -578,13 +586,59 @@ class Fason(Popup):
         self.chose_values = []
         self.product_size = []
         self.weight = ''
+        self.volume = ''
 
     def build_instance(self):
-        pass
+
+        if self.volume:
+            self.ids.volume_product.text = self.volume
+
+        if self.weight:
+            self.ids.weight_product.text = self.weight
+
+        if len(self.chose_values) > 1:
+            self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = self.chose_values[1]
+        else:
+            self.ids.label_gost_number.text = self.chose_values[0]
+            VALUES['gost'] = self.chose_values[0]
+            VALUES['number'] = 'Не определён.'
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
 
     def calculation(self):
-        pass
+        if self.ids.square_product.text:
+            VALUES['square'] = self.ids.square_product.text
+        else:
+            VALUES['square'] = 0
+
+        if self.ids.volume_product.text and self.ids.weight_product.text:
+            volume_weight = round((float(self.ids.weight_product.text) * 1000)
+                                  / float(self.ids.volume_product.text), 2)
+            VALUES['volume'] = self.ids.volume_product.text
+            VALUES['volume_weight'] = str(volume_weight)
+            VALUES['weight'] = self.ids.weight_product.text
+
+        else:
+            VALUES['volume_weight'] = None
+            VALUES['weight'] = None
+            VALUES['volume'] = None
+
+        if self.ids.volume_product.text:
+            VALUES['volume'] = self.ids.volume_product.text
+        else:
+            VALUES['volume'] = None
+
+        if self.ids.weight_product.text:
+            VALUES['weight'] = self.ids.weight_product.text
+        else:
+            VALUES['weight'] = None
+
+        VALUES['size'] = 0
+        print(VALUES)
+
+
+

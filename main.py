@@ -50,12 +50,38 @@ def open_OptionPopup():
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      size=VALUES['size'],
-                     weight=VALUES['weight'])
+                     weight=VALUES['weight']
+                     )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
-                     size=VALUES['size'])
+                     size=VALUES['size']
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     weight=VALUES['weight'],
+                     volume=VALUES['volume']
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     weight=VALUES['weight'],
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['volume']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     volume=VALUES['volume']
+                     )
+
+    elif VALUES['gost'] and VALUES['number']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     )
 
     else:
         SelectionOptionPopup().open()
@@ -160,10 +186,6 @@ class Second(Screen):
     def open_SelectionOptionPopup():
         open_OptionPopup()
 
-    def check(self):
-        if self.ids.label_S_pressing_value.text:
-            VALUES['square'] = self.ids.label_S_pressing_value.text
-
     def change_text(self):
         """Changing text Textinput after calculate"""
         if not VALUES:
@@ -181,7 +203,7 @@ class Second(Screen):
                 self.ids.volume_label.text = ''
                 self.ids.volume_value.text = ''
 
-            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо'):
+            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
                 self.ids.gost_text.text = VALUES['gost']
             elif VALUES['gost']:
                 self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
