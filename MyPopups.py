@@ -219,7 +219,7 @@ class Rectangle(Popup):
                 VALUES['size'].append(self.ids.thickness_value.text)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -304,7 +304,7 @@ class Trapezoid(Popup):
                 print(square, volume)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -391,7 +391,7 @@ class Ribbed(Popup):
                 print(square, volume)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -476,7 +476,7 @@ class Tube(Popup):
                 print(square, volume)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -578,7 +578,7 @@ class Shaped(Popup):
                 print(square, volume)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round((float(self.ids.weight_product.text) * 1000) / volume, 2)
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -639,7 +639,7 @@ class Fason(Popup):
             VALUES['square'] = 0
 
         if self.ids.volume_product.text and self.ids.weight_product.text:
-            volume_weight = round((float(self.ids.weight_product.text) * 1000)
+            volume_weight = round(float(self.ids.weight_product.text)
                                   / float(self.ids.volume_product.text), 2)
             VALUES['volume'] = self.ids.volume_product.text
             VALUES['volume_weight'] = str(volume_weight)
