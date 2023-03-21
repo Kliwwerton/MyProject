@@ -150,3 +150,34 @@
                 on_press:
                     root.dismiss()
 
+<ClosePopup>
+    size_hint: 0.8, 0.2
+    title: 'Закрыть приложение?'
+
+    BoxLayout:
+        padding: 5
+        spacing: 5
+        orientation: 'vertical'
+
+        Label:
+            text: 'Хотите закрыть приложение?'
+            halign: 'center'
+            valign: 'middle'
+            font_size: '15sp'
+            color: [255/255, 0, 0, 1]
+
+        BoxLayout:
+            spacing: 5
+
+            Button:
+                text: 'ДА'
+                size_hint: 1, 0.8
+                on_press:
+                    root.dismiss()
+                    app.stop()
+
+            Button:
+                text: 'НЕТ'
+                size_hint: 1, 0.8
+                on_press:
+                    root.dismiss()

@@ -1,3 +1,7 @@
+#!/usr/bin/kivy
+import kivy
+kivy.require('0.2.1')
+
 from kivy.config import Config
 
 Config.set('graphics', 'width', 360)
@@ -8,12 +12,13 @@ Config.set('kivy', 'keyboard_mode', 'systemanddock')
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
+from kivy.utils import platform
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
-from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup
+from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup
 
 
 # from kivymd.theming import ThemeManager
@@ -339,6 +344,8 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
+        icon = 'Images/Logo.png'
+        self.container = Container(transition=SwapTransition())
         self.First = First()
         self.Second = Second()
         self.Third = Third()
@@ -348,15 +355,41 @@ class EngineerApp(App):
 
     def build(self):
         self.icon = 'Images/Logo.png'
+        self.bind(on_start=self.post_build_init)
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
-        container = Container(transition=SwapTransition())
-        container.add_widget(self.First)
-        container.add_widget(self.Second)
-        container.add_widget(self.Third)
-        container.add_widget(self.References)
-        container.add_widget(self.Gost_standards)
-        container.add_widget(self.Cows_and_bulls)
-        return container
+        # container = Container(transition=SwapTransition())
+        self.container.add_widget(self.First)
+        self.container.add_widget(self.Second)
+        self.container.add_widget(self.Third)
+        self.container.add_widget(self.References)
+        self.container.add_widget(self.Gost_standards)
+        self.container.add_widget(self.Cows_and_bulls)
+        return self.container
+
+    def post_build_init(self,ev):
+
+        if platform == 'android':
+            import android
+            android.map_key(android.KEYCODE_BACK, 1001)
+
+        win = Window
+        win.bind(on_keyboard=self.key_handler)
+
+    def key_handler(self, window, keycode1, keycode2, text, modifiers):
+        if keycode1 == 27 or keycode1 == 1001:
+
+            if self.container.current == 'First':
+                ClosePopup().open()
+                print('Hello')
+                return True
+            elif self.container.current == 'Second' or 'Third':
+                self.container.current = 'First'
+                return True
+            else:
+                print(self.container.current)
+        else:
+            print(keycode1)
+            return False
 
 
 if __name__ == '__main__':
