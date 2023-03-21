@@ -59,11 +59,33 @@ def open_OptionPopup():
                      size=VALUES['size']
                      )
 
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume'] and VALUES['square']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     weight=VALUES['weight'],
+                     volume=VALUES['volume'],
+                     square=VALUES['square']
+                     )
+
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      weight=VALUES['weight'],
                      volume=VALUES['volume']
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['square'] and VALUES['volume']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     square=VALUES['square'],
+                     volume=VALUES['volume']
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['square']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     weight=VALUES['weight'],
+                     square=VALUES['square']
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight']:
@@ -76,6 +98,12 @@ def open_OptionPopup():
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      volume=VALUES['volume']
+                     )
+
+    elif VALUES['gost'] and VALUES['number'] and VALUES['square']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     square=VALUES['square']
                      )
 
     elif VALUES['gost'] and VALUES['number']:
@@ -204,7 +232,8 @@ class Second(Screen):
                 self.ids.volume_label.text = ''
                 self.ids.volume_value.text = ''
 
-            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
+            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин',
+                                  'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
                 self.ids.gost_text.text = VALUES['gost']
             elif VALUES['gost']:
                 self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']

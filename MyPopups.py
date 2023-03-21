@@ -1,11 +1,11 @@
 from kivy.uix.popup import Popup
-from variables import GOST_STANDARDS
+from variables import GOST_STANDARDS, FORMS
 from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON,\
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
 
-def choice_popup(gost, number=None, size=None, weight='', volume=''):
+def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
     """Opening new shape popup"""
 
     if gost in RECTANGLES and number in RECTANGLES[gost]:
@@ -85,6 +85,8 @@ def choice_popup(gost, number=None, size=None, weight='', volume=''):
         popup.product_size = size
     if volume:
         popup.volume = volume
+    if square:
+        popup.square = square
 
     popup.open()
 
@@ -174,18 +176,22 @@ class Rectangle(Popup):
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
             self.ids.length_value.text = self.product_size[0]
             self.ids.width_value.text = self.product_size[1]
-            self.ids.thickness_value.text = self.product_size[2]
+            if len(self.product_size) == 3:
+                self.ids.thickness_value.text = self.product_size[2]
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
 
         elif len(self.chose_values) > 1:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value.text = str(product_size[1])
-            self.ids.thickness_value.text = str(product_size[2])
-            VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = self.chose_values[1]
+            if self.chose_values[0] in FORMS:
+                pass
+            else:
+                product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+                self.ids.length_value.text = str(product_size[0])
+                self.ids.width_value.text = str(product_size[1])
+                self.ids.thickness_value.text = str(product_size[2])
+                VALUES['gost'] = self.chose_values[0]
+                VALUES['number'] = self.chose_values[1]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
@@ -232,6 +238,7 @@ class Rectangle(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
+            print(VALUES)
 
 
 class Trapezoid(Popup):
@@ -256,14 +263,17 @@ class Trapezoid(Popup):
 
         elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value_1.text = str(product_size[1])
-            self.ids.width_value_2.text = str(product_size[2])
-            self.ids.thickness_value.text = str(product_size[3])
-            self.ids.image.source = self.chose_values[2]
-            VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = self.chose_values[1]
+            if self.chose_values[0] in FORMS:
+                self.ids.image.source = self.chose_values[2]
+            else:
+                product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+                self.ids.length_value.text = str(product_size[0])
+                self.ids.width_value_1.text = str(product_size[1])
+                self.ids.width_value_2.text = str(product_size[2])
+                self.ids.thickness_value.text = str(product_size[3])
+                self.ids.image.source = self.chose_values[2]
+                VALUES['gost'] = self.chose_values[0]
+                VALUES['number'] = self.chose_values[1]
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
@@ -339,14 +349,17 @@ class Ribbed(Popup):
 
         elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value.text = str(product_size[1])
-            self.ids.thickness_value_1.text = str(product_size[2])
-            self.ids.thickness_value_2.text = str(product_size[3])
-            self.ids.image.source = self.chose_values[2]
-            VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = self.chose_values[1]
+            if self.chose_values[0] in FORMS:
+                self.ids.image.source = self.chose_values[2]
+            else:
+                product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+                self.ids.length_value.text = str(product_size[0])
+                self.ids.width_value.text = str(product_size[1])
+                self.ids.thickness_value_1.text = str(product_size[2])
+                self.ids.thickness_value_2.text = str(product_size[3])
+                self.ids.image.source = self.chose_values[2]
+                VALUES['gost'] = self.chose_values[0]
+                VALUES['number'] = self.chose_values[1]
 
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
@@ -422,13 +435,16 @@ class Tube(Popup):
 
         elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.outer_diameter_D.text = str(product_size[0])
-            self.ids.inner_diameter_d.text = str(product_size[1])
-            self.ids.length_value.text = str(product_size[2])
-            self.ids.image.source = self.chose_values[2]
-            VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = self.chose_values[1]
+            if self.chose_values[0] in FORMS:
+                self.ids.image.source = self.chose_values[2]
+            else:
+                product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+                self.ids.outer_diameter_D.text = str(product_size[0])
+                self.ids.inner_diameter_d.text = str(product_size[1])
+                self.ids.length_value.text = str(product_size[2])
+                self.ids.image.source = self.chose_values[2]
+                VALUES['gost'] = self.chose_values[0]
+                VALUES['number'] = self.chose_values[1]
 
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
@@ -509,17 +525,20 @@ class Shaped(Popup):
 
         elif len(self.chose_values) > 2:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
-            product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
-            self.ids.length_value.text = str(product_size[0])
-            self.ids.width_value_1.text = str(product_size[1])
-            self.ids.width_value_2.text = str(product_size[2])
-            self.ids.thickness_value_S.text = str(product_size[3])
-            self.ids.thickness_value_S1.text = str(product_size[4])
-            self.ids.thickness_value_S2.text = str(product_size[5])
-            self.ids.thickness_value_S3.text = str(product_size[6])
-            self.ids.image.source = self.chose_values[2]
-            VALUES['gost'] = self.chose_values[0]
-            VALUES['number'] = self.chose_values[1]
+            if self.chose_values[0] in FORMS:
+                self.ids.image.source = self.chose_values[2]
+            else:
+                product_size = GOST_STANDARDS[self.chose_values[0]][self.chose_values[1]]
+                self.ids.length_value.text = str(product_size[0])
+                self.ids.width_value_1.text = str(product_size[1])
+                self.ids.width_value_2.text = str(product_size[2])
+                self.ids.thickness_value_S.text = str(product_size[3])
+                self.ids.thickness_value_S1.text = str(product_size[4])
+                self.ids.thickness_value_S2.text = str(product_size[5])
+                self.ids.thickness_value_S3.text = str(product_size[6])
+                self.ids.image.source = self.chose_values[2]
+                VALUES['gost'] = self.chose_values[0]
+                VALUES['number'] = self.chose_values[1]
 
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
@@ -587,6 +606,7 @@ class Fason(Popup):
         self.product_size = []
         self.weight = ''
         self.volume = ''
+        self.square = ''
 
     def build_instance(self):
 
@@ -595,6 +615,9 @@ class Fason(Popup):
 
         if self.weight:
             self.ids.weight_product.text = self.weight
+
+        if self.square:
+            self.ids.square_product.text = self.square
 
         if len(self.chose_values) > 1:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
@@ -639,6 +662,3 @@ class Fason(Popup):
 
         VALUES['size'] = 0
         print(VALUES)
-
-
-
