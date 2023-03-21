@@ -42,6 +42,9 @@ Builder.load_file('Gost_standards.kv')
 Builder.load_file('Cows_and_bulls.kv')
 
 
+# TODO change fonts on main Screen snd second screen
+# TODO configure the action of button 'return back'
+
 def open_OptionPopup():
     if not VALUES:
         SelectionOptionPopup().open()
