@@ -407,15 +407,15 @@ class EngineerApp(App):
 
             if self.container.current == 'First':
                 ClosePopup().open()
-                print('Hello')
                 return True
+
             elif self.container.current == 'Second' or 'Third':
                 self.container.current = 'First'
                 return True
+
             else:
-                print(self.container.current)
+                pass
         else:
-            print(keycode1)
             return False
 
 
