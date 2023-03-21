@@ -1,6 +1,3 @@
-#!/usr/bin/kivy
-import kivy
-kivy.require('0.2.1')
 
 from kivy.config import Config
 
@@ -48,7 +45,6 @@ Builder.load_file('Cows_and_bulls.kv')
 
 
 # TODO change fonts on main Screen snd second screen
-# TODO configure the action of button 'return back'
 
 def open_OptionPopup():
     if not VALUES:
@@ -152,8 +148,7 @@ class Cows_and_bulls(Screen):
 
 class First(Screen):
     """First screen for the app"""
-    def print(self):
-        print(VALUES)
+    pass
 
 
 class Second(Screen):
