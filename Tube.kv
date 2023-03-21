@@ -33,11 +33,6 @@
             text: ''
             size_hint: 1, 0.15
 
-        Image:
-            id: image
-#            source: ''
-            size_hint: 1, 1.2
-
         BoxLayout:
             size_hint: 1, 0.2
 
@@ -114,12 +109,18 @@
             TextInput:
                 id: weight_product
                 text: ''
+                multiline: False
                 size_hint: 0.35, 1
                 hint_text: 'Вес изделия'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+        Image:
+            id: image
+#            source: ''
+            size_hint: 1, 1.2
 
         Button:
             text: 'Рассчитать'
