@@ -167,6 +167,10 @@ class ClosePopup(Popup):
     pass
 
 
+class MistakePopup(Popup):
+    pass
+
+
 class Rectangle(Popup):
     """Shape of rectangle"""
     def __init__(self):

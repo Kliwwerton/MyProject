@@ -181,3 +181,36 @@
                 size_hint: 1, 0.8
                 on_press:
                     root.dismiss()
+
+<MistakePopup>:
+    title: 'Ошибка!'
+    size_hint: 0.8, 0.2
+
+    BoxLayout:
+        padding: 5
+        spacing: 5
+        orientation: 'vertical'
+
+        Label:
+            text: 'Не хватает данных!'
+            halign: 'center'
+            valign: 'middle'
+            font_size: '15sp'
+            color: [255/255, 0, 0, 1]
+
+        Label:
+            id: text_mistake
+            text: ''
+            halign: 'center'
+            valign: 'middle'
+            font_size: '15sp'
+            color: [255/255, 0, 0, 1]
+
+        Button:
+            text: 'OK'
+            size_hint: 0.2, 1
+            pos_hint: {'center_x': 0.5}
+            on_press:
+                root.dismiss()
+
+

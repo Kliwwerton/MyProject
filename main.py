@@ -15,7 +15,8 @@ from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
-from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup
+from MyPopups import SelectionOptionPopup, choice_popup, \
+    RessetPopup, ClosePopup, MistakePopup
 
 
 # from kivymd.theming import ThemeManager
@@ -119,6 +120,12 @@ def open_OptionPopup():
         SelectionOptionPopup().open()
 
 
+def return_mistake(value):
+    popup = MistakePopup()
+    popup.ids.text_mistake.text = value
+    popup.open()
+
+
 class Container(ScreenManager):
     """Main Widget"""
     pass
@@ -156,25 +163,20 @@ class Second(Screen):
     sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
-    def return_mistake(self, data):
-        """returning wrong enter"""
-        self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_pressing_value.text = data
-
     def calculate(self):
         """Calculating pressing pressure"""
         self.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
-            self.return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
+            return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
         elif not self.ids.label_S_pressing_value.text:
-            self.return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
+            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         elif self.ids.spinner_quantity_stamps.text == '0':
-            self.return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
+            return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
 
         elif not self.ids.specific_pressure.text:
-            self.return_mistake('УКАЖИТЕ УДЕЛЬНОЕ ДАВЛЕНИЕ')
+            return_mistake('УКАЖИТЕ УДЕЛЬНОЕ ДАВЛЕНИЕ')
 
         else:
             press_mark = self.ids.spinner_press_mark.text
@@ -218,6 +220,10 @@ class Second(Screen):
     def open_SelectionOptionPopup():
         open_OptionPopup()
 
+    @staticmethod
+    def close_app():
+        ClosePopup().open()
+
     def change_text(self):
         """Changing text Textinput after calculate"""
         if not VALUES:
@@ -260,23 +266,19 @@ class Third(Screen):
     sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
-    def return_mistake(self, data):
-        self.ids.label_P_pressing_text.text = 'НЕХВАТАЕТ ДАННЫХ!!!'
-        self.ids.label_P_specific_pressure_value.text = data
-
     def calculate(self):
         self.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
-            self.return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
+            return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
         elif not self.ids.label_S_pressing_value.text:
-            self.return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
+            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         elif self.ids.spinner_quantity_stamps.text == '0':
-            self.return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
+            return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
 
         elif not self.ids.pressure.text:
-            self.return_mistake('УКАЖИТЕ ПРЕССОВОЕ ДАВЛЕНИЕ')
+            return_mistake('УКАЖИТЕ ПРЕССОВОЕ ДАВЛЕНИЕ')
 
         else:
             press = self.ids.spinner_press_mark.text
@@ -327,6 +329,10 @@ class Third(Screen):
     @staticmethod
     def open_SelectionOptionPopup():
         open_OptionPopup()
+
+    @staticmethod
+    def close_app():
+        ClosePopup().open()
 
     def change_text(self):
         if not VALUES:
