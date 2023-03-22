@@ -18,16 +18,14 @@
                 valign: 'middle'
                 font_size: '20sp'
                 size_hint: 1, 0.2
-                color: [255/255, 0, 0, 1]
-                outline_color: 50/255,0,0,1
-                outline_width: 2
+                color: 64/255,64/255,64/255,1
 
         Spinner:
             id: spinner_press_mark
             size_hint: 1, 0.12
-            background_normal: '0,0,0,0'
-            background_color: 44/255 ,164/255, 45/255, 1
-            color: 0/255 ,22/255, 203/255, 1
+#            background_normal: '0,0,0,0'
+#            background_color: 44/255 ,164/255, 45/255, 1
+#            color: 0/255 ,22/255, 203/255, 1
             font_size: '20sp'
             text: 'Выберите пресс'
             values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
@@ -38,7 +36,7 @@
             text: 'Площадь изделия (ПОДБОР)'
             font_size: '20sp'
             size_hint: 1,0.12
-            background_color: 0.2, 1, 0.7, 1
+#            background_color: 0.2, 1, 0.7, 1
             on_press:
                 root.open_SelectionOptionPopup()
 
@@ -91,9 +89,9 @@
             Spinner:
                 id: spinner_quantity_stamps
                 size_hint: 0.35, 1
-                background_normal: '0,0,0,0'
-                background_color: 44/255 ,164/255, 45/255, 1
-                color: 0/255 ,22/255, 203/255, 1
+#                background_normal: '0,0,0,0'
+#                background_color: 44/255 ,164/255, 45/255, 1
+#                color: 0/255 ,22/255, 203/255, 1
                 font_size: '20sp'
                 text: '0'
                 values: ['1', '2', '3', '4']
@@ -204,8 +202,8 @@
                 text: 'Рассчитать'
                 font_size: '20sp'
                 size_hint: 0.5, 1
-                background_normal: ''
-                background_color: 0.4,0,1,1
+#                background_normal: ''
+#                background_color: 0.4,0,1,1
                 on_release:
                     root.calculate()
 
@@ -238,8 +236,8 @@
             text: 'СБРОС'
             font_size: '20sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            background_color: 12/255,6/255,120/255,1
-            background_normal: ''
+#            background_color: 12/255,6/255,120/255,1
+#            background_normal: ''
             on_press:
                 root.open_ressetPopup()
 
