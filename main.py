@@ -158,6 +158,10 @@ class First(Screen):
     def print(self):
         print(VALUES)
 
+    @staticmethod
+    def close_app():
+        ClosePopup().open()
+
 
 class Second(Screen):
     """Second Screen for the app"""
@@ -402,9 +406,9 @@ class EngineerApp(App):
 
     def post_build_init(self,ev):
 
-        if platform == 'android':
-            import android
-            android.map_key(android.KEYCODE_BACK, 1001)
+        # if platform == 'android':
+        #     import android
+        #     android.map_key(android.KEYCODE_BACK, 1001)
 
         win = Window
         win.bind(on_keyboard=self.key_handler)
