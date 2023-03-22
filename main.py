@@ -155,7 +155,8 @@ class Cows_and_bulls(Screen):
 
 class First(Screen):
     """First screen for the app"""
-    pass
+    def print(self):
+        print(VALUES)
 
 
 class Second(Screen):

@@ -16,9 +16,8 @@
             text: 'Выберите действие'
             font_size: '30sp'
             size_hint: 1, 0.3
-            color: [164/255, 0, 0, 1]
-            outline_color: 50/255,0,0,1
-            outline_width: 2
+            color: 64/255,64/255,64/255,1
+
         AnchorLayout:
             size_hint: 1, 0.2
             anchor_y: 'center'
@@ -45,7 +44,7 @@
             halign: 'center'
             valign: 'middle'
             font_size: '20sp'
-            background_color: 0, 1, 0.8, 1
+#            background_color: 0, 1, 0.8, 1
             size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Second'
@@ -57,7 +56,7 @@
             halign: 'center'
             valign: 'middle'
             font_size: '20sp'
-            background_color: 0 , 1, 0.8, 1
+#            background_color: 0 , 1, 0.8, 1
             size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Third'
@@ -66,14 +65,14 @@
         Button:
             text: 'Расчёт химического состава.'
             font_size: '20sp'
-            background_color: 0, 200/255, 0, 1
+#            background_color: 0, 200/255, 0, 1
             size_hint: 1, 0.25
 
         Button:
             id: button_guide
             text: 'СПРАВОЧНИКИ!'
             font_size: '20sp'
-            background_color: 0,0,1,1
+#            background_color: 0,0,1,1
             size_hint: 1,0.25
 #            on_press:
 #                root.manager.current = 'References'

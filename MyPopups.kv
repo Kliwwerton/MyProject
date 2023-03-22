@@ -99,6 +99,7 @@
                 root.dismiss()
                 root.choose_window()
 
+
 <WrongPopup>
     title: 'Сообщение об ошибке!'
     size_hint: 0.8, 0.2
@@ -117,6 +118,7 @@
             pos_hint: {'center_x': 0.5}
             text: 'Закрыть'
             on_press: root.dismiss()
+
 
 <RessetPopup>
     title: 'Подтвердите сброс данных'
@@ -150,6 +152,7 @@
                 on_press:
                     root.dismiss()
 
+
 <ClosePopup>
     size_hint: 0.8, 0.2
     title: 'Выход из программы'
@@ -182,6 +185,7 @@
                 on_press:
                     root.dismiss()
 
+
 <MistakePopup>:
     title: 'Ошибка!'
     size_hint: 0.8, 0.2
@@ -212,5 +216,3 @@
             pos_hint: {'center_x': 0.5}
             on_press:
                 root.dismiss()
-
-
