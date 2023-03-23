@@ -1,5 +1,5 @@
 from kivy.uix.popup import Popup
-from variables import GOST_STANDARDS, FORMS
+from variables import GOST_STANDARDS, FORMS, PARAMS
 from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON,\
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
@@ -94,6 +94,9 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
 class SelectionOptionPopup(Popup):
     """The window of chose open popup. On gost or another shape."""
     def open_next_popup(self):
+        for i in PARAMS:
+            if i not in VALUES:
+                VALUES[i] = None
         if self.ids.option_selection.text == 'Размеры по ГОСТ':
             SelectionGostPopup().open()
         else:
