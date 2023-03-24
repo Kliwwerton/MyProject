@@ -9,7 +9,6 @@ Config.set('kivy', 'keyboard_mode', 'systemanddock')
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
-from kivy.utils import platform
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
 
@@ -382,7 +381,6 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
-        icon = 'Images/Logo.png'
         self.container = Container(transition=SwapTransition())
         self.First = First()
         self.Second = Second()
@@ -404,11 +402,7 @@ class EngineerApp(App):
         self.container.add_widget(self.Cows_and_bulls)
         return self.container
 
-    def post_build_init(self,ev):
-
-        # if platform == 'android':
-        #     import android
-        #     android.map_key(android.KEYCODE_BACK, 1001)
+    def post_build_init(self, ev):
 
         win = Window
         win.bind(on_keyboard=self.key_handler)

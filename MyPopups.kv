@@ -1,13 +1,13 @@
 <SelectionOptionPopup>
-    title: 'Расчёт площади изделия'
+    title: 'Расчёт параметров изделия'
     size_hint: 0.8, 0.14
     pos_hint: {'center_x': 0.5, 'top': 0.7}
 
     Spinner:
         id: option_selection
-        text: 'Выберите вариант расчёта(подбора)'
+        text: 'Выберите вариант расчёта'
         font_size: '15sp'
-        values: ['Размеры по ГОСТ', 'Расчёт по размерам']
+        values: ['Размеры по ГОСТ', 'Произвольные размеры']
         on_text:
             root.open_next_popup()
             root.dismiss()
@@ -27,7 +27,7 @@
             spacing: 5
 
             Button:
-                text: 'Назад'
+                text: 'НАЗАД'
                 font_size: '15sp'
                 size_hint: 0.3, 0.7
                 pos_hint: {'left_bottom': 0, 'center_y': 0.5}
@@ -36,7 +36,7 @@
                     root.return_beck()
 
             Button:
-                text: 'Закрыть'
+                text: 'ЗАКРЫТЬ'
                 font_size: '15sp'
                 size_hint: 0.3, 0.7
                 pos_hint: {'right_bottom': 1, 'center_y': 0.5}
@@ -73,7 +73,7 @@
             spacing: 5
 
             Button:
-                text: 'Назад'
+                text: 'НАЗАД'
                 font_size: '15sp'
                 size_hint: 0.3, 0.6
                 pos_hint: {'left_bottom': 0, 'center_y': 0.5}
@@ -82,7 +82,7 @@
                     root.return_beck()
 
             Button:
-                text: 'Закрыть'
+                text: 'ЗАКРЫТЬ'
                 font_size: '15sp'
                 size_hint: 0.3, 0.6
                 pos_hint: {'right_bottom': 1, 'center_y': 0.5}
@@ -147,7 +147,7 @@
                     root.dismiss()
 
             Button:
-                text: 'Отмена'
+                text: 'ОТМЕНА'
                 size_hint: 1, 0.8
                 on_press:
                     root.dismiss()
