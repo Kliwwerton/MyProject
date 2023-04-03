@@ -93,39 +93,16 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
 
 class SelectionOptionPopup(Popup):
     """The window of chose open popup. On gost or another shape."""
-    def open_next_popup(self):
+
+    def __init__(self):
+        super().__init__()
         for i in PARAMS:
             if i not in VALUES:
                 VALUES[i] = None
-        if self.ids.option_selection.text == 'Размеры по ГОСТ':
-            SelectionGostPopup().open()
-        else:
-            ChoosingShapeProduct().open()
-
-
-class SelectionGostPopup(Popup):
-    """Choice of gost and number of stamp"""
-    def choosing_a_product_number(self):
-        numbers = []
-        if self.ids.gost_number.text:
-            for i in GOST_STANDARDS[self.ids.gost_number.text]:
-                numbers.append(str(i))
-            self.ids.product_numbers.values = numbers
 
     @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
-
-    def opening_calculation_window(self):
-        choice_popup(gost=self.ids.gost_number.text,
-                     number=self.ids.product_numbers.text)
-
-
-class ChoosingShapeProduct(Popup):
-
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def open_next_popup():
+        SelectionGostPopup().open()
 
     def choose_window(self):
         popup = None
@@ -150,6 +127,24 @@ class ChoosingShapeProduct(Popup):
 
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()
+
+
+class SelectionGostPopup(Popup):
+    """Choice of gost and number of stamp"""
+    def choosing_a_product_number(self):
+        numbers = []
+        if self.ids.gost_number.text:
+            for i in GOST_STANDARDS[self.ids.gost_number.text]:
+                numbers.append(str(i))
+            self.ids.product_numbers.values = numbers
+
+    @staticmethod
+    def return_beck():
+        SelectionOptionPopup().open()
+
+    def opening_calculation_window(self):
+        choice_popup(gost=self.ids.gost_number.text,
+                     number=self.ids.product_numbers.text)
 
 
 class WrongPopup(Popup):

@@ -1,16 +1,45 @@
+#:import Factory kivy.factory.Factory
+
 <SelectionOptionPopup>
     title: 'Расчёт параметров изделия'
-    size_hint: 0.8, 0.14
+    size_hint: 0.8, 0.32
     pos_hint: {'center_x': 0.5, 'top': 0.7}
 
-    Spinner:
-        id: option_selection
-        text: 'Выберите вариант расчёта'
-        font_size: '15sp'
-        values: ['Размеры по ГОСТ', 'Произвольные размеры']
-        on_text:
-            root.open_next_popup()
-            root.dismiss()
+    BoxLayout:
+        padding: 5
+        spacing: 10
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: 1, 1.2
+            spacing: 5
+
+            Button:
+                text: 'ЗАКРЫТЬ'
+                font_size: '15sp'
+                size_hint: 0.3, 0.7
+                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+                on_press:
+                    root.dismiss()
+
+        Label:
+            text: 'ВАРИАНТЫ РАСЧЁТА'
+            size_hint: 1, 0.6
+
+        Button:
+            text: 'Размеры по ГОСТ'
+            on_press:
+                root.open_next_popup()
+                root.dismiss()
+
+        Spinner:
+            id: spin_choose_window
+            text: 'Выберите форму изделия'
+            font_size: '15sp'
+            values: ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Трубка', 'Фасонное изделие']
+            on_text:
+                root.choose_window()
+                root.dismiss()
 
 
 <SelectionGostPopup>
@@ -58,46 +87,6 @@
             on_text:
                 root.dismiss()
                 root.opening_calculation_window()
-
-
-<ChoosingShapeProduct>
-    title: 'Выбор формы изделия'
-    auto_dismiss: False
-    size_hint: 0.8, 0.2
-
-    BoxLayout:
-        orientation: 'vertical'
-
-        BoxLayout:
-            size_hint: 1, 0.7
-            spacing: 5
-
-            Button:
-                text: 'НАЗАД'
-                font_size: '15sp'
-                size_hint: 0.3, 0.6
-                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
-                on_press:
-                    root.dismiss()
-                    root.return_beck()
-
-            Button:
-                text: 'ЗАКРЫТЬ'
-                font_size: '15sp'
-                size_hint: 0.3, 0.6
-                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
-                on_press:
-                    root.dismiss()
-
-        Spinner:
-            id: spin_choose_window
-            size_hint: 1, 0.5
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            text: 'Выберите форму изделия'
-            values: ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Трубка', 'Фасонное изделие']
-            on_text:
-                root.dismiss()
-                root.choose_window()
 
 
 <WrongPopup>
