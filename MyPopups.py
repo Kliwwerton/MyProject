@@ -121,7 +121,7 @@ class SelectionOptionPopup(Popup):
             popup = Tube()
             popup.chose_values.append(TUBE['Image'])
 
-        elif self.ids.spin_choose_window.text == 'Фасонное изделие':
+        elif self.ids.spin_choose_window.text == 'Произвольное':
             popup = Fason()
             print(VALUES)
 
