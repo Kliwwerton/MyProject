@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from variables import GOST_STANDARDS, FORMS, PARAMS
-from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON,\
+from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON, \
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
 from math import pi
 
@@ -131,6 +131,7 @@ class SelectionOptionPopup(Popup):
 
 class SelectionGostPopup(Popup):
     """Choice of gost and number of stamp"""
+
     def choosing_a_product_number(self):
         numbers = []
         if self.ids.gost_number.text:
@@ -169,8 +170,13 @@ class MistakePopup(Popup):
     pass
 
 
+class Addition(Popup):
+    pass
+
+
 class Rectangle(Popup):
     """Shape of rectangle"""
+
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -209,6 +215,11 @@ class Rectangle(Popup):
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
+
+    @staticmethod
+    def open_calculation_popup():
+        Addition().open()
+        print('Hello')
 
     def calculation(self):
 
@@ -249,6 +260,7 @@ class Rectangle(Popup):
 
 class Trapezoid(Popup):
     """Shape of trapezoid"""
+
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -333,6 +345,7 @@ class Trapezoid(Popup):
 
 class Ribbed(Popup):
     """Shape of ribbed"""
+
     def __init__(self):
         super().__init__()
         self.chose_values = []
@@ -420,6 +433,7 @@ class Ribbed(Popup):
 
 class Tube(Popup):
     """Shape of tube"""
+
     def __init__(self):
         super().__init__()
         self.chose_values = []
