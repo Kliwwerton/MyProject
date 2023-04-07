@@ -171,7 +171,27 @@ class MistakePopup(Popup):
 
 
 class Addition(Popup):
-    pass
+
+    def __init__(self, instance):
+        super().__init__()
+        self.instance = instance
+
+    def write_average_value(self):
+        values = []
+        if self.ids.length_first.text:
+            values.append(float(self.ids.length_first.text))
+        if self.ids.length_second.text:
+            values.append(float(self.ids.length_second.text))
+        if self.ids.length_third.text:
+            values.append(float(self.ids.length_third.text))
+
+        if values:
+            summ = 0
+            for i in values:
+                summ += i
+            equals = round(summ / len(values), 1)
+
+            self.instance.text = str(equals)
 
 
 class Rectangle(Popup):
@@ -217,8 +237,8 @@ class Rectangle(Popup):
         SelectionOptionPopup().open()
 
     @staticmethod
-    def open_calculation_popup():
-        Addition().open()
+    def open_calculation_average_popup(instance):
+        Addition(instance).open()
         print('Hello')
 
     def calculation(self):

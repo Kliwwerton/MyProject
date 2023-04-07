@@ -54,11 +54,11 @@
                 input_tipe: 'number'
                 input_filter: 'float'
 
-#            Button:
-#                text: '...'
-#                size_hint: 0.1, 1
-#                on_press:
-#                    root.open_calculation_popup()
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(length_value)
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -80,6 +80,12 @@
                 input_tipe: 'number'
                 input_filter: 'float'
 
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(width_value)
+
         BoxLayout:
             size_hint: 1, 0.2
 
@@ -100,6 +106,12 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(thickness_value)
 
         BoxLayout:
             size_hint: 1, 0.2

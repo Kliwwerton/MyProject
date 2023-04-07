@@ -11,6 +11,7 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
+from kivy.uix.button import Button
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
