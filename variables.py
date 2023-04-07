@@ -132,7 +132,7 @@ GOST_STANDARDS = {
 }
 
 FORMS = ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Трубка', 'Произвольное']
-PARAMS = ['gost', 'number', 'size', 'weight', 'volume', 'square']
+PARAMS = ['gost', 'number', 'size', 'weight', 'volume', 'square', 'volume_weight']
 
 RECTANGLES = {'ГОСТ 8691-2018': ['1', '2', '3', '4', '5', '6', '6a', '7', '8', '9',
                                  '10', '11', '12', '13', '14', '15', '16', '17', '18', '19',

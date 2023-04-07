@@ -80,6 +80,8 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
     popup.chose_values.insert(0, gost)
     popup.chose_values.insert(1, number)
     popup.weight = weight
+    if VALUES['volume_weight']:
+        popup.volume_weight = VALUES['volume_weight']
 
     if size:
         popup.product_size = size
@@ -202,6 +204,7 @@ class Rectangle(Popup):
         self.chose_values = []
         self.product_size = []
         self.weight = ''
+        self.volume_weight = ''
 
     def build_instance(self):
         if self.chose_values and self.product_size:
@@ -210,6 +213,9 @@ class Rectangle(Popup):
             self.ids.width_value.text = self.product_size[1]
             if len(self.product_size) == 3:
                 self.ids.thickness_value.text = self.product_size[2]
+                volume = float(self.product_size[0]) * float(self.product_size[1]) * \
+                         float(self.product_size[2])
+                VALUES['volume'] = round(float(volume), 2)
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
 
@@ -224,6 +230,10 @@ class Rectangle(Popup):
                 self.ids.thickness_value.text = str(product_size[2])
                 VALUES['gost'] = self.chose_values[0]
                 VALUES['number'] = self.chose_values[1]
+                # volume = 1
+                # for i in product_size:
+                #     volume *= i
+                # VALUES['volume'] = round(float(volume), 2)
         else:
             self.ids.label_gost_number.text = self.chose_values[0]
             VALUES['gost'] = self.chose_values[0]
@@ -276,6 +286,20 @@ class Rectangle(Popup):
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
             print(VALUES)
+
+    def calculation_weight_product(self):
+        if VALUES['volume']:
+            VALUES['weight'] = str(float(VALUES['volume']) * float(self.ids.volume_weight_product.text))
+            print(VALUES)
+            pass
+
+    def change_text(self):
+        if VALUES['volume_weight']:
+            self.ids.volume_weight_product.text = VALUES['volume_weight']
+
+    def change_text_weight_product(self):
+        if VALUES['weight']:
+            self.ids.weight_product.text = VALUES['weight']
 
 
 class Trapezoid(Popup):
