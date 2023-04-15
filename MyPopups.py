@@ -523,6 +523,15 @@ class Tube(Popup):
     def return_beck():
         SelectionOptionPopup().open()
 
+    @staticmethod
+    def open_calculation_average_popup(instance):
+        Addition(instance).open()
+        print('Hello')
+
+    def change_text(self):
+        if VALUES['volume_weight']:
+            self.ids.volume_weight_product.text = VALUES['volume_weight']
+
     def calculation(self):
         if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
             _D = float(self.ids.outer_diameter_D.text)
