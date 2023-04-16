@@ -200,10 +200,6 @@ class Second(Screen):
             self.ids.label_P_pressing_text.text = 'Давление прессования:'
             self.ids.label_P_pressing_value.text = str(data)
 
-    @staticmethod
-    def open_ressetPopup():
-        RessetPopup().open()
-
     def reset(self):
         """reset all parameters"""
         self.ids.label_P_pressing_text.text = ''
@@ -220,6 +216,10 @@ class Second(Screen):
         self.ids.volume_weight.text = ''
         VALUES.clear()
         self.sound_reset.play()
+
+    @staticmethod
+    def open_ressetPopup():
+        RessetPopup().open()
 
     @staticmethod
     def open_SelectionOptionPopup():

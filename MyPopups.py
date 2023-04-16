@@ -287,6 +287,13 @@ class Rectangle(Popup):
             VALUES['weight'] = None
             print(VALUES)
 
+    def calculation_volume_weight(self):
+        if self.ids.length_value.text and self.ids.width_value.text and self.ids.thickness_value.text and self.ids.weight_product.text:
+            L, H, S, m = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+                float(self.ids.thickness_value.text), float(self.ids.weight_product.text)
+            var = round((m / ((L * H * S) / 1000)), 2)
+            self.ids.volume_weight_product.text = str(var)
+
     def calculation_weight_product(self):
         if VALUES['volume']:
             VALUES['weight'] = str(float(VALUES['volume']) * float(self.ids.volume_weight_product.text))
