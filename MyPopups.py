@@ -213,8 +213,8 @@ class Rectangle(Popup):
             self.ids.width_value.text = self.product_size[1]
             if len(self.product_size) == 3:
                 self.ids.thickness_value.text = self.product_size[2]
-                volume = float(self.product_size[0]) * float(self.product_size[1]) * \
-                         float(self.product_size[2])
+                volume = (float(self.product_size[0]) * float(self.product_size[1]) *
+                          float(self.product_size[2]) / 1000)
                 VALUES['volume'] = round(float(volume), 2)
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = self.chose_values[1]
@@ -241,6 +241,8 @@ class Rectangle(Popup):
 
         if self.weight:
             self.ids.weight_product.text = self.weight
+        if self.volume_weight:
+            self.ids.volume_weight_product.text = self.volume_weight
 
     @staticmethod
     def return_beck():
@@ -291,18 +293,36 @@ class Rectangle(Popup):
         if self.ids.length_value.text and self.ids.width_value.text and self.ids.thickness_value.text and self.ids.weight_product.text:
             L, H, S, m = float(self.ids.length_value.text), float(self.ids.width_value.text), \
                 float(self.ids.thickness_value.text), float(self.ids.weight_product.text)
-            var = round((m / ((L * H * S) / 1000)), 2)
+            volume = (L * H * S) / 1000
+            VALUES['volume'] = str(volume)
+            var = round((m / volume), 2)
             self.ids.volume_weight_product.text = str(var)
+            VALUES['volume_weight'] = str(var)
+            VALUES['weight'] = self.ids.weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value.text)
+            VALUES['size'].append(self.ids.thickness_value.text)
 
     def calculation_weight_product(self):
-        if VALUES['volume']:
-            VALUES['weight'] = str(float(VALUES['volume']) * float(self.ids.volume_weight_product.text))
+        if self.ids.length_value.text and self.ids.width_value.text and self.ids.thickness_value.text and self.ids.volume_weight_product.text:
+            L, H, S, V = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+                float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
+            volume = (L * H * S) / 1000
+            var = round(V * volume, 2)
+            self.ids.weight_product.text = str(var)
+            VALUES['weight'] = str(var)
+            VALUES['volume'] = str(volume)
+            VALUES['volume_weight'] = self.ids.volume_weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value.text)
+            VALUES['size'].append(self.ids.thickness_value.text)
             print(VALUES)
-            pass
 
-    def change_text(self):
-        if VALUES['volume_weight']:
-            self.ids.volume_weight_product.text = VALUES['volume_weight']
+    # def change_text(self):
+    #     if VALUES['volume_weight']:
+    #         self.ids.volume_weight_product.text = VALUES['volume_weight']
 
     def change_text_weight_product(self):
         if VALUES['weight']:

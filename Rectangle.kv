@@ -54,9 +54,9 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
-                on_text:
-                    root.calculation()
-                    root.change_text()
+#                on_text:
+#                    root.calculation()
+#                    root.change_text()
 
             Button:
                 text: '...'
@@ -83,9 +83,9 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
-                on_text:
-                    root.calculation()
-                    root.change_text()
+#                on_text:
+#                    root.calculation()
+#                    root.change_text()
 
             Button:
                 text: '...'
@@ -113,9 +113,9 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
-                on_text:
-                    root.calculation()
-                    root.change_text()
+#                on_text:
+#                    root.calculation()
+#                    root.change_text()
 
             Button:
                 text: '...'
@@ -183,7 +183,8 @@
                 text: 'P'
                 size_hint: 0.1, 1
                 on_press:
-                    root.open_calculation_average_popup(volume_weight_product)
+                    root.calculation_weight_product()
+
 
         Image:
             source: 'Images/Product_shape/rectangle.png'

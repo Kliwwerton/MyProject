@@ -51,6 +51,15 @@ def open_OptionPopup():
     if not VALUES:
         SelectionOptionPopup().open()
 
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume'] and VALUES['square'] and VALUES['size']:
+        choice_popup(gost=VALUES['gost'],
+                     number=VALUES['number'],
+                     weight=VALUES['weight'],
+                     volume=VALUES['volume'],
+                     square=VALUES['square'],
+                     size=VALUES['size']
+                     )
+
     elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
@@ -62,14 +71,6 @@ def open_OptionPopup():
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      size=VALUES['size']
-                     )
-
-    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume'] and VALUES['square']:
-        choice_popup(gost=VALUES['gost'],
-                     number=VALUES['number'],
-                     weight=VALUES['weight'],
-                     volume=VALUES['volume'],
-                     square=VALUES['square']
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume']:
