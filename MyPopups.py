@@ -290,10 +290,11 @@ class Rectangle(Popup):
             print(VALUES)
 
     def calculation_volume_weight(self):
-        if self.ids.length_value.text and self.ids.width_value.text and self.ids.thickness_value.text and self.ids.weight_product.text:
-            L, H, S, m = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+        if self.ids.length_value.text and self.ids.width_value.text and \
+                self.ids.thickness_value.text and self.ids.weight_product.text:
+            l, h, s, m = float(self.ids.length_value.text), float(self.ids.width_value.text), \
                 float(self.ids.thickness_value.text), float(self.ids.weight_product.text)
-            volume = (L * H * S) / 1000
+            volume = (l * h * s) / 1000
             VALUES['volume'] = str(volume)
             var = round((m / volume), 2)
             self.ids.volume_weight_product.text = str(var)
@@ -305,11 +306,12 @@ class Rectangle(Popup):
             VALUES['size'].append(self.ids.thickness_value.text)
 
     def calculation_weight_product(self):
-        if self.ids.length_value.text and self.ids.width_value.text and self.ids.thickness_value.text and self.ids.volume_weight_product.text:
-            L, H, S, V = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+        if self.ids.length_value.text and self.ids.width_value.text and \
+                self.ids.thickness_value.text and self.ids.volume_weight_product.text:
+            l, h, s, v = float(self.ids.length_value.text), float(self.ids.width_value.text), \
                 float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
-            volume = (L * H * S) / 1000
-            var = round(V * volume, 2)
+            volume = (l * h * s) / 1000
+            var = round(v * volume, 2)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
             VALUES['volume'] = str(volume)
