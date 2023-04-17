@@ -512,6 +512,7 @@ class Tube(Popup):
         self.chose_values = []
         self.product_size = []
         self.weight = ''
+        self.volume_weight = ''
 
     def build_instance(self):
 
@@ -597,6 +598,40 @@ class Tube(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
+
+    def calculation_volume_weight(self):
+        if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text and \
+                self.ids.length_value.text and self.ids.weight_product.text:
+            _d, d, l, m = float(self.ids.outer_diameter_D.text), float(self.ids.inner_diameter_d.text), \
+                float(self.ids.length_value.text), float(self.ids.weight_product.text)
+            volume = (((pi * (_d / 2) ** 2) - (pi * (d / 2) ** 2)) * l) / 1000
+            VALUES['volume'] = str(volume)
+            var = round((m / volume), 2)
+            self.ids.volume_weight_product.text = str(var)
+            VALUES['volume_weight'] = str(var)
+            VALUES['weight'] = self.ids.weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.outer_diameter_D.text)
+            VALUES['size'].append(self.ids.inner_diameter_d.text)
+            VALUES['size'].append(self.ids.length_value.text)
+
+    def calculation_weight_product(self):
+        pass
+        if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text and \
+                self.ids.length_value.text and self.ids.volume_weight_product.text:
+            _d, d, l, v = float(self.ids.outer_diameter_D.text), float(self.ids.inner_diameter_d.text), \
+                float(self.ids.length_value.text), float(self.ids.volume_weight_product.text)
+            volume = (((pi * (_d / 2) ** 2) - (pi * (d / 2) ** 2)) * l) / 1000
+            var = round(v * volume, 2)
+            self.ids.weight_product.text = str(var)
+            VALUES['weight'] = str(var)
+            VALUES['volume'] = str(volume)
+            VALUES['volume_weight'] = self.ids.volume_weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.outer_diameter_D.text)
+            VALUES['size'].append(self.ids.inner_diameter_d.text)
+            VALUES['size'].append(self.ids.length_value.text)
+            print(VALUES)
 
 
 class Shaped(Popup):

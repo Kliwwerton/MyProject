@@ -131,15 +131,18 @@
                 id: weight_product
                 text: ''
                 multiline: False
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 hint_text: 'Вес'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
-                on_text:
-                    root.calculation()
-                    root.change_text()
+
+            Button:
+                text: 'P'
+                size_hint: 0.1, 1
+                on_press:
+                    root.calculation_volume_weight()
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -156,19 +159,21 @@
                 id: volume_weight_product
                 text: ''
                 multiline: False
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 hint_text: 'm/V'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
-#                on_text:
-#                    root.calculation_weight_product()
-#                    root.change_text_weight_product()
+
+            Button:
+                text: 'P'
+                size_hint: 0.1, 1
+                on_press:
+                    root.calculation_weight_product()
 
         Image:
             id: image
-#            source: ''
             size_hint: 1, 1.2
 
         Button:
