@@ -138,7 +138,8 @@
                 text: 'P'
                 size_hint: 0.1, 1
                 on_press:
-                    root.calculation_volume_weight()
+                    root.check_value(var=1)
+                    root.calculation()
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -167,6 +168,7 @@
                 text: 'P'
                 size_hint: 0.1, 1
                 on_press:
+                    root.check_value(var=2)
                     root.calculation_weight_product()
 
         Image:
