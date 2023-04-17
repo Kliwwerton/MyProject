@@ -181,11 +181,13 @@
 
     BoxLayout:
         padding: 5
-        spacing: 5
+        spacing: 2
         orientation: 'vertical'
 
         Label:
+            size_hint: 1, 0.8
             text: 'Не хватает данных!'
+            text_size: self.size
             halign: 'center'
             valign: 'middle'
             font_size: '15sp'
@@ -194,6 +196,7 @@
         Label:
             id: text_mistake
             text: ''
+            text_size: self.size
             halign: 'center'
             valign: 'middle'
             font_size: '15sp'
@@ -201,7 +204,7 @@
 
         Button:
             text: 'OK'
-            size_hint: 0.2, 1
+            size_hint: 0.2, 0.8
             pos_hint: {'center_x': 0.5}
             on_press:
                 root.dismiss()
