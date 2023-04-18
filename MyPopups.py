@@ -403,8 +403,8 @@ class Trapezoid(Popup):
             VALUES['size'].append(self.ids.width_value_2.text)
 
             if self.ids.thickness_value.text:
-                volume = (square * float(self.ids.thickness_value.text)) / 1000
-                VALUES['volume'] = (round(volume, 2))
+                volume = round((square * float(self.ids.thickness_value.text)) / 1000, 2)
+                VALUES['volume'] = volume
                 VALUES['size'].append(self.ids.thickness_value.text)
                 print(square, volume)
 
@@ -462,11 +462,14 @@ class Trapezoid(Popup):
 
     def calculation_weight_product(self):
 
-        if self.ids.length_value.text and self.ids.width_value.text and \
-                self.ids.thickness_value.text and self.ids.volume_weight_product.text:
-            l, h, s, v = float(self.ids.length_value.text), float(self.ids.width_value.text), \
-                float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
-            volume = (l * h * s) / 1000
+        if self.ids.length_value.text and self.ids.width_value_1.text and \
+                self.ids.width_value_2.text and self.ids.thickness_value.text and self.ids.volume_weight_product.text:
+            l, s, s_1, h, v = float(self.ids.length_value.text), \
+                float(self.ids.width_value_1.text), \
+                float(self.ids.width_value_2.text), \
+                float(self.ids.thickness_value.text), \
+                float(self.ids.volume_weight_product.text)
+            volume = round(((l * ((s + s_1) / 2)) * h) / 1000, 2)
             var = round(v * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
@@ -474,7 +477,8 @@ class Trapezoid(Popup):
             VALUES['volume_weight'] = self.ids.volume_weight_product.text
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
-            VALUES['size'].append(self.ids.width_value.text)
+            VALUES['size'].append(self.ids.width_value_1.text)
+            VALUES['size'].append(self.ids.width_value_2.text)
             VALUES['size'].append(self.ids.thickness_value.text)
 
         print(VALUES)

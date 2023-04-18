@@ -1,8 +1,8 @@
 
 from kivy.config import Config
 
-# Config.set('graphics', 'width', 360)
-# Config.set('graphics', 'height', 800)
+Config.set('graphics', 'width', 420)
+Config.set('graphics', 'height', 1000)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 # Config.set('kivy', 'window_icon', 'Images/Logo.png')
 
