@@ -434,13 +434,13 @@ class Trapezoid(Popup):
         mistake = MistakePopup()
         text = ''
         if not self.ids.length_value.text:
-            text = 'Укажите длину изделия!'
+            text = 'Укажите длину(L)!'
         elif not self.ids.width_value_1.text:
-            text = 'Укажите ширину (S)!'
+            text = 'Укажите ширину(S)!'
         elif not self.ids.width_value_2.text:
-            text = 'Укажите ширину (S[sub]1[/sub])!'
+            text = 'Укажите ширину(S[sub]1[/sub])!'
         elif not self.ids.thickness_value.text:
-            text = 'Укажите толщину изделия!'
+            text = 'Укажите толщину(H)!'
 
         if var == 1:
             if not self.ids.weight_product.text:
@@ -549,9 +549,9 @@ class Ribbed(Popup):
             VALUES['size'].append(self.ids.width_value.text)
 
             if self.ids.thickness_value_1.text and self.ids.thickness_value_2.text:
-                volume = (square * ((float(self.ids.thickness_value_1.text) +
-                                     float(self.ids.thickness_value_2.text)) / 2)) / 1000
-                VALUES['volume'] = (round(volume, 2))
+                volume = round((square * ((float(self.ids.thickness_value_1.text) +
+                                           float(self.ids.thickness_value_2.text)) / 2)) / 1000, 2)
+                VALUES['volume'] = volume
                 VALUES['size'].append(self.ids.thickness_value_1.text)
                 VALUES['size'].append(self.ids.thickness_value_2.text)
                 print(square, volume)
@@ -578,17 +578,41 @@ class Ribbed(Popup):
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
 
+    def calculation_weight_product(self):
+
+        if self.ids.length_value.text and self.ids.width_value.text and \
+                self.ids.thickness_value_1.text and self.ids.thickness_value_2.text and \
+                self.ids.volume_weight_product.text:
+            l, h, s, s_1, v = float(self.ids.length_value.text), \
+                float(self.ids.width_value.text), \
+                float(self.ids.thickness_value_1.text), \
+                float(self.ids.thickness_value_2.text), \
+                float(self.ids.volume_weight_product.text)
+            volume = round(((l * h) * ((s + s_1) / 2)) / 1000, 2)
+            var = round(v * volume)
+            self.ids.weight_product.text = str(var)
+            VALUES['weight'] = str(var)
+            VALUES['volume'] = str(volume)
+            VALUES['volume_weight'] = self.ids.volume_weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value.text)
+            VALUES['size'].append(self.ids.thickness_value_1.text)
+            VALUES['size'].append(self.ids.thickness_value_2.text)
+
+        print(VALUES)
+
     def check_value(self, var):
         mistake = MistakePopup()
         text = ''
         if not self.ids.length_value.text:
-            text = 'Укажите длину изделия!'
-        elif not self.ids.width_value_1.text:
-            text = 'Укажите ширину (S)!'
-        elif not self.ids.width_value_2.text:
-            text = 'Укажите ширину (S[sub]1[/sub])!'
-        elif not self.ids.thickness_value.text:
-            text = 'Укажите толщину изделия!'
+            text = 'Укажите длину(L)!'
+        elif not self.ids.width_value.text:
+            text = 'Укажите ширину(H)!'
+        elif not self.ids.thickness_value_1.text:
+            text = 'Укажите толщину(S)!'
+        elif not self.ids.thickness_value_2.text:
+            text = 'Укажите толщину(S[sub]1[/sub])!'
 
         if var == 1:
             if not self.ids.weight_product.text:
