@@ -269,6 +269,9 @@ class Rectangle(Popup):
                     VALUES['volume_weight'] = str(volume_weight)
                     self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
+                elif self.ids.volume_weight_product.text:
+                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
+                    VALUES['weight'] = None
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
@@ -413,6 +416,9 @@ class Trapezoid(Popup):
                     self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
+                elif self.ids.volume_weight_product.text:
+                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
+                    VALUES['weight'] = None
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
@@ -431,32 +437,35 @@ class Trapezoid(Popup):
             VALUES['weight'] = None
 
     def check_value(self, var):
-        mistake = MistakePopup()
+
         text = ''
-        if not self.ids.length_value.text:
-            text = 'Укажите длину(L)!'
-        elif not self.ids.width_value_1.text:
-            text = 'Укажите ширину(S)!'
-        elif not self.ids.width_value_2.text:
-            text = 'Укажите ширину(S[sub]1[/sub])!'
-        elif not self.ids.thickness_value.text:
-            text = 'Укажите толщину(H)!'
+        def check():
+            if not self.ids.length_value.text:
+                _text = 'Укажите длину(L)!'
+            elif not self.ids.width_value_1.text:
+                _text = 'Укажите ширину(S)!'
+            elif not self.ids.width_value_2.text:
+                _text = 'Укажите ширину(S[sub]1[/sub])!'
+            elif not self.ids.thickness_value.text:
+                _text = 'Укажите толщину(H)!'
+            else:
+                _text = ''
+            return _text
 
         if var == 1:
             if not self.ids.weight_product.text:
                 text = 'Укажите вес изделия!'
             else:
-                pass
+                text = check()
 
         elif var == 2:
             if not self.ids.volume_weight_product.text:
                 text = 'Укажите объёмный вес!'
             else:
-                pass
+                text = check()
 
-        if not text:
-            mistake.dismiss()
-        else:
+        if text:
+            mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
 
@@ -530,6 +539,8 @@ class Ribbed(Popup):
 
         if self.weight:
             self.ids.weight_product.text = self.weight
+        if self.volume_weight:
+            self.ids.volume_weight_product.text = self.volume_weight
 
     @staticmethod
     def return_beck():
@@ -561,6 +572,9 @@ class Ribbed(Popup):
                     self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
+                elif self.ids.volume_weight_product.text:
+                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
+                    VALUES['weight'] = None
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
@@ -715,6 +729,9 @@ class Tube(Popup):
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                     self.ids.volume_weight_product.text = str(volume_weight)
+                elif self.ids.volume_weight_product.text:
+                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
+                    VALUES['weight'] = None
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
