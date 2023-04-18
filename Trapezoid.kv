@@ -50,12 +50,18 @@
             TextInput:
                 id: length_value
                 text: ''
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(length_value)
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -71,12 +77,18 @@
             TextInput:
                 id: width_value_1
                 text: ''
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(width_value_1)
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -93,12 +105,18 @@
             TextInput:
                 id: width_value_2
                 text: ''
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(width_value_2)
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -115,12 +133,18 @@
             TextInput:
                 id: thickness_value
                 text: ''
-                size_hint: 0.4, 1
+                size_hint: 0.3, 1
                 multiline: False
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: '...'
+                size_hint: 0.1, 1
+                on_press:
+                    root.open_calculation_average_popup(thickness_value)
 
         BoxLayout:
             size_hint: 1, 0.2
@@ -136,12 +160,49 @@
                 id: weight_product
                 text: ''
                 multiline: False
-                size_hint: 0.4, 1
-                hint_text: 'Вес изделия'
+                size_hint: 0.3, 1
+                hint_text: 'Вес'
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+
+            Button:
+                text: 'P'
+                size_hint: 0.1, 1
+                on_press:
+                    root.check_value(var=1)
+                    root.calculation()
+
+        BoxLayout:
+            size_hint: 1, 0.2
+
+            Label:
+                markup: True
+                text: 'Объёмный вес, г/см[sup]3[/sup]: '
+                size_hint: 0.6, 1
+                halign: 'left'
+                valign: 'center'
+                text_size: self.size
+
+            TextInput:
+                id: volume_weight_product
+                text: ''
+                multiline: False
+                size_hint: 0.3, 1
+                hint_text: 'm/V'
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+            Button:
+                markup: True
+                text: 'P'
+                size_hint: 0.1, 1
+                on_press:
+                    root.check_value(var=2)
+                    root.calculation_weight_product()
 
         Image:
             id: image
