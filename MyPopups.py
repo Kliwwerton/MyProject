@@ -492,6 +492,7 @@ class Ribbed(Popup):
         self.chose_values = []
         self.product_size = []
         self.weight = ''
+        self.volume_weight = ''
 
     def build_instance(self):
 
@@ -534,6 +535,11 @@ class Ribbed(Popup):
     def return_beck():
         SelectionOptionPopup().open()
 
+    @staticmethod
+    def open_calculation_average_popup(instance):
+        Addition(instance).open()
+        print('Hello')
+
     def calculation(self):
         if self.ids.length_value.text and self.ids.width_value.text:
             square = (float(self.ids.length_value.text) * float(self.ids.width_value.text))
@@ -552,6 +558,7 @@ class Ribbed(Popup):
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+                    self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -570,6 +577,36 @@ class Ribbed(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
+
+    def check_value(self, var):
+        mistake = MistakePopup()
+        text = ''
+        if not self.ids.length_value.text:
+            text = 'Укажите длину изделия!'
+        elif not self.ids.width_value_1.text:
+            text = 'Укажите ширину (S)!'
+        elif not self.ids.width_value_2.text:
+            text = 'Укажите ширину (S[sub]1[/sub])!'
+        elif not self.ids.thickness_value.text:
+            text = 'Укажите толщину изделия!'
+
+        if var == 1:
+            if not self.ids.weight_product.text:
+                text = 'Укажите вес изделия!'
+            else:
+                pass
+
+        elif var == 2:
+            if not self.ids.volume_weight_product.text:
+                text = 'Укажите объёмный вес!'
+            else:
+                pass
+
+        if not text:
+            mistake.dismiss()
+        else:
+            mistake.ids.text_mistake.text = text
+            mistake.open()
 
 
 class Tube(Popup):
