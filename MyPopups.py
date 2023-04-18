@@ -308,30 +308,33 @@ class Rectangle(Popup):
             print(VALUES)
 
     def check_value(self, var):
-        mistake = MistakePopup()
-        text = ''
-        if not self.ids.length_value.text:
-            text = 'Укажите длину изделия!'
-        elif not self.ids.width_value.text:
-            text = 'Укажите ширину изделия!'
-        elif not self.ids.thickness_value.text:
-            text = 'Укажите толщину изделия!'
+
+        text = None
+        def check():
+            if not self.ids.length_value.text:
+                _text = 'Укажите длину изделия!'
+            elif not self.ids.width_value.text:
+                _text = 'Укажите ширину изделия!'
+            elif not self.ids.thickness_value.text:
+                _text = 'Укажите толщину изделия!'
+            else:
+                _text = None
+            return _text
 
         if var == 1:
             if not self.ids.weight_product.text:
                 text = 'Укажите вес изделия!'
             else:
-                pass
+                text = check()
 
         elif var == 2:
             if not self.ids.volume_weight_product.text:
                 text = 'Укажите объёмный вес!'
             else:
-                pass
+                text = check()
 
-        if not text:
-            mistake.dismiss()
-        else:
+        if text:
+            mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
 
@@ -617,32 +620,35 @@ class Ribbed(Popup):
         print(VALUES)
 
     def check_value(self, var):
-        mistake = MistakePopup()
-        text = ''
-        if not self.ids.length_value.text:
-            text = 'Укажите длину(L)!'
-        elif not self.ids.width_value.text:
-            text = 'Укажите ширину(H)!'
-        elif not self.ids.thickness_value_1.text:
-            text = 'Укажите толщину(S)!'
-        elif not self.ids.thickness_value_2.text:
-            text = 'Укажите толщину(S[sub]1[/sub])!'
+
+        text = None
+        def check():
+            if not self.ids.length_value.text:
+                _text = 'Укажите длину(L)!'
+            elif not self.ids.width_value.text:
+                _text = 'Укажите ширину(H)!'
+            elif not self.ids.thickness_value_1.text:
+                _text = 'Укажите толщину(S)!'
+            elif not self.ids.thickness_value_2.text:
+                _text = 'Укажите толщину(S[sub]1[/sub])!'
+            else:
+                _text = None
+            return _text
 
         if var == 1:
             if not self.ids.weight_product.text:
                 text = 'Укажите вес изделия!'
             else:
-                pass
+                text = check()
 
         elif var == 2:
             if not self.ids.volume_weight_product.text:
                 text = 'Укажите объёмный вес!'
             else:
-                pass
+                text = check()
 
-        if not text:
-            mistake.dismiss()
-        else:
+        if text:
+            mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
 
@@ -768,30 +774,33 @@ class Tube(Popup):
             print(VALUES)
 
     def check_value(self, var):
-        mistake = MistakePopup()
-        text = ''
-        if not self.ids.outer_diameter_D.text:
-            text = 'Укажите наружный диаметр!'
-        elif not self.ids.inner_diameter_d.text:
-            text = 'Укажите внутренний диаметр!'
-        elif not self.ids.length_value.text:
-            text = 'Укажите высоту изделия!'
+
+        text = None
+        def check():
+            if not self.ids.outer_diameter_D.text:
+                _text = 'Укажите наружный диаметр!'
+            elif not self.ids.inner_diameter_d.text:
+                _text = 'Укажите внутренний диаметр!'
+            elif not self.ids.length_value.text:
+                _text = 'Укажите высоту изделия!'
+            else:
+                _text = None
+            return _text
 
         if var == 1:
             if not self.ids.weight_product.text:
                 text = 'Укажите вес изделия!'
             else:
-                pass
+                text = check()
 
         elif var == 2:
             if not self.ids.volume_weight_product.text:
                 text = 'Укажите объёмный вес!'
             else:
-                pass
+                text = check()
 
-        if not text:
-            mistake.dismiss()
-        else:
+        if text:
+            mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
 
@@ -804,6 +813,7 @@ class Shaped(Popup):
         self.chose_values = []
         self.product_size = []
         self.weight = ''
+        self.volume_weight = ''
 
     def build_instance(self):
 
@@ -847,6 +857,8 @@ class Shaped(Popup):
 
         if self.weight:
             self.ids.weight_product.text = self.weight
+        # if self.volume_weight:
+        #     self.ids.volume_weight_product.text = self.volume_weight
 
     @staticmethod
     def return_beck():
