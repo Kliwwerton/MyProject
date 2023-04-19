@@ -44,8 +44,6 @@ Builder.load_file('Gost_standards.kv')
 Builder.load_file('Cows_and_bulls.kv')
 
 
-# TODO change fonts on main Screen snd second screen
-
 def open_OptionPopup():
     if not VALUES:
         SelectionOptionPopup().open()
@@ -155,7 +153,8 @@ class Cows_and_bulls(Screen):
 
 class First(Screen):
     """First screen for the app"""
-    def print(self):
+    @staticmethod
+    def print():
         print(VALUES)
 
     @staticmethod
