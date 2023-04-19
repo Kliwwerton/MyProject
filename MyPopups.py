@@ -903,7 +903,6 @@ class Shaped(Popup):
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
-                print(VALUES)
 
             else:
                 VALUES['volume'] = None
@@ -917,13 +916,20 @@ class Shaped(Popup):
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
 
-# TODO dopility this function
     def calculation_weight_product(self):
-        if self.ids.length_value.text and self.ids.width_value.text and \
-                self.ids.thickness_value.text and self.ids.volume_weight_product.text:
-            l, h, s, v = float(self.ids.length_value.text), float(self.ids.width_value.text), \
-                float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
-            volume = (l * h * s) / 1000
+        if self.ids.length_value.text and self.ids.width_value_1.text and \
+                self.ids.width_value_2.text and \
+                self.ids.thickness_value_S.text and self.ids.thickness_value_S1.text \
+                and self.ids.thickness_value_S2.text and self.ids.thickness_value_S3.text:
+            l, h, h_1, s, s_1, s_2, s_3, v = float(self.ids.length_value.text), \
+                float(self.ids.width_value_1.text), \
+                float(self.ids.width_value_2.text), \
+                float(self.ids.thickness_value_S.text), \
+                float(self.ids.thickness_value_S1.text),\
+                float(self.ids.thickness_value_S2.text),\
+                float(self.ids.thickness_value_S3.text),\
+                float(self.ids.volume_weight_product.text)
+            volume = round((l * ((h + h_1) / 2) * ((s + s_1 + s_2 + s_3) / 4)) / 1000, 2)
             var = round(v * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
@@ -931,8 +937,12 @@ class Shaped(Popup):
             VALUES['volume_weight'] = self.ids.volume_weight_product.text
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
-            VALUES['size'].append(self.ids.width_value.text)
-            VALUES['size'].append(self.ids.thickness_value.text)
+            VALUES['size'].append(self.ids.width_value_1.text)
+            VALUES['size'].append(self.ids.width_value_2.text)
+            VALUES['size'].append(self.ids.thickness_value_S.text)
+            VALUES['size'].append(self.ids.thickness_value_S1.text)
+            VALUES['size'].append(self.ids.thickness_value_S2.text)
+            VALUES['size'].append(self.ids.thickness_value_S3.text)
             print(VALUES)
 
     def check_value(self, var):
