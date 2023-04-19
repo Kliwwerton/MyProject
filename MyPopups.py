@@ -299,7 +299,7 @@ class Rectangle(Popup):
             var = round(v * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
-            VALUES['volume'] = str(volume)
+            VALUES['volume'] = volume
             VALUES['volume_weight'] = self.ids.volume_weight_product.text
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
@@ -310,6 +310,7 @@ class Rectangle(Popup):
     def check_value(self, var):
 
         text = None
+
         def check():
             if not self.ids.length_value.text:
                 _text = 'Укажите длину изделия!'
@@ -439,9 +440,33 @@ class Trapezoid(Popup):
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
 
+    def calculation_weight_product(self):
+
+        if self.ids.length_value.text and self.ids.width_value_1.text and \
+                self.ids.width_value_2.text and self.ids.thickness_value.text and self.ids.volume_weight_product.text:
+            l, s, s_1, h, v = float(self.ids.length_value.text), \
+                float(self.ids.width_value_1.text), \
+                float(self.ids.width_value_2.text), \
+                float(self.ids.thickness_value.text), \
+                float(self.ids.volume_weight_product.text)
+            volume = round(((l * ((s + s_1) / 2)) * h) / 1000, 2)
+            var = round(v * volume)
+            self.ids.weight_product.text = str(var)
+            VALUES['weight'] = str(var)
+            VALUES['volume'] = volume
+            VALUES['volume_weight'] = self.ids.volume_weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value_1.text)
+            VALUES['size'].append(self.ids.width_value_2.text)
+            VALUES['size'].append(self.ids.thickness_value.text)
+
+        print(VALUES)
+
     def check_value(self, var):
 
         text = ''
+
         def check():
             if not self.ids.length_value.text:
                 _text = 'Укажите длину(L)!'
@@ -471,29 +496,6 @@ class Trapezoid(Popup):
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
-
-    def calculation_weight_product(self):
-
-        if self.ids.length_value.text and self.ids.width_value_1.text and \
-                self.ids.width_value_2.text and self.ids.thickness_value.text and self.ids.volume_weight_product.text:
-            l, s, s_1, h, v = float(self.ids.length_value.text), \
-                float(self.ids.width_value_1.text), \
-                float(self.ids.width_value_2.text), \
-                float(self.ids.thickness_value.text), \
-                float(self.ids.volume_weight_product.text)
-            volume = round(((l * ((s + s_1) / 2)) * h) / 1000, 2)
-            var = round(v * volume)
-            self.ids.weight_product.text = str(var)
-            VALUES['weight'] = str(var)
-            VALUES['volume'] = str(volume)
-            VALUES['volume_weight'] = self.ids.volume_weight_product.text
-            VALUES['size'] = []
-            VALUES['size'].append(self.ids.length_value.text)
-            VALUES['size'].append(self.ids.width_value_1.text)
-            VALUES['size'].append(self.ids.width_value_2.text)
-            VALUES['size'].append(self.ids.thickness_value.text)
-
-        print(VALUES)
 
 
 class Ribbed(Popup):
@@ -609,7 +611,7 @@ class Ribbed(Popup):
             var = round(v * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
-            VALUES['volume'] = str(volume)
+            VALUES['volume'] = volume
             VALUES['volume_weight'] = self.ids.volume_weight_product.text
             VALUES['size'] = []
             VALUES['size'].append(self.ids.length_value.text)
@@ -622,6 +624,7 @@ class Ribbed(Popup):
     def check_value(self, var):
 
         text = None
+
         def check():
             if not self.ids.length_value.text:
                 _text = 'Укажите длину(L)!'
@@ -765,7 +768,7 @@ class Tube(Popup):
             var = round(v * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
-            VALUES['volume'] = str(volume)
+            VALUES['volume'] = volume
             VALUES['volume_weight'] = self.ids.volume_weight_product.text
             VALUES['size'] = []
             VALUES['size'].append(self.ids.outer_diameter_D.text)
@@ -776,6 +779,7 @@ class Tube(Popup):
     def check_value(self, var):
 
         text = None
+
         def check():
             if not self.ids.outer_diameter_D.text:
                 _text = 'Укажите наружный диаметр!'
