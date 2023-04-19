@@ -248,7 +248,6 @@ class Rectangle(Popup):
     @staticmethod
     def open_calculation_average_popup(instance):
         Addition(instance).open()
-        print('Hello')
 
     def calculation(self):
 
@@ -861,12 +860,16 @@ class Shaped(Popup):
 
         if self.weight:
             self.ids.weight_product.text = self.weight
-        # if self.volume_weight:
-        #     self.ids.volume_weight_product.text = self.volume_weight
+        if self.volume_weight:
+            self.ids.volume_weight_product.text = self.volume_weight
 
     @staticmethod
     def return_beck():
         SelectionOptionPopup().open()
+
+    @staticmethod
+    def open_calculation_average_popup(instance):
+        Addition(instance).open()
 
     def calculation(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_1.text:
@@ -894,6 +897,7 @@ class Shaped(Popup):
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+                    self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 else:
@@ -912,6 +916,56 @@ class Shaped(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
+
+    def calculation_weight_product(self):
+        if self.ids.length_value.text and self.ids.width_value.text and \
+                self.ids.thickness_value.text and self.ids.volume_weight_product.text:
+            l, h, s, v = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+                float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
+            volume = (l * h * s) / 1000
+            var = round(v * volume)
+            self.ids.weight_product.text = str(var)
+            VALUES['weight'] = str(var)
+            VALUES['volume'] = volume
+            VALUES['volume_weight'] = self.ids.volume_weight_product.text
+            VALUES['size'] = []
+            VALUES['size'].append(self.ids.length_value.text)
+            VALUES['size'].append(self.ids.width_value.text)
+            VALUES['size'].append(self.ids.thickness_value.text)
+            print(VALUES)
+
+    def check_value(self, var):
+
+        text = None
+
+        def check():
+            if not self.ids.length_value.text:
+                _text = 'Укажите длину изделия!'
+            elif not self.ids.width_value.text:
+                _text = 'Укажите ширину изделия!'
+            elif not self.ids.thickness_value.text:
+                _text = 'Укажите толщину изделия!'
+            else:
+                _text = None
+            return _text
+
+        if var == 1:
+            if not self.ids.weight_product.text:
+                text = 'Укажите вес изделия!'
+            else:
+                text = check()
+
+        elif var == 2:
+            if not self.ids.volume_weight_product.text:
+                text = 'Укажите объёмный вес!'
+            else:
+                text = check()
+
+        if text:
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = text
+            mistake.open()
+
 
 
 class Fason(Popup):
