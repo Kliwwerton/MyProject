@@ -917,6 +917,7 @@ class Shaped(Popup):
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
 
+# TODO dopility this function
     def calculation_weight_product(self):
         if self.ids.length_value.text and self.ids.width_value.text and \
                 self.ids.thickness_value.text and self.ids.volume_weight_product.text:
@@ -940,11 +941,19 @@ class Shaped(Popup):
 
         def check():
             if not self.ids.length_value.text:
-                _text = 'Укажите длину изделия!'
-            elif not self.ids.width_value.text:
-                _text = 'Укажите ширину изделия!'
-            elif not self.ids.thickness_value.text:
-                _text = 'Укажите толщину изделия!'
+                _text = 'Укажите длину(L)!'
+            elif not self.ids.width_value_1.text:
+                _text = 'Укажите ширину(H)!'
+            elif not self.ids.width_value_2.text:
+                _text = 'Укажите ширину(H[sub]1[/sub])!'
+            elif not self.ids.thickness_value_S.text:
+                _text = 'Укажите толщину(S)!'
+            elif not self.ids.thickness_value_S1.text:
+                _text = 'Укажите толщину(S[sub]1[/sub])!'
+            elif not self.ids.thickness_value_S2.text:
+                _text = 'Укажите толщину(S[sub]2[/sub])!'
+            elif not self.ids.thickness_value_S3.text:
+                _text = 'Укажите толщину(S[sub]3[/sub])!'
             else:
                 _text = None
             return _text
@@ -965,7 +974,6 @@ class Shaped(Popup):
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
-
 
 
 class Fason(Popup):
