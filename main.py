@@ -374,6 +374,13 @@ class Third(Screen):
                 self.ids.volume_weight.text = ''
 
 
+class Fourth(Screen):
+    """Fourth Screen. Screen of calculation chemical composition."""
+    def __init__(self):
+        super().__init__()
+        self.name = 'Fourth'
+
+
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
 
@@ -385,18 +392,20 @@ class EngineerApp(App):
         self.First = First()
         self.Second = Second()
         self.Third = Third()
+        self.Fourth = Fourth()
         self.References = References()
         self.Gost_standards = Gost_standards()
         self.Cows_and_bulls = Cows_and_bulls()
 
     def build(self):
-        self.icon = 'Images/Logo.png'
+        self.icon = 'Logo.png'
         self.bind(on_start=self.post_build_init)
         Window.clearcolor = (232 / 255, 184 / 255, 1, 1)
         # container = Container(transition=SwapTransition())
         self.container.add_widget(self.First)
         self.container.add_widget(self.Second)
         self.container.add_widget(self.Third)
+        self.container.add_widget(self.Fourth)
         self.container.add_widget(self.References)
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)
