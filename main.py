@@ -10,7 +10,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition
+from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition, FadeTransition, FallOutTransition
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
@@ -24,6 +24,7 @@ from MyPopups import SelectionOptionPopup, choice_popup, \
 Builder.load_file('First.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
+Builder.load_file('Fourth.kv')
 
 # Popups
 Builder.load_file('MyPopups.kv')
@@ -388,7 +389,7 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
-        self.container = Container(transition=SwapTransition())
+        self.container = Container(transition = FallOutTransition())
         self.First = First()
         self.Second = Second()
         self.Third = Third()

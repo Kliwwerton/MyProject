@@ -60,12 +60,14 @@
             size_hint: 1, 0.25
             on_release:
                 root.manager.current = 'Third'
-                root.manager.transition.direction = 'up'
+#                root.manager.transition.direction = 'up'
 
         Button:
             text: 'Расчёт химического состава.'
             font_size: '20sp'
             size_hint: 1, 0.25
+            on_press:
+                root.manager.current = 'Fourth'
 
         Button:
             id: button_guide

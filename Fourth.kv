@@ -1,0 +1,56 @@
+<Fourth>:
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 5
+
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            size_hint: 1, 0.15
+            padding:10,30,10,0
+
+            Label:
+                text: 'Расчёт химического состава смеси.'
+                halign: 'center'
+                valign: 'middle'
+                font_size: '20sp'
+#                size_hint: 1, 0.2
+                color: 64/255,64/255,64/255,1
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 5
+
+            Label:
+                text: '1й компонент'
+
+            BoxLayout:
+
+                TextInput:
+                    markup: True
+                    hint_text: 'Al[sub]2[/sub]O[sub]3[/sub]'
+                TextInput:
+                    markup: True
+                    hint_text: 'Fe[sub]2[/sub]O[sub]3[/sub]'
+#
+#    ScrollView:
+#        size_hint: 1, None
+##        size: Window.width, Window.height
+#        do_scroll_x: False
+#        do_scroll_y: True
+#        GridLayout:
+#            cols: 1
+#            Button:
+#            Button:
+#            Button:
+#            Button:
+#            Label:
+#                size_hint_y: None
+#                height: self.texture_size[1]
+#                text_size: self.width, None
+#                padding: 10, 10
+#                text:
+#                    'really some amazing text\n' * 100
+#        Label:
+#            title: 'Расчёт химического состава.'
