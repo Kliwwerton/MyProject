@@ -1,3 +1,11 @@
+#: import SwapTransition kivy.uix.screenmanager.SwapTransition
+
+<Mylabel@Label>
+    halign: 'center'
+    valign: 'middle'
+    font_size: '20sp'
+    color: 64/255,64/255,64/255,1
+
 <Fourth>:
 
     BoxLayout:
@@ -19,38 +27,84 @@
                 color: 64/255,64/255,64/255,1
 
         BoxLayout:
-            orientation: 'vertical'
+#            orientation: 'vertical'
             padding: 5
+            size_hint: 1, 0.15
 
-            Label:
-                text: '1й компонент'
+            GridLayout:
+                size_hint: 0.8, 1
+                rows: 2
 
-            BoxLayout:
+                Mylabel:
+                    text: '1'
 
-                TextInput:
-                    markup: True
-                    hint_text: 'Al[sub]2[/sub]O[sub]3[/sub]'
-                TextInput:
-                    markup: True
-                    hint_text: 'Fe[sub]2[/sub]O[sub]3[/sub]'
-#
-#    ScrollView:
-#        size_hint: 1, None
-##        size: Window.width, Window.height
-#        do_scroll_x: False
-#        do_scroll_y: True
-#        GridLayout:
-#            cols: 1
-#            Button:
-#            Button:
-#            Button:
-#            Button:
+                Mylabel:
+                    text: '2'
+
+                Mylabel:
+                    text: '3'
+
+                Mylabel:
+                    text: '4'
+
+                Mylabel:
+                    text: '5'
+
+                Mylabel:
+                    text: '6'
+
+                Mylabel:
+                    text: '7'
+
+                Mylabel:
+                    text: '8'
+
+                Mylabel:
+                    text: '9'
+
+                Mylabel:
+                    text: '10'
+
 #            Label:
-#                size_hint_y: None
-#                height: self.texture_size[1]
-#                text_size: self.width, None
-#                padding: 10, 10
-#                text:
-#                    'really some amazing text\n' * 100
-#        Label:
-#            title: 'Расчёт химического состава.'
+#                markup: True
+#                text: 'Al[sub]2[/sub]O[sub]3[/sub]'
+#                halign: 'center'
+#                valign: 'middle'
+#                font_size: '20sp'
+#                color: 64/255,64/255,64/255,1
+
+#            BoxLayout:
+
+#                TextInput:
+#                    markup: True
+#                    hint_text: 'Al[sub]2[/sub]O[sub]3[/sub]'
+#                TextInput:
+#                    markup: True
+#                    hint_text: 'Fe[sub]2[/sub]O[sub]3[/sub]'
+            Button:
+                text: 'Add new component'
+                size_hint: 0.2, 0.8
+
+        FloatLayout:
+            size_hint: 0.8, 0.13
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            Button:
+                size_hint: 0.25, 0.6
+                text: 'НАЗАД'
+                font_size: '10sp'
+                pos_hint: {'center_x': 0.25, 'center_y': 0.4}
+                background_color: 1,0,0,1
+                on_release:
+                    root.manager.current = 'First'
+#                    root.manager.transition = SwapTransition()
+
+            Button:
+                id: button_exit
+                text: 'ВЫХОД'
+                font_size: '10sp'
+                background_color: 1,0,0,1
+                size_hint: 0.25, 0.6
+                pos_hint: {'center_x': 0.75, 'center_y': 0.4}
+                on_release:
+                    root.close_app()

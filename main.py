@@ -381,6 +381,10 @@ class Fourth(Screen):
         super().__init__()
         self.name = 'Fourth'
 
+    @staticmethod
+    def close_app():
+        ClosePopup().open()
+
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
