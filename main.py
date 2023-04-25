@@ -2,7 +2,7 @@
 from kivy.config import Config
 
 Config.set('graphics', 'width', 420)
-Config.set('graphics', 'height', 1000)
+Config.set('graphics', 'height', 800)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 # Config.set('kivy', 'window_icon', 'Images/Logo.png')
 
@@ -11,6 +11,8 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition, FadeTransition, FallOutTransition
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
@@ -49,7 +51,8 @@ def open_OptionPopup():
     if not VALUES:
         SelectionOptionPopup().open()
 
-    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume'] and VALUES['square'] and VALUES['size']:
+    elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and \
+            VALUES['volume'] and VALUES['square'] and VALUES['size']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      weight=VALUES['weight'],
@@ -110,10 +113,10 @@ def open_OptionPopup():
                      square=VALUES['square']
                      )
 
-    elif VALUES['gost'] and VALUES['number']:
-        choice_popup(gost=VALUES['gost'],
-                     number=VALUES['number'],
-                     )
+    # elif VALUES['gost'] and VALUES['number']:
+    #     choice_popup(gost=VALUES['gost'],
+    #                  number=VALUES['number'],
+    #                  )
 
     else:
         SelectionOptionPopup().open()
@@ -122,6 +125,8 @@ def open_OptionPopup():
 def return_mistake(value):
     popup = MistakePopup()
     popup.ids.text_mistake.text = value
+    if value == 'Превышено количество компонентов!':
+        popup.ids.text_label.text = ''
     popup.open()
 
 
@@ -375,6 +380,10 @@ class Third(Screen):
                 self.ids.volume_weight.text = ''
 
 
+class MyBox(BoxLayout):
+    pass
+
+
 class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
     def __init__(self):
@@ -385,6 +394,25 @@ class Fourth(Screen):
     def close_app():
         ClosePopup().open()
 
+    def add_new_component(self):
+        if not self.ids.first_box.name:
+            self.ids.first_box.add_widget(MyBox())
+            self.ids.first_box.name = 'first'
+        elif not self.ids.second_box.name:
+            self.ids.second_box.add_widget(MyBox())
+            self.ids.second_box.name = 'second'
+        elif not self.ids.third_box.name:
+            self.ids.third_box.add_widget(MyBox())
+            self.ids.third_box.name = 'third'
+        elif not self.ids.fourth_box.name:
+            self.ids.fourth_box.add_widget(MyBox())
+            self.ids.fourth_box.name = 'fourth'
+        elif not self.ids.fifth_box.name:
+            self.ids.fifth_box.add_widget(MyBox())
+            self.ids.fifth_box.name = 'fifth'
+        else:
+            return_mistake('Превышено количество компонентов!')
+
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
@@ -393,7 +421,7 @@ class EngineerApp(App):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Images/Logo.png'
-        self.container = Container(transition = FallOutTransition())
+        self.container = Container(transition=FallOutTransition())
         self.First = First()
         self.Second = Second()
         self.Third = Third()

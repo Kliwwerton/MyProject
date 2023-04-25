@@ -1,5 +1,13 @@
 #:import Factory kivy.factory.Factory
 
+<MyLabel@Label>
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+    font_size: '15sp'
+    color: [255/255, 0, 0, 1]
+
+
 <SelectionOptionPopup>
     title: 'Расчёт параметров изделия'
     size_hint: 0.8, 0.32
@@ -118,12 +126,8 @@
         spacing: 5
         orientation: 'vertical'
 
-        Label:
+        MyLabel:
             text: 'При подтверждении будут удалены \n все введённые ранее данные!!!'
-            halign: 'center'
-            valign: 'middle'
-            font_size: '15sp'
-            color: [255/255, 0, 0, 1]
 
         BoxLayout:
             spacing: 5
@@ -151,12 +155,8 @@
         spacing: 5
         orientation: 'vertical'
 
-        Label:
+        MyLabel:
             text: 'Хотите закрыть приложение?'
-            halign: 'center'
-            valign: 'middle'
-            font_size: '15sp'
-            color: [255/255, 0, 0, 1]
 
         BoxLayout:
             spacing: 5
@@ -184,24 +184,15 @@
         spacing: 2
         orientation: 'vertical'
 
-        Label:
+        MyLabel:
+            id: text_label
             size_hint: 1, 0.8
             text: 'Не хватает данных!'
-            text_size: self.size
-            halign: 'center'
-            valign: 'middle'
-            font_size: '15sp'
-            color: [255/255, 0, 0, 1]
 
-        Label:
+        MyLabel:
             id: text_mistake
             markup: True
             text: ''
-            text_size: self.size
-            halign: 'center'
-            valign: 'middle'
-            font_size: '15sp'
-            color: [255/255, 0, 0, 1]
 
         Button:
             text: 'OK'

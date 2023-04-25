@@ -1,10 +1,53 @@
 #: import SwapTransition kivy.uix.screenmanager.SwapTransition
 
-<Mylabel@Label>
+<MyChLabel@Label>
     halign: 'center'
     valign: 'middle'
     font_size: '20sp'
     color: 64/255,64/255,64/255,1
+
+<MyBox>:
+    padding: 5
+
+    GridLayout:
+        size_hint: 0.8, 1
+        rows: 2
+
+        MyChLabel:
+            text: '1'
+
+        MyChLabel:
+            text: '2'
+
+        MyChLabel:
+            text: '3'
+
+        MyChLabel:
+            text: '4'
+
+        MyChLabel:
+            text: '5'
+
+        MyChLabel:
+            text: '6'
+
+        MyChLabel:
+            text: '7'
+
+        MyChLabel:
+            text: '8'
+
+        MyChLabel:
+            text: '9'
+
+        MyChLabel:
+            text: '10'
+
+    Button:
+        text: 'Add'
+        size_hint: 0.2, 0.8
+        pos_hint: {'center_y': 0.5}
+
 
 <Fourth>:
 
@@ -16,7 +59,7 @@
             anchor_x: 'center'
             anchor_y: 'top'
             size_hint: 1, 0.15
-            padding:10,30,10,0
+            padding: 10,10,10,10
 
             Label:
                 text: 'Расчёт химического состава смеси.'
@@ -27,66 +70,43 @@
                 color: 64/255,64/255,64/255,1
 
         BoxLayout:
-#            orientation: 'vertical'
-            padding: 5
-            size_hint: 1, 0.15
+            size_hint: 1, 0.2
 
-            GridLayout:
-                size_hint: 0.8, 1
-                rows: 2
-
-                Mylabel:
-                    text: '1'
-
-                Mylabel:
-                    text: '2'
-
-                Mylabel:
-                    text: '3'
-
-                Mylabel:
-                    text: '4'
-
-                Mylabel:
-                    text: '5'
-
-                Mylabel:
-                    text: '6'
-
-                Mylabel:
-                    text: '7'
-
-                Mylabel:
-                    text: '8'
-
-                Mylabel:
-                    text: '9'
-
-                Mylabel:
-                    text: '10'
-
-#            Label:
-#                markup: True
-#                text: 'Al[sub]2[/sub]O[sub]3[/sub]'
-#                halign: 'center'
-#                valign: 'middle'
-#                font_size: '20sp'
-#                color: 64/255,64/255,64/255,1
-
-#            BoxLayout:
-
-#                TextInput:
-#                    markup: True
-#                    hint_text: 'Al[sub]2[/sub]O[sub]3[/sub]'
-#                TextInput:
-#                    markup: True
-#                    hint_text: 'Fe[sub]2[/sub]O[sub]3[/sub]'
             Button:
-                text: 'Add new component'
-                size_hint: 0.2, 0.8
+                text: 'Добавить компонент'
+                size_hint: 1, 0.5
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_press:
+                    root.add_new_component()
+
+        BoxLayout:
+            id: first_box
+            name: ''
+            size_hint: 1, 0.18
+
+        BoxLayout:
+            id: second_box
+            name: ''
+            size_hint: 1, 0.18
+
+        BoxLayout:
+            id: third_box
+            name: ''
+            size_hint: 1, 0.18
+
+        BoxLayout:
+            id: fourth_box
+            name: ''
+            size_hint: 1, 0.18
+
+        BoxLayout:
+            id: fifth_box
+            name: ''
+            size_hint: 1, 0.18
+
 
         FloatLayout:
-            size_hint: 0.8, 0.13
+            size_hint: 0.8, 0.10
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:
