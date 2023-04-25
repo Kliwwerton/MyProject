@@ -105,8 +105,55 @@
             size_hint: 1, 0.18
 
 
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'bottom'
+            size_hint: 1, 0.13
+
+            Button:
+                text: 'РАССЧИТАТЬ'
+                font_size: '20sp'
+                size_hint: 0.5, 1
+#                background_normal: ''
+#                background_color: 0.4,0,1,1
+#                on_release:
+#                    root.calculate()
+#
+        BoxLayout:
+            size_hint: 1, 0.25
+            orientation: 'vertical'
+
+            Label:
+                id: label_P_pressing_text
+                text: 'Результат расчёта'
+                markup: True
+                size_hint: 1, 0.8
+                color: 1,0,0,1
+                font_size: '20sp'
+
+            Label:
+                id: label_P_pressing_value
+                markup: True
+                text: 'да'
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                font_size: '20sp'
+                color: 64/255,64/255,64/255,1
+
+        Button:
+            size_hint: 0.6, 0.12
+            text: 'СБРОС'
+            font_size: '20sp'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+#            background_color: 12/255,6/255,120/255,1
+#            background_normal: ''
+#            on_press:
+#                root.open_ressetPopup()
+
+
         FloatLayout:
-            size_hint: 0.8, 0.10
+            size_hint: 0.8, 0.15
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:
