@@ -146,8 +146,6 @@
             text: 'СБРОС'
             font_size: '20sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-#            background_color: 12/255,6/255,120/255,1
-#            background_normal: ''
             on_press:
                 root.open_ressetPopup()
 
@@ -174,4 +172,4 @@
                 size_hint: 0.25, 0.6
                 pos_hint: {'center_x': 0.75, 'center_y': 0.4}
                 on_release:
-                    root.close_app()
+                    app.close_app()

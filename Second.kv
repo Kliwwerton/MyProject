@@ -253,7 +253,7 @@
                 background_color: 1,0,0,1
                 on_release:
                     root.manager.current = 'First'
-                    root.manager.transition.direction = 'right'
+#                    root.manager.transition.direction = 'right'
 
             Button:
                 id: button_exit
@@ -263,4 +263,4 @@
                 size_hint: 0.25, 0.6
                 pos_hint: {'center_x': 0.75, 'center_y': 0.4}
                 on_release:
-                    root.close_app()
+                    app.close_app()

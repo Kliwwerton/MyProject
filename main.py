@@ -163,10 +163,6 @@ class First(Screen):
     def print():
         print(VALUES)
 
-    @staticmethod
-    def close_app():
-        ClosePopup().open()
-
 
 class Second(Screen):
     """Second Screen for the app"""
@@ -228,10 +224,6 @@ class Second(Screen):
     @staticmethod
     def open_SelectionOptionPopup():
         open_OptionPopup()
-
-    @staticmethod
-    def close_app():
-        ClosePopup().open()
 
     def change_text(self):
         """Changing text Textinput after calculate"""
@@ -338,10 +330,6 @@ class Third(Screen):
     def open_SelectionOptionPopup():
         open_OptionPopup()
 
-    @staticmethod
-    def close_app():
-        ClosePopup().open()
-
     def change_text(self):
         if not VALUES:
             pass
@@ -393,10 +381,6 @@ class Fourth(Screen):
         self.component4 = MyBox()
         self.component5 = MyBox()
 
-    @staticmethod
-    def close_app():
-        ClosePopup().open()
-
     def open_ressetPopup(self):
         RessetPopup(self).open()
 
@@ -429,7 +413,7 @@ class EngineerApp(App):
     def __init__(self):
         super().__init__()
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
-        self.icon = 'Images/Logo.png'
+        self.icon = 'Logo.png'
         self.container = Container(transition=FallOutTransition())
         self.First = First()
         self.Second = Second()
@@ -452,6 +436,10 @@ class EngineerApp(App):
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)
         return self.container
+
+    @staticmethod
+    def close_app():
+        ClosePopup().open()
 
     def post_build_init(self, ev):
 
