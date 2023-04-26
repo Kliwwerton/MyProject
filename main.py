@@ -222,9 +222,8 @@ class Second(Screen):
         VALUES.clear()
         self.sound_reset.play()
 
-    @staticmethod
-    def open_ressetPopup():
-        RessetPopup().open()
+    def open_ressetPopup(self):
+        RessetPopup(self).open()
 
     @staticmethod
     def open_SelectionOptionPopup():
@@ -308,9 +307,8 @@ class Third(Screen):
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
                 self.ids.label_P_specific_pressure_value.text = str(data) + ' ' + 'кг/см[sup]2[/sup]'
 
-    @staticmethod
-    def open_ressetPopup():
-        RessetPopup().open()
+    def open_ressetPopup(self):
+        RessetPopup(self).open()
 
     def reset(self):
         """Reset all parameters and labels text"""
@@ -394,6 +392,9 @@ class Fourth(Screen):
     def close_app():
         ClosePopup().open()
 
+    def open_ressetPopup(self):
+        RessetPopup(self).open()
+
     def add_new_component(self):
         if not self.ids.first_box.name:
             self.ids.first_box.add_widget(MyBox())
@@ -412,6 +413,9 @@ class Fourth(Screen):
             self.ids.fifth_box.name = 'fifth'
         else:
             return_mistake('Превышено количество компонентов!')
+
+    def reset(self):
+        pass
 
 
 class EngineerApp(App):

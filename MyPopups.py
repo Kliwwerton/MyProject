@@ -161,7 +161,12 @@ class WrongPopup(Popup):
 
 
 class RessetPopup(Popup):
-    pass
+    def __init__(self, instance):
+        super().__init__()
+        self.instance = instance
+
+    def reset_all(self):
+        self.instance.reset()
 
 
 class ClosePopup(Popup):
