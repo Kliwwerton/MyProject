@@ -387,6 +387,11 @@ class Fourth(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'Fourth'
+        self.component1 = MyBox()
+        self.component2 = MyBox()
+        self.component3 = MyBox()
+        self.component4 = MyBox()
+        self.component5 = MyBox()
 
     @staticmethod
     def close_app():
@@ -396,26 +401,26 @@ class Fourth(Screen):
         RessetPopup(self).open()
 
     def add_new_component(self):
-        if not self.ids.first_box.name:
-            self.ids.first_box.add_widget(MyBox())
-            self.ids.first_box.name = 'first'
-        elif not self.ids.second_box.name:
-            self.ids.second_box.add_widget(MyBox())
-            self.ids.second_box.name = 'second'
-        elif not self.ids.third_box.name:
-            self.ids.third_box.add_widget(MyBox())
-            self.ids.third_box.name = 'third'
-        elif not self.ids.fourth_box.name:
-            self.ids.fourth_box.add_widget(MyBox())
-            self.ids.fourth_box.name = 'fourth'
-        elif not self.ids.fifth_box.name:
-            self.ids.fifth_box.add_widget(MyBox())
-            self.ids.fifth_box.name = 'fifth'
+        if not self.ids.first_box.children:
+            self.ids.first_box.add_widget(self.component1)
+            print(self.ids.first_box)
+        elif not self.ids.second_box.children:
+            self.ids.second_box.add_widget(self.component2)
+        elif not self.ids.third_box.children:
+            self.ids.third_box.add_widget(self.component3)
+        elif not self.ids.fourth_box.children:
+            self.ids.fourth_box.add_widget(self.component4)
+        elif not self.ids.fifth_box.children:
+            self.ids.fifth_box.add_widget(self.component5)
         else:
             return_mistake('Превышено количество компонентов!')
 
     def reset(self):
-        pass
+        self.ids.first_box.remove_widget(self.component1)
+        self.ids.second_box.remove_widget(self.component2)
+        self.ids.third_box.remove_widget(self.component3)
+        self.ids.fourth_box.remove_widget(self.component4)
+        self.ids.fifth_box.remove_widget(self.component5)
 
 
 class EngineerApp(App):
