@@ -208,5 +208,19 @@ SHAPED = {'Image': 'Images/Product_shape/shaped.png',
 
 FASON = {'Произвольное': ['Не определён.']}
 
+CHEMICAL_ELEMENTS = {'ПГНУ-2':{'Al[sub]2[/sub]O[sub]3[/sub]': '32',
+                               'Fe[sub]2[/sub]O[sub]3[/sub]': '4.0',
+                               'SiO[sub]2[/sub]': '68',
+                               'ппп': '2.1'},
+                     'ШАРО-40':{'Al[sub]2[/sub]O[sub]3[/sub]': '40',
+                                'Fe[sub]2[/sub]O[sub]3[/sub]': '2.5'},
+                     'ШМЖБ-2':{'Al[sub]2[/sub]O[sub]3[/sub]': '65',
+                               'Fe[sub]2[/sub]O[sub]3[/sub]': '1.8'},
+                     'ССП-1':{'Al[sub]2[/sub]O[sub]3[/sub]': '80',
+                              'Fe[sub]2[/sub]O[sub]3[/sub]': '1.5'},
+                     'ССП-9':{'Al[sub]2[/sub]O[sub]3[/sub]': '65',
+                              'Fe[sub]2[/sub]O[sub]3[/sub]': '1.8'}
+                     }
+
 
 VALUES = {}

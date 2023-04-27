@@ -1,0 +1,102 @@
+<MyChLabel@Label>
+    markup: True
+    halign: 'center'
+    valign: 'middle'
+    font_size: '20sp'
+    color: 1, 1, 1, 1
+
+<MyTextInput@TextInput>
+    markup: True
+    hint_text: '%'
+    multiline: False
+    font_family: 'Roboto'
+    font_size: '15sp'
+    foreground_color: 64/255,64/255,64/255,1
+    size_hint: 1, 1
+
+    halign: 'center'
+    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    input_tipe: 'number'
+    input_filter: 'float'
+
+
+<Box>:
+    orientation: 'vertical'
+
+    MyChLabel:
+        id: name_element
+
+    MyTextInput:
+        id: value_element
+
+
+<Element>:
+    size_hint: 0.8, 0.3
+    title: 'Добавление нового компонента'
+
+    BoxLayout:
+        padding: 5
+        spacing: 5
+        orientation: 'vertical'
+
+        Spinner:
+            id: spinner_element
+            size_hint: 0.8, 0.6
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            font_size: '20sp'
+            text: 'Выберите элемент'
+            values: ['ПГНУ-2', 'ШАРО-40', 'ШМЖБ-2', 'ССП-1', 'ССП-9']
+            on_text:
+                root.check_value()
+                root.build()
+
+        BoxLayout:
+            spacing: 2
+
+            GridLayout:
+                id: grid_box
+                size_hint: 0.8, 1
+                rows: 1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            Button:
+                text: '+'
+                size_hint: 0.2, 0.8
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release:
+                    root.add_element()
+
+#            MyChLabel:
+#                text: '1'
+#
+#            MyChLabel:
+#                text: '2'
+#
+#            MyChLabel:
+#                text: '3'
+#
+#            MyChLabel:
+#                text: '4'
+#
+#            MyChLabel:
+#                text: '5'
+#
+#            MyTextInput:
+#                id: first_element
+#
+#            MyTextInput:
+#                id: second_element
+#
+#            MyTextInput:
+#                id: third_element
+#
+#            MyTextInput:
+#                id: fourth_element
+#
+#            MyTextInput:
+#                id: fifth_element
+
+        Button:
+            text: 'Add'
+            size_hint: 0.2, 0.5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}

@@ -19,6 +19,8 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
+from Chemical_elements import Element
+
 
 # from kivymd.theming import ThemeManager
 
@@ -38,6 +40,9 @@ Builder.load_file('Rectangle.kv')
 Builder.load_file('Ribbed.kv')
 Builder.load_file('Shaped.kv')
 Builder.load_file('Fason.kv')
+
+# Chemical_element
+Builder.load_file('Chemical_element.kv')
 
 # Another buttons
 Builder.load_file('References.kv')
@@ -386,8 +391,11 @@ class Fourth(Screen):
 
     def add_new_component(self):
         if not self.ids.first_box.children:
-            self.ids.first_box.add_widget(self.component1)
-            print(self.ids.first_box)
+            element = Element()
+            element.open()
+
+            # self.ids.first_box.add_widget(self.component1)
+            # print(self.ids.first_box)
         elif not self.ids.second_box.children:
             self.ids.second_box.add_widget(self.component2)
         elif not self.ids.third_box.children:
@@ -436,6 +444,10 @@ class EngineerApp(App):
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)
         return self.container
+
+    # @staticmethod
+    # def change_text(instance):
+    #     instance.change_text()
 
     @staticmethod
     def close_app():
