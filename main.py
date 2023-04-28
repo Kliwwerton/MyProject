@@ -19,7 +19,7 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import EddComponent
+from Chemical_elements import AddComponent
 
 
 # from kivymd.theming import ThemeManager
@@ -391,7 +391,7 @@ class Fourth(Screen):
 
     def add_new_component(self):
         if not self.ids.first_box.children:
-            element = EddComponent()
+            element = AddComponent()
             element.open()
 
         # self.ids.first_box.add_widget(self.component1)

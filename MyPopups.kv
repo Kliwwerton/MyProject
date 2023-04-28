@@ -8,6 +8,10 @@
     color: [255/255, 0, 0, 1]
 
 
+<SpinnerOption>
+    markup: True
+
+
 <SelectionOptionPopup>
     title: 'Расчёт параметров изделия'
     size_hint: 0.8, 0.32
@@ -264,6 +268,7 @@
 
 <NewElement>:
     title: 'Новый элемент'
+    size_hint: 0.8, 0.3
 
     BoxLayout:
         padding: 5
@@ -281,3 +286,12 @@
             on_text:
 #                root.check_value()
                 root.build()
+
+        MyTextInput:
+            id: element_value
+            size_hint: 0.3, 0.6
+
+        Button:
+            text: 'Добавить элемент'
+            on_release:
+                root.add_element()

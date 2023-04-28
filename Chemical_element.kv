@@ -32,7 +32,7 @@
         id: value_element
 
 
-<EddComponent>:
+<AddComponent>:
     size_hint: 0.8, 0.3
     title: 'Добавление нового компонента'
 
@@ -59,6 +59,7 @@
                 id: grid_box
                 size_hint: 0.8, 1
                 rows: 1
+                cols: 4
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         Button:
@@ -72,3 +73,5 @@
             text: 'Добавить компонент в шихту'
             size_hint: 0.2, 0.5
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_release:
+                root.add_component()

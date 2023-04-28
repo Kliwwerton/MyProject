@@ -30,7 +30,7 @@ class Composition(MixtureComponent):
         return f'{self.name}, {self.composition}'
 
 
-class EddComponent(Popup):
+class AddComponent(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
     def __init__(self, **kwargs):
@@ -62,8 +62,15 @@ class EddComponent(Popup):
         if len(self.chemical_elements) < 4:
             element = NewElement()
             element.open()
+
         elif len(self.chemical_elements) < 8:
+            element = NewElement()
+            element.open()
+
             self.size_hint = [0.8, 0.45]
+
+    def add_component(self):
+        pass
 
 
 class Box(BoxLayout):

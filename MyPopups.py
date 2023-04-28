@@ -182,6 +182,9 @@ class NewElement(Popup):
     def build(self):
         pass
 
+    def add_element(self):
+        pass
+
 
 class Addition(Popup):
 
