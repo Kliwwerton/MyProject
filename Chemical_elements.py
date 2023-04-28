@@ -1,7 +1,6 @@
 from kivy.uix.popup import Popup
-from kivy.uix.boxlayout import BoxLayout
 from variables import CHEMICAL_ELEMENTS
-from MyPopups import NewElement
+from MyPopups import NewElement, Box, MistakePopup
 
 
 class MixtureComponent:
@@ -36,7 +35,8 @@ class AddComponent(Popup):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
-        self.chemical_elements = []
+        self.chemical_elements = {}
+        self.chemical_elements_box = []
 
     def build(self):
         """Creates Chemical element"""
@@ -49,32 +49,36 @@ class AddComponent(Popup):
                 box.ids.name_element.text = i
                 box.ids.value_element.text = j
                 self.ids.grid_box.add_widget(box)
-                self.chemical_elements.append(box)
+                self.chemical_elements_box.append(box)
+                self.chemical_elements[i] = j
 
     def check_value(self):
         """Removes chemical elements that inside the Box class"""
 
-        if self.chemical_elements:
-            for i in self.chemical_elements:
+        if self.chemical_elements_box:
+            for i in self.chemical_elements_box:
                 self.ids.grid_box.remove_widget(i)
+            self.chemical_elements = {}
 
     def add_element(self):
-        if len(self.chemical_elements) < 4:
-            element = NewElement()
+        if len(self.chemical_elements) < 5:
+            element = NewElement(self)
             element.open()
+            print('Hello')
 
         elif len(self.chemical_elements) < 8:
-            element = NewElement()
+            element = NewElement(self)
             element.open()
 
             self.size_hint = [0.8, 0.45]
 
+        else:
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Превышено количество элементов!'
+            mistake.open()
+
     def add_component(self):
         pass
-
-
-class Box(BoxLayout):
-    pass
 
 
 if __name__ == '__main__':

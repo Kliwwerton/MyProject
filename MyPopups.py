@@ -1,4 +1,5 @@
 from kivy.uix.popup import Popup
+from kivy.uix.boxlayout import BoxLayout
 from variables import GOST_STANDARDS, FORMS, PARAMS
 from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON, \
     TRAPEZOID_1, RIBBED, RIBBED_1, RIBBED_2, RIBBED_3, END_WEDGE, END_WEDGE_2, SHAPED
@@ -177,13 +178,69 @@ class MistakePopup(Popup):
     pass
 
 
+class Box(BoxLayout):
+    pass
+
+
 class NewElement(Popup):
     """Adda new chemical element to the selected component"""
+
+    def __init__(self, instance):
+        super().__init__()
+        self.instance = instance
     def build(self):
         pass
 
     def add_element(self):
-        pass
+        if self.ids.spinner_element.text == 'Выберите элемент':
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Не указано название элемента!'
+            mistake.open()
+
+        elif self.ids.spinner_element.text and self.ids.element_value.text:
+            if self.ids.spinner_element.text in self.instance.chemical_elements:
+                mistake = MistakePopup()
+                mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
+                mistake.open()
+            else:
+                box = Box()
+                box.ids.name_element.text = self.ids.spinner_element.text
+                box.ids.value_element.text = str(self.ids.element_value.text)
+                self.instance.ids.grid_box.add_widget(box)
+                self.instance.chemical_elements_box.append(box)
+                self.instance.chemical_elements[self.ids.spinner_element.text] = str(self.ids.element_value.text)
+
+                if len(self.instance.chemical_elements) > 4:
+                    self.instance.ids.boxid.size_hint = [0.8, 1.2]
+                    # self.instance.ids.grid_box.size_hint = [1, 1.5]
+                    self.instance.size_hint = [0.8, 0.45]
+
+                else:
+                    self.instance.size_hint = [0.8, 0.3]
+                self.dismiss()
+
+        elif self.ids.spinner_element.text:
+            if self.ids.spinner_element.text in self.instance.chemical_elements:
+                mistake = MistakePopup()
+                mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
+                mistake.open()
+            else:
+                box = Box()
+                box.ids.name_element.text = self.ids.spinner_element.text
+                box.ids.value_element.text = ''
+                self.instance.ids.grid_box.add_widget(box)
+                self.instance.chemical_elements_box.append(box)
+                self.instance.chemical_elements[self.ids.spinner_element.text] = str(self.ids.element_value.text)
+                if len(self.instance.chemical_elements) > 4:
+                    self.instance.size_hint = [0.8, 0.45]
+                else:
+                    self.instance.size_hint = [0.8, 0.3]
+                self.dismiss()
+
+        else:
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Не указано название элемента!'
+            mistake.open()
 
 
 class Addition(Popup):
