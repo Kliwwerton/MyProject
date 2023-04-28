@@ -29,7 +29,7 @@ class Composition(ChemicalElement):
         return f'{self.name}, {self.composition}'
 
 
-class Element(Popup):
+class EddElement(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
     def __init__(self, **kwargs):
@@ -38,6 +38,7 @@ class Element(Popup):
         self.chemical_elements = []
 
     def build(self):
+        """Creates Chemical element"""
         if self.ids.spinner_element.text in CHEMICAL_ELEMENTS:
             self.element.name = self.ids.spinner_element.text
             self.element.chemical_composition = CHEMICAL_ELEMENTS[self.element.name]
@@ -50,6 +51,8 @@ class Element(Popup):
                 self.chemical_elements.append(box)
 
     def check_value(self):
+        """Removes chemical elements that inside the Box class"""
+
         if self.chemical_elements:
             for i in self.chemical_elements:
                 self.ids.grid_box.remove_widget(i)
@@ -58,14 +61,16 @@ class Element(Popup):
         if len(self.chemical_elements) < 5:
             pass
 
+
 class Box(BoxLayout):
     pass
 
 
 if __name__ == '__main__':
+    """Test"""
 
-    first = ChemicalElement(name='ПГНУ-2', chemical_composition={'Al':32, 'Fe':2.6})
-    second = ChemicalElement(name='АРО-40', chemical_composition={'Al':40, 'Fe':1.8})
+    first = ChemicalElement(name='ПГНУ-2', chemical_composition={'Al': 32, 'Fe': 2.6})
+    second = ChemicalElement(name='АРО-40', chemical_composition={'Al': 40, 'Fe': 1.8})
 
     composition = Composition(first, second)
 

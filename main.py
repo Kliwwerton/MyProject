@@ -19,7 +19,7 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import Element
+from Chemical_elements import EddElement
 
 
 # from kivymd.theming import ThemeManager
@@ -371,8 +371,8 @@ class Third(Screen):
                 self.ids.volume_weight.text = ''
 
 
-class MyBox(BoxLayout):
-    pass
+# class MyBox(BoxLayout):
+#     pass
 
 
 class Fourth(Screen):
@@ -380,30 +380,30 @@ class Fourth(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'Fourth'
-        self.component1 = MyBox()
-        self.component2 = MyBox()
-        self.component3 = MyBox()
-        self.component4 = MyBox()
-        self.component5 = MyBox()
+        # self.component1 = MyBox()
+        # self.component2 = MyBox()
+        # self.component3 = MyBox()
+        # self.component4 = MyBox()
+        # self.component5 = MyBox()
 
     def open_ressetPopup(self):
         RessetPopup(self).open()
 
     def add_new_component(self):
         if not self.ids.first_box.children:
-            element = Element()
+            element = EddElement()
             element.open()
 
-            # self.ids.first_box.add_widget(self.component1)
-            # print(self.ids.first_box)
-        elif not self.ids.second_box.children:
-            self.ids.second_box.add_widget(self.component2)
-        elif not self.ids.third_box.children:
-            self.ids.third_box.add_widget(self.component3)
-        elif not self.ids.fourth_box.children:
-            self.ids.fourth_box.add_widget(self.component4)
-        elif not self.ids.fifth_box.children:
-            self.ids.fifth_box.add_widget(self.component5)
+        # self.ids.first_box.add_widget(self.component1)
+        # print(self.ids.first_box)
+        # elif not self.ids.second_box.children:
+        #     self.ids.second_box.add_widget(self.component2)
+        # elif not self.ids.third_box.children:
+        #     self.ids.third_box.add_widget(self.component3)
+        # elif not self.ids.fourth_box.children:
+        #     self.ids.fourth_box.add_widget(self.component4)
+        # elif not self.ids.fifth_box.children:
+        #     self.ids.fifth_box.add_widget(self.component5)
         else:
             return_mistake('Превышено количество компонентов!')
 

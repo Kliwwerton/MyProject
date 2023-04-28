@@ -1,9 +1,11 @@
+
 <MyChLabel@Label>
     markup: True
     halign: 'center'
     valign: 'middle'
     font_size: '20sp'
     color: 1, 1, 1, 1
+
 
 <MyTextInput@TextInput>
     markup: True
@@ -30,7 +32,7 @@
         id: value_element
 
 
-<Element>:
+<EddElement>:
     size_hint: 0.8, 0.3
     title: 'Добавление нового компонента'
 
@@ -44,7 +46,7 @@
             size_hint: 0.8, 0.6
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             font_size: '20sp'
-            text: 'Выберите элемент'
+            text: 'Выберите компонент'
             values: ['ПГНУ-2', 'ШАРО-40', 'ШМЖБ-2', 'ССП-1', 'ССП-9']
             on_text:
                 root.check_value()
@@ -59,44 +61,14 @@
                 rows: 1
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-            Button:
-                text: '+'
-                size_hint: 0.2, 0.8
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                on_release:
-                    root.add_element()
-
-#            MyChLabel:
-#                text: '1'
-#
-#            MyChLabel:
-#                text: '2'
-#
-#            MyChLabel:
-#                text: '3'
-#
-#            MyChLabel:
-#                text: '4'
-#
-#            MyChLabel:
-#                text: '5'
-#
-#            MyTextInput:
-#                id: first_element
-#
-#            MyTextInput:
-#                id: second_element
-#
-#            MyTextInput:
-#                id: third_element
-#
-#            MyTextInput:
-#                id: fourth_element
-#
-#            MyTextInput:
-#                id: fifth_element
+        Button:
+            text: '+'
+            size_hint: 0.2, 0.8
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_release:
+                root.add_element()
 
         Button:
-            text: 'Add'
+            text: 'Добавить компонент в шихту'
             size_hint: 0.2, 0.5
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
