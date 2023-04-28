@@ -1,9 +1,10 @@
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from variables import CHEMICAL_ELEMENTS
+from MyPopups import NewElement
 
 
-class ChemicalElement:
+class MixtureComponent:
     """Class Chemical_element. Creating chemical element, which has some attributes"""
 
     def __init__(self, name='', chemical_composition=None):
@@ -13,7 +14,7 @@ class ChemicalElement:
         self.chemical_composition = chemical_composition
 
 
-class Composition(ChemicalElement):
+class Composition(MixtureComponent):
     """Composition of Chemical_elements"""
 
     def __init__(self, *args):
@@ -21,7 +22,7 @@ class Composition(ChemicalElement):
         self.composition = []
         if args:
             for i in args:
-                if isinstance(i, ChemicalElement):
+                if isinstance(i, MixtureComponent):
                     self.composition.append(i)
                     self.name += i.name + ':'
 
@@ -29,21 +30,21 @@ class Composition(ChemicalElement):
         return f'{self.name}, {self.composition}'
 
 
-class EddElement(Popup):
+class EddComponent(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.element = ChemicalElement()
+        self.component = MixtureComponent()
         self.chemical_elements = []
 
     def build(self):
         """Creates Chemical element"""
-        if self.ids.spinner_element.text in CHEMICAL_ELEMENTS:
-            self.element.name = self.ids.spinner_element.text
-            self.element.chemical_composition = CHEMICAL_ELEMENTS[self.element.name]
+        if self.ids.spinner_component.text in CHEMICAL_ELEMENTS:
+            self.component.name = self.ids.spinner_component.text
+            self.component.chemical_composition = CHEMICAL_ELEMENTS[self.component.name]
 
-            for i, j in self.element.chemical_composition.items():
+            for i, j in self.component.chemical_composition.items():
                 box = Box()
                 box.ids.name_element.text = i
                 box.ids.value_element.text = j
@@ -58,8 +59,11 @@ class EddElement(Popup):
                 self.ids.grid_box.remove_widget(i)
 
     def add_element(self):
-        if len(self.chemical_elements) < 5:
-            pass
+        if len(self.chemical_elements) < 4:
+            element = NewElement()
+            element.open()
+        elif len(self.chemical_elements) < 8:
+            self.size_hint = [0.8, 0.45]
 
 
 class Box(BoxLayout):
@@ -69,8 +73,8 @@ class Box(BoxLayout):
 if __name__ == '__main__':
     """Test"""
 
-    first = ChemicalElement(name='ПГНУ-2', chemical_composition={'Al': 32, 'Fe': 2.6})
-    second = ChemicalElement(name='АРО-40', chemical_composition={'Al': 40, 'Fe': 1.8})
+    first = MixtureComponent(name='ПГНУ-2', chemical_composition={'Al': 32, 'Fe': 2.6})
+    second = MixtureComponent(name='АРО-40', chemical_composition={'Al': 40, 'Fe': 1.8})
 
     composition = Composition(first, second)
 

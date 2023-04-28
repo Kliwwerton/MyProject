@@ -260,3 +260,24 @@
             on_press:
                 root.dismiss()
                 root.write_average_value()
+
+
+<NewElement>:
+    title: 'Новый элемент'
+
+    BoxLayout:
+        padding: 5
+        spacing: 5
+        orientation: 'vertical'
+
+        Spinner:
+            id: spinner_element
+            markup: True
+            size_hint: 0.8, 0.6
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            font_size: '20sp'
+            text: 'Выберите элемент'
+            values: ['Al[sub]2[/sub]O[sub]3[/sub]', 'Fe[sub]2[/sub]O[sub]3[/sub]', 'SiO[sub]2[/sub]']
+            on_text:
+#                root.check_value()
+                root.build()

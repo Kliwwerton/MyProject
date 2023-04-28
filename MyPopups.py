@@ -177,6 +177,12 @@ class MistakePopup(Popup):
     pass
 
 
+class NewElement(Popup):
+    """Adda new chemical element to the selected component"""
+    def build(self):
+        pass
+
+
 class Addition(Popup):
 
     def __init__(self, instance):
