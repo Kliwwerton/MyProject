@@ -10,9 +10,8 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.uix.screenmanager import Screen, ScreenManager, SwapTransition, FadeTransition, FallOutTransition
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
+
 
 from variables import PRESS_PARAMETERS
 from variables import VALUES
@@ -408,11 +407,12 @@ class Fourth(Screen):
             return_mistake('Превышено количество компонентов!')
 
     def reset(self):
-        self.ids.first_box.remove_widget(self.component1)
-        self.ids.second_box.remove_widget(self.component2)
-        self.ids.third_box.remove_widget(self.component3)
-        self.ids.fourth_box.remove_widget(self.component4)
-        self.ids.fifth_box.remove_widget(self.component5)
+        pass
+        # self.ids.first_box.remove_widget(self.component1)
+        # self.ids.second_box.remove_widget(self.component2)
+        # self.ids.third_box.remove_widget(self.component3)
+        # self.ids.fourth_box.remove_widget(self.component4)
+        # self.ids.fifth_box.remove_widget(self.component5)
 
 
 class EngineerApp(App):
