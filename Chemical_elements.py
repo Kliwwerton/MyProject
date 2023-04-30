@@ -18,8 +18,14 @@ class ButtonAddElement(Button):
         self.instance = instance
 
     def add_element(self):
+        print(self.instance.ids.grid_box.children)
+        for i in self.instance.ids.grid_box.children:
+            print(i)
+            self.instance.ids.grid_box.remove_widget(i)
+        print(self.instance.ids.grid_box.children)
         element = NewElement(self.instance)
         element.open()
+        # print(self.instance.chemical_elements)
 
         # if len(self.chemical_elements) < 5:
         #     element = NewElement(self)
@@ -70,12 +76,12 @@ class AddComponent(Popup):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
-        self.chemical_elements = {}
-        self.chemical_elements_box = []
+        # self.chemical_elements = {}
+        # self.chemical_elements_box = []
 
     def build(self):
         """Creates Chemical element"""
-        print('Hello there')
+        # print('Hello there')
         if self.ids.spinner_component.text in CHEMICAL_ELEMENTS:
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = CHEMICAL_ELEMENTS[self.component.name]
@@ -85,23 +91,29 @@ class AddComponent(Popup):
                 box.ids.name_element.text = i
                 box.ids.value_element.text = j
                 self.ids.grid_box.add_widget(box)
-                self.chemical_elements_box.append(box)
-                self.chemical_elements[i] = j
+                # self.chemical_elements_box.append(box)
+                # self.chemical_elements[i] = j
             but = ButtonAddElement(self)
             self.ids.grid_box.add_widget(but)
-            self.chemical_elements_box.append(but)
-            if len(self.chemical_elements_box) > 4:
+            # self.chemical_elements_box.append(but)
+            # print(self.chemical_elements)
+            if len(self.component.chemical_composition) >= 4:
                 self.size_hint = [0.8, 0.45]
+                self.ids.box_id.size_hint  = [1, 0.5]
             else:
                 pass
 
     def check_value(self):
         """Removes chemical elements that inside the Box class"""
+        print(self.ids.grid_box.children)
 
-        if self.chemical_elements_box:
-            for i in self.chemical_elements_box:
+        if self.ids.grid_box.children:
+            for i in self.ids.grid_box.children:
                 self.ids.grid_box.remove_widget(i)
-            self.chemical_elements = {}
+            self.ids.grid_box.children = []
+
+            # self.chemical_elements = {}
+            # self.chemical_elements_box = []
 
     def change_value(self):
         for i, j in self.component.chemical_composition.items():
@@ -109,18 +121,27 @@ class AddComponent(Popup):
             box.ids.name_element.text = i
             box.ids.value_element.text = j
             self.ids.grid_box.add_widget(box)
-            self.chemical_elements_box.append(box)
-            self.chemical_elements[i] = j
-        but = ButtonAddElement(self)
-        self.ids.grid_box.add_widget(but)
-        self.chemical_elements_box.append(but)
-        if len(self.chemical_elements_box) > 4:
-            self.size_hint = [0.8, 0.45]
+            # self.chemical_elements_box.append(box)
+            # self.chemical_elements[i] = j
+
+        # self.chemical_elements_box.append(but)
+        if len(self.component.chemical_composition) < 8:
+            but = ButtonAddElement(self)
+            self.ids.grid_box.add_widget(but)
+
+            if len(self.component.chemical_composition) >= 4:
+                self.size_hint = [0.8, 0.45]
         else:
             pass
 
     def add_component(self):
-        pass
+        if self.component.name:
+            pass
+            self.dismiss()
+        else:
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Не выбран компонент!'
+            mistake.open()
 
 
 class NewElement(Popup):
@@ -140,7 +161,7 @@ class NewElement(Popup):
             mistake.open()
 
         elif self.ids.spinner_element.text and self.ids.element_value.text:
-            if self.ids.spinner_element.text in self.instance.chemical_elements:
+            if self.ids.spinner_element.text in self.instance.component.chemical_composition:
                 mistake = MistakePopup()
                 mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
                 mistake.open()
@@ -148,17 +169,17 @@ class NewElement(Popup):
                 box = Box()
                 box.ids.name_element.text = self.ids.spinner_element.text
                 box.ids.value_element.text = str(self.ids.element_value.text)
-                self.instance.ids.grid_box.add_widget(box)
-                self.instance.chemical_elements_box.append(box)
-                self.instance.chemical_elements[self.ids.spinner_element.text] = str(self.ids.element_value.text)
+                # self.instance.ids.grid_box.add_widget(box)
+                # self.instance.chemical_elements_box.append(box)
+                self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(self.ids.element_value.text)
 
+                print('Hello!')
                 self.instance.check_value()
                 self.instance.change_value()
                 self.dismiss()
 
-
         elif self.ids.spinner_element.text:
-            if self.ids.spinner_element.text in self.instance.chemical_elements:
+            if self.ids.spinner_element.text in self.instance.component.chemical_composition:
                 mistake = MistakePopup()
                 mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
                 mistake.open()
@@ -167,18 +188,23 @@ class NewElement(Popup):
                 box.ids.name_element.text = self.ids.spinner_element.text
                 box.ids.value_element.text = ''
                 self.instance.ids.grid_box.add_widget(box)
-                self.instance.chemical_elements_box.append(box)
-                self.instance.chemical_elements[self.ids.spinner_element.text] = str(self.ids.element_value.text)
-                if len(self.instance.chemical_elements) > 4:
-                    self.instance.size_hint = [0.8, 0.45]
-                else:
-                    self.instance.size_hint = [0.8, 0.3]
+                # self.instance.component.chemical_composition.append(box)
+                self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(self.ids.element_value.text)
+                # if len(self.instance.chemical_elements) > 4:
+                #     self.instance.size_hint = [0.8, 0.45]
+                # else:
+                #     self.instance.size_hint = [0.8, 0.3]
+
+                self.instance.check_value()
+                self.instance.change_value()
                 self.dismiss()
 
         else:
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = 'Не указано название элемента!'
             mistake.open()
+
+        # print(self.instance.chemical_elements)
 
 
 if __name__ == '__main__':

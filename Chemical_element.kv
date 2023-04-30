@@ -21,6 +21,7 @@
     input_tipe: 'number'
     input_filter: 'float'
 
+
 <ButtonAddElement>:
     text: '+'
     size_hint: 0.2, 0.4
@@ -50,6 +51,7 @@
         orientation: 'vertical'
 
         BoxLayout:
+            id: box_id
             size_hint: 1, 0.7
             spacing: 5
 
@@ -62,6 +64,7 @@
                     root.dismiss()
 
             Button:
+                id: btn_id
                 text: 'ЗАКРЫТЬ'
                 font_size: '15sp'
                 size_hint: 0.3, 0.7
@@ -97,4 +100,3 @@
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_release:
                 root.add_component()
-                root.dismiss()

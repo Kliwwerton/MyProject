@@ -379,14 +379,19 @@ class Fourth(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'Fourth'
-        # self.component1 = MyBox()
-        # self.component2 = MyBox()
-        # self.component3 = MyBox()
-        # self.component4 = MyBox()
-        # self.component5 = MyBox()
+        self.component1 = None
+        self.component2 = None
+        self.component3 = None
+        self.component4 = None
+        self.component5 = None
 
     def open_ressetPopup(self):
-        RessetPopup(self).open()
+        if not self.component1 or self.component2 or self.component3 or self.component4 or self.component5:
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Нет данных для сброса!'
+            mistake.open()
+        else:
+            RessetPopup(self).open()
 
     def add_new_component(self):
         if not self.ids.first_box.children:
