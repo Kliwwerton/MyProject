@@ -18,7 +18,7 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent
+from Chemical_elements import AddComponent, Composition
 
 
 # from kivymd.theming import ThemeManager
@@ -378,6 +378,7 @@ class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
     def __init__(self):
         super().__init__()
+        self.composition = None
         self.name = 'Fourth'
         self.component1 = None
         self.component2 = None
@@ -410,6 +411,10 @@ class Fourth(Screen):
         #     self.ids.fifth_box.add_widget(self.component5)
         else:
             return_mistake('Превышено количество компонентов!')
+
+    def create_new_composition(self):
+        self.composition = Composition()
+        print(self.composition.__dict__)
 
     def reset(self):
         pass
@@ -450,10 +455,6 @@ class EngineerApp(App):
         self.container.add_widget(self.Cows_and_bulls)
         return self.container
 
-    # @staticmethod
-    # def change_text(instance):
-    #     instance.change_text()
-
     @staticmethod
     def close_app():
         ClosePopup().open()
@@ -470,8 +471,9 @@ class EngineerApp(App):
                 ClosePopup().open()
                 return True
 
-            elif self.container.current == 'Second' or 'Third':
+            elif self.container.current == 'Second' or 'Third' or 'Fourth':
                 self.container.current = 'First'
+                print('I`m here')
                 return True
 
             else:

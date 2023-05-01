@@ -40,6 +40,14 @@
         id: value_element
 
 
+<Box2>:
+    MyChLabel:
+        id: name_element
+
+    Widget:
+        id: wid_id
+        pos_hint: root.pos_hint
+
 <AddComponent>:
     auto_dismiss: False
     size_hint: 0.8, 0.35
@@ -61,6 +69,7 @@
                 size_hint: 0.3, 0.7
                 pos_hint: {'left_bottom': 0, 'center_y': 0.5}
                 on_press:
+                    root.close()
                     root.dismiss()
 
             Button:
@@ -70,6 +79,7 @@
                 size_hint: 0.3, 0.7
                 pos_hint: {'right_bottom': 1, 'center_y': 0.5}
                 on_press:
+                    root.close()
                     root.dismiss()
 
         Spinner:
@@ -80,7 +90,7 @@
             text: 'Выберите компонент'
             values: ['ПГНУ-2', 'ШАРО-40', 'ШМЖБ-2', 'ССП-1', 'ССП-9']
             on_text:
-                root.check_value()
+                root.clear_grid()
                 root.build()
 
         BoxLayout:
@@ -95,6 +105,7 @@
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
         Button:
+            id: btn_add
             text: 'Добавить компонент в шихту'
             size_hint: 0.8, 0.6
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
