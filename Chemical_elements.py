@@ -43,30 +43,32 @@ class Composition(MixtureComponent):
 
     def __init__(self, *args):
         super().__init__()
-        self.composition = []
-        if args:
-            for i in args:
-                if isinstance(i, MixtureComponent):
-                    self.composition.append(i)
-                    self.name += i.name + ':'
+        self.mixture = {}
+        # if args:
+        #     for i in args:
+        #         if isinstance(i, MixtureComponent):
+        #             self.mixture.append(i)
+        #             self.name += i.name + ':'
+        self.content = None
 
     def __str__(self):
-        return f'{self.name}, {self.composition}'
+        return f'{self.name}, {self.mixture}'
 
 
 class AddComponent(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
-    def __init__(self, **kwargs):
+    def __init__(self, fourth, widget, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
         self.ELEMENTS = deepcopy(CHEMICAL_ELEMENTS)
+        self.dad = fourth
+        self.widget = widget
         print(self.component.name)
         print(self.component.chemical_composition)
 
     def build(self):
         """Creates Chemical element"""
-        print(CHEMICAL_ELEMENTS)
         if self.ids.spinner_component.text in self.ELEMENTS:
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = self.ELEMENTS[self.component.name]
@@ -86,16 +88,10 @@ class AddComponent(Popup):
                 if len(self.component.chemical_composition) >= 4:
                     self.size_hint = [0.8, 0.55]
                     self.ids.box_grid.size_hint = [1, 0.44]
-                    # self.ids.box_id.size_hint = [1, 0.5]
-                    # self.ids.spinner_component.size_hint = [0.8, 0.4]
-                    # self.ids.btn_add.size_hint = [0.8, 0.4]
-                    # self.ids.box_content.size_hint = [1, 0.28]
+
                 else:
                     self.size_hint = [0.8, 0.45]
                     self.ids.box_grid.size_hint = [1, 0.22]
-                    # self.ids.box_id.size_hint = [1, 0.7]
-                    # self.ids.spinner_component.size_hint = [0.8, 0.6]
-                    # self.ids.btn_add.size_hint = [0.8, 0.6]
 
             else:
                 pass
@@ -108,8 +104,23 @@ class AddComponent(Popup):
             self.ids.grid_box.clear_widgets()
 
     def add_component(self):
-        if self.component.name:
-            pass
+        """Add new component to the Screen Fourth`s Composition
+        Upgrades the received Widget"""
+        if self.component.name and not self.ids.content_value.text:
+            mistake = MistakePopup()
+            mistake.ids.text_label.text = 'Не указано процентное'
+            mistake.ids.text_mistake.text = 'содержание компонента в шихте!'
+            mistake.open()
+
+        elif self.component.name and self.ids.content_value.text:
+            self.dad.composition.mixture[self.component] = self.ids.content_value.text
+            _box = Box()
+            _box.ids.name_element.text = self.component.name
+            _box.ids.value_element.text = self.ids.content_value.text
+            self.widget.add_widget(_box)
+
+            print(self.component.name)
+            print(self.component.chemical_composition)
             self.dismiss()
         else:
             mistake = MistakePopup()
@@ -131,6 +142,7 @@ class NewElement(Popup):
         pass
 
     def add_element(self):
+        """Adds new chemical element to the current component"""
         if self.ids.spinner_element.text == 'Выберите элемент':
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = 'Не указано название элемента!'
@@ -161,14 +173,3 @@ class NewElement(Popup):
 
             mistake.ids.text_mistake.text = 'Не указано название элемента!'
             mistake.open()
-
-
-if __name__ == '__main__':
-    """Test"""
-
-    first = MixtureComponent(name='ПГНУ-2', chemical_composition={'Al': 32, 'Fe': 2.6})
-    second = MixtureComponent(name='АРО-40', chemical_composition={'Al': 40, 'Fe': 1.8})
-
-    composition = Composition(first, second)
-
-    print(composition.name)

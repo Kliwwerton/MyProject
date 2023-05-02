@@ -378,13 +378,13 @@ class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
     def __init__(self):
         super().__init__()
-        self.composition = None
+        self.composition = Composition()
         self.name = 'Fourth'
         self.component1 = None
-        self.component2 = None
-        self.component3 = None
-        self.component4 = None
-        self.component5 = None
+        # self.component2 = None
+        # self.component3 = None
+        # self.component4 = None
+        # self.component5 = None
 
     def open_ressetPopup(self):
         if not self.component1 or self.component2 or self.component3 or self.component4 or self.component5:
@@ -396,12 +396,14 @@ class Fourth(Screen):
 
     def add_new_component(self):
         if not self.ids.first_box.children:
-            element = AddComponent()
+            element = AddComponent(self, self.ids.first_box)
             element.open()
 
         # self.ids.first_box.add_widget(self.component1)
         # print(self.ids.first_box)
-        # elif not self.ids.second_box.children:
+        elif not self.ids.second_box.children:
+            element = AddComponent(self, self.ids.second_box)
+            element.open()
         #     self.ids.second_box.add_widget(self.component2)
         # elif not self.ids.third_box.children:
         #     self.ids.third_box.add_widget(self.component3)
@@ -411,10 +413,15 @@ class Fourth(Screen):
         #     self.ids.fifth_box.add_widget(self.component5)
         else:
             return_mistake('Превышено количество компонентов!')
+        # print(self.composition)
 
-    def create_new_composition(self):
-        self.composition = Composition()
-        print(self.composition.__dict__)
+    # def create_new_composition(self):
+    #     self.composition = Composition()
+    #     print(self.composition.__dict__)
+
+
+    def calculate(self):
+        print(self.composition)
 
     def reset(self):
         pass
