@@ -24,7 +24,7 @@
 
 <ButtonAddElement>:
     text: '+'
-    size_hint: 0.2, 0.4
+#    size_hint: 0.2,
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     on_release:
         root.add_element()
@@ -41,12 +41,14 @@
 
 
 <Box2>:
+    orientation: 'vertical'
     MyChLabel:
         id: name_element
 
-    Widget:
+    BoxLayout:
+        size_hint: 1, 1
         id: wid_id
-        pos_hint: root.pos_hint
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 <AddComponent>:
     auto_dismiss: False

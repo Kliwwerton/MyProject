@@ -11,6 +11,7 @@ from MyPopups import MistakePopup
 class Box(BoxLayout):
     pass
 
+
 class Box2(BoxLayout):
     pass
 
@@ -78,16 +79,20 @@ class AddComponent(Popup):
 
             if len(self.component.chemical_composition) < 8:
                 but = ButtonAddElement(self)
-                box = Box2()
-                # box.ids.wid_id = but
-                box.ids.wid_id.add_widget(but)
-                self.ids.grid_box.add_widget(box)
+                box2 = Box2()
+                box2.ids.wid_id.add_widget(but)
+                self.ids.grid_box.add_widget(box2)
 
                 if len(self.component.chemical_composition) >= 4:
                     self.size_hint = [0.8, 0.45]
                     self.ids.box_id.size_hint = [1, 0.5]
                     self.ids.spinner_component.size_hint = [0.8, 0.4]
                     self.ids.btn_add.size_hint = [0.8, 0.4]
+                else:
+                    self.size_hint = [0.8, 0.35]
+                    self.ids.box_id.size_hint = [1, 0.7]
+                    self.ids.spinner_component.size_hint = [0.8, 0.6]
+                    self.ids.btn_add.size_hint = [0.8, 0.6]
 
             else:
                 pass
@@ -129,13 +134,14 @@ class NewElement(Popup):
             mistake.open()
 
         elif self.ids.spinner_element.text in self.instance.component.chemical_composition:
-                mistake = MistakePopup()
-                mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
-                mistake.open()
+            mistake = MistakePopup()
+            mistake.ids.text_mistake.text = 'Такой элемент уже добавлен!'
+            mistake.open()
 
         elif self.ids.spinner_element.text and self.ids.element_value.text:
 
-            self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(self.ids.element_value.text)
+            self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
+                self.ids.element_value.text)
 
             self.instance.clear_grid()
             self.instance.build()
@@ -143,11 +149,13 @@ class NewElement(Popup):
 
         elif not self.ids.element_value.text:
             mistake = MistakePopup()
-            mistake.ids.text_mistake.text = 'Укажите процентное содержание элемента!'
+            mistake.ids.text_label.text = 'Укажите процентное'
+            mistake.ids.text_mistake.text = 'содержание элемента!'
             mistake.open()
 
         else:
             mistake = MistakePopup()
+
             mistake.ids.text_mistake.text = 'Не указано название элемента!'
             mistake.open()
 
