@@ -1,5 +1,5 @@
 #: import SwapTransition kivy.uix.screenmanager.SwapTransition
-#
+
 #<MyChLabel@Label>
 #    halign: 'center'
 #    valign: 'middle'
@@ -58,7 +58,7 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'top'
-            size_hint: 1, 0.15
+            size_hint: 1, 0.2
             padding: 10,10,10,10
 
             Label:
@@ -69,19 +69,19 @@
 #                size_hint: 1, 0.2
                 color: 64/255,64/255,64/255,1
 
-        BoxLayout:
-            size_hint: 1, 0.2
+#        BoxLayout:
+#            size_hint: 1, 0.2
 
-            Button:
-                text: 'Добавить компонент'
-                size_hint: 1, 0.5
-                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                on_press:
-                    root.add_new_component()
+        Button:
+            text: 'Добавить компонент'
+            size_hint: 1, 0.1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_press:
+                root.add_new_component()
 
         BoxLayout:
+            orientation: 'vertical'
             id: first_box
-            name: ''
             size_hint: 1, 0.18
 
         BoxLayout:

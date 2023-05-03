@@ -419,7 +419,6 @@ class Fourth(Screen):
     #     self.composition = Composition()
     #     print(self.composition.__dict__)
 
-
     def calculate(self):
         print(self.composition)
 

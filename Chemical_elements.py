@@ -16,6 +16,10 @@ class Box2(BoxLayout):
     pass
 
 
+class Box3(Popup):
+    pass
+
+
 class ButtonAddElement(Button):
     """Button for add new chemical element to component"""
 
@@ -158,7 +162,8 @@ class NewElement(Popup):
                 summ = 0
                 for i in self.instance.component.chemical_composition:
                     summ += float(self.instance.component.chemical_composition[i])
-                summ += float(self.ids.element_value.text)
+                else:
+                    summ += float(self.ids.element_value.text)
 
                 if summ > 100:
                     mistake = MistakePopup()
