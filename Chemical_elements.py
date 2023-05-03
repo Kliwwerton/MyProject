@@ -154,13 +154,35 @@ class NewElement(Popup):
             mistake.open()
 
         elif self.ids.spinner_element.text and self.ids.element_value.text:
+            if self.instance.component.chemical_composition:
+                summ = 0
+                for i in self.instance.component.chemical_composition:
+                    summ += float(self.instance.component.chemical_composition[i])
+                summ += float(self.ids.element_value.text)
 
-            self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
-                self.ids.element_value.text)
-
-            self.instance.clear_grid()
-            self.instance.build()
-            self.dismiss()
+                if summ > 100:
+                    mistake = MistakePopup()
+                    mistake.ids.text_label.text = 'НЕ МОЖЕТ БЫТЬ!!!'
+                    mistake.ids.text_mistake.text = 'Превышено содержание элементов!'
+                    mistake.open()
+                else:
+                    self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
+                        self.ids.element_value.text)
+                    self.instance.clear_grid()
+                    self.instance.build()
+                    self.dismiss()
+            else:
+                if float(self.ids.element_value.text) > 99:
+                    mistake = MistakePopup()
+                    mistake.ids.text_label.text = 'НЕ МОЖЕТ БЫТЬ!!!'
+                    mistake.ids.text_mistake.text = 'СТОЛЬКО НЕ БЫВАЕТ!!!'
+                    mistake.open()
+                else:
+                    self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
+                        self.ids.element_value.text)
+                    self.instance.clear_grid()
+                    self.instance.build()
+                    self.dismiss()
 
         elif not self.ids.element_value.text:
             mistake = MistakePopup()
