@@ -42,6 +42,7 @@ Builder.load_file('Fason.kv')
 
 # Chemical_element
 Builder.load_file('Chemical_element.kv')
+Builder.load_file('Element_info.kv')
 
 # Another buttons
 Builder.load_file('References.kv')
@@ -396,17 +397,22 @@ class Fourth(Screen):
 
     def add_new_component(self):
         if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box)
+            element = AddComponent(self, self.ids.first_box, number_component=1)
             element.open()
 
         # self.ids.first_box.add_widget(self.component1)
         # print(self.ids.first_box)
+
         elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box)
+            element = AddComponent(self, self.ids.second_box, number_component=2)
             element.open()
+
         #     self.ids.second_box.add_widget(self.component2)
-        # elif not self.ids.third_box.children:
-        #     self.ids.third_box.add_widget(self.component3)
+
+        elif not self.ids.third_box.children:
+            element = AddComponent(self, self.ids.third_box, number_component=3)
+            element.open()
+
         # elif not self.ids.fourth_box.children:
         #     self.ids.fourth_box.add_widget(self.component4)
         # elif not self.ids.fifth_box.children:

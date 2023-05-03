@@ -1,0 +1,59 @@
+#: import Box Chemical_elements.Box
+
+
+<Box3>:
+    orientation: 'vertical'
+
+    MyChLabel:
+        id: lab_1
+        color: 64/255,64/255,64/255,1
+
+    MyChLabel:
+        id: lab_2
+        color: 64/255,64/255,64/255,1
+
+
+<BigBox>:
+    spacing: 2
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.80, 1
+
+        BoxLayout:
+            size_hint: 1, 0.33
+
+            MyChLabel:
+                id: number_component
+                font_size: '15sp'
+                color: 64/255,64/255,64/255,1
+
+            MyChLabel:
+                id: components_name
+                text_size: self.size
+                halign: 'left'
+                color: 64/255,64/255,64/255,1
+
+        BoxLayout:
+            id: box_for_elements
+            size_hint: 1, 0.66
+            spacing: 2
+
+    BoxLayout:
+        size_hint: 0.2, 1
+        orientation: 'vertical'
+
+        MyLabel:
+            id: lab_lab
+            markup: True
+            pos_hint: {'center_x': 0.5, 'center_y': 1}
+
+            color: 64/255,64/255,64/255,1
+
+        MyTextInput:
+            id: lab_value_element
+#            markup: True
+#            halign: 'center'
+#            valign: 'middle'
+#            font_size: '20sp'
+#            color: 1, 1, 1, 1

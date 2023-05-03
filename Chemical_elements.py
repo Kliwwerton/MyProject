@@ -16,7 +16,11 @@ class Box2(BoxLayout):
     pass
 
 
-class Box3(Popup):
+class Box3(BoxLayout):
+    pass
+
+
+class BigBox(BoxLayout):
     pass
 
 
@@ -62,12 +66,13 @@ class Composition(MixtureComponent):
 class AddComponent(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
-    def __init__(self, fourth, widget, **kwargs):
+    def __init__(self, fourth, widget, number_component=None, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
         self.ELEMENTS = deepcopy(CHEMICAL_ELEMENTS)
         self.dad = fourth
         self.widget = widget
+        self.number_component = number_component
         print(self.component.name)
         print(self.component.chemical_composition)
 
@@ -118,9 +123,19 @@ class AddComponent(Popup):
 
         elif self.component.name and self.ids.content_value.text:
             self.dad.composition.mixture[self.component] = self.ids.content_value.text
-            _box = Box()
-            _box.ids.name_element.text = self.component.name
-            _box.ids.value_element.text = self.ids.content_value.text
+            _box = BigBox()
+            _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
+            _box.ids.components_name.text = self.component.name
+            _box.ids.lab_lab.text = '% в шихте'
+            _box.ids.lab_value_element.text = self.ids.content_value.text
+
+            for i, j in self.component.chemical_composition.items():
+                box = Box3()
+                box.ids.lab_1.text = i
+                box.ids.lab_2.text = j
+                _box.ids.box_for_elements.add_widget(box)
+
+
             self.widget.add_widget(_box)
 
             print(self.component.name)
