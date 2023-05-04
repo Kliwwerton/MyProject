@@ -381,42 +381,31 @@ class Fourth(Screen):
         super().__init__()
         self.composition = Composition()
         self.name = 'Fourth'
-        self.component1 = None
-        # self.component2 = None
-        # self.component3 = None
-        # self.component4 = None
-        # self.component5 = None
 
     def open_ressetPopup(self):
-        if not self.component1 or self.component2 or self.component3 or self.component4 or self.component5:
-            mistake = MistakePopup()
-            mistake.ids.text_mistake.text = 'Нет данных для сброса!'
-            mistake.open()
-        else:
-            RessetPopup(self).open()
+        RessetPopup(self).open()
 
     def add_new_component(self):
         if not self.ids.first_box.children:
             element = AddComponent(self, self.ids.first_box, number_component=1)
             element.open()
 
-        # self.ids.first_box.add_widget(self.component1)
-        # print(self.ids.first_box)
-
         elif not self.ids.second_box.children:
             element = AddComponent(self, self.ids.second_box, number_component=2)
             element.open()
-
-        #     self.ids.second_box.add_widget(self.component2)
 
         elif not self.ids.third_box.children:
             element = AddComponent(self, self.ids.third_box, number_component=3)
             element.open()
 
-        # elif not self.ids.fourth_box.children:
-        #     self.ids.fourth_box.add_widget(self.component4)
-        # elif not self.ids.fifth_box.children:
-        #     self.ids.fifth_box.add_widget(self.component5)
+        elif not self.ids.fourth_box.children:
+            element = AddComponent(self, self.ids.fourth_box, number_component=4)
+            element.open()
+
+        elif not self.ids.fifth_box.children:
+            element = AddComponent(self, self.ids.fifth_box, number_component=5)
+            element.open()
+
         else:
             return_mistake('Превышено количество компонентов!')
         # print(self.composition)
@@ -429,7 +418,13 @@ class Fourth(Screen):
         print(self.composition)
 
     def reset(self):
-        pass
+        self.ids.first_box.clear_widgets()
+        self.ids.second_box.clear_widgets()
+        self.ids.third_box.clear_widgets()
+        self.ids.fourth_box.clear_widgets()
+        self.ids.fifth_box.clear_widgets()
+
+        self.composition = Composition()
         # self.ids.first_box.remove_widget(self.component1)
         # self.ids.second_box.remove_widget(self.component2)
         # self.ids.third_box.remove_widget(self.component3)

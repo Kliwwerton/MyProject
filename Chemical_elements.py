@@ -123,6 +123,12 @@ class AddComponent(Popup):
 
         elif self.component.name and self.ids.content_value.text:
             self.dad.composition.mixture[self.component] = self.ids.content_value.text
+
+            if self.dad.composition.name:
+                self.dad.composition.name += ':' + self.component.name
+            else:
+                self.dad.composition.name += self.component.name
+
             _box = BigBox()
             _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
             _box.ids.components_name.text = self.component.name
