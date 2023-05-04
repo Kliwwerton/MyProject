@@ -96,7 +96,7 @@
             text: 'Выберите компонент'
             values: ['ПГНУ-2', 'ШАРО-40', 'ШМЖБ-2', 'ССП-1', 'ССП-9']
             on_text:
-                root.check_value()
+                root.check_name()
 
         BoxLayout:
             id: box_grid
@@ -129,4 +129,5 @@
             size_hint: 0.8, 0.14
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_release:
-                root.add_component()
+                root.check_values()
+#                root.add_component()
