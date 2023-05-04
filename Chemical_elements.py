@@ -52,6 +52,7 @@ class Composition(MixtureComponent):
     def __init__(self, *args):
         super().__init__()
         self.mixture = {}
+        self.names = []
         # if args:
         #     for i in args:
         #         if isinstance(i, MixtureComponent):
@@ -60,7 +61,7 @@ class Composition(MixtureComponent):
         self.content = None
 
     def __str__(self):
-        return f'{self.name}, {self.mixture}'
+        return f'{self.name}, {self.names}, {self.mixture}'
 
 
 class AddComponent(Popup):
@@ -112,6 +113,22 @@ class AddComponent(Popup):
         if self.ids.grid_box.children:
             self.ids.grid_box.clear_widgets()
 
+    def check_value(self):
+        if self.dad.composition.mixture:
+            for i in self.dad.composition.mixture:
+                if i.name == self.ids.spinner_component.text:
+                    mistake = MistakePopup()
+                    mistake.ids.text_label.text = 'Такой компонент'
+                    mistake.ids.text_mistake.text = 'УЖЕ ДОБАВЛЕН В ШИХТУ!!!'
+                    mistake.open()
+                    self.ids.spinner_component.text = 'Выберите компонент'
+                else:
+                    self.clear_grid()
+                    self.build()
+        else:
+            self.clear_grid()
+            self.build()
+
     def add_component(self):
         """Add new component to the Screen Fourth`s Composition
         Upgrades the received Widget"""
@@ -123,6 +140,7 @@ class AddComponent(Popup):
 
         elif self.component.name and self.ids.content_value.text:
             self.dad.composition.mixture[self.component] = self.ids.content_value.text
+            self.dad.composition.names.append(self.component.name)
 
             if self.dad.composition.name:
                 self.dad.composition.name += ':' + self.component.name
