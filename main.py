@@ -425,11 +425,11 @@ class Fourth(Screen):
         self.ids.fifth_box.clear_widgets()
 
         self.composition = Composition()
-        # self.ids.first_box.remove_widget(self.component1)
-        # self.ids.second_box.remove_widget(self.component2)
-        # self.ids.third_box.remove_widget(self.component3)
-        # self.ids.fourth_box.remove_widget(self.component4)
-        # self.ids.fifth_box.remove_widget(self.component5)
+
+    def open_component(self, instance):
+        print(instance.name)
+
+        print(self.composition.mixture)
 
 
 class EngineerApp(App):

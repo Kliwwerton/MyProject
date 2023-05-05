@@ -12,16 +12,8 @@
             size_hint: 1, 0.2
             padding: 10,10,10,10
 
-            Label:
+            LabelGray:
                 text: 'Расчёт химического состава смеси.'
-                halign: 'center'
-                valign: 'middle'
-                font_size: '20sp'
-#                size_hint: 1, 0.2
-                color: 64/255,64/255,64/255,1
-
-#        BoxLayout:
-#            size_hint: 1, 0.2
 
         Button:
             text: 'Добавить компонент'
@@ -31,13 +23,18 @@
                 root.add_new_component()
 
         BoxLayout:
-            orientation: 'vertical'
             id: first_box
+            name: ''
             size_hint: 1, 0.18
+            on_touch_down:
+                root.open_component(self)
 
         BoxLayout:
             id: second_box
+            name: ''
             size_hint: 1, 0.18
+            on_touch_down:
+                root.open_component(self)
 
         BoxLayout:
             id: third_box
@@ -69,23 +66,20 @@
             size_hint: 1, 0.25
             orientation: 'vertical'
 
-            Label:
-                id: label_P_pressing_text
-                text: 'Результат расчёта'
-                markup: True
-                size_hint: 1, 0.8
-                color: 1,0,0,1
-                font_size: '20sp'
+            BoxLayout:
+                spacing: 2
 
-            Label:
-                id: label_P_pressing_value
-                markup: True
+                LabelGray:
+                    id: label_name_composition
+                    text: 'Результат расчёта'
+                    size_hint: 1, 0.8
+
+                LabelGray:
+                    id: label_content_composition
+
+            LabelGray:
+                id: label_result
                 text: 'да'
-                halign: 'center'
-                valign: 'middle'
-                text_size: self.size
-                font_size: '20sp'
-                color: 64/255,64/255,64/255,1
 
         Button:
             size_hint: 0.6, 0.12

@@ -4,7 +4,7 @@
     halign: 'center'
     valign: 'middle'
     font_size: '20sp'
-    color: 1, 1, 1, 1
+    color: 1, 1, 1, 1 # white
 
 
 <MyTextInput@TextInput>
@@ -52,6 +52,18 @@
         size_hint: 1, 1
         id: wid_id
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+
+<Box3>:
+    orientation: 'vertical'
+
+    MyChLabel:
+        id: lab_1
+        color: 64/255,64/255,64/255,1
+
+    MyChLabel:
+        id: lab_2
+        color: 64/255,64/255,64/255,1
 
 
 <AddComponent>:

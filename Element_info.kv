@@ -1,16 +1,6 @@
 #: import Box Chemical_elements.Box
 
-
-<Box3>:
-    orientation: 'vertical'
-
-    MyChLabel:
-        id: lab_1
-        color: 64/255,64/255,64/255,1
-
-    MyChLabel:
-        id: lab_2
-        color: 64/255,64/255,64/255,1
+<BoxComponent>
 
 
 <BigBox>:
@@ -43,17 +33,10 @@
         size_hint: 0.2, 1
         orientation: 'vertical'
 
-        MyLabel:
+        LabelGray:
             id: lab_lab
-            markup: True
+            font_size: '15sp'
             pos_hint: {'center_x': 0.5, 'center_y': 1}
 
-            color: 64/255,64/255,64/255,1
-
-        MyTextInput:
+        LabelGray:
             id: lab_value_element
-#            markup: True
-#            halign: 'center'
-#            valign: 'middle'
-#            font_size: '20sp'
-#            color: 1, 1, 1, 1

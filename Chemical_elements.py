@@ -24,6 +24,9 @@ class BigBox(BoxLayout):
     pass
 
 
+
+
+
 class ButtonAddElement(Button):
     """Button for add new chemical element to component"""
 
@@ -201,6 +204,7 @@ class AddComponent(Popup):
             box.ids.lab_2.text = j
             _box.ids.box_for_elements.add_widget(box)
 
+        self.widget.name = self.component.name
         self.widget.add_widget(_box)
 
         print(self.component.name)
