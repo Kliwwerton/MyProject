@@ -61,23 +61,8 @@
                     root.calculate()
 
         BoxLayout:
+            id: box_result
             size_hint: 1, 0.25
-            orientation: 'vertical'
-
-            BoxLayout:
-                spacing: 2
-
-                LabelGray:
-                    id: label_name_composition
-                    text: 'Результат расчёта'
-                    size_hint: 1, 0.8
-
-                LabelGray:
-                    id: label_content_composition
-
-            LabelGray:
-                id: label_result
-                text: 'да'
 
         Button:
             size_hint: 0.6, 0.12

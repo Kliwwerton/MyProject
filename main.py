@@ -18,8 +18,7 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent, Composition
-
+from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult
 
 # from kivymd.theming import ThemeManager
 
@@ -381,6 +380,7 @@ class Fourth(Screen):
         super().__init__()
         self.composition = Composition()
         self.name = 'Fourth'
+        self.weight_value = {}
 
     def open_ressetPopup(self):
         RessetPopup(self).open()
@@ -408,34 +408,40 @@ class Fourth(Screen):
 
         else:
             return_mistake('Превышено количество компонентов!')
-        # print(self.composition)
 
-    # def create_new_composition(self):
-    #     self.composition = Composition()
-    #     print(self.composition.__dict__)
+    def build_label(self):
+        if self.composition.name:
+            self.ids.box_result.clear_widgets()
+
+            _box = BigBoxResult()
+            _box.ids.number_component.text = 'Состав шихты: '
+            _box.ids.components_name.text = self.composition.name
+            _box.ids.ratio_composition.text = self.composition.ratio
+
+            for i, j in self.weight_value.items():
+                box = Box3()
+                box.ids.lab_1.text = i
+                box.ids.lab_2.text = str(round(j, 2))
+                _box.ids.box_for_elements.add_widget(box)
+
+            self.ids.box_result.add_widget(_box)
 
     def calculate(self):
 
-        weight_value = {}
+        self.weight_value = {}
         for i, k in self.composition.mixture.items(): # i = component, k = % (содержание в шихте)
 
             for h, j in i.chemical_composition.items(): # h = element, j = % (количество элемента в компоненте)
-                n = round((float(j) * float(k)) / 100, 2)
-                if h in weight_value:
-                    weight_value[h] += n
+                n = (float(j) * float(k)) / 100
+                # n = round(n, 2)
+                if h in self.weight_value:
+                    self.weight_value[h] += n
                 else:
-                    weight_value[h] = n
+                    self.weight_value[h] = n
 
+        self.build_label()
 
-        # for m, a in weight_value.items():
-        #     summ = 0
-        #     for u, r in a.items():
-        #         summ +=
-
-        print(weight_value)
-
-
-
+        print(self.weight_value)
         print(self.composition)
 
     def reset(self):

@@ -40,3 +40,46 @@
 
         LabelGray:
             id: lab_value_element
+
+
+<BigBoxResult>:
+    spacing: 2
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 0.80, 1
+
+        LabelGray:
+            id: number_component
+            size_hint: 1, 0.25
+#            font_size: '15sp'
+
+        BoxLayout:
+            size_hint: 1, 0.25
+
+            LabelGray:
+                id: components_name
+                text_size: self.size
+                font_size: '15sp'
+
+            LabelGray:
+                id: ratio_composition
+                size_hint: 0.33, 1
+                font_size: '15sp'
+
+        BoxLayout:
+            id: box_for_elements
+            size_hint: 1, 0.66
+            spacing: 2
+
+#    BoxLayout:
+#        size_hint: 0.2, 1
+#        orientation: 'vertical'
+#
+#        LabelGray:
+#            id: lab_lab
+#            font_size: '15sp'
+#            pos_hint: {'center_x': 0.5, 'center_y': 1}
+#
+#        LabelGray:
+#            id: lab_value_element

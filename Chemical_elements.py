@@ -24,7 +24,8 @@ class BigBox(BoxLayout):
     pass
 
 
-
+class BigBoxResult(BoxLayout):
+    pass
 
 
 class ButtonAddElement(Button):
@@ -56,10 +57,11 @@ class Composition(MixtureComponent):
         super().__init__()
         self.mixture = {}
         self.names = []
+        self.ratio = ''
         self.content = None
 
     def __str__(self):
-        return f'{self.name}, {self.names}, {self.mixture}'
+        return f'{self.name}, {self.ratio}, {self.names}, {self.mixture}'
 
 
 class AddComponent(Popup):
@@ -172,20 +174,16 @@ class AddComponent(Popup):
     def add_component(self):
         """Add new component to the Screen Fourth`s Composition
         Upgrades the received Widget"""
-        # if self.component.name and not self.ids.content_value.text:
-        #     mistake = MistakePopup()
-        #     mistake.ids.text_label.text = 'Не указано процентное'
-        #     mistake.ids.text_mistake.text = 'содержание компонента в шихте!'
-        #     mistake.open()
 
-        # elif self.component.name and self.ids.content_value.text:
         self.dad.composition.mixture[self.component] = self.ids.content_value.text
         self.dad.composition.names.append(self.component.name)
 
         if self.dad.composition.name:
             self.dad.composition.name += ':' + self.component.name
+            self.dad.composition.ratio += ':' + self.ids.content_value.text
         else:
             self.dad.composition.name += self.component.name
+            self.dad.composition.ratio += self.ids.content_value.text
 
         _box = BigBox()
         _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
