@@ -56,11 +56,6 @@ class Composition(MixtureComponent):
         super().__init__()
         self.mixture = {}
         self.names = []
-        # if args:
-        #     for i in args:
-        #         if isinstance(i, MixtureComponent):
-        #             self.mixture.append(i)
-        #             self.name += i.name + ':'
         self.content = None
 
     def __str__(self):
@@ -216,7 +211,7 @@ class AddComponent(Popup):
 
 
 class NewElement(Popup):
-    """Adda new chemical element to the selected component"""
+    """Adds new chemical element to the selected component"""
 
     def __init__(self, instance):
         super().__init__()

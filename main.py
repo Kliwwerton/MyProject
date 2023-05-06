@@ -415,6 +415,27 @@ class Fourth(Screen):
     #     print(self.composition.__dict__)
 
     def calculate(self):
+
+        weight_value = {}
+        for i, k in self.composition.mixture.items(): # i = component, k = % (содержание в шихте)
+
+            for h, j in i.chemical_composition.items(): # h = element, j = % (количество элемента в компоненте)
+                n = round((float(j) * float(k)) / 100, 2)
+                if h in weight_value:
+                    weight_value[h] += n
+                else:
+                    weight_value[h] = n
+
+
+        # for m, a in weight_value.items():
+        #     summ = 0
+        #     for u, r in a.items():
+        #         summ +=
+
+        print(weight_value)
+
+
+
         print(self.composition)
 
     def reset(self):
