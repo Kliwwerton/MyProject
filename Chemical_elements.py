@@ -89,22 +89,14 @@ class AddComponent(Popup):
                 box.ids.value_element.text = j
                 self.ids.grid_box.add_widget(box)
 
-            if len(self.component.chemical_composition) < 8:
-                but = ButtonAddElement(self)
-                box2 = Box2()
-                box2.ids.wid_id.add_widget(but)
-                self.ids.grid_box.add_widget(box2)
+            self.create_button()
 
-                if len(self.component.chemical_composition) >= 4:
-                    self.size_hint = [0.8, 0.55]
-                    self.ids.box_grid.size_hint = [1, 0.44]
+        elif self.ids.spinner_component.text == 'Новый компонент':
+            if 'Новый компонент 1' not in self.ELEMENTS:
+                self.component.name = 'Новый компонент 1'
+                self.component.chemical_composition = self.ELEMENTS[self.component.name]
 
-                else:
-                    self.size_hint = [0.8, 0.45]
-                    self.ids.box_grid.size_hint = [1, 0.22]
-
-            else:
-                pass
+                self.create_button()
 
     def clear_grid(self):
         """Removes chemical elements that inside the Box class"""
@@ -128,6 +120,22 @@ class AddComponent(Popup):
         else:
             self.clear_grid()
             self.build()
+
+    def create_button(self):
+        """Creates new button for add new element"""
+        if len(self.component.chemical_composition) < 8:
+            but = ButtonAddElement(self)
+            box2 = Box2()
+            box2.ids.wid_id.add_widget(but)
+            self.ids.grid_box.add_widget(box2)
+
+            if len(self.component.chemical_composition) >= 4:
+                self.size_hint = [0.8, 0.55]
+                self.ids.box_grid.size_hint = [1, 0.44]
+
+            else:
+                self.size_hint = [0.8, 0.45]
+                self.ids.box_grid.size_hint = [1, 0.22]
 
     def check_values(self):
         """Checks presence for the entered date"""
