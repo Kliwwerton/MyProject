@@ -92,9 +92,17 @@ class AddComponent(Popup):
             self.create_button()
 
         elif self.ids.spinner_component.text == 'Новый компонент':
-            if 'Новый компонент 1' not in self.ELEMENTS:
+            if not self.ELEMENTS['Новый компонент 1']:
                 self.component.name = 'Новый компонент 1'
                 self.component.chemical_composition = self.ELEMENTS[self.component.name]
+                self.ids.spinner_component.text = 'Новый компонент 1'
+
+                self.create_button()
+
+            elif not self.ELEMENTS['Новый компонент 2']:
+                self.component.name = 'Новый компонент 2'
+                self.component.chemical_composition = self.ELEMENTS[self.component.name]
+                # self.ids.spinner_component.text = 'Новый компонент 2'
 
                 self.create_button()
 
@@ -107,13 +115,16 @@ class AddComponent(Popup):
 
     def check_name(self):
         if self.dad.composition.mixture:
+
             for i in self.dad.composition.mixture:
+
                 if i.name == self.ids.spinner_component.text:
                     mistake = MistakePopup()
                     mistake.ids.text_label.text = 'Такой компонент'
                     mistake.ids.text_mistake.text = 'УЖЕ ДОБАВЛЕН В ШИХТУ!!!'
                     mistake.open()
                     self.ids.spinner_component.text = 'Выберите компонент'
+
                 else:
                     self.clear_grid()
                     self.build()
