@@ -11,6 +11,7 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
+from kivy.uix.boxlayout import BoxLayout
 
 
 from variables import PRESS_PARAMETERS
@@ -452,6 +453,7 @@ class Fourth(Screen):
         self.ids.third_box.clear_widgets()
         self.ids.fourth_box.clear_widgets()
         self.ids.fifth_box.clear_widgets()
+        self.ids.box_result.clear_widgets()
 
         self.composition = Composition()
 
