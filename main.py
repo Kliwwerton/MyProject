@@ -409,6 +409,8 @@ class Fourth(Screen):
         else:
             return_mistake('Превышено количество компонентов!')
 
+        print(self.composition.names)
+
     def build_label(self):
         if self.composition.name:
             self.ids.box_result.clear_widgets()

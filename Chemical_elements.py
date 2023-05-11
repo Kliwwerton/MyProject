@@ -74,8 +74,8 @@ class AddComponent(Popup):
         self.dad = fourth
         self.widget = widget
         self.number_component = number_component
-        print(self.component.name)
-        print(self.component.chemical_composition)
+        # print(self.component.name)
+        # print(self.component.chemical_composition)
 
     def build(self):
         """Creates Chemical element"""
@@ -91,29 +91,50 @@ class AddComponent(Popup):
 
             self.create_button()
 
-        elif self.ids.spinner_component.text == 'Новый компонент':
-            if not self.ELEMENTS['Новый компонент 1']:
-                self.component.name = 'Новый компонент 1'
-                self.component.chemical_composition = self.ELEMENTS[self.component.name]
-                self.ids.spinner_component.text = 'Новый компонент 1'
+        elif self.ids.spinner_component.text != 'Выберите компонент':
+            self.component.name = self.ids.spinner_component.text
+            self.component.chemical_composition = {}
+            self.ELEMENTS[self.component.name] = {}
 
-                self.create_button()
-
-            elif not self.ELEMENTS['Новый компонент 2']:
-                self.component.name = 'Новый компонент 2'
-                self.component.chemical_composition = self.ELEMENTS[self.component.name]
-                # self.ids.spinner_component.text = 'Новый компонент 2'
-
-                self.create_button()
+            self.create_button()
+        #
+        #     elif 'Новый компонент 2' not in self.dad.composition.mixture:
+        #         self.component.name = 'Новый компонент 2'
+        #         self.component.chemical_composition = {}
+        #         self.ELEMENTS[self.component.name] = {}
+        #         self.ids.spinner_component.text = 'Новый компонент 2'
+        #
+        #         self.create_button()
 
     def clear_grid(self):
         """Removes chemical elements that inside the Box class"""
-        print(self.ids.grid_box.children)
+        # print(self.ids.grid_box.children)
 
         if self.ids.grid_box.children:
             self.ids.grid_box.clear_widgets()
 
     def check_name(self):
+        """checks the selected name for entry into the list """
+
+        if self.ids.spinner_component.text == 'Новый компонент':
+            if 'Новый компонент 1' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Новый компонент 1'
+            elif 'Новый компонент 2' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Новый компонент 2'
+            elif 'Новый компонент 3' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Новый компонент 3'
+            elif 'Новый компонент 4' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Новый компонент 4'
+
+            else:
+                mistake = MistakePopup()
+                mistake.ids.text_label.text = 'От куда столько'
+                mistake.ids.text_mistake.text = 'НОВЫХ КОМПОНЕНТОВ!!!'
+                mistake.open()
+                self.ids.spinner_component.text = 'Выберите компонент'
+        else:
+            pass
+
         if self.dad.composition.mixture:
 
             for i in self.dad.composition.mixture:
