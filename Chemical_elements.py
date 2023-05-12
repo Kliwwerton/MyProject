@@ -4,7 +4,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-from variables import CHEMICAL_ELEMENTS
+from variables import CHEMICAL_COMPONENTS
 from MyPopups import MistakePopup
 
 
@@ -70,7 +70,7 @@ class AddComponent(Popup):
     def __init__(self, fourth, widget, number_component=None, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
-        self.ELEMENTS = deepcopy(CHEMICAL_ELEMENTS)
+        self.COMPONENTS = deepcopy(CHEMICAL_COMPONENTS)
         self.dad = fourth
         self.widget = widget
         self.number_component = number_component
@@ -79,9 +79,9 @@ class AddComponent(Popup):
 
     def build(self):
         """Creates Chemical element"""
-        if self.ids.spinner_component.text in self.ELEMENTS:
+        if self.ids.spinner_component.text in self.COMPONENTS:
             self.component.name = self.ids.spinner_component.text
-            self.component.chemical_composition = self.ELEMENTS[self.component.name]
+            self.component.chemical_composition = self.COMPONENTS[self.component.name]
 
             for i, j in self.component.chemical_composition.items():
                 box = Box()
@@ -94,7 +94,7 @@ class AddComponent(Popup):
         elif self.ids.spinner_component.text != 'Выберите компонент':
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = {}
-            self.ELEMENTS[self.component.name] = {}
+            self.COMPONENTS[self.component.name] = {}
 
             self.create_button()
 
@@ -123,10 +123,8 @@ class AddComponent(Popup):
                 mistake.ids.text_mistake.text = 'НОВЫХ КОМПОНЕНТОВ!!!'
                 mistake.open()
                 self.ids.spinner_component.text = 'Выберите компонент'
-        else:
-            pass
 
-        if self.dad.composition.mixture:
+        elif self.dad.composition.mixture:
 
             for i in self.dad.composition.mixture:
 
@@ -277,6 +275,8 @@ class NewElement(Popup):
                 else:
                     self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
                         self.ids.element_value.text)
+                    # self.instance.COMPONENTS[self.instance.component.name][self.ids.spinner_element.text] = str(
+                    #     self.ids.element_value.text)
                     self.instance.clear_grid()
                     self.instance.build()
                     self.dismiss()
@@ -288,6 +288,8 @@ class NewElement(Popup):
                     mistake.open()
                 else:
                     self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
+                        self.ids.element_value.text)
+                    self.instance.COMPONENTS[self.instance.component.name][self.ids.spinner_element.text] = str(
                         self.ids.element_value.text)
                     self.instance.clear_grid()
                     self.instance.build()
