@@ -48,17 +48,26 @@
             id: fifth_box
             size_hint: 1, 0.18
 
-        AnchorLayout:
-            anchor_x: 'center'
-            anchor_y: 'bottom'
+        BoxLayout:
             size_hint: 1, 0.13
 
-            Button:
-                text: 'РАССЧИТАТЬ'
-                font_size: '20sp'
-                size_hint: 0.5, 1
-                on_release:
-                    root.calculate()
+            Label:
+
+            RelativeLayout:
+
+
+                Button:
+                    text: 'РАССЧИТАТЬ'
+                    font_size: '20sp'
+                    size_hint: 0.5, 1
+                    on_release:
+                        root.calculate()
+
+            RelativeLayout:
+
+                Button:
+                    text: '#'
+                    size_hint: 0.5, 1
 
         BoxLayout:
             id: box_result
