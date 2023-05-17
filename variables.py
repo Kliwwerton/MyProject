@@ -208,10 +208,8 @@ SHAPED = {'Image': 'Images/Product_shape/shaped.png',
 
 FASON = {'Произвольное': ['Не определён.']}
 
-CHEMICAL_COMPONENTS = {'ПГНУ-2': {'Al[sub]2[/sub]O[sub]3[/sub]': '32',
-                                  'Fe[sub]2[/sub]O[sub]3[/sub]': '4.0',
-                                  'SiO[sub]2[/sub]': '68',
-                                  'ппп': '2.1'},
+CHEMICAL_COMPONENTS = {'ПГНУ-2': {'Al[sub]2[/sub]O[sub]3[/sub]': '28',
+                                  'Fe[sub]2[/sub]O[sub]3[/sub]': '4.5'},
                        'ШАРО-40': {'Al[sub]2[/sub]O[sub]3[/sub]': '40',
                                    'Fe[sub]2[/sub]O[sub]3[/sub]': '2.5'},
                        'ШМЖБ-2': {'Al[sub]2[/sub]O[sub]3[/sub]': '65',
@@ -220,11 +218,6 @@ CHEMICAL_COMPONENTS = {'ПГНУ-2': {'Al[sub]2[/sub]O[sub]3[/sub]': '32',
                                  'Fe[sub]2[/sub]O[sub]3[/sub]': '1.5'},
                        'ССП-9': {'Al[sub]2[/sub]O[sub]3[/sub]': '65',
                                  'Fe[sub]2[/sub]O[sub]3[/sub]': '1.8'},
-                       # 'Новый компонент 1': {},
-                       # 'Новый компонент 2': {},
-                       # 'Новый компонент 3': {},
-                       # 'Новый компонент 4': {},
-                       # 'Новый компонент 5': {}
 
                        }
 
