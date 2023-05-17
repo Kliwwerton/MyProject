@@ -28,6 +28,7 @@ Builder.load_file('First.kv')
 Builder.load_file('Second.kv')
 Builder.load_file('Third.kv')
 Builder.load_file('Fourth.kv')
+Builder.load_file('Fifth.kv')
 
 # Popups
 Builder.load_file('MyPopups.kv')
@@ -463,11 +464,100 @@ class Fourth(Screen):
         print(self.composition.mixture)
 
 
+class Fifth(Screen):
+    """Fourth Screen. Screen of calculation chemical composition."""
+    def __init__(self):
+        super().__init__()
+        self.composition = Composition()
+        self.name = 'Fifth'
+        self.weight_value = {}
+
+    def open_ressetPopup(self):
+        RessetPopup(self).open()
+
+    def add_new_component(self):
+        if not self.ids.first_box.children:
+            element = AddComponent(self, self.ids.first_box, number_component=1)
+            element.open()
+
+        elif not self.ids.second_box.children:
+            element = AddComponent(self, self.ids.second_box, number_component=2)
+            element.open()
+
+        elif not self.ids.third_box.children:
+            element = AddComponent(self, self.ids.third_box, number_component=3)
+            element.open()
+
+        elif not self.ids.fourth_box.children:
+            element = AddComponent(self, self.ids.fourth_box, number_component=4)
+            element.open()
+
+        elif not self.ids.fifth_box.children:
+            element = AddComponent(self, self.ids.fifth_box, number_component=5)
+            element.open()
+
+        else:
+            return_mistake('Превышено количество компонентов!')
+
+        print(self.composition.names)
+
+    def build_label(self):
+        if self.composition.name:
+            self.ids.box_result.clear_widgets()
+
+            _box = BigBoxResult()
+            _box.ids.number_component.text = 'Состав шихты: '
+            _box.ids.components_name.text = self.composition.name
+            _box.ids.ratio_composition.text = self.composition.ratio
+
+            for i, j in self.weight_value.items():
+                box = Box3()
+                box.ids.lab_1.text = i
+                box.ids.lab_2.text = str(round(j, 2))
+                _box.ids.box_for_elements.add_widget(box)
+
+            self.ids.box_result.add_widget(_box)
+
+    def calculate(self):
+
+        self.weight_value = {}
+        for i, k in self.composition.mixture.items(): # i = component, k = % (содержание в шихте)
+
+            for h, j in i.chemical_composition.items(): # h = element, j = % (количество элемента в компоненте)
+                n = (float(j) * float(k)) / 100
+                # n = round(n, 2)
+                if h in self.weight_value:
+                    self.weight_value[h] += n
+                else:
+                    self.weight_value[h] = n
+
+        self.build_label()
+
+        print(self.weight_value)
+        print(self.composition)
+
+    def reset(self):
+        self.ids.first_box.clear_widgets()
+        self.ids.second_box.clear_widgets()
+        self.ids.third_box.clear_widgets()
+        self.ids.fourth_box.clear_widgets()
+        self.ids.fifth_box.clear_widgets()
+        self.ids.box_result.clear_widgets()
+
+        self.composition = Composition()
+
+    def open_component(self, instance):
+        print(instance.name)
+
+        print(self.composition.mixture)
+
+
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
 
     def __init__(self):
         super().__init__()
+
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Logo.png'
         self.container = Container(transition=FallOutTransition())
@@ -475,6 +565,7 @@ class EngineerApp(App):
         self.Second = Second()
         self.Third = Third()
         self.Fourth = Fourth()
+        self.Fifth = Fifth()
         self.References = References()
         self.Gost_standards = Gost_standards()
         self.Cows_and_bulls = Cows_and_bulls()
@@ -488,6 +579,7 @@ class EngineerApp(App):
         self.container.add_widget(self.Second)
         self.container.add_widget(self.Third)
         self.container.add_widget(self.Fourth)
+        self.container.add_widget(self.Fifth)
         self.container.add_widget(self.References)
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)

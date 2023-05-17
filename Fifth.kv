@@ -1,6 +1,4 @@
-#: import SwapTransition kivy.uix.screenmanager.SwapTransition
-
-<Fourth>:
+<Fifth>:
 
     BoxLayout:
         id: main_box
@@ -14,7 +12,7 @@
             padding: 10,10,10,10
 
             LabelGray:
-                text: 'Расчёт химического состава смеси.'
+                text: 'Расчёт состава смеси.'
 
         Button:
             text: 'Добавить компонент'
@@ -74,7 +72,7 @@
                     size_hint: 0.25, 0.5
                     pos_hint: {'center_x': 0.75, 'center_y': 0.5}
                     on_release:
-                        root.manager.current = 'Fifth'
+                        root.manager.current = 'Fourth'
 
         BoxLayout:
             id: box_result
