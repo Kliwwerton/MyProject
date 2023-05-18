@@ -521,9 +521,9 @@ class Fifth(Screen):
     def calculate(self):
 
         self.weight_value = {}
-        for i, k in self.composition.mixture.items(): # i = component, k = % (содержание в шихте)
+        for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
 
-            for h, j in i.chemical_composition.items(): # h = element, j = % (количество элемента в компоненте)
+            for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
                 n = (float(j) * float(k)) / 100
                 # n = round(n, 2)
                 if h in self.weight_value:
