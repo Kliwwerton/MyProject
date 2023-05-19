@@ -67,13 +67,15 @@ class Composition(MixtureComponent):
 class AddComponent(Popup):
     """Popup for adding Chemical element for composition of mixture"""
 
-    def __init__(self, fourth, widget, number_component=None, **kwargs):
+    def __init__(self, fourth, widget, number_component=None, color=None, **kwargs):
         super().__init__(**kwargs)
         self.component = MixtureComponent()
         self.COMPONENTS = deepcopy(CHEMICAL_COMPONENTS)
         self.dad = fourth
         self.widget = widget
         self.number_component = number_component
+        self.color = color
+
         # print(self.component.name)
         # print(self.component.chemical_composition)
 
@@ -224,18 +226,26 @@ class AddComponent(Popup):
         _box.ids.components_name.text = self.component.name
         _box.ids.lab_lab.text = '% в шихте'
         _box.ids.lab_value_element.text = self.ids.content_value.text
+        if self.color:
+            _box.ids.number_component.color = self.color
+            _box.ids.components_name.color = self.color
+            _box.ids.lab_lab.color = self.color
+            _box.ids.lab_value_element.color = self.color
 
         for i, j in self.component.chemical_composition.items():
             box = Box3()
             box.ids.lab_1.text = i
             box.ids.lab_2.text = j
+            if self.color:
+                box.ids.lab_1.color = self.color
+                box.ids.lab_2.color = self.color
             _box.ids.box_for_elements.add_widget(box)
 
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
 
-        print(self.component.name)
-        print(self.component.chemical_composition)
+        # print(self.component.name)
+        # print(self.component.chemical_composition)
         self.dismiss()
 
     def close(self):
@@ -494,17 +504,17 @@ class AddComponents(Popup):
             values.append(i)
 
         if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box, number_component=1)
+            element = AddComponent(self, self.ids.first_box, number_component=1, color=[1, 1, 1, 1])
             element.ids.spinner_component.values = values
             element.open()
 
         elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box, number_component=2)
+            element = AddComponent(self, self.ids.second_box, number_component=2, color=[1, 1, 1, 1])
             element.ids.spinner_component.values = values
             element.open()
 
         elif not self.ids.third_box.children:
-            element = AddComponent(self, self.ids.third_box, number_component=3)
+            element = AddComponent(self, self.ids.third_box, number_component=3, color=[1, 1, 1, 1])
             element.ids.spinner_component.values = values
             element.open()
 
