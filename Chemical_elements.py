@@ -489,7 +489,7 @@ class AddComponents(Popup):
 
     def add_new_component(self):
 
-        values = []
+        values = ['Новый компонент']
         for i in CHEMICAL_COMPONENTS:
             values.append(i)
 
