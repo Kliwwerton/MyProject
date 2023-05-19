@@ -16,7 +16,6 @@
     foreground_color: 64/255,64/255,64/255,1
     size_hint: 1, 1
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
     halign: 'center'
     padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
     input_tipe: 'number'
@@ -188,19 +187,23 @@
             id: first_box
             size_hint: 1, 0.18
             on_children:
-                root.print_me()
+                root.add_name()
 #            on_touch_down:
 #                root.open_component(self)
 
         BoxLayout:
             id: second_box
             size_hint: 1, 0.18
+            on_children:
+                root.add_name()
 #            on_touch_down:
 #                root.open_component(self)
 
         BoxLayout:
             id: third_box
             size_hint: 1, 0.18
+            on_children:
+                root.add_name()
 
         BoxLayout:
             id: box_result
@@ -210,3 +213,6 @@
             text: 'Внести смесь в состав'
             size_hint: 1, 0.12
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_press:
+                root.add_mixture()
+                root.dismiss()

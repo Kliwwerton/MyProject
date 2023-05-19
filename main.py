@@ -411,7 +411,7 @@ class Fourth(Screen):
         else:
             return_mistake('Превышено количество компонентов!')
 
-        print(self.composition.names)
+        # print(self.composition.names)
 
     def build_label(self):
         if self.composition.name:
@@ -445,8 +445,8 @@ class Fourth(Screen):
 
         self.build_label()
 
-        print(self.weight_value)
-        print(self.composition)
+        # print(self.weight_value)
+        # print(self.composition)
 
     def reset(self):
         self.ids.first_box.clear_widgets()
@@ -459,9 +459,9 @@ class Fourth(Screen):
         self.composition = Composition()
 
     def open_component(self, instance):
-        print(instance.name)
-
-        print(self.composition.mixture)
+        pass
+        # print(instance.name)
+        # print(self.composition.mixture)
 
 
 class Fifth(Screen):

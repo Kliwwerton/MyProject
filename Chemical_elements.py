@@ -88,7 +88,10 @@ class AddComponent(Popup):
             for i, j in self.component.chemical_composition.items():
                 box = Box()
                 box.ids.name_element.text = i
-                box.ids.value_element.text = j
+                if isinstance(j, float):
+                    box.ids.value_element.text = str(round(j, 2))
+                else:
+                    box.ids.value_element.text = j
                 self.ids.grid_box.add_widget(box)
 
             self.create_button()
@@ -230,12 +233,16 @@ class AddComponent(Popup):
             _box.ids.number_component.color = self.color
             _box.ids.components_name.color = self.color
             _box.ids.lab_lab.color = self.color
+            _box.ids.lab_lab.text = '% в смеси'
             _box.ids.lab_value_element.color = self.color
 
         for i, j in self.component.chemical_composition.items():
             box = Box3()
             box.ids.lab_1.text = i
-            box.ids.lab_2.text = j
+            if isinstance(j, float):
+                box.ids.lab_2.text = str(round(j, 2))
+            else:
+                box.ids.lab_2.text = j
             if self.color:
                 box.ids.lab_1.color = self.color
                 box.ids.lab_2.color = self.color
@@ -525,9 +532,19 @@ class AddComponents(Popup):
 
         # print(self.composition.names)
 
-    def print_me(self):
+    def add_name(self):
+        """Forms the name"""
+        self.ids.box_result.clear_widgets()
         print(self.composition)
-        print('Это работает;')
+        box = Box3()
+        box.orientation = 'horizontal'
+        self.composition.name = '(' + self.composition.name + ')'
+        box.ids.lab_1.text = self.composition.name
+        box.ids.lab_1.color = [1, 1, 1, 1]
+        box.ids.lab_2.text = '(' + self.composition.ratio + ')'
+        box.ids.lab_2.color = [1, 1, 1, 1]
+        box.ids.lab_2.size_hint = [0.5, 1]
+        self.ids.box_result.add_widget(box)
 
     def build_label(self):
         if self.composition.name:
@@ -546,3 +563,18 @@ class AddComponents(Popup):
 
             self.ids.box_result.add_widget(_box)
 
+    def add_mixture(self):
+
+        chemical_composition = {}
+        for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
+
+            for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
+                n = (float(j) * float(k)) / 100
+                # n = round(n, 2)
+                if h in chemical_composition:
+                    chemical_composition[h] += n
+                else:
+                    chemical_composition[h] = n
+
+        self.widget.COMPONENTS[self.composition.name] = chemical_composition
+        self.widget.ids.spinner_component.text = self.composition.name
