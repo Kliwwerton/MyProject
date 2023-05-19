@@ -153,6 +153,30 @@
         spacing: 2
         orientation: 'vertical'
 
+        BoxLayout:
+            id: box_id
+            size_hint: 1, 0.12
+            spacing: 5
+
+            Button:
+                text: 'НАЗАД'
+                font_size: '15sp'
+                size_hint: 0.3, 0.8
+                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
+                on_press:
+                    root.close()
+                    root.dismiss()
+
+            Button:
+                id: btn_id
+                text: 'ЗАКРЫТЬ'
+                font_size: '15sp'
+                size_hint: 0.3, 0.8
+                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
+                on_press:
+                    root.close()
+                    root.dismiss()
+
         Button:
             text: 'Добавить компонент'
             size_hint: 1, 0.12
@@ -163,6 +187,8 @@
         BoxLayout:
             id: first_box
             size_hint: 1, 0.18
+            on_children:
+                root.print_me()
 #            on_touch_down:
 #                root.open_component(self)
 

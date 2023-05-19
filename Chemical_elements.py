@@ -127,7 +127,7 @@ class AddComponent(Popup):
         elif self.ids.spinner_component.text == 'СМЕСЬ':
             new_popup = AddComponents(self)
             new_popup.open()
-            self.dismiss()
+            # self.dismiss()
 
         elif self.dad.composition.mixture:
 
@@ -483,20 +483,29 @@ class AddComponents(Popup):
     #     print(self.component.chemical_composition)
     #     self.dismiss()
     #
-    # def close(self):
-    #     del self.component
+    def close(self):
+        self.widget.ids.spinner_component.text = 'Выберите компонент'
+        # del self.component
 
     def add_new_component(self):
+
+        values = []
+        for i in CHEMICAL_COMPONENTS:
+            values.append(i)
+
         if not self.ids.first_box.children:
             element = AddComponent(self, self.ids.first_box, number_component=1)
+            element.ids.spinner_component.values = values
             element.open()
 
         elif not self.ids.second_box.children:
             element = AddComponent(self, self.ids.second_box, number_component=2)
+            element.ids.spinner_component.values = values
             element.open()
 
         elif not self.ids.third_box.children:
             element = AddComponent(self, self.ids.third_box, number_component=3)
+            element.ids.spinner_component.values = values
             element.open()
 
         else:
@@ -504,7 +513,11 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-        print(self.composition.names)
+        # print(self.composition.names)
+
+    def print_me(self):
+        print(self.composition)
+        print('Это работает;')
 
     def build_label(self):
         if self.composition.name:
