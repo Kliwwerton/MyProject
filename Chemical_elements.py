@@ -227,8 +227,16 @@ class AddComponent(Popup):
         _box = BigBox()
         _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
         _box.ids.components_name.text = self.component.name
+
+        if '(' in self.component.name:
+            if len(self.component.name) > 36:
+                _box.ids.components_name.font_size = '10sp'
+            else:
+                _box.ids.components_name.font_size = '15sp'
+
         _box.ids.lab_lab.text = '% в шихте'
         _box.ids.lab_value_element.text = self.ids.content_value.text
+
         if self.color:
             _box.ids.number_component.color = self.color
             _box.ids.components_name.color = self.color
@@ -337,169 +345,7 @@ class AddComponents(Popup):
         super().__init__(**kwargs)
         self.widget = widget
         self.composition = Composition()
-        # self.component = MixtureComponent()
-        # self.COMPONENTS = deepcopy(CHEMICAL_COMPONENTS)
-        # self.dad = fourth
-        # self.number_component = number_component
-        # print(self.component.name)
-        # print(self.component.chemical_composition)
 
-    # def build(self):
-    #     """Creates Chemical element"""
-    #     if self.ids.spinner_component.text in self.COMPONENTS:
-    #         self.component.name = self.ids.spinner_component.text
-    #         self.component.chemical_composition = self.COMPONENTS[self.component.name]
-    #
-    #         for i, j in self.component.chemical_composition.items():
-    #             box = Box()
-    #             box.ids.name_element.text = i
-    #             box.ids.value_element.text = j
-    #             self.ids.grid_box.add_widget(box)
-    #
-    #         self.create_button()
-    #
-    #     elif self.ids.spinner_component.text != 'Выберите компонент':
-    #         self.component.name = self.ids.spinner_component.text
-    #         self.component.chemical_composition = {}
-    #         self.COMPONENTS[self.component.name] = {}
-    #
-    #         self.create_button()
-    #
-    # def clear_grid(self):
-    #     """Removes chemical elements that inside the Box class"""
-    #
-    #     if self.ids.grid_box.children:
-    #         self.ids.grid_box.clear_widgets()
-    #
-    # def check_name(self):
-    #     """checks the selected name for entry into the list """
-    #
-    #     if self.ids.spinner_component.text == 'Новый компонент':
-    #         if 'К 1' not in self.dad.composition.names:
-    #             self.ids.spinner_component.text = 'К 1'
-    #         elif 'К 2' not in self.dad.composition.names:
-    #             self.ids.spinner_component.text = 'К 2'
-    #         elif 'К 3' not in self.dad.composition.names:
-    #             self.ids.spinner_component.text = 'К 3'
-    #         elif 'К 4' not in self.dad.composition.names:
-    #             self.ids.spinner_component.text = 'К 4'
-    #
-    #         else:
-    #             mistake = MistakePopup()
-    #             mistake.ids.text_label.text = 'От куда столько'
-    #             mistake.ids.text_mistake.text = 'НОВЫХ КОМПОНЕНТОВ!!!'
-    #             mistake.open()
-    #             self.ids.spinner_component.text = 'Выберите компонент'
-    #
-    #     elif self.dad.composition.mixture:
-    #
-    #         for i in self.dad.composition.mixture:
-    #
-    #             if i.name == self.ids.spinner_component.text:
-    #                 mistake = MistakePopup()
-    #                 mistake.ids.text_label.text = 'Такой компонент'
-    #                 mistake.ids.text_mistake.text = 'УЖЕ ДОБАВЛЕН В ШИХТУ!!!'
-    #                 mistake.open()
-    #                 self.ids.spinner_component.text = 'Выберите компонент'
-    #
-    #             else:
-    #                 self.clear_grid()
-    #                 self.build()
-    #     else:
-    #         self.clear_grid()
-    #         self.build()
-    #
-    # def create_button(self):
-    #     """Creates new button for add new element"""
-    #     if len(self.component.chemical_composition) < 8:
-    #         but = ButtonAddElement(self)
-    #         box2 = Box2()
-    #         box2.ids.wid_id.add_widget(but)
-    #         self.ids.grid_box.add_widget(box2)
-    #
-    #         if len(self.component.chemical_composition) >= 4:
-    #             self.size_hint = [0.8, 0.55]
-    #             self.ids.box_grid.size_hint = [1, 0.44]
-    #
-    #         else:
-    #             self.size_hint = [0.8, 0.45]
-    #             self.ids.box_grid.size_hint = [1, 0.22]
-    #
-    # def check_values(self):
-    #     """Checks presence for the entered date"""
-    #
-    #     if self.component.name and not self.ids.content_value.text:
-    #         mistake = MistakePopup()
-    #         mistake.ids.text_label.text = 'Не указано процентное'
-    #         mistake.ids.text_mistake.text = 'содержание компонента в шихте!'
-    #         mistake.open()
-    #
-    #     elif self.component.name and self.ids.content_value.text:
-    #
-    #         if self.dad.composition.mixture:
-    #             summ = 0
-    #
-    #             for i in self.dad.composition.mixture:
-    #                 summ += float(self.dad.composition.mixture[i])
-    #             summ += float(self.ids.content_value.text)
-    #
-    #             if summ > 100:
-    #                 mistake = MistakePopup()
-    #                 mistake.ids.text_label.text = 'КОЛИЧЕСТВО КОМПОНЕНТОВ'
-    #                 mistake.ids.text_mistake.text = 'ПРЕВЫСИЛО 100%!!!'
-    #                 self.ids.content_value.text = ''
-    #                 mistake.open()
-    #
-    #             else:
-    #                 self.add_component()
-    #
-    #         elif float(self.ids.content_value.text) > 100:
-    #             mistake = MistakePopup()
-    #             mistake.ids.text_label.text = 'КОЛИЧЕСТВО КОМПОНЕНТОВ'
-    #             mistake.ids.text_mistake.text = 'ПРЕВЫСИЛО 100%!!!'
-    #             self.ids.content_value.text = ''
-    #             mistake.open()
-    #
-    #         else:
-    #             self.add_component()
-    #     else:
-    #         mistake = MistakePopup()
-    #         mistake.ids.text_mistake.text = 'Не выбран компонент!'
-    #         mistake.open()
-    #
-    # def add_component(self):
-    #     """Add new component to the Screen Fourth`s Composition
-    #     Upgrades the received Widget"""
-    #
-    #     self.dad.composition.mixture[self.component] = self.ids.content_value.text
-    #     self.dad.composition.names.append(self.component.name)
-    #
-    #     if self.dad.composition.name:
-    #         self.dad.composition.name += ':' + self.component.name
-    #         self.dad.composition.ratio += ':' + self.ids.content_value.text
-    #     else:
-    #         self.dad.composition.name += self.component.name
-    #         self.dad.composition.ratio += self.ids.content_value.text
-    #
-    #     _box = BigBox()
-    #     _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
-    #     _box.ids.components_name.text = self.component.name
-    #     _box.ids.lab_lab.text = '% в шихте'
-    #     _box.ids.lab_value_element.text = self.ids.content_value.text
-    #
-    #     for i, j in self.component.chemical_composition.items():
-    #         box = Box3()
-    #         box.ids.lab_1.text = i
-    #         box.ids.lab_2.text = j
-    #         _box.ids.box_for_elements.add_widget(box)
-    #
-    #     self.widget.name = self.component.name
-    #     self.widget.add_widget(_box)
-    #
-    #     print(self.component.name)
-    #     print(self.component.chemical_composition)
-    #     self.dismiss()
-    #
     def close(self):
         self.widget.ids.spinner_component.text = 'Выберите компонент'
         # del self.component
@@ -535,11 +381,10 @@ class AddComponents(Popup):
     def add_name(self):
         """Forms the name"""
         self.ids.box_result.clear_widgets()
-        print(self.composition)
+        # print(self.composition)
         box = Box3()
         box.orientation = 'horizontal'
-        self.composition.name = '(' + self.composition.name + ')'
-        box.ids.lab_1.text = self.composition.name
+        box.ids.lab_1.text = '(' + self.composition.name + ')'
         box.ids.lab_1.color = [1, 1, 1, 1]
         box.ids.lab_2.text = '(' + self.composition.ratio + ')'
         box.ids.lab_2.color = [1, 1, 1, 1]
@@ -576,5 +421,6 @@ class AddComponents(Popup):
                 else:
                     chemical_composition[h] = n
 
+        self.composition.name = '(' + self.composition.name + '[sub](' + self.composition.ratio + ') [/sub]' + ')'
         self.widget.COMPONENTS[self.composition.name] = chemical_composition
         self.widget.ids.spinner_component.text = self.composition.name

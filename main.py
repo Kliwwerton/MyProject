@@ -411,14 +411,16 @@ class Fourth(Screen):
         else:
             return_mistake('Превышено количество компонентов!')
 
-        # print(self.composition.names)
-
     def build_label(self):
         if self.composition.name:
             self.ids.box_result.clear_widgets()
 
             _box = BigBoxResult()
             _box.ids.number_component.text = 'Состав шихты: '
+
+            if len(self.composition.name) > 50:
+                _box.ids.components_name.font_size = '10sp'
+                print('HEllo there')
             _box.ids.components_name.text = self.composition.name
             _box.ids.ratio_composition.text = self.composition.ratio
 

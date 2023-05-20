@@ -25,14 +25,12 @@
 
         BoxLayout:
             id: first_box
-            name: ''
             size_hint: 1, 0.18
 #            on_touch_down:
 #                root.open_component(self)
 
         BoxLayout:
             id: second_box
-            name: ''
             size_hint: 1, 0.18
 #            on_touch_down:
 #                root.open_component(self)
@@ -69,12 +67,12 @@
             RelativeLayout:
                 size_hint: 0.6, 1
 
-                Button:
-                    text: '#'
-                    size_hint: 0.25, 0.5
-                    pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-                    on_release:
-                        root.manager.current = 'Fifth'
+#                Button:
+#                    text: '#'
+#                    size_hint: 0.25, 0.5
+#                    pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+#                    on_release:
+#                        root.manager.current = 'Fifth'
 
         BoxLayout:
             id: box_result
