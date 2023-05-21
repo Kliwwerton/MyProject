@@ -14,7 +14,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
 from kivy.uix.boxlayout import BoxLayout
 
 
-from variables import PRESS_PARAMETERS
+from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
@@ -383,29 +383,39 @@ class Fourth(Screen):
         self.composition = Composition()
         self.name = 'Fourth'
         self.weight_value = {}
+        self.components_for_spinner = ['Новый компонент', 'СОБРАТЬ СМЕСЬ']
+        for i in CHEMICAL_COMPONENTS:
+            self.components_for_spinner.append(i)
+
 
     def open_ressetPopup(self):
         RessetPopup(self).open()
 
     def add_new_component(self):
+
         if not self.ids.first_box.children:
             element = AddComponent(self, self.ids.first_box, number_component=1)
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.second_box.children:
             element = AddComponent(self, self.ids.second_box, number_component=2)
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.third_box.children:
             element = AddComponent(self, self.ids.third_box, number_component=3)
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.fourth_box.children:
             element = AddComponent(self, self.ids.fourth_box, number_component=4)
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.fifth_box.children:
             element = AddComponent(self, self.ids.fifth_box, number_component=5)
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         else:

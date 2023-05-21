@@ -76,12 +76,13 @@ class AddComponent(Popup):
         self.number_component = number_component
         self.color = color
 
-        # print(self.component.name)
-        # print(self.component.chemical_composition)
-
     def build(self):
         """Creates Chemical element"""
         if self.ids.spinner_component.text in self.COMPONENTS:
+
+            if len(self.ids.spinner_component.text) > 32:
+                    self.ids.spinner_component.font_size = '10sp'
+
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = self.COMPONENTS[self.component.name]
 
@@ -129,10 +130,9 @@ class AddComponent(Popup):
                 mistake.open()
                 self.ids.spinner_component.text = 'Выберите компонент'
 
-        elif self.ids.spinner_component.text == 'СМЕСЬ':
+        elif self.ids.spinner_component.text == 'СОБРАТЬ СМЕСЬ':
             new_popup = AddComponents(self)
             new_popup.open()
-            # self.dismiss()
 
         elif self.dad.composition.mixture:
 
@@ -229,7 +229,7 @@ class AddComponent(Popup):
         _box.ids.components_name.text = self.component.name
 
         if '(' in self.component.name:
-            if len(self.component.name) > 36:
+            if len(self.component.name) > 32:
                 _box.ids.components_name.font_size = '10sp'
             else:
                 _box.ids.components_name.font_size = '15sp'
@@ -259,8 +259,6 @@ class AddComponent(Popup):
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
 
-        # print(self.component.name)
-        # print(self.component.chemical_composition)
         self.dismiss()
 
     def close(self):
@@ -305,8 +303,6 @@ class NewElement(Popup):
                 else:
                     self.instance.component.chemical_composition[self.ids.spinner_element.text] = str(
                         self.ids.element_value.text)
-                    # self.instance.COMPONENTS[self.instance.component.name][self.ids.spinner_element.text] = str(
-                    #     self.ids.element_value.text)
                     self.instance.clear_grid()
                     self.instance.build()
                     self.dismiss()
@@ -348,7 +344,6 @@ class AddComponents(Popup):
 
     def close(self):
         self.widget.ids.spinner_component.text = 'Выберите компонент'
-        # del self.component
 
     def add_new_component(self):
 
@@ -376,14 +371,16 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-        # print(self.composition.names)
-
     def add_name(self):
         """Forms the name"""
         self.ids.box_result.clear_widgets()
-        # print(self.composition)
         box = Box3()
         box.orientation = 'horizontal'
+
+        if len(self.composition.name) > 34:
+            box.ids.lab_1.font_size = '10sp'
+            box.ids.lab_2.font_size = '10sp'
+
         box.ids.lab_1.text = '(' + self.composition.name + ')'
         box.ids.lab_1.color = [1, 1, 1, 1]
         box.ids.lab_2.text = '(' + self.composition.ratio + ')'
@@ -397,6 +394,8 @@ class AddComponents(Popup):
 
             _box = BigBoxResult()
             _box.ids.number_component.text = 'Состав шихты: '
+            if len(self.composition.name) > 50:
+                _box.ids.components_name.font_size = '10sp'
             _box.ids.components_name.text = self.composition.name
             _box.ids.ratio_composition.text = self.composition.ratio
 
@@ -415,7 +414,7 @@ class AddComponents(Popup):
 
             for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
                 n = (float(j) * float(k)) / 100
-                # n = round(n, 2)
+
                 if h in chemical_composition:
                     chemical_composition[h] += n
                 else:
