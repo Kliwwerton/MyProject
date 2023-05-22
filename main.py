@@ -172,12 +172,10 @@ class First(Screen):
 
 class Second(Screen):
     """Second Screen for the app"""
-    sound = SoundLoader.load('sounds/sound.wav')
-    sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def calculate(self):
         """Calculating pressing pressure"""
-        self.sound.play()
+        EngineerApp.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
@@ -222,7 +220,7 @@ class Second(Screen):
         self.ids.stamp_label.text = ''
         self.ids.volume_weight.text = ''
         VALUES.clear()
-        self.sound_reset.play()
+        EngineerApp.sound_reset.play()
 
     def open_ressetPopup(self):
         RessetPopup(self).open()
@@ -270,11 +268,9 @@ class Second(Screen):
 
 
 class Third(Screen):
-    sound = SoundLoader.load('sounds/sound.wav')
-    sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def calculate(self):
-        self.sound.play()
+        EngineerApp.sound.play()
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
@@ -323,7 +319,7 @@ class Third(Screen):
         self.ids.stamp_label.text = ''
         self.ids.volume_weight.text = ''
         VALUES.clear()
-        self.sound_reset.play()
+        EngineerApp.sound_reset.play()
 
     def change_label(self):
         """changing label unit of press parameters"""
@@ -566,6 +562,8 @@ class Fifth(Screen):
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
+    sound = SoundLoader.load('sounds/sound.wav')
+    sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def __init__(self):
         super().__init__()

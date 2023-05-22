@@ -4,7 +4,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-from variables import CHEMICAL_COMPONENTS
+from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS
 from MyPopups import MistakePopup
 
 
@@ -271,6 +271,7 @@ class NewElement(Popup):
     def __init__(self, instance):
         super().__init__()
         self.instance = instance
+        self.ids.spinner_element.values = CHEMICAL_ELEMENTS
 
     def build(self):
         pass
@@ -329,7 +330,6 @@ class NewElement(Popup):
 
         else:
             mistake = MistakePopup()
-
             mistake.ids.text_mistake.text = 'Не указано название элемента!'
             mistake.open()
 
