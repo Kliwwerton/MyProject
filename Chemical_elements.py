@@ -81,7 +81,7 @@ class AddComponent(Popup):
         if self.ids.spinner_component.text in self.COMPONENTS:
 
             if len(self.ids.spinner_component.text) > 32:
-                    self.ids.spinner_component.font_size = '10sp'
+                self.ids.spinner_component.font_size = '10sp'
 
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = self.COMPONENTS[self.component.name]
@@ -114,14 +114,16 @@ class AddComponent(Popup):
         """checks the selected name for entry into the list """
 
         if self.ids.spinner_component.text == 'Новый компонент':
-            if 'К 1' not in self.dad.composition.names:
-                self.ids.spinner_component.text = 'К 1'
-            elif 'К 2' not in self.dad.composition.names:
-                self.ids.spinner_component.text = 'К 2'
-            elif 'К 3' not in self.dad.composition.names:
-                self.ids.spinner_component.text = 'К 3'
-            elif 'К 4' not in self.dad.composition.names:
-                self.ids.spinner_component.text = 'К 4'
+            if 'Компонент 1' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Компонент 1'
+            elif 'Компонент 2' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Компонент 2'
+            elif 'Компонент 3' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Компонент 3'
+            elif 'Компонент 4' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Компонент 4'
+            elif 'Компонент 5' not in self.dad.composition.names:
+                self.ids.spinner_component.text = 'Компонент 5'
 
             else:
                 mistake = MistakePopup()
@@ -179,7 +181,14 @@ class AddComponent(Popup):
 
         elif self.component.name and self.ids.content_value.text:
 
-            if self.dad.composition.mixture:
+            if not self.component.chemical_composition:
+                mistake = MistakePopup()
+                mistake.ids.text_label.text = 'НЕ ДОБАВЛЕНО НИ ОДНОГО'
+                mistake.ids.text_mistake.text = 'ХИМИЧЕСКОГО ЭЛЕМЕНТА!!!'
+                self.ids.content_value.text = ''
+                mistake.open()
+
+            elif self.dad.composition.mixture:
                 summ = 0
 
                 for i in self.dad.composition.mixture:
@@ -298,7 +307,7 @@ class NewElement(Popup):
 
                 if summ > 100:
                     mistake = MistakePopup()
-                    mistake.ids.text_label.text = 'НЕ МОЖЕТ БЫТЬ!!!'
+                    mistake.ids.text_label.text = 'НЕ МОЖЕТ БЫТЬ >100%!!!'
                     mistake.ids.text_mistake.text = 'Превышено содержание элементов!'
                     mistake.open()
                 else:

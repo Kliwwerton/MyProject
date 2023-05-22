@@ -383,7 +383,6 @@ class Fourth(Screen):
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
 
-
     def open_ressetPopup(self):
         RessetPopup(self).open()
 
@@ -426,7 +425,7 @@ class Fourth(Screen):
 
             if len(self.composition.name) > 50:
                 _box.ids.components_name.font_size = '10sp'
-                print('HEllo there')
+
             _box.ids.components_name.text = self.composition.name
             _box.ids.ratio_composition.text = self.composition.ratio
 
@@ -453,9 +452,6 @@ class Fourth(Screen):
 
         self.build_label()
 
-        # print(self.weight_value)
-        # print(self.composition)
-
     def reset(self):
         self.ids.first_box.clear_widgets()
         self.ids.second_box.clear_widgets()
@@ -468,8 +464,6 @@ class Fourth(Screen):
 
     def open_component(self, instance):
         pass
-        # print(instance.name)
-        # print(self.composition.mixture)
 
 
 class Fifth(Screen):
@@ -507,8 +501,6 @@ class Fifth(Screen):
         else:
             return_mistake('Превышено количество компонентов!')
 
-        print(self.composition.names)
-
     def build_label(self):
         if self.composition.name:
             self.ids.box_result.clear_widgets()
@@ -533,16 +525,13 @@ class Fifth(Screen):
 
             for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
                 n = (float(j) * float(k)) / 100
-                # n = round(n, 2)
+
                 if h in self.weight_value:
                     self.weight_value[h] += n
                 else:
                     self.weight_value[h] = n
 
         self.build_label()
-
-        print(self.weight_value)
-        print(self.composition)
 
     def reset(self):
         self.ids.first_box.clear_widgets()
@@ -556,7 +545,6 @@ class Fifth(Screen):
 
     def open_component(self, instance):
         print(instance.name)
-
         print(self.composition.mixture)
 
 
