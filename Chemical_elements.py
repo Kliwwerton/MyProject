@@ -217,6 +217,14 @@ class AddComponent(Popup):
                     mistake.ids.text_mistake.text = 'ПРЕВЫСИЛО 100%!!!'
                     self.ids.content_value.text = ''
                     mistake.open()
+                # elif summ < 100:
+                #     mistake = MistakePopup()
+                #     mistake.title = 'РЕКОМЕНДАЦИЯ'
+                #     mistake.ids.text_label.text = 'Для достоверного расчёта '
+                #     mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
+                #     mistake.open()
+                #
+                #     self.add_component()
 
                 else:
                     self.add_component()
@@ -453,3 +461,17 @@ class AddComponents(Popup):
         self.composition.name = '(' + self.composition.name + '[sub](' + self.composition.ratio + ') [/sub]' + ')'
         self.widget.COMPONENTS[self.composition.name] = chemical_composition
         self.widget.ids.spinner_component.text = self.composition.name
+
+        summ = 0
+        if self.composition.mixture:
+
+            for i in self.composition.mixture:
+                summ += float(self.composition.mixture[i])
+
+            if summ < 100:
+                mistake = MistakePopup()
+                mistake.title = 'РЕКОМЕНДАЦИЯ'
+                mistake.ids.text_label.text = 'Для достоверного расчёта '
+                mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
+                mistake.open()
+
