@@ -15,7 +15,10 @@ class Box(BoxLayout):
         self.instance = instance
 
     def change_value(self):
-        pass
+        if self.ids.value_element.text == self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text]:
+            pass
+        else:
+            self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text] = self.ids.value_element.text
 
 
 class Box2(BoxLayout):
@@ -88,6 +91,8 @@ class AddComponent(Popup):
 
             if len(self.ids.spinner_component.text) > 32:
                 self.ids.spinner_component.font_size = '10sp'
+            else:
+                self.ids.spinner_component.font_size = '15sp'
 
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = self.COMPONENTS[self.component.name]
@@ -107,6 +112,11 @@ class AddComponent(Popup):
             self.component.name = self.ids.spinner_component.text
             self.component.chemical_composition = {}
             self.COMPONENTS[self.component.name] = {}
+
+            if len(self.ids.spinner_component.text) > 32:
+                self.ids.spinner_component.font_size = '10sp'
+            else:
+                self.ids.spinner_component.font_size = '15sp'
 
             self.create_button()
 
@@ -392,9 +402,14 @@ class AddComponents(Popup):
         box = Box3()
         box.orientation = 'horizontal'
 
+        print(len(self.composition.name))
+
         if len(self.composition.name) > 34:
             box.ids.lab_1.font_size = '10sp'
-            box.ids.lab_2.font_size = '10sp'
+            box.ids.lab_2.font_size = '15sp'
+        elif len(self.composition.name) > 19:
+            box.ids.lab_1.font_size = '15sp'
+            box.ids.lab_2.font_size = '15sp'
 
         box.ids.lab_1.text = '(' + self.composition.name + ')'
         box.ids.lab_1.color = [1, 1, 1, 1]
