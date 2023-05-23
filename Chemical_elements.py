@@ -9,7 +9,13 @@ from MyPopups import MistakePopup
 
 
 class Box(BoxLayout):
-    pass
+
+    def __init__(self, instance):
+        super().__init__()
+        self.instance = instance
+
+    def change_value(self):
+        pass
 
 
 class Box2(BoxLayout):
@@ -87,7 +93,7 @@ class AddComponent(Popup):
             self.component.chemical_composition = self.COMPONENTS[self.component.name]
 
             for i, j in self.component.chemical_composition.items():
-                box = Box()
+                box = Box(self)
                 box.ids.name_element.text = i
                 if isinstance(j, float):
                     box.ids.value_element.text = str(round(j, 2))
