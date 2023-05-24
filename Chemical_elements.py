@@ -225,14 +225,6 @@ class AddComponent(Popup):
                     mistake.ids.text_mistake.text = 'ПРЕВЫСИЛО 100%!!!'
                     self.ids.content_value.text = ''
                     mistake.open()
-                # elif summ < 100:
-                #     mistake = MistakePopup()
-                #     mistake.title = 'РЕКОМЕНДАЦИЯ'
-                #     mistake.ids.text_label.text = 'Для достоверного расчёта '
-                #     mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
-                #     mistake.open()
-                #
-                #     self.add_component()
 
                 else:
                     self.add_component()
@@ -418,7 +410,7 @@ class AddComponents(Popup):
         box = Box3()
         box.orientation = 'horizontal'
 
-        print(len(self.composition.name))
+        # print(len(self.composition.name))
 
         if len(self.composition.name) > 34:
             box.ids.lab_1.font_size = '10sp'

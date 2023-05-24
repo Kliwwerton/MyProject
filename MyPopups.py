@@ -127,7 +127,7 @@ class SelectionOptionPopup(Popup):
 
         elif self.ids.spin_choose_window.text == 'Произвольное':
             popup = Fason()
-            print(VALUES)
+            # print(VALUES)
 
         popup.chose_values.insert(0, self.ids.spin_choose_window.text)
         popup.open()
@@ -294,7 +294,6 @@ class Rectangle(Popup):
             VALUES['volume'] = 0
             VALUES['volume_weight'] = None
             VALUES['weight'] = None
-            print(VALUES)
 
     def calculation_weight_product(self):
         if self.ids.length_value.text and self.ids.width_value.text and \
@@ -311,7 +310,6 @@ class Rectangle(Popup):
             VALUES['size'].append(self.ids.length_value.text)
             VALUES['size'].append(self.ids.width_value.text)
             VALUES['size'].append(self.ids.thickness_value.text)
-            print(VALUES)
 
     def check_value(self, var):
 
@@ -403,7 +401,6 @@ class Trapezoid(Popup):
     @staticmethod
     def open_calculation_average_popup(instance):
         Addition(instance).open()
-        print('Hello')
 
     def calculation(self):
         if self.ids.length_value.text and self.ids.width_value_1.text and self.ids.width_value_2.text:
@@ -419,7 +416,6 @@ class Trapezoid(Popup):
                 volume = round((square * float(self.ids.thickness_value.text)) / 1000, 2)
                 VALUES['volume'] = volume
                 VALUES['size'].append(self.ids.thickness_value.text)
-                print(square, volume)
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
@@ -432,7 +428,6 @@ class Trapezoid(Popup):
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
-                print(VALUES)
 
             else:
                 VALUES['volume'] = None
@@ -466,8 +461,6 @@ class Trapezoid(Popup):
             VALUES['size'].append(self.ids.width_value_1.text)
             VALUES['size'].append(self.ids.width_value_2.text)
             VALUES['size'].append(self.ids.thickness_value.text)
-
-        print(VALUES)
 
     def check_value(self, var):
 
@@ -560,7 +553,6 @@ class Ribbed(Popup):
     @staticmethod
     def open_calculation_average_popup(instance):
         Addition(instance).open()
-        print('Hello')
 
     def calculation(self):
         if self.ids.length_value.text and self.ids.width_value.text:
@@ -576,7 +568,6 @@ class Ribbed(Popup):
                 VALUES['volume'] = volume
                 VALUES['size'].append(self.ids.thickness_value_1.text)
                 VALUES['size'].append(self.ids.thickness_value_2.text)
-                print(square, volume)
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
@@ -589,7 +580,6 @@ class Ribbed(Popup):
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
-                print(VALUES)
 
             else:
                 VALUES['volume'] = None
@@ -624,8 +614,6 @@ class Ribbed(Popup):
             VALUES['size'].append(self.ids.width_value.text)
             VALUES['size'].append(self.ids.thickness_value_1.text)
             VALUES['size'].append(self.ids.thickness_value_2.text)
-
-        print(VALUES)
 
     def check_value(self, var):
 
@@ -717,7 +705,6 @@ class Tube(Popup):
     @staticmethod
     def open_calculation_average_popup(instance):
         Addition(instance).open()
-        print('Hello')
 
     def change_text(self):
         if VALUES['volume_weight']:
@@ -737,7 +724,6 @@ class Tube(Popup):
                 volume = round((square * float(self.ids.length_value.text)) / 1000, 2)
                 VALUES['volume'] = volume
                 VALUES['size'].append(self.ids.length_value.text)
-                print(square, volume)
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
@@ -750,7 +736,6 @@ class Tube(Popup):
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
-                print(VALUES)
 
             else:
                 VALUES['volume'] = None
@@ -780,7 +765,6 @@ class Tube(Popup):
             VALUES['size'].append(self.ids.outer_diameter_D.text)
             VALUES['size'].append(self.ids.inner_diameter_d.text)
             VALUES['size'].append(self.ids.length_value.text)
-            print(VALUES)
 
     def check_value(self, var):
 
@@ -900,7 +884,6 @@ class Shaped(Popup):
                 VALUES['size'].append(self.ids.thickness_value_S1.text)
                 VALUES['size'].append(self.ids.thickness_value_S2.text)
                 VALUES['size'].append(self.ids.thickness_value_S3.text)
-                print(square, volume)
 
                 if self.ids.weight_product.text:
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
@@ -950,7 +933,6 @@ class Shaped(Popup):
             VALUES['size'].append(self.ids.thickness_value_S1.text)
             VALUES['size'].append(self.ids.thickness_value_S2.text)
             VALUES['size'].append(self.ids.thickness_value_S3.text)
-            print(VALUES)
 
     def check_value(self, var):
 
@@ -1055,4 +1037,3 @@ class Fason(Popup):
             VALUES['weight'] = None
 
         VALUES['size'] = 0
-        print(VALUES)

@@ -11,8 +11,6 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
-from kivy.uix.boxlayout import BoxLayout
-
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
@@ -20,8 +18,6 @@ from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
 from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
-
-# from kivymd.theming import ThemeManager
 
 # Screens
 Builder.load_file('First.kv')
@@ -118,11 +114,6 @@ def open_OptionPopup():
                      number=VALUES['number'],
                      square=VALUES['square']
                      )
-
-    # elif VALUES['gost'] and VALUES['number']:
-    #     choice_popup(gost=VALUES['gost'],
-    #                  number=VALUES['number'],
-    #                  )
 
     else:
         SelectionOptionPopup().open()
@@ -368,10 +359,6 @@ class Third(Screen):
                 self.ids.volume_weight.text = ''
 
 
-# class MyBox(BoxLayout):
-#     pass
-
-
 class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
     def __init__(self):
@@ -448,7 +435,7 @@ class Fourth(Screen):
 
             for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
                 n = (float(j) * float(k)) / 100
-                # n = round(n, 2)
+
                 if h in self.weight_value:
                     self.weight_value[h] += n
                 else:
@@ -472,86 +459,86 @@ class Fourth(Screen):
         pass
 
 
-class Fifth(Screen):
-    """Fourth Screen. Screen of calculation chemical composition."""
-    def __init__(self):
-        super().__init__()
-        self.composition = Composition()
-        self.name = 'Fifth'
-        self.weight_value = {}
-
-    def open_ressetPopup(self):
-        RessetPopup(self).open()
-
-    def add_new_component(self):
-        if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box, number_component=1)
-            element.open()
-
-        elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box, number_component=2)
-            element.open()
-
-        elif not self.ids.third_box.children:
-            element = AddComponent(self, self.ids.third_box, number_component=3)
-            element.open()
-
-        elif not self.ids.fourth_box.children:
-            element = AddComponent(self, self.ids.fourth_box, number_component=4)
-            element.open()
-
-        elif not self.ids.fifth_box.children:
-            element = AddComponent(self, self.ids.fifth_box, number_component=5)
-            element.open()
-
-        else:
-            return_mistake('Превышено количество компонентов!')
-
-    def build_label(self):
-        if self.composition.name:
-            self.ids.box_result.clear_widgets()
-
-            _box = BigBoxResult()
-            _box.ids.number_component.text = 'Состав шихты: '
-            _box.ids.components_name.text = self.composition.name
-            _box.ids.ratio_composition.text = self.composition.ratio
-
-            for i, j in self.weight_value.items():
-                box = Box3()
-                box.ids.lab_1.text = i
-                box.ids.lab_2.text = str(round(j, 2))
-                _box.ids.box_for_elements.add_widget(box)
-
-            self.ids.box_result.add_widget(_box)
-
-    def calculate(self):
-
-        self.weight_value = {}
-        for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
-
-            for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
-                n = (float(j) * float(k)) / 100
-
-                if h in self.weight_value:
-                    self.weight_value[h] += n
-                else:
-                    self.weight_value[h] = n
-
-        self.build_label()
-
-    def reset(self):
-        self.ids.first_box.clear_widgets()
-        self.ids.second_box.clear_widgets()
-        self.ids.third_box.clear_widgets()
-        self.ids.fourth_box.clear_widgets()
-        self.ids.fifth_box.clear_widgets()
-        self.ids.box_result.clear_widgets()
-
-        self.composition = Composition()
-
-    def open_component(self, instance):
-        print(instance.name)
-        print(self.composition.mixture)
+# class Fifth(Screen):
+#     """Fourth Screen. Screen of calculation chemical composition."""
+#     def __init__(self):
+#         super().__init__()
+#         self.composition = Composition()
+#         self.name = 'Fifth'
+#         self.weight_value = {}
+#
+#     def open_ressetPopup(self):
+#         RessetPopup(self).open()
+#
+#     def add_new_component(self):
+#         if not self.ids.first_box.children:
+#             element = AddComponent(self, self.ids.first_box, number_component=1)
+#             element.open()
+#
+#         elif not self.ids.second_box.children:
+#             element = AddComponent(self, self.ids.second_box, number_component=2)
+#             element.open()
+#
+#         elif not self.ids.third_box.children:
+#             element = AddComponent(self, self.ids.third_box, number_component=3)
+#             element.open()
+#
+#         elif not self.ids.fourth_box.children:
+#             element = AddComponent(self, self.ids.fourth_box, number_component=4)
+#             element.open()
+#
+#         elif not self.ids.fifth_box.children:
+#             element = AddComponent(self, self.ids.fifth_box, number_component=5)
+#             element.open()
+#
+#         else:
+#             return_mistake('Превышено количество компонентов!')
+#
+#     def build_label(self):
+#         if self.composition.name:
+#             self.ids.box_result.clear_widgets()
+#
+#             _box = BigBoxResult()
+#             _box.ids.number_component.text = 'Состав шихты: '
+#             _box.ids.components_name.text = self.composition.name
+#             _box.ids.ratio_composition.text = self.composition.ratio
+#
+#             for i, j in self.weight_value.items():
+#                 box = Box3()
+#                 box.ids.lab_1.text = i
+#                 box.ids.lab_2.text = str(round(j, 2))
+#                 _box.ids.box_for_elements.add_widget(box)
+#
+#             self.ids.box_result.add_widget(_box)
+#
+#     def calculate(self):
+#
+#         self.weight_value = {}
+#         for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
+#
+#             for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
+#                 n = (float(j) * float(k)) / 100
+#
+#                 if h in self.weight_value:
+#                     self.weight_value[h] += n
+#                 else:
+#                     self.weight_value[h] = n
+#
+#         self.build_label()
+#
+#     def reset(self):
+#         self.ids.first_box.clear_widgets()
+#         self.ids.second_box.clear_widgets()
+#         self.ids.third_box.clear_widgets()
+#         self.ids.fourth_box.clear_widgets()
+#         self.ids.fifth_box.clear_widgets()
+#         self.ids.box_result.clear_widgets()
+#
+#         self.composition = Composition()
+#
+#     def open_component(self, instance):
+#         print(instance.name)
+#         print(self.composition.mixture)
 
 
 class EngineerApp(App):
@@ -569,7 +556,7 @@ class EngineerApp(App):
         self.Second = Second()
         self.Third = Third()
         self.Fourth = Fourth()
-        self.Fifth = Fifth()
+        # self.Fifth = Fifth()
         self.References = References()
         self.Gost_standards = Gost_standards()
         self.Cows_and_bulls = Cows_and_bulls()
@@ -583,7 +570,7 @@ class EngineerApp(App):
         self.container.add_widget(self.Second)
         self.container.add_widget(self.Third)
         self.container.add_widget(self.Fourth)
-        self.container.add_widget(self.Fifth)
+        # self.container.add_widget(self.Fifth)
         self.container.add_widget(self.References)
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)
