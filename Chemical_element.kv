@@ -14,6 +14,22 @@
     input_filter: 'float'
 
 
+<ResetButton>
+#    size_hint: 0.6, 0.12
+    text: 'СБРОС'
+    font_size: '20sp'
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    on_press:
+        app.Fourth.open_ressetPopup()
+
+<CalcButton>:
+    text: 'РАССЧИТАТЬ'
+    font_size: '20sp'
+#                    size_hint: 0.5, 1
+    on_release:
+        app.Fourth.calculate()
+
+
 <ButtonAddElement>:
     text: '+'
     size_hint: 1, 0.95

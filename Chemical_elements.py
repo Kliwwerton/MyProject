@@ -37,6 +37,14 @@ class BigBoxResult(BoxLayout):
     pass
 
 
+class ResetButton(Button):
+    pass
+
+
+class CalcButton(Button):
+    pass
+
+
 class ButtonAddElement(Button):
     """Button for add new chemical element to component"""
 

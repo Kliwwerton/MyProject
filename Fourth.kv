@@ -17,7 +17,7 @@
                 text: 'Расчёт химического состава смеси.'
 
         Button:
-            text: 'Добавить компонент'
+            text: 'ДОБАВИТЬ КОМПОНЕНТ'
             size_hint: 1, 0.1
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_press:
@@ -55,14 +55,7 @@
 
             RelativeLayout:
                 size_hint: 1, 1
-
-
-                Button:
-                    text: 'РАССЧИТАТЬ'
-                    font_size: '20sp'
-#                    size_hint: 0.5, 1
-                    on_release:
-                        root.calculate()
+                id: calc_but
 
             RelativeLayout:
                 size_hint: 0.6, 1
@@ -78,13 +71,10 @@
             id: box_result
             size_hint: 1, 0.25
 
-        Button:
+        BoxLayout:
+            id: reset_but
             size_hint: 0.6, 0.12
-            text: 'СБРОС'
-            font_size: '20sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
-                root.open_ressetPopup()
 
         FloatLayout:
             size_hint: 0.8, 0.13

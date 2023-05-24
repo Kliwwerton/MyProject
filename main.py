@@ -19,7 +19,7 @@ from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, \
     RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult
+from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
 
 # from kivymd.theming import ThemeManager
 
@@ -392,6 +392,10 @@ class Fourth(Screen):
             element = AddComponent(self, self.ids.first_box, number_component=1)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
+            reset_button = ResetButton()
+            self.ids.reset_but.add_widget(reset_button)
+            calc_button = CalcButton()
+            self.ids.calc_but.add_widget(calc_button)
 
         elif not self.ids.second_box.children:
             element = AddComponent(self, self.ids.second_box, number_component=2)
@@ -459,6 +463,8 @@ class Fourth(Screen):
         self.ids.fourth_box.clear_widgets()
         self.ids.fifth_box.clear_widgets()
         self.ids.box_result.clear_widgets()
+        self.ids.reset_but.clear_widgets()
+        self.ids.calc_but.clear_widgets()
 
         self.composition = Composition()
 
