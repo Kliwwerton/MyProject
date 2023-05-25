@@ -1,5 +1,5 @@
 # version.regex
-# __version__ = 0.53
+# __version__ = 0.5.3
 
 from kivy.config import Config
 
@@ -540,14 +540,13 @@ class Fourth(Screen):
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
-    sound = SoundLoader.load('sound.wav')
+    sound = SoundLoader.load('sounds/sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def __init__(self):
         super().__init__()
 
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
-        self.icon = 'Logo.png'
         self.container = ScreenManager(transition=FallOutTransition())
         self.First = First()
         self.Second = Second()
