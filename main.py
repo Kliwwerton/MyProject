@@ -1,3 +1,5 @@
+# version.regex
+# __version__ = 0.53
 
 from kivy.config import Config
 
@@ -125,11 +127,6 @@ def return_mistake(value):
     if value == 'Превышено количество компонентов!':
         popup.ids.text_label.text = ''
     popup.open()
-
-
-class Container(ScreenManager):
-    """Main Widget"""
-    pass
 
 
 class References(Screen):
@@ -543,7 +540,7 @@ class Fourth(Screen):
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
-    sound = SoundLoader.load('sounds/sound.wav')
+    sound = SoundLoader.load('sound.wav')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def __init__(self):
@@ -551,7 +548,7 @@ class EngineerApp(App):
 
         self.title = 'ИНЖЕНЕР НА ВСЮ ГОЛОВУ!'
         self.icon = 'Logo.png'
-        self.container = Container(transition=FallOutTransition())
+        self.container = ScreenManager(transition=FallOutTransition())
         self.First = First()
         self.Second = Second()
         self.Third = Third()
