@@ -164,7 +164,7 @@ class Second(Screen):
 
     def calculate(self):
         """Calculating pressing pressure"""
-        EngineerApp.sound.play()
+
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
@@ -193,6 +193,7 @@ class Second(Screen):
 
             self.ids.label_P_pressing_text.text = 'Давление прессования:'
             self.ids.label_P_pressing_value.text = str(data)
+            EngineerApp.sound.play()
 
     def reset(self):
         """reset all parameters"""
@@ -220,6 +221,7 @@ class Second(Screen):
 
     def change_text(self):
         """Changing text Textinput after calculate"""
+
         if not VALUES:
             pass
         elif VALUES:
@@ -259,7 +261,8 @@ class Second(Screen):
 class Third(Screen):
 
     def calculate(self):
-        EngineerApp.sound.play()
+        """Calculates pressing pressure for any press"""
+
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
@@ -289,6 +292,7 @@ class Third(Screen):
             else:
                 self.ids.label_P_pressing_text.text = 'Удельное давление:'
                 self.ids.label_P_specific_pressure_value.text = str(data) + ' ' + 'кг/см[sup]2[/sup]'
+                EngineerApp.sound.play()
 
     def open_ressetPopup(self):
         RessetPopup(self).open()
@@ -387,6 +391,7 @@ class Fourth(Screen):
             lab = Label()
             lab.text = 'ПРОИЗВЕДИТЕ СБРОС ДАННЫХ!'
             mistake.ids.mistake_box.add_widget(lab)
+            mistake.ids.mistake_but.size_hint = [0.2, 0.3]
             mistake.open()
         else:
             self.ids.box_result.clear_widgets()
@@ -395,10 +400,6 @@ class Fourth(Screen):
                 element = AddComponent(self, self.ids.first_box, number_component=1)
                 element.ids.spinner_component.values = self.components_for_spinner
                 element.open()
-                reset_button = ResetButton()
-                self.ids.reset_but.add_widget(reset_button)
-                calc_button = CalcButton()
-                self.ids.calc_but.add_widget(calc_button)
 
             elif not self.ids.second_box.children:
                 element = AddComponent(self, self.ids.second_box, number_component=2)
@@ -422,6 +423,14 @@ class Fourth(Screen):
 
             else:
                 return_mistake('Превышено количество компонентов!')
+
+    def add_buttons(self):
+        """Adds buttons: button1 RessetButton, button2 CalcButton"""
+        if not self.ids.reset_but.children:
+            reset_button = ResetButton()
+            self.ids.reset_but.add_widget(reset_button)
+            calc_button = CalcButton()
+            self.ids.calc_but.add_widget(calc_button)
 
     def build_label(self):
         if self.composition.name:
@@ -458,6 +467,7 @@ class Fourth(Screen):
                     self.weight_value[h] = n
 
         self.build_label()
+        EngineerApp.sound.play()
 
     def reset(self):
         self.ids.first_box.clear_widgets()
@@ -470,6 +480,7 @@ class Fourth(Screen):
         self.ids.calc_but.clear_widgets()
 
         self.composition = Composition()
+        EngineerApp.sound_reset.play()
 
     def open_component(self, instance):
         pass
@@ -559,7 +570,7 @@ class Fourth(Screen):
 
 class EngineerApp(App):
     """MAIN APP ENGINEER"""
-    sound = SoundLoader.load('sounds/sound.wav')
+    sound = SoundLoader.load('sounds/sound_but.mp3')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
 
     def __init__(self):

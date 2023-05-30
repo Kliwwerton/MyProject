@@ -207,10 +207,11 @@
 
         MyLabel:
             id: text_label
-            size_hint: 1, 0.5
+            size_hint: 1, 0.3
             text: 'Не хватает данных!'
 
         BoxLayout:
+            size_hint: 1, 0.5
             orientation: 'vertical'
             id: mistake_box
 
@@ -220,8 +221,9 @@
                 text: ''
 
         Button:
+            id: mistake_but
             text: 'OK'
-            size_hint: 0.2, 0.8
+            size_hint: 0.2, 0.4
             pos_hint: {'center_x': 0.5}
             on_press:
                 root.dismiss()

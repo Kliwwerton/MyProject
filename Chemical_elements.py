@@ -291,6 +291,7 @@ class AddComponent(Popup):
 
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
+        self.dad.add_buttons()
 
         self.dismiss()
 
