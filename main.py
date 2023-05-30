@@ -17,8 +17,7 @@ from kivy.uix.label import Label
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
-from MyPopups import SelectionOptionPopup, choice_popup, \
-    RessetPopup, ClosePopup, MistakePopup
+from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup, MistakePopup
 
 from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
 
@@ -52,7 +51,7 @@ Builder.load_file('Gost_standards.kv')
 Builder.load_file('Cows_and_bulls.kv')
 
 
-def open_OptionPopup():
+def open_option_popup():
     if not VALUES:
         SelectionOptionPopup().open()
 
@@ -132,12 +131,13 @@ def return_mistake(value):
 
 class References(Screen):
     """Window of references"""
+
     def __init__(self):
         super().__init__()
         self.name = 'References'
 
 
-class Gost_standards(Screen):
+class GostStandards(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'Gost_standards'
@@ -146,7 +146,7 @@ class Gost_standards(Screen):
         pass
 
 
-class Cows_and_bulls(Screen):
+class CowsAndBulls(Screen):
     def __init__(self):
         super().__init__()
         self.name = 'Cows_and_bulls'
@@ -154,6 +154,7 @@ class Cows_and_bulls(Screen):
 
 class First(Screen):
     """First screen for the app"""
+
     @staticmethod
     def print():
         print(VALUES)
@@ -212,12 +213,12 @@ class Second(Screen):
         VALUES.clear()
         EngineerApp.sound_reset.play()
 
-    def open_ressetPopup(self):
+    def open_resset_popup(self):
         RessetPopup(self).open()
 
     @staticmethod
-    def open_SelectionOptionPopup():
-        open_OptionPopup()
+    def open_selection_option_popup():
+        open_option_popup()
 
     def change_text(self):
         """Changing text Textinput after calculate"""
@@ -294,7 +295,7 @@ class Third(Screen):
                 self.ids.label_P_specific_pressure_value.text = str(data) + ' ' + 'кг/см[sup]2[/sup]'
                 EngineerApp.sound.play()
 
-    def open_ressetPopup(self):
+    def open_resset_popup(self):
         RessetPopup(self).open()
 
     def reset(self):
@@ -322,8 +323,8 @@ class Third(Screen):
             self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
 
     @staticmethod
-    def open_SelectionOptionPopup():
-        open_OptionPopup()
+    def open_selection_option_popup():
+        open_option_popup()
 
     def change_text(self):
         if not VALUES:
@@ -363,6 +364,7 @@ class Third(Screen):
 
 class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
+
     def __init__(self):
         super().__init__()
         self.composition = Composition()
@@ -372,7 +374,7 @@ class Fourth(Screen):
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
 
-    def open_ressetPopup(self):
+    def open_reset_popup(self):
         RessetPopup(self).open()
 
     def add_new_component(self):
@@ -584,8 +586,8 @@ class EngineerApp(App):
         self.Fourth = Fourth()
         # self.Fifth = Fifth()
         self.References = References()
-        self.Gost_standards = Gost_standards()
-        self.Cows_and_bulls = Cows_and_bulls()
+        self.Gost_standards = GostStandards()
+        self.Cows_and_bulls = CowsAndBulls()
 
     def build(self):
         self.icon = 'Logo.png'
