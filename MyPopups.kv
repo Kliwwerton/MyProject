@@ -207,13 +207,17 @@
 
         MyLabel:
             id: text_label
-            size_hint: 1, 0.8
+            size_hint: 1, 0.5
             text: 'Не хватает данных!'
 
-        MyLabel:
-            id: text_mistake
-            markup: True
-            text: ''
+        BoxLayout:
+            orientation: 'vertical'
+            id: mistake_box
+
+            MyLabel:
+                id: text_mistake
+                markup: True
+                text: ''
 
         Button:
             text: 'OK'

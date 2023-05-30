@@ -13,6 +13,7 @@ from kivy.core.window import Window
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
+from kivy.uix.label import Label
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
@@ -371,38 +372,56 @@ class Fourth(Screen):
         RessetPopup(self).open()
 
     def add_new_component(self):
+        """Adds new component to mixture"""
 
-        if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box, number_component=1)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-            reset_button = ResetButton()
-            self.ids.reset_but.add_widget(reset_button)
-            calc_button = CalcButton()
-            self.ids.calc_but.add_widget(calc_button)
+        summ = 0
+        for i in self.composition.mixture:
+            summ += float(self.composition.mixture[i])
 
-        elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box, number_component=2)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
-        elif not self.ids.third_box.children:
-            element = AddComponent(self, self.ids.third_box, number_component=3)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
-        elif not self.ids.fourth_box.children:
-            element = AddComponent(self, self.ids.fourth_box, number_component=4)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
-        elif not self.ids.fifth_box.children:
-            element = AddComponent(self, self.ids.fifth_box, number_component=5)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
+        if summ == 100:
+            mistake = MistakePopup()
+            mistake.size_hint = [0.8, 0.24]
+            mistake.title = 'ПРЕДУПРЕЖДЕНИE!'
+            mistake.ids.text_label.text = 'Сумма всех компонентов уже 100%'
+            mistake.ids.text_mistake.text = 'БОЛЬШЕ НЕ ДОБАВИТЬ!!!'
+            lab = Label()
+            lab.text = 'ПРОИЗВЕДИТЕ СБРОС ДАННЫХ!'
+            mistake.ids.mistake_box.add_widget(lab)
+            mistake.open()
         else:
-            return_mistake('Превышено количество компонентов!')
+            self.ids.box_result.clear_widgets()
+
+            if not self.ids.first_box.children:
+                element = AddComponent(self, self.ids.first_box, number_component=1)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+                reset_button = ResetButton()
+                self.ids.reset_but.add_widget(reset_button)
+                calc_button = CalcButton()
+                self.ids.calc_but.add_widget(calc_button)
+
+            elif not self.ids.second_box.children:
+                element = AddComponent(self, self.ids.second_box, number_component=2)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            elif not self.ids.third_box.children:
+                element = AddComponent(self, self.ids.third_box, number_component=3)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            elif not self.ids.fourth_box.children:
+                element = AddComponent(self, self.ids.fourth_box, number_component=4)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            elif not self.ids.fifth_box.children:
+                element = AddComponent(self, self.ids.fifth_box, number_component=5)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            else:
+                return_mistake('Превышено количество компонентов!')
 
     def build_label(self):
         if self.composition.name:
