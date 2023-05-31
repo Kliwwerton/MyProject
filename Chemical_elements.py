@@ -15,10 +15,12 @@ class Box(BoxLayout):
         self.instance = instance
 
     def change_value(self):
-        if self.ids.value_element.text == self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text]:
+        if self.ids.value_element.text == \
+                self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text]:
             pass
         else:
-            self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text] = self.ids.value_element.text
+            self.instance.COMPONENTS[self.instance.component.name][self.ids.name_element.text] = \
+                self.ids.value_element.text
 
 
 class Box2(BoxLayout):
@@ -475,4 +477,3 @@ class AddComponents(Popup):
                 mistake.ids.text_label.text = 'Для достоверного расчёта '
                 mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
                 mistake.open()
-
