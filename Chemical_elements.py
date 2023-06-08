@@ -381,6 +381,9 @@ class AddComponents(Popup):
     def close(self):
         self.widget.ids.spinner_component.text = 'Выберите компонент'
 
+    def add_buttons(self):
+        pass
+
     def add_new_component(self):
 
         values = ['Новый компонент']

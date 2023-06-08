@@ -1,5 +1,5 @@
 # version.regex
-# __version__ = 0.5.3
+# __version__ = 0.5.5
 
 from kivy.config import Config
 
