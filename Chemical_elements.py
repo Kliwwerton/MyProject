@@ -39,6 +39,13 @@ class BigBoxResult(BoxLayout):
     pass
 
 
+class BoxForElement(BoxLayout):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.component = None
+
+
 class ResetButton(Button):
     pass
 
@@ -163,6 +170,10 @@ class AddComponent(Popup):
             new_popup = AddComponents(self)
             new_popup.open()
 
+        elif self.widget.component:
+            self.clear_grid()
+            self.build()
+
         elif self.dad.composition.mixture:
 
             for i in self.dad.composition.mixture:
@@ -216,6 +227,10 @@ class AddComponent(Popup):
                 mistake.open()
 
             elif self.dad.composition.mixture:
+                if self.widget.component in self.dad.composition.mixture:
+                    del self.dad.composition.mixture[self.widget.component]
+                    self.dad.composition.names.remove(self.widget.component.name)
+                    self.widget.clear_widgets()
                 summ = 0
 
                 for i in self.dad.composition.mixture:
@@ -253,12 +268,16 @@ class AddComponent(Popup):
         self.dad.composition.mixture[self.component] = self.ids.content_value.text
         self.dad.composition.names.append(self.component.name)
 
-        if self.dad.composition.name:
-            self.dad.composition.name += ':' + self.component.name
-            self.dad.composition.ratio += ':' + self.ids.content_value.text
-        else:
-            self.dad.composition.name += self.component.name
-            self.dad.composition.ratio += self.ids.content_value.text
+        k = 0
+        for i in self.dad.composition.mixture:
+            if k == 0:
+                self.dad.composition.name = i.name
+                print(self.dad.composition.mixture)
+                self.dad.composition.ratio = str(self.dad.composition.mixture[i])
+                k += 1
+            else:
+                self.dad.composition.name += ':' + i.name
+                self.dad.composition.ratio += ':' + str(self.dad.composition.mixture[i])
 
         _box = BigBox()
         _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
@@ -295,6 +314,7 @@ class AddComponent(Popup):
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
         self.widget.component = self.component
+        self.widget.number_component = self.number_component
         self.dad.add_buttons()
 
         self.dismiss()

@@ -24,29 +24,24 @@
             on_press:
                 root.add_new_component()
 
-        BoxLayout:
+        BoxForElement:
             id: first_box
-            size_hint: 1, 0.18
             on_touch_down:
                 root.open_component(self) if self.collide_point(*args[1].pos) else False
 
-        BoxLayout:
+        BoxForElement:
             id: second_box
-            size_hint: 1, 0.18
-#            on_touch_down:
-#                root.open_component(self)
+            on_touch_down:
+                root.open_component(self) if self.collide_point(*args[1].pos) else False
 
-        BoxLayout:
+        BoxForElement:
             id: third_box
-            size_hint: 1, 0.18
 
-        BoxLayout:
+        BoxForElement:
             id: fourth_box
-            size_hint: 1, 0.18
 
-        BoxLayout:
+        BoxForElement:
             id: fifth_box
-            size_hint: 1, 0.18
 
         BoxLayout:
             size_hint: 1, 0.13
