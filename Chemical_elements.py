@@ -140,6 +140,7 @@ class AddComponent(Popup):
         """checks the selected name for entry into the list """
 
         if self.ids.spinner_component.text == 'Новый компонент':
+
             if 'Компонент 1' not in self.dad.composition.names:
                 self.ids.spinner_component.text = 'Компонент 1'
             elif 'Компонент 2' not in self.dad.composition.names:
@@ -293,6 +294,7 @@ class AddComponent(Popup):
 
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
+        self.widget.component = self.component
         self.dad.add_buttons()
 
         self.dismiss()

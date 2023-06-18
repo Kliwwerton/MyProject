@@ -374,6 +374,11 @@ class Fourth(Screen):
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
 
+    # def on_touch_down(self, touch):
+    #     print(touch, self.children)
+    #     if touch.pos in self.ids.btn_add_component.pos:
+    #         print('Hello world')
+
     def open_reset_popup(self):
         RessetPopup(self).open()
 
@@ -485,7 +490,16 @@ class Fourth(Screen):
         EngineerApp.sound_reset.play()
 
     def open_component(self, instance):
-        pass
+        try:
+            if instance.component:
+                element = AddComponent(self, instance, number_component=instance.number_component)
+                element.ids.spinner_component.text = instance.component.name
+                print(instance.component.name)
+                element.ids.spinner_component.values = []
+                element.open()
+
+        except AttributeError:
+            print('Перехвачена ошибка')
 
 
 # class Fifth(Screen):
