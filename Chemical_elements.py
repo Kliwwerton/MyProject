@@ -272,7 +272,7 @@ class AddComponent(Popup):
         for i in self.dad.composition.mixture:
             if k == 0:
                 self.dad.composition.name = i.name
-                print(self.dad.composition.mixture)
+                # print(self.dad.composition.mixture)
                 self.dad.composition.ratio = str(self.dad.composition.mixture[i])
                 k += 1
             else:

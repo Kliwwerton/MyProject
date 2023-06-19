@@ -493,11 +493,16 @@ class Fourth(Screen):
     def open_component(self, instance):
         try:
             if instance.component:
+                CHEMICAL_COMPONENTS[instance.component.name] = instance.component.chemical_composition
                 element = AddComponent(self, instance, number_component=instance.number_component)
                 element.ids.spinner_component.text = instance.component.name
-                print(instance.component.name)
                 element.ids.spinner_component.values = []
+                element.ids.content_value.text = self.composition.mixture[instance.component]
+
                 element.open()
+                EngineerApp.sound_open_component.play()
+            else:
+                EngineerApp.sound_duck_open_component.play()
 
         except AttributeError:
             print('Перехвачена ошибка')
@@ -589,6 +594,8 @@ class EngineerApp(App):
     """MAIN APP ENGINEER"""
     sound = SoundLoader.load('sounds/sound_but.mp3')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
+    sound_duck_open_component = SoundLoader.load('sounds/animal_bird_duck.mp3')
+    sound_open_component = SoundLoader.load('sounds/open_component.mp3')
 
     def __init__(self):
         super().__init__()
