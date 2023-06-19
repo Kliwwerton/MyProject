@@ -477,11 +477,12 @@ class Fourth(Screen):
         EngineerApp.sound.play()
 
     def reset(self):
-        self.ids.first_box.clear_widgets()
-        self.ids.second_box.clear_widgets()
-        self.ids.third_box.clear_widgets()
-        self.ids.fourth_box.clear_widgets()
-        self.ids.fifth_box.clear_widgets()
+        cont = [self.ids.first_box, self.ids.second_box, self.ids.third_box, self.ids.fourth_box, self.ids.fifth_box]
+
+        for i in cont:
+            i.clear_widgets()
+            i.component = None
+
         self.ids.box_result.clear_widgets()
         self.ids.reset_but.clear_widgets()
         self.ids.calc_but.clear_widgets()
