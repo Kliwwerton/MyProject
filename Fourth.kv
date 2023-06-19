@@ -21,7 +21,8 @@
             text: 'ДОБАВИТЬ КОМПОНЕНТ'
             size_hint: 1, 0.1
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
+            border: 25, 8, 8, 8
+            on_release:
                 root.add_new_component()
 
         BoxForElement:
@@ -55,13 +56,6 @@
 
             RelativeLayout:
                 size_hint: 0.6, 1
-
-#                Button:
-#                    text: '#'
-#                    size_hint: 0.25, 0.5
-#                    pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-#                    on_release:
-#                        root.manager.current = 'Fifth'
 
         BoxLayout:
             id: box_result
