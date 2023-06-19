@@ -493,15 +493,18 @@ class Fourth(Screen):
     def open_component(self, instance):
         try:
             if instance.component:
+                self.ids.box_result.clear_widgets()
+
                 CHEMICAL_COMPONENTS[instance.component.name] = instance.component.chemical_composition
                 element = AddComponent(self, instance, number_component=instance.number_component)
                 element.ids.spinner_component.text = instance.component.name
-                element.ids.spinner_component.values = []
+                element.ids.spinner_component.values = self.components_for_spinner
                 element.ids.content_value.text = self.composition.mixture[instance.component]
 
                 element.open()
                 EngineerApp.sound_open_component.play()
             else:
+
                 EngineerApp.sound_duck_open_component.play()
 
         except AttributeError:
