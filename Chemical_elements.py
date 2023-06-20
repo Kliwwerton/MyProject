@@ -2,6 +2,7 @@ from copy import deepcopy
 
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
 
 from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS
@@ -37,6 +38,20 @@ class BigBox(BoxLayout):
 
 class BigBoxResult(BoxLayout):
     pass
+
+
+class BoxForElement(BoxLayout):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.component = None
+
+
+class MyAnchor(AnchorLayout):
+    def __init__(self, widget, dad):
+        super().__init__()
+        self.instance = widget
+        self.dad = dad
 
 
 class ResetButton(Button):
@@ -140,6 +155,7 @@ class AddComponent(Popup):
         """checks the selected name for entry into the list """
 
         if self.ids.spinner_component.text == 'Новый компонент':
+
             if 'Компонент 1' not in self.dad.composition.names:
                 self.ids.spinner_component.text = 'Компонент 1'
             elif 'Компонент 2' not in self.dad.composition.names:
@@ -161,6 +177,10 @@ class AddComponent(Popup):
         elif self.ids.spinner_component.text == 'СОБРАТЬ СМЕСЬ':
             new_popup = AddComponents(self)
             new_popup.open()
+
+        elif self.widget.component:
+            self.clear_grid()
+            self.build()
 
         elif self.dad.composition.mixture:
 
@@ -215,6 +235,10 @@ class AddComponent(Popup):
                 mistake.open()
 
             elif self.dad.composition.mixture:
+                if self.widget.component in self.dad.composition.mixture:
+                    del self.dad.composition.mixture[self.widget.component]
+                    self.dad.composition.names.remove(self.widget.component.name)
+                    self.widget.clear_widgets()
                 summ = 0
 
                 for i in self.dad.composition.mixture:
@@ -252,12 +276,16 @@ class AddComponent(Popup):
         self.dad.composition.mixture[self.component] = self.ids.content_value.text
         self.dad.composition.names.append(self.component.name)
 
-        if self.dad.composition.name:
-            self.dad.composition.name += ':' + self.component.name
-            self.dad.composition.ratio += ':' + self.ids.content_value.text
-        else:
-            self.dad.composition.name += self.component.name
-            self.dad.composition.ratio += self.ids.content_value.text
+        k = 0
+        for i in self.dad.composition.mixture:
+            if k == 0:
+                self.dad.composition.name = i.name
+                # print(self.dad.composition.mixture)
+                self.dad.composition.ratio = str(self.dad.composition.mixture[i])
+                k += 1
+            else:
+                self.dad.composition.name += ':' + i.name
+                self.dad.composition.ratio += ':' + str(self.dad.composition.mixture[i])
 
         _box = BigBox()
         _box.ids.number_component.text = 'Компонент № ' + str(self.number_component)
@@ -293,6 +321,8 @@ class AddComponent(Popup):
 
         self.widget.name = self.component.name
         self.widget.add_widget(_box)
+        self.widget.component = self.component
+        self.widget.number_component = self.number_component
         self.dad.add_buttons()
 
         self.dismiss()
@@ -385,6 +415,8 @@ class AddComponents(Popup):
         pass
 
     def add_new_component(self):
+        
+        """Adds new component to mixture"""
 
         values = ['Новый компонент']
         for i in CHEMICAL_COMPONENTS:
@@ -410,13 +442,11 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-    def add_name(self):
+    def add_name(self, widget):
         """Forms the name"""
         self.ids.box_result.clear_widgets()
         box = Box3()
         box.orientation = 'horizontal'
-
-        # print(len(self.composition.name))
 
         if len(self.composition.name) > 34:
             box.ids.lab_1.font_size = '10sp'
@@ -431,25 +461,32 @@ class AddComponents(Popup):
         box.ids.lab_2.color = [1, 1, 1, 1]
         box.ids.lab_2.size_hint = [0.5, 1]
         self.ids.box_result.add_widget(box)
+        print(self.composition.mixture)
+        print(widget.name, widget.component)
+        # self.widget.dad.composition.mixture[widget.component] = self.composition.mixture[widget.component]
 
-    def build_label(self):
-        if self.composition.name:
-            self.ids.box_result.clear_widgets()
-
-            _box = BigBoxResult()
-            _box.ids.number_component.text = 'Состав шихты: '
-            if len(self.composition.name) > 50:
-                _box.ids.components_name.font_size = '10sp'
-            _box.ids.components_name.text = self.composition.name
-            _box.ids.ratio_composition.text = self.composition.ratio
-
-            for i, j in self.weight_value.items():
-                box = Box3()
-                box.ids.lab_1.text = i
-                box.ids.lab_2.text = str(round(j, 2))
-                _box.ids.box_for_elements.add_widget(box)
-
-            self.ids.box_result.add_widget(_box)
+    # def build_label(self):
+    #     """
+    #     :rtype: object
+    #
+    #     """
+    #     if self.composition.name:
+    #         self.ids.box_result.clear_widgets()
+    #
+    #         _box = BigBoxResult()
+    #         _box.ids.number_component.text = 'Состав шихты: '
+    #         if len(self.composition.name) > 50:
+    #             _box.ids.components_name.font_size = '10sp'
+    #         _box.ids.components_name.text = self.composition.name
+    #         _box.ids.ratio_composition.text = self.composition.ratio
+    #
+    #         for i, j in self.weight_value.items():
+    #             box = Box3()
+    #             box.ids.lab_1.text = i
+    #             box.ids.lab_2.text = str(round(j, 2))
+    #             _box.ids.box_for_elements.add_widget(box)
+    #
+    #         self.ids.box_result.add_widget(_box)
 
     def add_mixture(self):
 

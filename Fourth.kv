@@ -6,6 +6,7 @@
         id: main_box
         orientation: 'vertical'
         padding: 5
+        spacing: 5
 
         AnchorLayout:
             anchor_x: 'center'
@@ -17,35 +18,28 @@
                 text: 'Расчёт химического состава смеси.'
 
         Button:
+            id: btn_add_component
             text: 'ДОБАВИТЬ КОМПОНЕНТ'
             size_hint: 1, 0.1
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
+            border: 25, 8, 8, 8
+            on_release:
                 root.add_new_component()
 
-        BoxLayout:
+        BoxForElement:
             id: first_box
-            size_hint: 1, 0.18
-#            on_touch_down:
-#                root.open_component(self)
 
-        BoxLayout:
+        BoxForElement:
             id: second_box
-            size_hint: 1, 0.18
-#            on_touch_down:
-#                root.open_component(self)
 
-        BoxLayout:
+        BoxForElement:
             id: third_box
-            size_hint: 1, 0.18
 
-        BoxLayout:
+        BoxForElement:
             id: fourth_box
-            size_hint: 1, 0.18
 
-        BoxLayout:
+        BoxForElement:
             id: fifth_box
-            size_hint: 1, 0.18
 
         BoxLayout:
             size_hint: 1, 0.13
@@ -59,13 +53,6 @@
 
             RelativeLayout:
                 size_hint: 0.6, 1
-
-#                Button:
-#                    text: '#'
-#                    size_hint: 0.25, 0.5
-#                    pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-#                    on_release:
-#                        root.manager.current = 'Fifth'
 
         BoxLayout:
             id: box_result

@@ -1,5 +1,5 @@
 # version.regex
-# __version__ = 0.5.5
+# __version__ = 0.5.6
 
 from kivy.config import Config
 
@@ -14,12 +14,13 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
 from kivy.uix.label import Label
+from kivy.uix.anchorlayout import AnchorLayout
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
+from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton, MyAnchor
 
 # Screens
 Builder.load_file('First.kv')
@@ -374,6 +375,11 @@ class Fourth(Screen):
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
 
+    # def on_touch_down(self, touch):
+    #     print(touch, self.children)
+    #     if touch.pos in self.ids.btn_add_component.pos:
+    #         print('Hello world')
+
     def open_reset_popup(self):
         RessetPopup(self).open()
 
@@ -472,11 +478,12 @@ class Fourth(Screen):
         EngineerApp.sound.play()
 
     def reset(self):
-        self.ids.first_box.clear_widgets()
-        self.ids.second_box.clear_widgets()
-        self.ids.third_box.clear_widgets()
-        self.ids.fourth_box.clear_widgets()
-        self.ids.fifth_box.clear_widgets()
+        cont = [self.ids.first_box, self.ids.second_box, self.ids.third_box, self.ids.fourth_box, self.ids.fifth_box]
+
+        for i in cont:
+            i.clear_widgets()
+            i.component = None
+
         self.ids.box_result.clear_widgets()
         self.ids.reset_but.clear_widgets()
         self.ids.calc_but.clear_widgets()
@@ -484,8 +491,52 @@ class Fourth(Screen):
         self.composition = Composition()
         EngineerApp.sound_reset.play()
 
+    def dell_component(self, widget):
+
+        del self.composition.mixture[widget.component]
+        self.composition.names.remove(widget.component.name)
+        widget.name = None
+        widget.component = None
+
+        widget.clear_widgets()
+        k = 0
+        for i in self.composition.mixture:
+            if k == 0:
+                self.composition.name = i.name
+                self.composition.ratio = str(self.composition.mixture[i])
+                k += 1
+            else:
+                self.composition.name += ':' + i.name
+                self.composition.ratio += ':' + str(self.composition.mixture[i])
+
+        print(self.composition, widget)
+
     def open_component(self, instance):
-        pass
+        try:
+            if instance.component:
+                print(instance.component)
+                self.ids.box_result.clear_widgets()
+
+                CHEMICAL_COMPONENTS[instance.component.name] = instance.component.chemical_composition
+                element = AddComponent(self, instance, number_component=instance.number_component)
+                element.ids.spinner_component.text = instance.component.name
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.ids.content_value.text = self.composition.mixture[instance.component]
+                element.ids.btn_add.text = 'Внести корректировку'
+
+                element.ids.box_id.add_widget(MyAnchor(instance, element))
+                element.ids.btn_id.size_hint = [0.6, 0.8]
+
+                element.open()
+                EngineerApp.sound_open_component.play()
+            else:
+
+                EngineerApp.sound_duck_open_component.play()
+
+        except AttributeError:
+            print('Перехвачена ошибка')
+
+        # print(instance.name)
 
 
 # class Fifth(Screen):
@@ -574,6 +625,8 @@ class EngineerApp(App):
     """MAIN APP ENGINEER"""
     sound = SoundLoader.load('sounds/sound_but.mp3')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
+    sound_duck_open_component = SoundLoader.load('sounds/animal_bird_duck.mp3')
+    sound_open_component = SoundLoader.load('sounds/open_component.mp3')
 
     def __init__(self):
         super().__init__()
