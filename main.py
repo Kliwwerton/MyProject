@@ -20,7 +20,7 @@ from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
+from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton, MyAnchor
 
 # Screens
 Builder.load_file('First.kv')
@@ -491,7 +491,24 @@ class Fourth(Screen):
         self.composition = Composition()
         EngineerApp.sound_reset.play()
 
-    def p(self, widget):
+    def dell_component(self, widget):
+
+        del self.composition.mixture[widget.component]
+        self.composition.names.remove(widget.component.name)
+        widget.name = None
+        widget.component = None
+
+        widget.clear_widgets()
+        k = 0
+        for i in self.composition.mixture:
+            if k == 0:
+                self.composition.name = i.name
+                self.composition.ratio = str(self.composition.mixture[i])
+                k += 1
+            else:
+                self.composition.name += ':' + i.name
+                self.composition.ratio += ':' + str(self.composition.mixture[i])
+
         print(self.composition, widget)
 
     def open_component(self, instance):
@@ -504,11 +521,10 @@ class Fourth(Screen):
                 element.ids.spinner_component.text = instance.component.name
                 element.ids.spinner_component.values = self.components_for_spinner
                 element.ids.content_value.text = self.composition.mixture[instance.component]
+                element.ids.btn_add.text = 'Внести корректировку'
 
-                anch = AnchorLayout()
-
-                element.ids.box_id.add_widget()
-                element.ids.btn_id.size_hint = [0.6, 0.6]
+                element.ids.box_id.add_widget(MyAnchor(instance, element))
+                element.ids.btn_id.size_hint = [0.6, 0.8]
 
                 element.open()
                 EngineerApp.sound_open_component.play()
@@ -518,6 +534,8 @@ class Fourth(Screen):
 
         except AttributeError:
             print('Перехвачена ошибка')
+
+        # print(instance.name)
 
 
 # class Fifth(Screen):

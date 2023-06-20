@@ -47,6 +47,13 @@ class BoxForElement(BoxLayout):
         self.component = None
 
 
+class MyAnchor(AnchorLayout):
+    def __init__(self, widget, dad):
+        super().__init__()
+        self.instance = widget
+        self.dad = dad
+
+
 class ResetButton(Button):
     pass
 

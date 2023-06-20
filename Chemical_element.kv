@@ -15,20 +15,18 @@
 
 
 <MyAnchor>:
-
     Button:
         text: 'УДАЛИТЬ ЭЛЕМЕНТ'
         font_size: '10sp'
         background_color: 1,0,0,1
-        size_hint: 0.8, 0.6
+        size_hint: 0.8, 0.8
         pos_hint: {'x': 0.5, 'y': 0.5}
         on_release:
-#            root.p()
-            app.Fourth.p(root)
+            app.Fourth.dell_component(root.instance)
+            root.dad.dismiss()
 
 
 <ResetButton>
-#    size_hint: 0.6, 0.12
     text: 'СБРОС'
     font_size: '20sp'
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -158,7 +156,7 @@
                     text: 'ЗАКРЫТЬ'
                     font_size: '10sp'
                     background_color: 1,0,0,1
-                    size_hint: 0.3, 0.6
+                    size_hint: 0.3, 0.8
                     pos_hint: {'x': 0.6, 'y': 0.5}
                     on_press:
                         root.close()
