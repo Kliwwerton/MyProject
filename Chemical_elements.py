@@ -2,6 +2,7 @@ from copy import deepcopy
 
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
 
 from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS

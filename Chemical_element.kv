@@ -14,6 +14,19 @@
     input_filter: 'float'
 
 
+<MyAnchor>:
+
+    Button:
+        text: 'УДАЛИТЬ ЭЛЕМЕНТ'
+        font_size: '10sp'
+        background_color: 1,0,0,1
+        size_hint: 0.8, 0.6
+        pos_hint: {'x': 0.5, 'y': 0.5}
+        on_release:
+#            root.p()
+            app.Fourth.p(root)
+
+
 <ResetButton>
 #    size_hint: 0.6, 0.12
     text: 'СБРОС'
@@ -21,6 +34,7 @@
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     on_press:
         app.Fourth.open_reset_popup()
+
 
 <CalcButton>:
     text: 'РАССЧИТАТЬ'
@@ -89,30 +103,6 @@
         spacing: 5
         orientation: 'vertical'
 
-        BoxLayout:
-            id: box_id
-            size_hint: 1, 0.14
-            spacing: 5
-
-            Button:
-                text: 'НАЗАД'
-                font_size: '15sp'
-                size_hint: 0.3, 0.8
-                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
-                on_press:
-                    root.close()
-                    root.dismiss()
-
-            Button:
-                id: btn_id
-                text: 'ЗАКРЫТЬ'
-                font_size: '15sp'
-                size_hint: 0.3, 0.8
-                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
-                on_press:
-                    root.close()
-                    root.dismiss()
-
         Spinner:
             id: spinner_component
             markup: True
@@ -155,6 +145,24 @@
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_release:
                 root.check_values()
+
+        BoxLayout:
+            id: box_id
+            size_hint: 1, 0.14
+            spacing: 5
+
+            AnchorLayout:
+
+                Button:
+                    id: btn_id
+                    text: 'ЗАКРЫТЬ'
+                    font_size: '10sp'
+                    background_color: 1,0,0,1
+                    size_hint: 0.3, 0.6
+                    pos_hint: {'x': 0.6, 'y': 0.5}
+                    on_press:
+                        root.close()
+                        root.dismiss()
 
 
 <AddComponents>:

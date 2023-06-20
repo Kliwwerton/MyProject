@@ -14,6 +14,7 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
 from kivy.uix.label import Label
+from kivy.uix.anchorlayout import AnchorLayout
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
@@ -490,6 +491,9 @@ class Fourth(Screen):
         self.composition = Composition()
         EngineerApp.sound_reset.play()
 
+    def p(self, widget):
+        print(self.composition, widget)
+
     def open_component(self, instance):
         try:
             if instance.component:
@@ -500,6 +504,11 @@ class Fourth(Screen):
                 element.ids.spinner_component.text = instance.component.name
                 element.ids.spinner_component.values = self.components_for_spinner
                 element.ids.content_value.text = self.composition.mixture[instance.component]
+
+                anch = AnchorLayout()
+
+                element.ids.box_id.add_widget()
+                element.ids.btn_id.size_hint = [0.6, 0.6]
 
                 element.open()
                 EngineerApp.sound_open_component.play()
