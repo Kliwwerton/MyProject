@@ -172,51 +172,27 @@
         spacing: 2
         orientation: 'vertical'
 
-        BoxLayout:
-            id: box_id
-            size_hint: 1, 0.12
-            spacing: 5
-
-            Button:
-                text: 'НАЗАД'
-                font_size: '15sp'
-                size_hint: 0.3, 0.8
-                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
-                on_press:
-                    root.close()
-                    root.dismiss()
-
-            Button:
-                id: btn_id
-                text: 'ЗАКРЫТЬ'
-                font_size: '15sp'
-                size_hint: 0.3, 0.8
-                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
-                on_press:
-                    root.close()
-                    root.dismiss()
-
         Button:
             text: 'Добавить компонент'
             size_hint: 1, 0.12
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
+            on_release:
                 root.add_new_component()
 
         BoxForElement:
             id: first_box
             on_children:
-                root.add_name()
+                root.add_name(self)
 
         BoxForElement:
             id: second_box
             on_children:
-                root.add_name()
+                root.add_name(self)
 
         BoxForElement:
             id: third_box
             on_children:
-                root.add_name()
+                root.add_name(self)
 
         BoxLayout:
             id: box_result
@@ -229,3 +205,21 @@
             on_press:
                 root.add_mixture()
                 root.dismiss()
+
+        BoxLayout:
+            id: box_id
+            size_hint: 1, 0.12
+            spacing: 5
+
+            AnchorLayout:
+
+                Button:
+                    id: btn_id
+                    text: 'ЗАКРЫТЬ'
+                    font_size: '10sp'
+                    background_color: 1,0,0,1
+                    size_hint: 0.3, 0.8
+                    pos_hint: {'x': 0.6, 'y': 0.5}
+                    on_press:
+                        root.close()
+                        root.dismiss()

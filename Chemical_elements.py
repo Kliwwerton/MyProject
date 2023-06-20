@@ -415,6 +415,8 @@ class AddComponents(Popup):
         pass
 
     def add_new_component(self):
+        
+        """Adds new component to mixture"""
 
         values = ['Новый компонент']
         for i in CHEMICAL_COMPONENTS:
@@ -440,13 +442,11 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-    def add_name(self):
+    def add_name(self, widget):
         """Forms the name"""
         self.ids.box_result.clear_widgets()
         box = Box3()
         box.orientation = 'horizontal'
-
-        # print(len(self.composition.name))
 
         if len(self.composition.name) > 34:
             box.ids.lab_1.font_size = '10sp'
@@ -461,25 +461,32 @@ class AddComponents(Popup):
         box.ids.lab_2.color = [1, 1, 1, 1]
         box.ids.lab_2.size_hint = [0.5, 1]
         self.ids.box_result.add_widget(box)
+        print(self.composition.mixture)
+        print(widget.name, widget.component)
+        # self.widget.dad.composition.mixture[widget.component] = self.composition.mixture[widget.component]
 
-    def build_label(self):
-        if self.composition.name:
-            self.ids.box_result.clear_widgets()
-
-            _box = BigBoxResult()
-            _box.ids.number_component.text = 'Состав шихты: '
-            if len(self.composition.name) > 50:
-                _box.ids.components_name.font_size = '10sp'
-            _box.ids.components_name.text = self.composition.name
-            _box.ids.ratio_composition.text = self.composition.ratio
-
-            for i, j in self.weight_value.items():
-                box = Box3()
-                box.ids.lab_1.text = i
-                box.ids.lab_2.text = str(round(j, 2))
-                _box.ids.box_for_elements.add_widget(box)
-
-            self.ids.box_result.add_widget(_box)
+    # def build_label(self):
+    #     """
+    #     :rtype: object
+    #
+    #     """
+    #     if self.composition.name:
+    #         self.ids.box_result.clear_widgets()
+    #
+    #         _box = BigBoxResult()
+    #         _box.ids.number_component.text = 'Состав шихты: '
+    #         if len(self.composition.name) > 50:
+    #             _box.ids.components_name.font_size = '10sp'
+    #         _box.ids.components_name.text = self.composition.name
+    #         _box.ids.ratio_composition.text = self.composition.ratio
+    #
+    #         for i, j in self.weight_value.items():
+    #             box = Box3()
+    #             box.ids.lab_1.text = i
+    #             box.ids.lab_2.text = str(round(j, 2))
+    #             _box.ids.box_for_elements.add_widget(box)
+    #
+    #         self.ids.box_result.add_widget(_box)
 
     def add_mixture(self):
 

@@ -514,6 +514,7 @@ class Fourth(Screen):
     def open_component(self, instance):
         try:
             if instance.component:
+                print(instance.component)
                 self.ids.box_result.clear_widgets()
 
                 CHEMICAL_COMPONENTS[instance.component.name] = instance.component.chemical_composition
