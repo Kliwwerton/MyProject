@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+from kivy.graphics import Color
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.anchorlayout import AnchorLayout
@@ -393,6 +394,7 @@ class AddComponent(Popup):
         self.widget.add_widget(_box)
         self.widget.number_component = self.number_component
         self.dad.add_buttons()
+        CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
 
         self.dismiss()
 
@@ -511,7 +513,7 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-    def check_name(self, instance):
+    def check_name(self):
         """Forms the name"""
         if self.composition.mixture:
 

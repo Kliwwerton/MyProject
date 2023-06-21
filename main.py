@@ -14,13 +14,12 @@ from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen, ScreenManager, FallOutTransition
 from kivy.uix.label import Label
-from kivy.uix.anchorlayout import AnchorLayout
 
 from variables import PRESS_PARAMETERS, CHEMICAL_COMPONENTS
 from variables import VALUES
 from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup, MistakePopup
 
-from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton, MyAnchor
+from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
 
 # Screens
 Builder.load_file('First.kv')

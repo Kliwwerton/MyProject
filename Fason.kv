@@ -15,27 +15,6 @@
             size_hint: 1, 0.15
 
         BoxLayout:
-            size_hint: 1, 0.3
-            spacing: 5
-
-            Button:
-                text: 'НАЗАД'
-                size_hint: 1, 0.6
-                font_size: '15sp'
-                pos_hint: {'left_bottom': 0, 'center_y': 0.5}
-                on_press:
-                    root.dismiss()
-                    root.return_beck()
-
-            Button:
-                text: 'ЗАКРЫТЬ'
-                size_hint: 1, 0.6
-                font_size: '15sp'
-                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
-                on_press:
-                    root.dismiss()
-
-        BoxLayout:
             size_hint: 1, 0.2
 
             Label:
@@ -111,3 +90,30 @@
                     root.calculation()
                     app.Second.change_text(), app.Third.change_text()
                     root.dismiss()
+
+        BoxLayout:
+            size_hint: 1, 0.3
+            spacing: 5
+
+            AnchorLayout:
+
+                Button:
+                    text: 'НАЗАД'
+                    font_size: '10sp'
+                    size_hint: 0.5, 0.5
+                    background_color: 1,0,0,1
+                    pos_hint: {'x': 0.6, 'y': 0.5}
+                    on_release:
+                        root.dismiss()
+                        root.return_beck()
+
+            AnchorLayout:
+
+                Button:
+                    text: 'ЗАКРЫТЬ'
+                    font_size: '10sp'
+                    size_hint: 0.5, 0.5
+                    background_color: 1,0,0,1
+                    pos_hint: {'x': 0.6, 'y': 0.5}
+                    on_release:
+                        root.dismiss()
