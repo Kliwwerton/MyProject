@@ -148,12 +148,14 @@
         orientation: 'vertical'
 
         MyLabel:
+            id: warning_text
             text: 'При подтверждении будут удалены \n все введённые ранее данные!!!'
 
         BoxLayout:
             spacing: 5
 
             Button:
+                id: btn_res
                 text: 'СБРОС!!!'
                 size_hint: 1, 0.8
                 on_press:

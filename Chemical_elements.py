@@ -6,7 +6,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
 
 from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS
-from MyPopups import MistakePopup
+from MyPopups import MistakePopup, RessetPopup
 
 
 class Box(BoxLayout):
@@ -42,51 +42,69 @@ class BigBoxResult(BoxLayout):
 
 class BoxForElement(BoxLayout):
 
+    """Class includes all widgets for displays parameters component:
+     component.name
+     component.chemical_composition
+     KV code located in Chemical_element.kv file"""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = None
         self.dad = None
 
     def open_component(self):
-        # try:
+        try:
 
-        if self.component:
-            self.dad.ids.box_result.clear_widgets()
+            if self.component:
+                self.dad.ids.box_result.clear_widgets()
 
-            CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
-            if self.dad.color:
-                element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
-            else:
-                element = AddComponent(self.dad, self, number_component=self.number_component)
-            element.component = self.component
-            element.ids.spinner_component.text = self.component.name
-            element.ids.spinner_component.values = self.dad.components_for_spinner
-            element.ids.content_value.text = self.dad.composition.mixture[self.component]
-            element.ids.btn_add.text = 'Внести корректировку'
+                CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+                if self.dad.color:
+                    element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
+                else:
+                    element = AddComponent(self.dad, self, number_component=self.number_component)
+                element.component = self.component
+                element.title = 'Корректировка компонента'
+                element.ids.spinner_component.text = self.component.name
+                element.ids.spinner_component.values = self.dad.components_for_spinner
+                element.ids.content_value.text = self.dad.composition.mixture[self.component]
+                element.ids.btn_add.text = 'Внести корректировку'
 
-            element.ids.box_id.add_widget(MyAnchor(element))
-            element.ids.btn_id.size_hint = [0.6, 0.8]
+                element.ids.box_id.add_widget(MyAnchor(element))
+                element.ids.btn_id.size_hint = [0.6, 0.8]
 
-            element.open()
+                element.open()
                 # EngineerApp.sound_open_component.play()
             # else:
                 # EngineerApp.sound_duck_open_component.play()
 
-        # except AttributeError:
-        #     print('Перехвачена ошибка')
+        except AttributeError:
+            mistake = MistakePopup()
+            mistake.ids.text_label.text = 'УПССС!!!'
+            mistake.ids.text_mistake.text = 'Что-то пошло не так'
+            mistake.open()
 
 
 class MyAnchor(AnchorLayout):
+    """Class includes button 'Удалить элемент'
+     KV code located in Chemical_element.kv file"""
     def __init__(self, element):
         super().__init__()
-        # self.instance = widget
         self.element = element
 
     def dell_component(self):
 
+        """Calling RessetPopup"""
+
+        reset_popup = RessetPopup(self)
+        reset_popup.title = 'Подтвердите удаление элемента'
+        reset_popup.ids.btn_res.text = 'УДАЛИТЬ!!!'
+        reset_popup.ids.warning_text.text = 'При подтверждении будет удалён \nкомпонент из состава!'
+        reset_popup.open()
+
+    def reset(self):
+
         del self.element.dad.composition.mixture[self.element.component]
-        # self.composition.names.remove(widget.component.name)
-        # self.element.name = None
         self.element.widget.component = None
 
         self.element.widget.clear_widgets()
@@ -100,7 +118,6 @@ class MyAnchor(AnchorLayout):
                 self.element.dad.composition.name += ':' + i.name
                 self.element.dad.composition.ratio += ':' + str(self.element.dad.composition.mixture[i])
 
-        # print(self.element.component)
         self.element.dismiss()
 
 
