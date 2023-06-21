@@ -374,6 +374,7 @@ class Fourth(Screen):
         self.components_for_spinner = ['Новый компонент', 'СОБРАТЬ СМЕСЬ']
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
+        self.color = None
 
     # def on_touch_down(self, touch):
     #     print(touch, self.children)

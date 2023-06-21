@@ -45,34 +45,35 @@ class BoxForElement(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = None
-        # self.instance = None
         self.dad = None
 
     def open_component(self):
-        try:
+        # try:
 
-            if self.component:
-                self.dad.ids.box_result.clear_widgets()
+        if self.component:
+            self.dad.ids.box_result.clear_widgets()
 
-                CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+            CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+            if self.dad.color:
+                element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
+            else:
                 element = AddComponent(self.dad, self, number_component=self.number_component)
-                element.component = self.component
-                element.ids.spinner_component.text = self.component.name
-                element.ids.spinner_component.values = self.dad.components_for_spinner
-                # print(self.component.name, self.dad.composition.mixture)
-                element.ids.content_value.text = self.dad.composition.mixture[self.component]
-                element.ids.btn_add.text = 'Внести корректировку'
+            element.component = self.component
+            element.ids.spinner_component.text = self.component.name
+            element.ids.spinner_component.values = self.dad.components_for_spinner
+            element.ids.content_value.text = self.dad.composition.mixture[self.component]
+            element.ids.btn_add.text = 'Внести корректировку'
 
-                element.ids.box_id.add_widget(MyAnchor(element))
-                element.ids.btn_id.size_hint = [0.6, 0.8]
+            element.ids.box_id.add_widget(MyAnchor(element))
+            element.ids.btn_id.size_hint = [0.6, 0.8]
 
-                element.open()
+            element.open()
                 # EngineerApp.sound_open_component.play()
             # else:
                 # EngineerApp.sound_duck_open_component.play()
 
-        except AttributeError:
-            print('Перехвачена ошибка')
+        # except AttributeError:
+        #     print('Перехвачена ошибка')
 
 
 class MyAnchor(AnchorLayout):
@@ -461,6 +462,7 @@ class AddComponents(Popup):
         self.components_for_spinner = ['Новый компонент']
         for i in CHEMICAL_COMPONENTS:
             self.components_for_spinner.append(i)
+        self.color = [1, 1, 1, 1]
 
     def close(self):
         self.widget.ids.spinner_component.text = 'Выберите компонент'
@@ -473,17 +475,17 @@ class AddComponents(Popup):
         """Adds new component to mixture"""
 
         if not self.ids.first.children:
-            element = AddComponent(self, self.ids.first, number_component=1, color=[1, 1, 1, 1])
+            element = AddComponent(self, self.ids.first, number_component=1, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.second.children:
-            element = AddComponent(self, self.ids.second, number_component=2, color=[1, 1, 1, 1])
+            element = AddComponent(self, self.ids.second, number_component=2, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         elif not self.ids.third.children:
-            element = AddComponent(self, self.ids.third, number_component=3, color=[1, 1, 1, 1])
+            element = AddComponent(self, self.ids.third, number_component=3, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
@@ -514,11 +516,7 @@ class AddComponents(Popup):
             box.ids.lab_2.size_hint = [0.5, 1]
             self.ids.box_result.add_widget(box)
         else:
-            print('Her')
-        # print(self.composition.mixture)
-        # print(instance.name, instance.component)
-        # if instance.component:
-        #     self.composition.mixture[instance.component] = self.composition.mixture[instance.component]
+            pass
 
     # def build_label(self):
     #     """
