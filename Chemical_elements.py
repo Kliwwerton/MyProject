@@ -45,13 +45,62 @@ class BoxForElement(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = None
+        # self.instance = None
+        self.dad = None
+
+    def open_component(self):
+        try:
+
+            if self.component:
+                self.dad.ids.box_result.clear_widgets()
+
+                CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+                element = AddComponent(self.dad, self, number_component=self.number_component)
+                element.component = self.component
+                element.ids.spinner_component.text = self.component.name
+                element.ids.spinner_component.values = self.dad.components_for_spinner
+                # print(self.component.name, self.dad.composition.mixture)
+                element.ids.content_value.text = self.dad.composition.mixture[self.component]
+                element.ids.btn_add.text = 'Внести корректировку'
+
+                element.ids.box_id.add_widget(MyAnchor(element))
+                element.ids.btn_id.size_hint = [0.6, 0.8]
+
+                element.open()
+                # EngineerApp.sound_open_component.play()
+            # else:
+                # EngineerApp.sound_duck_open_component.play()
+
+        except AttributeError:
+            print('Перехвачена ошибка')
 
 
 class MyAnchor(AnchorLayout):
-    def __init__(self, widget, dad):
+    def __init__(self, element):
         super().__init__()
-        self.instance = widget
-        self.dad = dad
+        # self.instance = widget
+        self.element = element
+
+    def dell_component(self):
+
+        del self.element.dad.composition.mixture[self.element.component]
+        # self.composition.names.remove(widget.component.name)
+        # self.element.name = None
+        self.element.widget.component = None
+
+        self.element.widget.clear_widgets()
+        k = 0
+        for i in self.element.dad.composition.mixture:
+            if k == 0:
+                self.element.dad.composition.name = i.name
+                self.element.dad.composition.ratio = str(self.element.dad.composition.mixture[i])
+                k += 1
+            else:
+                self.element.dad.composition.name += ':' + i.name
+                self.element.dad.composition.ratio += ':' + str(self.element.dad.composition.mixture[i])
+
+        # print(self.element.component)
+        self.element.dismiss()
 
 
 class ResetButton(Button):
@@ -237,7 +286,8 @@ class AddComponent(Popup):
             elif self.dad.composition.mixture:
                 if self.widget.component in self.dad.composition.mixture:
                     del self.dad.composition.mixture[self.widget.component]
-                    self.dad.composition.names.remove(self.widget.component.name)
+                    if self.widget.component.name in self.dad.composition.names:
+                        self.dad.composition.names.remove(self.widget.component.name)
                     self.widget.clear_widgets()
                 summ = 0
 
@@ -274,6 +324,7 @@ class AddComponent(Popup):
         Upgrades the received Widget"""
 
         self.dad.composition.mixture[self.component] = self.ids.content_value.text
+        self.widget.component = self.component
         self.dad.composition.names.append(self.component.name)
 
         k = 0
@@ -320,8 +371,8 @@ class AddComponent(Popup):
             _box.ids.box_for_elements.add_widget(box)
 
         self.widget.name = self.component.name
+        self.widget.dad = self.dad
         self.widget.add_widget(_box)
-        self.widget.component = self.component
         self.widget.number_component = self.number_component
         self.dad.add_buttons()
 
@@ -407,6 +458,9 @@ class AddComponents(Popup):
         super().__init__(**kwargs)
         self.widget = widget
         self.composition = Composition()
+        self.components_for_spinner = ['Новый компонент']
+        for i in CHEMICAL_COMPONENTS:
+            self.components_for_spinner.append(i)
 
     def close(self):
         self.widget.ids.spinner_component.text = 'Выберите компонент'
@@ -418,23 +472,19 @@ class AddComponents(Popup):
         
         """Adds new component to mixture"""
 
-        values = ['Новый компонент']
-        for i in CHEMICAL_COMPONENTS:
-            values.append(i)
-
-        if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box, number_component=1, color=[1, 1, 1, 1])
-            element.ids.spinner_component.values = values
+        if not self.ids.first.children:
+            element = AddComponent(self, self.ids.first, number_component=1, color=[1, 1, 1, 1])
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
-        elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box, number_component=2, color=[1, 1, 1, 1])
-            element.ids.spinner_component.values = values
+        elif not self.ids.second.children:
+            element = AddComponent(self, self.ids.second, number_component=2, color=[1, 1, 1, 1])
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
-        elif not self.ids.third_box.children:
-            element = AddComponent(self, self.ids.third_box, number_component=3, color=[1, 1, 1, 1])
-            element.ids.spinner_component.values = values
+        elif not self.ids.third.children:
+            element = AddComponent(self, self.ids.third, number_component=3, color=[1, 1, 1, 1])
+            element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
         else:
@@ -442,28 +492,33 @@ class AddComponents(Popup):
             popup.ids.text_mistake.text = 'Превышено количество компонентов'
             popup.open()
 
-    def add_name(self, widget):
+    def check_name(self, instance):
         """Forms the name"""
-        self.ids.box_result.clear_widgets()
-        box = Box3()
-        box.orientation = 'horizontal'
+        if self.composition.mixture:
 
-        if len(self.composition.name) > 34:
-            box.ids.lab_1.font_size = '10sp'
-            box.ids.lab_2.font_size = '15sp'
-        elif len(self.composition.name) > 19:
-            box.ids.lab_1.font_size = '15sp'
-            box.ids.lab_2.font_size = '15sp'
+            self.ids.box_result.clear_widgets()
+            box = Box3()
+            box.orientation = 'horizontal'
 
-        box.ids.lab_1.text = '(' + self.composition.name + ')'
-        box.ids.lab_1.color = [1, 1, 1, 1]
-        box.ids.lab_2.text = '(' + self.composition.ratio + ')'
-        box.ids.lab_2.color = [1, 1, 1, 1]
-        box.ids.lab_2.size_hint = [0.5, 1]
-        self.ids.box_result.add_widget(box)
-        print(self.composition.mixture)
-        print(widget.name, widget.component)
-        # self.widget.dad.composition.mixture[widget.component] = self.composition.mixture[widget.component]
+            if len(self.composition.name) > 34:
+                box.ids.lab_1.font_size = '10sp'
+                box.ids.lab_2.font_size = '15sp'
+            elif len(self.composition.name) > 19:
+                box.ids.lab_1.font_size = '15sp'
+                box.ids.lab_2.font_size = '15sp'
+
+            box.ids.lab_1.text = '(' + self.composition.name + ')'
+            box.ids.lab_1.color = [1, 1, 1, 1]
+            box.ids.lab_2.text = '(' + self.composition.ratio + ')'
+            box.ids.lab_2.color = [1, 1, 1, 1]
+            box.ids.lab_2.size_hint = [0.5, 1]
+            self.ids.box_result.add_widget(box)
+        else:
+            print('Her')
+        # print(self.composition.mixture)
+        # print(instance.name, instance.component)
+        # if instance.component:
+        #     self.composition.mixture[instance.component] = self.composition.mixture[instance.component]
 
     # def build_label(self):
     #     """
@@ -490,30 +545,33 @@ class AddComponents(Popup):
 
     def add_mixture(self):
 
-        chemical_composition = {}
-        for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
-
-            for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
-                n = (float(j) * float(k)) / 100
-
-                if h in chemical_composition:
-                    chemical_composition[h] += n
-                else:
-                    chemical_composition[h] = n
-
-        self.composition.name = '(' + self.composition.name + '[sub](' + self.composition.ratio + ') [/sub]' + ')'
-        self.widget.COMPONENTS[self.composition.name] = chemical_composition
-        self.widget.ids.spinner_component.text = self.composition.name
-
-        summ = 0
         if self.composition.mixture:
+            chemical_composition = {}
+            for i, k in self.composition.mixture.items():  # i = component, k = % (содержание в шихте)
 
-            for i in self.composition.mixture:
-                summ += float(self.composition.mixture[i])
+                for h, j in i.chemical_composition.items():  # h = element, j = % (количество элемента в компоненте)
+                    n = (float(j) * float(k)) / 100
 
-            if summ < 100:
-                mistake = MistakePopup()
-                mistake.title = 'РЕКОМЕНДАЦИЯ'
-                mistake.ids.text_label.text = 'Для достоверного расчёта '
-                mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
-                mistake.open()
+                    if h in chemical_composition:
+                        chemical_composition[h] += n
+                    else:
+                        chemical_composition[h] = n
+
+            self.composition.name = '(' + self.composition.name + '[sub](' + self.composition.ratio + ') [/sub]' + ')'
+            self.widget.COMPONENTS[self.composition.name] = chemical_composition
+            self.widget.ids.spinner_component.text = self.composition.name
+
+            summ = 0
+            if self.composition.mixture:
+
+                for i in self.composition.mixture:
+                    summ += float(self.composition.mixture[i])
+
+                if summ < 100:
+                    mistake = MistakePopup()
+                    mistake.title = 'РЕКОМЕНДАЦИЯ'
+                    mistake.ids.text_label.text = 'Для достоверного расчёта '
+                    mistake.ids.text_mistake.text = 'состав смеси должен составлять 100%!!!'
+                    mistake.open()
+        else:
+            self.widget.ids.spinner_component.text = 'Выберите компонент'

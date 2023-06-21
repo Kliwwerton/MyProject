@@ -491,53 +491,6 @@ class Fourth(Screen):
         self.composition = Composition()
         EngineerApp.sound_reset.play()
 
-    def dell_component(self, widget):
-
-        del self.composition.mixture[widget.component]
-        self.composition.names.remove(widget.component.name)
-        widget.name = None
-        widget.component = None
-
-        widget.clear_widgets()
-        k = 0
-        for i in self.composition.mixture:
-            if k == 0:
-                self.composition.name = i.name
-                self.composition.ratio = str(self.composition.mixture[i])
-                k += 1
-            else:
-                self.composition.name += ':' + i.name
-                self.composition.ratio += ':' + str(self.composition.mixture[i])
-
-        print(self.composition, widget)
-
-    def open_component(self, instance):
-        try:
-            if instance.component:
-                print(instance.component)
-                self.ids.box_result.clear_widgets()
-
-                CHEMICAL_COMPONENTS[instance.component.name] = instance.component.chemical_composition
-                element = AddComponent(self, instance, number_component=instance.number_component)
-                element.ids.spinner_component.text = instance.component.name
-                element.ids.spinner_component.values = self.components_for_spinner
-                element.ids.content_value.text = self.composition.mixture[instance.component]
-                element.ids.btn_add.text = 'Внести корректировку'
-
-                element.ids.box_id.add_widget(MyAnchor(instance, element))
-                element.ids.btn_id.size_hint = [0.6, 0.8]
-
-                element.open()
-                EngineerApp.sound_open_component.play()
-            else:
-
-                EngineerApp.sound_duck_open_component.play()
-
-        except AttributeError:
-            print('Перехвачена ошибка')
-
-        # print(instance.name)
-
 
 # class Fifth(Screen):
 #     """Fourth Screen. Screen of calculation chemical composition."""

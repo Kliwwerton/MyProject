@@ -22,8 +22,7 @@
         size_hint: 0.8, 0.8
         pos_hint: {'x': 0.5, 'y': 0.5}
         on_release:
-            app.Fourth.dell_component(root.instance)
-            root.dad.dismiss()
+            root.dell_component()
 
 
 <ResetButton>
@@ -88,7 +87,7 @@
 <BoxForElement>:
     size_hint: 1, 0.18
     on_touch_down:
-        app.Fourth.open_component(self) if self.collide_point(*args[1].pos) else False
+        self.open_component() if self.collide_point(*args[1].pos) else False
 
 
 <AddComponent>:
@@ -180,19 +179,19 @@
                 root.add_new_component()
 
         BoxForElement:
-            id: first_box
+            id: first
             on_children:
-                root.add_name(self)
+                root.check_name(self)
 
         BoxForElement:
-            id: second_box
+            id: second
             on_children:
-                root.add_name(self)
+                root.check_name(self)
 
         BoxForElement:
-            id: third_box
+            id: third
             on_children:
-                root.add_name(self)
+                root.check_name(self)
 
         BoxLayout:
             id: box_result
