@@ -365,6 +365,9 @@ class Third(Screen):
 class Fourth(Screen):
     """Fourth Screen. Screen of calculation chemical composition."""
 
+    sound_open_component = SoundLoader.load('sounds/sound_open_element.mp3')
+    sound_del_component = SoundLoader.load('sounds/del_component.mp3')
+
     def __init__(self):
         super().__init__()
         self.composition = Composition()
@@ -578,8 +581,6 @@ class EngineerApp(App):
     """MAIN APP ENGINEER"""
     sound = SoundLoader.load('sounds/sound_but.mp3')
     sound_reset = SoundLoader.load('sounds/sound_reset.mp3')
-    sound_duck_open_component = SoundLoader.load('sounds/animal_bird_duck.mp3')
-    sound_open_component = SoundLoader.load('sounds/open_component.mp3')
 
     def __init__(self):
         super().__init__()

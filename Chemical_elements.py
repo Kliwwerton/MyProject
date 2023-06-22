@@ -1,10 +1,10 @@
 from copy import deepcopy
 
-from kivy.graphics import Color
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
+from kivy.core.audio import SoundLoader
 
 from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS
 from MyPopups import MistakePopup, RessetPopup
@@ -48,6 +48,8 @@ class BoxForElement(BoxLayout):
      component.chemical_composition
      KV code located in Chemical_element.kv file"""
 
+    sound_wrong = SoundLoader.load('sounds/sound_wrong.mp3')
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.component = None
@@ -73,17 +75,14 @@ class BoxForElement(BoxLayout):
 
                 element.ids.box_id.add_widget(MyAnchor(element))
                 element.ids.btn_id.size_hint = [0.6, 0.8]
+                self.dad.sound_open_component.play()
 
                 element.open()
-                # EngineerApp.sound_open_component.play()
-            # else:
-                # EngineerApp.sound_duck_open_component.play()
+            else:
+                self.sound_wrong.play()
 
         except AttributeError:
-            mistake = MistakePopup()
-            mistake.ids.text_label.text = 'УПССС!!!'
-            mistake.ids.text_mistake.text = 'Что-то пошло не так'
-            mistake.open()
+            self.sound_wrong.play()
 
 
 class MyAnchor(AnchorLayout):
@@ -119,6 +118,7 @@ class MyAnchor(AnchorLayout):
                 self.element.dad.composition.name += ':' + i.name
                 self.element.dad.composition.ratio += ':' + str(self.element.dad.composition.mixture[i])
 
+        self.element.dad.sound_del_component.play()
         self.element.dismiss()
 
 
