@@ -56,33 +56,34 @@ class BoxForElement(BoxLayout):
         self.dad = None
 
     def open_component(self):
-        try:
+        # try:
 
-            if self.component:
-                self.dad.ids.box_result.clear_widgets()
+        if self.component:
+            self.dad.ids.box_result.clear_widgets()
 
-                CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
-                if self.dad.color:
-                    element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
-                else:
-                    element = AddComponent(self.dad, self, number_component=self.number_component)
-                element.component = self.component
-                element.title = 'Корректировка компонента'
-                element.ids.spinner_component.text = self.component.name
-                element.ids.spinner_component.values = self.dad.components_for_spinner
-                element.ids.content_value.text = self.dad.composition.mixture[self.component]
-                element.ids.btn_add.text = 'Внести корректировку'
-
-                element.ids.box_id.add_widget(MyAnchor(element))
-                element.ids.btn_id.size_hint = [0.6, 0.8]
-                self.dad.sound_open_component.play()
-
-                element.open()
+            CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+            if self.dad.color:
+                element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
             else:
-                self.sound_wrong.play()
+                element = AddComponent(self.dad, self, number_component=self.number_component)
+            element.component = self.component
+            element.title = 'Корректировка компонента'
+            element.ids.spinner_component.text = self.component.name
+            element.ids.spinner_component.values = self.dad.components_for_spinner
+            element.ids.content_value.text = self.dad.composition.mixture[self.component]
+            element.ids.btn_add.text = 'Внести корректировку'
 
-        except AttributeError:
+            element.ids.box_id.add_widget(MyAnchor(element))
+            element.ids.btn_id.size_hint = [0.6, 0.8]
+            self.dad.sound_open_component.play()
+
+            element.open()
+        else:
             self.sound_wrong.play()
+
+        # except AttributeError:
+        #     print('Ошибка!!!')
+        #     self.sound_wrong.play()
 
 
 class MyAnchor(AnchorLayout):
@@ -473,6 +474,8 @@ class NewElement(Popup):
 
 class AddComponents(Popup):
     """Popup for adding Chemical element for composition of mixture"""
+    sound_open_component = SoundLoader.load('sounds/sound_open_element.mp3')
+    sound_del_component = SoundLoader.load('sounds/del_component.mp3')
 
     def __init__(self, widget, **kwargs):
         super().__init__(**kwargs)
@@ -493,18 +496,18 @@ class AddComponents(Popup):
         
         """Adds new component to mixture"""
 
-        if not self.ids.first.children:
-            element = AddComponent(self, self.ids.first, number_component=1, color=self.color)
+        if not self.ids.first_box.children:
+            element = AddComponent(self, self.ids.first_box, number_component=1, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
-        elif not self.ids.second.children:
-            element = AddComponent(self, self.ids.second, number_component=2, color=self.color)
+        elif not self.ids.second_box.children:
+            element = AddComponent(self, self.ids.second_box, number_component=2, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
-        elif not self.ids.third.children:
-            element = AddComponent(self, self.ids.third, number_component=3, color=self.color)
+        elif not self.ids.third_box.children:
+            element = AddComponent(self, self.ids.third_box, number_component=3, color=self.color)
             element.ids.spinner_component.values = self.components_for_spinner
             element.open()
 
@@ -515,6 +518,7 @@ class AddComponents(Popup):
 
     def check_name(self):
         """Forms the name"""
+
         if self.composition.mixture:
 
             self.ids.box_result.clear_widgets()
