@@ -1,9 +1,9 @@
 # version.regex
-# __version__ = 0.6.0
+# __version__ = 0.6.2
 
 from kivy.config import Config
 
-Config.set('graphics', 'width', 420)
+Config.set('graphics', 'width', 480)
 Config.set('graphics', 'height', 800)
 Config.set('kivy', 'keyboard_mode', 'systemanddock')
 # Config.set('kivy', 'window_icon', 'Images/Logo.png')
