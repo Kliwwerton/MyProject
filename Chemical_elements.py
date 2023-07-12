@@ -4,6 +4,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.button import Button
+from kivy.uix.label import Label
 from kivy.core.audio import SoundLoader
 
 from variables import CHEMICAL_COMPONENTS, CHEMICAL_ELEMENTS
@@ -495,26 +496,47 @@ class AddComponents(Popup):
     def add_new_component(self):
         
         """Adds new component to mixture"""
+        summ = 0
+        for i in self.composition.mixture:
+            summ += float(self.composition.mixture[i])
 
-        if not self.ids.first_box.children:
-            element = AddComponent(self, self.ids.first_box, number_component=1, color=self.color)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
-        elif not self.ids.second_box.children:
-            element = AddComponent(self, self.ids.second_box, number_component=2, color=self.color)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
-        elif not self.ids.third_box.children:
-            element = AddComponent(self, self.ids.third_box, number_component=3, color=self.color)
-            element.ids.spinner_component.values = self.components_for_spinner
-            element.open()
-
+        if summ == 100:
+            mistake = MistakePopup()
+            mistake.size_hint = [0.8, 0.28]
+            mistake.title = 'ПРЕДУПРЕЖДЕНИE!'
+            mistake.ids.text_label.text = 'Сумма всех компонентов уже 100%'
+            mistake.ids.text_mistake.text = 'БОЛЬШЕ НЕ ДОБАВИТЬ!!!'
+            lab = Label()
+            lab.text = 'Произведите корректировку содержания \nили создайте новую смесь!'
+            lab.halign = 'center'
+            lab.valign = 'middle'
+            mistake.ids.text_mistake.size_hint = [1, 0.3]
+            mistake.ids.text_label.size_hint = [1, 0.2]
+            mistake.ids.mistake_box.size_hint = [1, 0.6]
+            mistake.ids.mistake_box.add_widget(lab)
+            mistake.ids.mistake_but.size_hint = [0.2, 0.2]
+            mistake.open()
         else:
-            popup = MistakePopup()
-            popup.ids.text_mistake.text = 'Превышено количество компонентов'
-            popup.open()
+
+            if not self.ids.first_box.children:
+                element = AddComponent(self, self.ids.first_box, number_component=1, color=self.color)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            elif not self.ids.second_box.children:
+                element = AddComponent(self, self.ids.second_box, number_component=2, color=self.color)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            elif not self.ids.third_box.children:
+                element = AddComponent(self, self.ids.third_box, number_component=3, color=self.color)
+                element.ids.spinner_component.values = self.components_for_spinner
+                element.open()
+
+            else:
+                popup = MistakePopup()
+                popup.ids.text_mistake.text = 'Превышено количество компонентов'
+                popup.open()
 
     def check_name(self):
         """Forms the name"""
@@ -540,6 +562,32 @@ class AddComponents(Popup):
             self.ids.box_result.add_widget(box)
         else:
             pass
+
+    def calculate_interim_result(self):
+        self.ids.interim_result.clear_widgets()
+        print(self.composition.mixture)
+        box = Box3()
+
+        interim_result = 0
+        for i, k in self.composition.mixture.items():
+            interim_result += float(k)
+
+        if int(interim_result) == interim_result:
+            interim_result = int(interim_result)
+
+        box.ids.lab_1.font_size = '10sp'
+        box.ids.lab_1.color = [1, 1, 1, 1]
+        box.ids.lab_2.text = str(interim_result) + '%'
+        box.ids.lab_2.font_sizer = '15sp'
+
+        if interim_result != 100:
+            box.ids.lab_1.text = 'Промежуточный \nитог:'
+            box.ids.lab_2.color = [1, 0, 0, 1]
+        else:
+            box.ids.lab_1.text = 'Смесь \nукомплектована:'
+            box.ids.lab_2.color = [1, 1, 1, 1]
+
+        self.ids.interim_result.add_widget(box)
 
     # def build_label(self):
     #     """

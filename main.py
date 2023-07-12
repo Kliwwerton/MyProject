@@ -378,11 +378,6 @@ class Fourth(Screen):
             self.components_for_spinner.append(i)
         self.color = None
 
-    # def on_touch_down(self, touch):
-    #     print(touch, self.children)
-    #     if touch.pos in self.ids.btn_add_component.pos:
-    #         print('Hello world')
-
     def open_reset_popup(self):
         RessetPopup(self).open()
 
@@ -490,6 +485,7 @@ class Fourth(Screen):
         self.ids.box_result.clear_widgets()
         self.ids.reset_but.clear_widgets()
         self.ids.calc_but.clear_widgets()
+        self.ids.interim_result.clear_widgets()
 
         self.composition = Composition()
         EngineerApp.sound_reset.play()
@@ -503,13 +499,18 @@ class Fourth(Screen):
 
         interim_result = 0
         for i, k in self.composition.mixture.items():
-            interim_result += int(k)
+            interim_result += float(k)
 
-        box.ids.lab_2.text = str(interim_result)
+        if int(interim_result) == interim_result:
+            interim_result = int(interim_result)
+
+        box.ids.lab_2.text = str(interim_result) + '%'
         box.ids.lab_2.font_sizer = '15sp'
 
         if interim_result != 100:
             box.ids.lab_2.color = [1, 0, 0, 1]
+        else:
+            box.ids.lab_1.text = 'Смесь \nукомплектована:'
 
         self.ids.interim_result.add_widget(box)
 
