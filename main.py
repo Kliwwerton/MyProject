@@ -494,6 +494,25 @@ class Fourth(Screen):
         self.composition = Composition()
         EngineerApp.sound_reset.play()
 
+    def calculate_interim_result(self):
+        self.ids.interim_result.clear_widgets()
+        print(self.composition.mixture)
+        box = Box3()
+        box.ids.lab_1.text = 'Промежуточный \nитог:'
+        box.ids.lab_1.font_size = '10sp'
+
+        interim_result = 0
+        for i, k in self.composition.mixture.items():
+            interim_result += int(k)
+
+        box.ids.lab_2.text = str(interim_result)
+        box.ids.lab_2.font_sizer = '15sp'
+
+        if interim_result != 100:
+            box.ids.lab_2.color = [1, 0, 0, 1]
+
+        self.ids.interim_result.add_widget(box)
+
 
 # class Fifth(Screen):
 #     """Fourth Screen. Screen of calculation chemical composition."""

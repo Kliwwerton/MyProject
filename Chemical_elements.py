@@ -56,34 +56,34 @@ class BoxForElement(BoxLayout):
         self.dad = None
 
     def open_component(self):
-        # try:
+        try:
 
-        if self.component:
-            self.dad.ids.box_result.clear_widgets()
+            if self.component:
+                self.dad.ids.box_result.clear_widgets()
 
-            CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
-            if self.dad.color:
-                element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
+                CHEMICAL_COMPONENTS[self.component.name] = self.component.chemical_composition
+                if self.dad.color:
+                    element = AddComponent(self.dad, self, number_component=self.number_component, color=self.dad.color)
+                else:
+                    element = AddComponent(self.dad, self, number_component=self.number_component)
+                element.component = self.component
+                element.title = 'Корректировка компонента'
+                element.ids.spinner_component.text = self.component.name
+                element.ids.spinner_component.values = self.dad.components_for_spinner
+                element.ids.content_value.text = self.dad.composition.mixture[self.component]
+                element.ids.btn_add.text = 'Внести корректировку'
+
+                element.ids.box_id.add_widget(MyAnchor(element))
+                element.ids.btn_id.size_hint = [0.6, 0.8]
+                self.dad.sound_open_component.play()
+
+                element.open()
             else:
-                element = AddComponent(self.dad, self, number_component=self.number_component)
-            element.component = self.component
-            element.title = 'Корректировка компонента'
-            element.ids.spinner_component.text = self.component.name
-            element.ids.spinner_component.values = self.dad.components_for_spinner
-            element.ids.content_value.text = self.dad.composition.mixture[self.component]
-            element.ids.btn_add.text = 'Внести корректировку'
+                self.sound_wrong.play()
 
-            element.ids.box_id.add_widget(MyAnchor(element))
-            element.ids.btn_id.size_hint = [0.6, 0.8]
-            self.dad.sound_open_component.play()
-
-            element.open()
-        else:
+        except AttributeError:
+            print('Ошибка!!!')
             self.sound_wrong.play()
-
-        # except AttributeError:
-        #     print('Ошибка!!!')
-        #     self.sound_wrong.play()
 
 
 class MyAnchor(AnchorLayout):
