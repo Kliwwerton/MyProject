@@ -104,9 +104,13 @@ class SelectionOptionPopup(Popup):
             if i not in VALUES:
                 VALUES[i] = None
 
-    @staticmethod
-    def open_next_popup():
-        SelectionGostPopup().open()
+    def choosing_a_product_number(self):
+        numbers = []
+        if self.ids.gost_number.text:
+            for i in GOST_STANDARDS[self.ids.gost_number.text]:
+                numbers.append(str(i))
+            self.ids.spin_choose_window.text = 'Номер изделия'
+            self.ids.spin_choose_window.values = numbers
 
     def choose_window(self):
         popup = None
@@ -127,29 +131,19 @@ class SelectionOptionPopup(Popup):
 
         elif self.ids.spin_choose_window.text == 'Произвольное':
             popup = Fason()
-            # print(VALUES)
 
-        popup.chose_values.insert(0, self.ids.spin_choose_window.text)
-        popup.open()
+        else:
+            if self.ids.spin_choose_window.text != 'Номер изделия':
+                choice_popup(gost=self.ids.gost_number.text,
+                             number=self.ids.spin_choose_window.text)
+                self.dismiss()
+            else:
+                pass
 
-
-class SelectionGostPopup(Popup):
-    """Choice of gost and number of stamp"""
-
-    def choosing_a_product_number(self):
-        numbers = []
-        if self.ids.gost_number.text:
-            for i in GOST_STANDARDS[self.ids.gost_number.text]:
-                numbers.append(str(i))
-            self.ids.product_numbers.values = numbers
-
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
-
-    def opening_calculation_window(self):
-        choice_popup(gost=self.ids.gost_number.text,
-                     number=self.ids.product_numbers.text)
+        if popup:
+            popup.chose_values.insert(0, self.ids.spin_choose_window.text)
+            popup.open()
+            self.dismiss()
 
 
 class WrongPopup(Popup):

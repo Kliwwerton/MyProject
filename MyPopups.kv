@@ -39,40 +39,27 @@
         spacing: 10
         orientation: 'vertical'
 
-#        BoxLayout:
-#            size_hint: 1, 1.2
-#            spacing: 5
-#
-#            Button:
-#                text: 'ЗАКРЫТЬ'
-#                font_size: '15sp'
-#                size_hint: 0.3, 0.7
-#                pos_hint: {'right_bottom': 1, 'center_y': 0.5}
-#                on_press:
-#                    root.dismiss()
-
         Label:
             text: 'ВАРИАНТЫ РАСЧЁТА'
             size_hint: 1, 0.6
 
-        Button:
+        Spinner:
+            id: gost_number
             text: 'Размеры по ГОСТ'
-            on_press:
-                root.open_next_popup()
-                root.dismiss()
+            values: ['ГОСТ 8691-2018', 'ГОСТ 1598-2018 (ШПД)', 'ГОСТ 1598-2018 (МЛЛД)', 'ГОСТ 5341-2016', 'ГОСТ 5500-2001', 'ГОСТ 11586-2005', 'ГОСТ 21436-2004', 'ГОСТ 20901-2016']
+            on_text:
+                root.choosing_a_product_number()
 
         Spinner:
             id: spin_choose_window
-            text: 'Выберите форму изделия'
+            text: 'Произвольная форма изделия'
             font_size: '15sp'
             values: ['Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Трубка', 'Произвольное']
             on_text:
                 root.choose_window()
-                root.dismiss()
 
         AnchorLayout:
             size_hint: 1, 1
-#            spacing: 5
 
             Button:
                 text: 'ЗАКРЫТЬ'
@@ -82,58 +69,6 @@
                 pos_hint: {'x': 0.5, 'y': 0.5}
                 on_release:
                     root.dismiss()
-
-
-<SelectionGostPopup>
-    title: 'Выбор ГОСТа на размеры'
-    auto_dismiss: False
-    size_hint: 0.8, 0.28
-
-    BoxLayout:
-        orientation:'vertical'
-        spacing: 10
-
-        Spinner:
-            id: gost_number
-            text: 'Выберите ГОСТ'
-            values: ['ГОСТ 8691-2018', 'ГОСТ 1598-2018 (ШПД)', 'ГОСТ 1598-2018 (МЛЛД)', 'ГОСТ 5341-2016', 'ГОСТ 5500-2001', 'ГОСТ 11586-2005', 'ГОСТ 21436-2004', 'ГОСТ 20901-2016']
-            on_text:
-                root.choosing_a_product_number()
-
-        Spinner:
-            id: product_numbers
-            text: 'Номер изделия'
-            values: []
-            on_text:
-                root.dismiss()
-                root.opening_calculation_window()
-
-        BoxLayout:
-            size_hint: 1, 1.2
-            spacing: 5
-
-            AnchorLayout:
-
-                Button:
-                    text: 'НАЗАД'
-                    font_size: '10sp'
-                    size_hint: 0.5, 0.5
-                    background_color: 1,0,0,1
-                    pos_hint: {'x': 0.6, 'y': 0.5}
-                    on_release:
-                        root.dismiss()
-                        root.return_beck()
-
-            AnchorLayout:
-
-                Button:
-                    text: 'ЗАКРЫТЬ'
-                    font_size: '10sp'
-                    size_hint: 0.5, 0.5
-                    background_color: 1,0,0,1
-                    pos_hint: {'x': 0.6, 'y': 0.5}
-                    on_release:
-                        root.dismiss()
 
 
 <WrongPopup>
