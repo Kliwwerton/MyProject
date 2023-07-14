@@ -1,5 +1,5 @@
 # version.regex
-__version__ = '0.6.3'
+__version__ = '0.6.4'
 
 from kivy.config import Config
 
@@ -51,9 +51,9 @@ Builder.load_file('Gost_standards.kv')
 Builder.load_file('Cows_and_bulls.kv')
 
 
-def open_option_popup():
+def open_option_popup(dad=None):
     if not VALUES:
-        SelectionOptionPopup().open()
+        SelectionOptionPopup(dad).open()
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and \
             VALUES['volume'] and VALUES['square'] and VALUES['size']:
@@ -62,63 +62,72 @@ def open_option_popup():
                      weight=VALUES['weight'],
                      volume=VALUES['volume'],
                      square=VALUES['square'],
-                     size=VALUES['size']
+                     size=VALUES['size'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['size'] and VALUES['weight']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      size=VALUES['size'],
-                     weight=VALUES['weight']
+                     weight=VALUES['weight'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['size']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
-                     size=VALUES['size']
+                     size=VALUES['size'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['volume']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      weight=VALUES['weight'],
-                     volume=VALUES['volume']
+                     volume=VALUES['volume'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['square'] and VALUES['volume']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      square=VALUES['square'],
-                     volume=VALUES['volume']
+                     volume=VALUES['volume'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight'] and VALUES['square']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      weight=VALUES['weight'],
-                     square=VALUES['square']
+                     square=VALUES['square'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['weight']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
                      weight=VALUES['weight'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['volume']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
-                     volume=VALUES['volume']
+                     volume=VALUES['volume'],
+                     dad=dad
                      )
 
     elif VALUES['gost'] and VALUES['number'] and VALUES['square']:
         choice_popup(gost=VALUES['gost'],
                      number=VALUES['number'],
-                     square=VALUES['square']
+                     square=VALUES['square'],
+                     dad=dad
                      )
 
     else:
-        SelectionOptionPopup().open()
+        SelectionOptionPopup(dad).open()
 
 
 def return_mistake(value):
@@ -216,9 +225,8 @@ class Second(Screen):
     def open_resset_popup(self):
         RessetPopup(self).open()
 
-    @staticmethod
-    def open_selection_option_popup():
-        open_option_popup()
+    def open_selection_option_popup(self):
+        open_option_popup(self)
 
     def change_text(self):
         """Changing text Textinput after calculate"""
@@ -322,9 +330,8 @@ class Third(Screen):
         else:
             self.ids.pressure_unit.text = PRESS_PARAMETERS[self.ids.spinner_press_mark.text][2]
 
-    @staticmethod
-    def open_selection_option_popup():
-        open_option_popup()
+    def open_selection_option_popup(self):
+        open_option_popup(self)
 
     def change_text(self):
         if not VALUES:

@@ -35,6 +35,10 @@ class Box3(BoxLayout):
 
 
 class BigBox(BoxLayout):
+
+    """big box for output information about chemical element,
+    kv version Located in Element_info.kv file"""
+
     pass
 
 

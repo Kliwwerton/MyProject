@@ -7,11 +7,11 @@ from variables import VALUES, RECTANGLES, TUBE, TRAPEZOID, TUBE_1, FASON, \
 from math import pi
 
 
-def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
+def choice_popup(gost, number=None, size=None, weight='', volume='', square='', dad=None):
     """Opening new shape popup"""
 
     if gost in RECTANGLES and number in RECTANGLES[gost]:
-        popup = Rectangle()
+        popup = Rectangle(dad)
 
     elif gost in TRAPEZOID and number in TRAPEZOID[gost]:
         popup = Trapezoid()
@@ -95,11 +95,51 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square=''):
     popup.open()
 
 
+def change_text(dad):
+    """Changing text Textinput after calculate"""
+
+    if not VALUES:
+        pass
+    elif VALUES:
+        if VALUES['square']:
+            dad.ids.label_S_pressing_value.text = str(VALUES['square'])
+        else:
+            dad.ids.label_S_pressing_value.text = ''
+
+        if VALUES['volume']:
+            dad.ids.volume_label.text = 'Объём изделия: '
+            dad.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
+        else:
+            dad.ids.volume_label.text = ''
+            dad.ids.volume_value.text = ''
+
+        if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин',
+                              'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
+            dad.ids.gost_text.text = VALUES['gost']
+        elif VALUES['gost']:
+            dad.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+        else:
+            dad.ids.gost_text.text = ''
+
+        if VALUES['number']:
+            dad.ids.stamp_text.text = 'Номер изделия: '
+            dad.ids.stamp_label.text = VALUES['number']
+        else:
+            dad.ids.stamp_text.text = ''
+            dad.ids.stamp_label.text = ''
+
+        if VALUES['volume_weight']:
+            dad.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
+        else:
+            dad.ids.volume_weight.text = ''
+
+
 class SelectionOptionPopup(Popup):
     """The window of chose open popup. On gost or another shape."""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
+        self.dad = dad
         for i in PARAMS:
             if i not in VALUES:
                 VALUES[i] = None
@@ -115,7 +155,7 @@ class SelectionOptionPopup(Popup):
     def choose_window(self):
         popup = None
         if self.ids.spin_choose_window.text == 'Прямоугольник':
-            popup = Rectangle()
+            popup = Rectangle(self.dad)
 
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
             popup = Trapezoid()
@@ -135,7 +175,7 @@ class SelectionOptionPopup(Popup):
         else:
             if self.ids.spin_choose_window.text != 'Номер изделия':
                 choice_popup(gost=self.ids.gost_number.text,
-                             number=self.ids.spin_choose_window.text)
+                             number=self.ids.spin_choose_window.text, dad=self.dad)
                 self.dismiss()
             else:
                 pass
@@ -200,12 +240,13 @@ class Addition(Popup):
 class Rectangle(Popup):
     """Shape of rectangle"""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume_weight = ''
+        self.dad = dad
 
     def build_instance(self):
         if self.chose_values and self.product_size:
@@ -242,9 +283,8 @@ class Rectangle(Popup):
         if self.volume_weight:
             self.ids.volume_weight_product.text = self.volume_weight
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     @staticmethod
     def open_calculation_average_popup(instance):
@@ -340,6 +380,9 @@ class Rectangle(Popup):
     def change_text_weight_product(self):
         if VALUES['weight']:
             self.ids.weight_product.text = VALUES['weight']
+
+    def change_text(self):
+        change_text(self.dad)
 
 
 class Trapezoid(Popup):

@@ -210,23 +210,18 @@
                 size_hint: 0.6, 1
 
             Button:
-                text: 'Внести смесь в состав'
+                text: 'Внести смесь\nв состав'
+                halign: 'center'
+                valign: 'middle'
                 size_hint: 1, 1
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 on_press:
                     root.add_mixture()
                     root.dismiss()
 
-#            RelativeLayout:
-#                id: calc_but
-#                size_hint: 1, 1
-
             RelativeLayout:
                 id: interim_result
                 size_hint: 0.6, 1
-
-
-
 
         BoxLayout:
             id: box_id

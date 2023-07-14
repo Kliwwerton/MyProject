@@ -18,6 +18,8 @@ class Brick:
         """Volume of the Brick"""
         self.weight = None
         """Weight of the Brick"""
+        self.volume_weight = None
+        """volume_weight of the Brick"""
 
     def calculate_square(self):
         pass
