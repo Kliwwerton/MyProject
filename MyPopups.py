@@ -25,22 +25,22 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square='', 
         popup.chose_values.append(TRAPEZOID_1['Image'])
 
     elif gost in RIBBED and number in RIBBED[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(RIBBED['Image'])
 
     elif gost in RIBBED_1 and number in RIBBED_1[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(RIBBED_1['Image'])
 
     elif gost in RIBBED_2 and number in RIBBED_2[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(RIBBED_2['Image'])
         popup.ids.width_label_H.text = 'Ширина(S), мм:'
         popup.ids.thickness_label_S.text = 'Толщина(H), мм:'
         popup.ids.thickness_label_S1.text = 'Ширина(S[sub]1[/sub]), мм:'
 
     elif gost in RIBBED_3 and number in RIBBED_3[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(RIBBED_3['Image'])
         popup.ids.length_label_L.text = 'Ширина(в), мм'
         popup.ids.width_label_H.text = 'Длина(б), мм:'
@@ -48,7 +48,7 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square='', 
         popup.ids.thickness_label_S1.text = 'Толщина(а[sub]1[/sub]), мм:'
 
     elif gost in END_WEDGE and number in END_WEDGE[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(END_WEDGE['Image'])
         popup.ids.length_label_L.text = 'Длина(в), мм'
         popup.ids.width_label_H.text = 'Ширина(б), мм:'
@@ -57,20 +57,20 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square='', 
         popup.title = 'Расчёт площади торцового клина'
 
     elif gost in END_WEDGE_2 and number in END_WEDGE_2[gost]:
-        popup = Ribbed()
+        popup = Ribbed(dad)
         popup.chose_values.append(END_WEDGE_2['Image'])
         popup.title = 'Расчёт площади торцового клина'
 
     elif gost in SHAPED and number in SHAPED[gost]:
-        popup = Shaped()
+        popup = Shaped(dad)
         popup.chose_values.append(SHAPED['Image'])
 
     elif gost in TUBE and number in TUBE[gost]:
-        popup = Tube()
+        popup = Tube(dad)
         popup.chose_values.append(TUBE['Image'])
 
     elif gost in TUBE_1 and number in TUBE_1[gost]:
-        popup = Tube()
+        popup = Tube(dad)
         popup.chose_values.append(TUBE_1['Image'])
 
     elif gost in FASON and number in FASON[gost]:
@@ -165,11 +165,11 @@ class SelectionOptionPopup(Popup):
             popup.chose_values.append(TRAPEZOID_1['Image'])
 
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
-            popup = Ribbed()
+            popup = Ribbed(self.dad)
             popup.chose_values.append(RIBBED['Image'])
 
         elif self.ids.spin_choose_window.text == 'Трубка':
-            popup = Tube()
+            popup = Tube(self.dad)
             popup.chose_values.append(TUBE['Image'])
 
         elif self.ids.spin_choose_window.text == 'Произвольное':
@@ -318,7 +318,6 @@ class Rectangle(Popup):
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
-                print(VALUES)
 
             else:
                 VALUES['volume'] = None
@@ -699,12 +698,13 @@ class Ribbed(Popup):
 class Tube(Popup):
     """Shape of tube"""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume_weight = ''
+        self.dad = dad
 
     def build_instance(self):
 
@@ -744,17 +744,12 @@ class Tube(Popup):
         if self.volume_weight:
             self.ids.volume_weight_product.text = self.volume_weight
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     @staticmethod
     def open_calculation_average_popup(instance):
         Addition(instance).open()
-
-    def change_text(self):
-        if VALUES['volume_weight']:
-            self.ids.volume_weight_product.text = VALUES['volume_weight']
 
     def calculation(self):
         if self.ids.outer_diameter_D.text and self.ids.inner_diameter_d.text:
@@ -844,16 +839,20 @@ class Tube(Popup):
             mistake.ids.text_mistake.text = text
             mistake.open()
 
+    def change_text(self):
+        change_text(self.dad)
+
 
 class Shaped(Popup):
     """Shape of shaped"""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume_weight = ''
+        self.dad = dad
 
     def build_instance(self):
 
@@ -900,9 +899,8 @@ class Shaped(Popup):
         if self.volume_weight:
             self.ids.volume_weight_product.text = self.volume_weight
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     @staticmethod
     def open_calculation_average_popup(instance):
@@ -1020,15 +1018,19 @@ class Shaped(Popup):
             mistake.ids.text_mistake.text = text
             mistake.open()
 
+    def change_text(self):
+        change_text(self.dad)
+
 
 class Fason(Popup):
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume = ''
         self.square = ''
+        self.dad = dad
 
     def build_instance(self):
 
@@ -1050,9 +1052,8 @@ class Fason(Popup):
             VALUES['gost'] = self.chose_values[0]
             VALUES['number'] = 'Не определён.'
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     def calculation(self):
         if self.ids.square_product.text:
@@ -1083,3 +1084,6 @@ class Fason(Popup):
             VALUES['weight'] = None
 
         VALUES['size'] = 0
+
+    def change_text(self):
+        change_text(self.dad)

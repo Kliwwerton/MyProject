@@ -87,7 +87,6 @@ class BoxForElement(BoxLayout):
                 self.sound_wrong.play()
 
         except AttributeError:
-            print('Ошибка!!!')
             self.sound_wrong.play()
 
 
@@ -356,7 +355,6 @@ class AddComponent(Popup):
         for i in self.dad.composition.mixture:
             if k == 0:
                 self.dad.composition.name = i.name
-                # print(self.dad.composition.mixture)
                 self.dad.composition.ratio = str(self.dad.composition.mixture[i])
                 k += 1
             else:
@@ -569,7 +567,6 @@ class AddComponents(Popup):
 
     def calculate_interim_result(self):
         self.ids.interim_result.clear_widgets()
-        print(self.composition.mixture)
         box = Box3()
 
         interim_result = 0

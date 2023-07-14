@@ -22,22 +22,22 @@ from MyPopups import SelectionOptionPopup, choice_popup, RessetPopup, ClosePopup
 from Chemical_elements import AddComponent, Composition, Box3, BigBoxResult, ResetButton, CalcButton
 
 # Screens
-Builder.load_file('First.kv')
-Builder.load_file('Second.kv')
-Builder.load_file('Third.kv')
-Builder.load_file('Fourth.kv')
-Builder.load_file('Fifth.kv')
+Builder.load_file('Screens/First.kv')
+Builder.load_file('Screens/Second.kv')
+Builder.load_file('Screens/Third.kv')
+Builder.load_file('Screens/Fourth.kv')
+Builder.load_file('Screens/Fifth.kv')
 
 # Popups
 Builder.load_file('MyPopups.kv')
 
 # Shapes
-Builder.load_file('Tube.kv')
-Builder.load_file('Trapezoid.kv')
-Builder.load_file('Rectangle.kv')
-Builder.load_file('Ribbed.kv')
-Builder.load_file('Shaped.kv')
-Builder.load_file('Fason.kv')
+Builder.load_file('Shapes/Tube.kv')
+Builder.load_file('Shapes/Trapezoid.kv')
+Builder.load_file('Shapes/Rectangle.kv')
+Builder.load_file('Shapes/Ribbed.kv')
+Builder.load_file('Shapes/Shaped.kv')
+Builder.load_file('Shapes/Fason.kv')
 
 # Chemical_element
 Builder.load_file('Chemical_element.kv')
@@ -228,44 +228,6 @@ class Second(Screen):
     def open_selection_option_popup(self):
         open_option_popup(self)
 
-    def change_text(self):
-        """Changing text Textinput after calculate"""
-
-        if not VALUES:
-            pass
-        elif VALUES:
-            if VALUES['square']:
-                self.ids.label_S_pressing_value.text = str(VALUES['square'])
-            else:
-                self.ids.label_S_pressing_value.text = ''
-
-            if VALUES['volume']:
-                self.ids.volume_label.text = 'Объём изделия: '
-                self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
-            else:
-                self.ids.volume_label.text = ''
-                self.ids.volume_value.text = ''
-
-            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин',
-                                  'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
-                self.ids.gost_text.text = VALUES['gost']
-            elif VALUES['gost']:
-                self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
-            else:
-                self.ids.gost_text.text = ''
-
-            if VALUES['number']:
-                self.ids.stamp_text.text = 'Номер изделия: '
-                self.ids.stamp_label.text = VALUES['number']
-            else:
-                self.ids.stamp_text.text = ''
-                self.ids.stamp_label.text = ''
-
-            if VALUES['volume_weight']:
-                self.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
-            else:
-                self.ids.volume_weight.text = ''
-
 
 class Third(Screen):
 
@@ -332,41 +294,6 @@ class Third(Screen):
 
     def open_selection_option_popup(self):
         open_option_popup(self)
-
-    def change_text(self):
-        if not VALUES:
-            pass
-        elif VALUES:
-            if VALUES['square']:
-                self.ids.label_S_pressing_value.text = str(VALUES['square'])
-            else:
-                self.ids.label_S_pressing_value.text = ''
-
-            if VALUES['volume']:
-                self.ids.volume_label.text = 'Объём изделия: '
-                self.ids.volume_value.text = str(VALUES['volume']) + ' см[sup]3[/sup]'
-            else:
-                self.ids.volume_label.text = ''
-                self.ids.volume_value.text = ''
-
-            if VALUES['gost'] in ('Прямоугольник', 'Трапецеидальный клин', 'Ребровый клин', 'Кольцо'):
-                self.ids.gost_text.text = VALUES['gost']
-            elif VALUES['gost']:
-                self.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
-            else:
-                self.ids.gost_text.text = ''
-
-            if VALUES['number']:
-                self.ids.stamp_text.text = 'Номер изделия: '
-                self.ids.stamp_label.text = VALUES['number']
-            else:
-                self.ids.stamp_text.text = ''
-                self.ids.stamp_label.text = ''
-
-            if VALUES['volume_weight']:
-                self.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
-            else:
-                self.ids.volume_weight.text = ''
 
 
 class Fourth(Screen):
@@ -499,7 +426,6 @@ class Fourth(Screen):
 
     def calculate_interim_result(self):
         self.ids.interim_result.clear_widgets()
-        print(self.composition.mixture)
         box = Box3()
         box.ids.lab_1.text = 'Промежуточный \nитог:'
         box.ids.lab_1.font_size = '10sp'
