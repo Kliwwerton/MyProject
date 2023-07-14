@@ -14,14 +14,14 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square='', 
         popup = Rectangle(dad)
 
     elif gost in TRAPEZOID and number in TRAPEZOID[gost]:
-        popup = Trapezoid()
+        popup = Trapezoid(dad)
         popup.chose_values.append(TRAPEZOID['Image'])
         popup.ids.length_label.text = 'Ширина(L), мм:'
         popup.ids.width_label.text = 'Длина(S), мм:'
         popup.ids.width_label_2.text = 'Длина(S[sub]1[/sub]), мм:'
 
     elif gost in TRAPEZOID_1 and number in TRAPEZOID_1[gost]:
-        popup = Trapezoid()
+        popup = Trapezoid(dad)
         popup.chose_values.append(TRAPEZOID_1['Image'])
 
     elif gost in RIBBED and number in RIBBED[gost]:
@@ -100,6 +100,9 @@ def change_text(dad):
 
     if not VALUES:
         pass
+    elif not dad:
+        pass
+
     elif VALUES:
         if VALUES['square']:
             dad.ids.label_S_pressing_value.text = str(VALUES['square'])
@@ -158,7 +161,7 @@ class SelectionOptionPopup(Popup):
             popup = Rectangle(self.dad)
 
         elif self.ids.spin_choose_window.text == 'Трапецеидальный клин':
-            popup = Trapezoid()
+            popup = Trapezoid(self.dad)
             popup.chose_values.append(TRAPEZOID_1['Image'])
 
         elif self.ids.spin_choose_window.text == 'Ребровый клин':
@@ -388,12 +391,13 @@ class Rectangle(Popup):
 class Trapezoid(Popup):
     """Shape of trapezoid"""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume_weight = ''
+        self.dad = dad
 
     def build_instance(self):
         if self.chose_values and self.product_size:
@@ -431,9 +435,8 @@ class Trapezoid(Popup):
         if self.volume_weight:
             self.ids.volume_weight_product.text = self.volume_weight
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     @staticmethod
     def open_calculation_average_popup(instance):
@@ -533,16 +536,20 @@ class Trapezoid(Popup):
             mistake.ids.text_mistake.text = text
             mistake.open()
 
+    def change_text(self):
+        change_text(self.dad)
+
 
 class Ribbed(Popup):
     """Shape of ribbed"""
 
-    def __init__(self):
+    def __init__(self, dad):
         super().__init__()
         self.chose_values = []
         self.product_size = []
         self.weight = ''
         self.volume_weight = ''
+        self.dad = dad
 
     def build_instance(self):
 
@@ -583,9 +590,8 @@ class Ribbed(Popup):
         if self.volume_weight:
             self.ids.volume_weight_product.text = self.volume_weight
 
-    @staticmethod
-    def return_beck():
-        SelectionOptionPopup().open()
+    def return_beck(self):
+        SelectionOptionPopup(self.dad).open()
 
     @staticmethod
     def open_calculation_average_popup(instance):
@@ -685,6 +691,9 @@ class Ribbed(Popup):
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
+
+    def change_text(self):
+        change_text(self.dad)
 
 
 class Tube(Popup):
