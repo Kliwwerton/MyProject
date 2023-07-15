@@ -22,7 +22,7 @@
 
         Spinner:
             id: spinner_press_mark
-            size_hint: 1, 0.12
+            size_hint: 1, 0.15
 #            background_normal: '0,0,0,0'
 #            background_color: 44/255 ,164/255, 45/255, 1
 #            color: 0/255 ,22/255, 203/255, 1
@@ -31,46 +31,6 @@
             values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
             on_text:
                 root.change_label()
-
-        Button:
-            text: 'Размеры и вес изделия (ВВОД)'
-            font_size: '20sp'
-            size_hint: 1,0.12
-#            background_color: 0.2, 1, 0.7, 1
-            on_release:
-                root.open_selection_option_popup()
-
-        BoxLayout:
-            spacing: 10
-            size_hint: 1, 0.12
-            Label:
-                text: 'S изделия: '
-                font_size: '20sp'
-                halign: 'left'
-                valign: 'middle'
-                text_size: self.size
-                size_hint: 0.3, 1
-                color: 64/255,64/255,64/255,1
-
-            TextInput:
-                id: label_S_pressing_value
-                markup: True
-                multiline: False
-                font_size: '20sp'
-                color: 64/255,64/255,64/255,1
-                hint_text: 'Площадь'
-                size_hint: 0.45, 1
-                halign: 'center'
-                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
-                input_tipe: 'number'
-                input_filter: 'float'
-
-            Label:
-                markup: True
-                font_size: '20sp'
-                color: 64/255,64/255,64/255,1
-                size_hint: 0.2, 1
-                text: 'см[sup]2[/sup]'
 
         GridLayout:
             size_hint: 1, 0.30
@@ -117,7 +77,7 @@
                 size_hint: 0.3, 1
                 font_size: '20sp'
                 hint_text: 'P'
-                color: 64/255,64/255,64/255,1
+                foreground_color: 64/255,64/255,64/255,1
                 halign: 'center'
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
@@ -130,6 +90,47 @@
                 color: 64/255,64/255,64/255,1
                 font_size: '20sp'
                 size_hint: 0.4, 1
+
+        Button:
+            text: 'Размеры и вес изделия (ВВОД)'
+            font_size: '20sp'
+            size_hint: 1,0.15
+#            background_color: 0.2, 1, 0.7, 1
+            on_release:
+                root.open_selection_option_popup()
+
+        BoxLayout:
+            spacing: 10
+            size_hint: 1, 0.15
+
+            Label:
+                text: 'S изделия: '
+                font_size: '20sp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                size_hint: 0.3, 1
+                color: 64/255,64/255,64/255,1
+
+            TextInput:
+                id: label_S_pressing_value
+                markup: True
+                multiline: False
+                font_size: '20sp'
+                foreground_color: 64/255,64/255,64/255,1
+                hint_text: 'Площадь'
+                size_hint: 0.45, 1
+                halign: 'center'
+                padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+            Label:
+                markup: True
+                font_size: '20sp'
+                color: 64/255,64/255,64/255,1
+                size_hint: 0.2, 1
+                text: 'см[sup]2[/sup]'
 
         BoxLayout:
             size_hint: 1, 0.06
@@ -204,20 +205,10 @@
                 halign: 'left'
                 valign: 'middle'
 
-#        Label:
-#            id: volume_weight
-#            markup: True
-#            size_hint: 1, 0.06
-#            text: ''
-#            color: 64/255,64/255,64/255,1
-#            text_size: self.size
-#            halign: 'left'
-#            valign: 'middle'
-
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'bottom'
-            size_hint: 1, 0.13
+            size_hint: 1, 0.12
 
             Button:
                 text: 'РАСЧИТАТЬ'
@@ -264,7 +255,7 @@
 
         FloatLayout:
             padding: 0,0,0,20
-            size_hint: 0.8, 0.13
+            size_hint: 0.8, 0.12
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
             Button:

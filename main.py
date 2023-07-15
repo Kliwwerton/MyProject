@@ -178,14 +178,14 @@ class Second(Screen):
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
-        elif not self.ids.label_S_pressing_value.text:
-            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
-
         elif self.ids.spinner_quantity_stamps.text == '0':
             return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
 
         elif not self.ids.specific_pressure.text:
             return_mistake('УКАЖИТЕ УДЕЛЬНОЕ ДАВЛЕНИЕ')
+
+        elif not self.ids.label_S_pressing_value.text:
+            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         else:
             press_mark = self.ids.spinner_press_mark.text
@@ -219,6 +219,7 @@ class Second(Screen):
         self.ids.stamp_text.text = ''
         self.ids.stamp_label.text = ''
         self.ids.volume_weight.text = ''
+        self.ids.weight_value.text = ''
         VALUES.clear()
         EngineerApp.sound_reset.play()
 
@@ -237,14 +238,14 @@ class Third(Screen):
         if self.ids.spinner_press_mark.text == 'Выберите пресс':
             return_mistake('УКАЖИТЕ МАРКУ ПРЕССА')
 
-        elif not self.ids.label_S_pressing_value.text:
-            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
-
         elif self.ids.spinner_quantity_stamps.text == '0':
             return_mistake('УКАЖИТЕ КОЛИЧЕТВО ШТАМПОВ')
 
         elif not self.ids.pressure.text:
             return_mistake('УКАЖИТЕ ПРЕССОВОЕ ДАВЛЕНИЕ')
+
+        elif not self.ids.label_S_pressing_value.text:
+            return_mistake('УКАЖИТЕ ПЛОЩАДЬ ИЗДЕЛИЯ')
 
         else:
             press = self.ids.spinner_press_mark.text
@@ -282,6 +283,7 @@ class Third(Screen):
         self.ids.stamp_text.text = ''
         self.ids.stamp_label.text = ''
         self.ids.volume_weight.text = ''
+        self.ids.weight_value.text = ''
         VALUES.clear()
         EngineerApp.sound_reset.play()
 
