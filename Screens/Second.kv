@@ -32,49 +32,6 @@
             text: 'Выберите пресс'
             values: ['LAEIS-1250', 'SACMI-1000', 'SACMI-500', 'YPR-2500', 'ДО-542', 'ДА-2238 (ЦИЧО)', 'СМ-1085', 'ПЮ', 'ПД-476 (ЦИЧО)', 'П-483 (ЦИЧО)', 'П-474А (ЦИЧО)', 'ИП-500М-АВТО']
 
-        Button:
-            text: 'Параметры изделия (ВВОД)'
-            font_size: '20sp'
-            size_hint: 1,0.15
-#            background_color: 0.2, 1, 0.7, 1
-            on_press:
-                root.open_selection_option_popup()
-
-        BoxLayout:
-            spacing: 10
-            size_hint: 1, 0.15
-            Label:
-                text: 'S изделия: '
-                font_size: '20dp'
-                halign: 'left'
-                valign: 'middle'
-                text_size: self.size
-                size_hint: 0.3, 1
-                color: 64/255,64/255,64/255,1
-
-            TextInput:
-                id: label_S_pressing_value
-                markup: True
-                hint_text: 'Площадь'
-                multiline: False
-                font_family: 'Roboto'
-                font_size: '20sp'
-                foreground_color: 64/255,64/255,64/255,1
-                size_hint: 0.45, 1
-
-                halign: 'center'
-                padding_y: [self.height / 3.5, 0]
-#                [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
-                input_tipe: 'number'
-                input_filter: 'float'
-
-            Label:
-                markup: True
-                font_size: '20sp'
-                size_hint: 0.2, 1
-                text: 'см[sup]2[/sup]'
-                color: 64/255,64/255,64/255,1
-
         GridLayout:
             size_hint: 1, 0.30
             spacing: 15
@@ -133,6 +90,50 @@
                 color: 64/255,64/255,64/255,1
                 size_hint: 0.4, 1
 
+
+        Button:
+            text: 'Параметры изделия (ВВОД)'
+            font_size: '20sp'
+            size_hint: 1,0.15
+#            background_color: 0.2, 1, 0.7, 1
+            on_press:
+                root.open_selection_option_popup()
+
+        BoxLayout:
+            spacing: 10
+            size_hint: 1, 0.15
+            Label:
+                text: 'S изделия: '
+                font_size: '20dp'
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                size_hint: 0.3, 1
+                color: 64/255,64/255,64/255,1
+
+            TextInput:
+                id: label_S_pressing_value
+                markup: True
+                hint_text: 'Площадь'
+                multiline: False
+                font_family: 'Roboto'
+                font_size: '20sp'
+                foreground_color: 64/255,64/255,64/255,1
+                size_hint: 0.45, 1
+
+                halign: 'center'
+                padding_y: [self.height / 3.5, 0]
+#                [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+                input_tipe: 'number'
+                input_filter: 'float'
+
+            Label:
+                markup: True
+                font_size: '20sp'
+                size_hint: 0.2, 1
+                text: 'см[sup]2[/sup]'
+                color: 64/255,64/255,64/255,1
+
         BoxLayout:
             size_hint: 1, 0.06
 
@@ -185,15 +186,26 @@
                 halign: 'left'
                 valign: 'middle'
 
-        Label:
-            id: volume_weight
-            markup: True
+        BoxLayout:
             size_hint: 1, 0.06
-            text: ''
-            color: 64/255,64/255,64/255,1
-            text_size: self.size
-            halign: 'left'
-            valign: 'middle'
+
+            Label:
+                id: weight_value
+                markup: True
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: volume_weight
+                markup: True
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
         AnchorLayout:
             anchor_x: 'center'

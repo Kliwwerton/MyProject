@@ -74,7 +74,7 @@ def choice_popup(gost, number=None, size=None, weight='', volume='', square='', 
         popup.chose_values.append(TUBE_1['Image'])
 
     elif gost in FASON and number in FASON[gost]:
-        popup = Fason()
+        popup = Fason(dad)
 
     else:
         popup = WrongPopup()
@@ -136,6 +136,9 @@ def change_text(dad):
         else:
             dad.ids.volume_weight.text = ''
 
+        if VALUES['weight']:
+            dad.ids.weight_value.text = 'Вес изделия: ' + VALUES['weight'] + 'грамм'
+
 
 class SelectionOptionPopup(Popup):
     """The window of chose open popup. On gost or another shape."""
@@ -173,7 +176,7 @@ class SelectionOptionPopup(Popup):
             popup.chose_values.append(TUBE['Image'])
 
         elif self.ids.spin_choose_window.text == 'Произвольное':
-            popup = Fason()
+            popup = Fason(self.dad)
 
         else:
             if self.ids.spin_choose_window.text != 'Номер изделия':
@@ -313,8 +316,9 @@ class Rectangle(Popup):
                     self.ids.volume_weight_product.text = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
                 elif self.ids.volume_weight_product.text:
-                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
-                    VALUES['weight'] = None
+                    self.calculation_weight_product()
+                    # VALUES['volume_weight'] = self.ids.volume_weight_product.text
+                    # VALUES['weight'] = None
                 else:
                     VALUES['volume_weight'] = None
                     VALUES['weight'] = None
@@ -334,10 +338,10 @@ class Rectangle(Popup):
     def calculation_weight_product(self):
         if self.ids.length_value.text and self.ids.width_value.text and \
                 self.ids.thickness_value.text and self.ids.volume_weight_product.text:
-            l, h, s, v = float(self.ids.length_value.text), float(self.ids.width_value.text), \
+            l, h, s, vw = float(self.ids.length_value.text), float(self.ids.width_value.text), \
                 float(self.ids.thickness_value.text), float(self.ids.volume_weight_product.text)
             volume = (l * h * s) / 1000
-            var = round(v * volume)
+            var = round(vw * volume)
             self.ids.weight_product.text = str(var)
             VALUES['weight'] = str(var)
             VALUES['volume'] = volume
