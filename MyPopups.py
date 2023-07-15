@@ -636,28 +636,37 @@ class Ribbed(Popup):
                 VALUES['size'].append(self.ids.thickness_value_2.text)
 
                 if self.ids.weight_product.text:
-                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
-                    self.ids.volume_weight_product.text = str(volume_weight)
-                    VALUES['volume_weight'] = str(volume_weight)
-                    VALUES['weight'] = self.ids.weight_product.text
-                elif self.ids.volume_weight_product.text:
-                    VALUES['volume_weight'] = self.ids.volume_weight_product.text
-                    VALUES['weight'] = None
+
+                    if float(self.ids.weight_product.text) != float(VALUES['weight']):
+                        volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+                        self.ids.volume_weight_product.text = str(volume_weight)
+                        VALUES['volume_weight'] = str(volume_weight)
+                        VALUES['weight'] = self.ids.weight_product.text
+                    else:
+                        pass
                 else:
-                    VALUES['volume_weight'] = None
-                    VALUES['weight'] = None
+                    VALUES['weight'] = 0
+
+                if self.ids.volume_weight_product.text:
+
+                    if float(self.ids.volume_weight_product.text) != float(VALUES['volume_weight']):
+                        self.calculation_weight_product()
+                    else:
+                        pass
+                else:
+                    VALUES['volume_weight'] = 0
 
             else:
-                VALUES['volume'] = None
-                VALUES['volume_weight'] = None
-                VALUES['weight'] = None
+                VALUES['volume'] = 0
+                VALUES['volume_weight'] = 0
+                VALUES['weight'] = 0
 
         else:
             VALUES['square'] = 0
             VALUES['size'] = 0
             VALUES['volume'] = 0
-            VALUES['volume_weight'] = None
-            VALUES['weight'] = None
+            VALUES['volume_weight'] = 0
+            VALUES['weight'] = 0
 
     def calculation_weight_product(self):
 
@@ -791,6 +800,7 @@ class Tube(Popup):
                 VALUES['size'].append(self.ids.length_value.text)
 
                 if self.ids.weight_product.text:
+
                     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                     VALUES['volume_weight'] = str(volume_weight)
                     VALUES['weight'] = self.ids.weight_product.text
