@@ -1059,11 +1059,12 @@ class Fason(Popup):
     def return_beck(self):
         SelectionOptionPopup(self.dad).open()
 
-    def calculation(self):
+    def calculation(self):  # TODO will add calculate volume_weight for Fason.
+
         if self.ids.square_product.text:
             VALUES['square'] = self.ids.square_product.text
         else:
-            VALUES['square'] = 0
+            pass
 
         if self.ids.volume_product.text and self.ids.weight_product.text:
             volume_weight = round(float(self.ids.weight_product.text)
@@ -1071,23 +1072,20 @@ class Fason(Popup):
             VALUES['volume'] = self.ids.volume_product.text
             VALUES['volume_weight'] = str(volume_weight)
             VALUES['weight'] = self.ids.weight_product.text
-
         else:
-            VALUES['volume_weight'] = 0
-            VALUES['weight'] = 0
-            VALUES['volume'] = 0
+            pass
 
         if self.ids.volume_product.text:
             VALUES['volume'] = self.ids.volume_product.text
         else:
-            VALUES['volume'] = 0
+            pass
 
         if self.ids.weight_product.text:
             VALUES['weight'] = self.ids.weight_product.text
         else:
-            VALUES['weight'] = 0
+            pass
 
-        VALUES['size'] = 0
+        # TODO will add buttons P 'calculate' for all parameters
 
     def change_text(self):
         change_text(self.dad)
