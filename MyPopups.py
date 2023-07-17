@@ -148,7 +148,7 @@ class SelectionOptionPopup(Popup):
         self.dad = dad
         for i in PARAMS:
             if i not in VALUES:
-                VALUES[i] = None
+                VALUES[i] = 0
 
     def choosing_a_product_number(self):
         numbers = []
@@ -253,6 +253,9 @@ class Rectangle(Popup):
         self.weight = ''
         self.volume_weight = ''
         self.dad = dad
+
+    def hello(self):
+        print(self.chose_values)
 
     def build_instance(self):
         if self.chose_values and self.product_size:
@@ -391,6 +394,8 @@ class Rectangle(Popup):
             mistake = MistakePopup()
             mistake.ids.text_mistake.text = text
             mistake.open()
+        else:
+            pass
 
     def change_text_weight_product(self):
         if VALUES['weight']:
@@ -1124,19 +1129,19 @@ class Fason(Popup):
             VALUES['weight'] = self.ids.weight_product.text
 
         else:
-            VALUES['volume_weight'] = None
-            VALUES['weight'] = None
-            VALUES['volume'] = None
+            VALUES['volume_weight'] = 0
+            VALUES['weight'] = 0
+            VALUES['volume'] = 0
 
         if self.ids.volume_product.text:
             VALUES['volume'] = self.ids.volume_product.text
         else:
-            VALUES['volume'] = None
+            VALUES['volume'] = 0
 
         if self.ids.weight_product.text:
             VALUES['weight'] = self.ids.weight_product.text
         else:
-            VALUES['weight'] = None
+            VALUES['weight'] = 0
 
         VALUES['size'] = 0
 
