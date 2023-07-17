@@ -119,6 +119,8 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+                on_text_validate:
+                    root.calculation()
 
             Button:
                 text: 'P'
@@ -149,13 +151,15 @@
                 padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
                 input_tipe: 'number'
                 input_filter: 'float'
+                on_text_validate:
+                    root.calculation()
 
             Button:
                 text: 'P'
                 size_hint: 0.1, 1
                 on_press:
                     root.check_value(var=2)
-                    root.calculation_weight_product()
+                    root.calculation()
 
         Image:
             id: image
