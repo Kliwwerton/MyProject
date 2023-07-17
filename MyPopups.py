@@ -254,9 +254,6 @@ class Rectangle(Popup):
         self.volume_weight = ''
         self.dad = dad
 
-    def hello(self):
-        print(self.chose_values)
-
     def build_instance(self):
         if self.chose_values and self.product_size:
             self.ids.label_gost_number.text = self.chose_values[0] + ' № ' + self.chose_values[1]
