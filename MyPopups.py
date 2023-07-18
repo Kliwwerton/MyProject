@@ -120,9 +120,11 @@ def change_text(dad):
                               'Ребровый клин', 'Кольцо', 'Фасонное изделие'):
             dad.ids.gost_text.text = VALUES['gost']
         elif VALUES['gost']:
-            dad.ids.gost_text.text = 'Размеры по: ' + VALUES['gost']
+            dad.ids.gost_label.text = 'Размеры по: '
+            dad.ids.gost_text.text = VALUES['gost']
         else:
             dad.ids.gost_text.text = ''
+            dad.ids.gost_label = ''
 
         if VALUES['number']:
             dad.ids.stamp_text.text = 'Номер изделия: '
@@ -132,12 +134,15 @@ def change_text(dad):
             dad.ids.stamp_label.text = ''
 
         if VALUES['volume_weight']:
-            dad.ids.volume_weight.text = 'Объёмный вес: ' + VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
+            dad.ids.volume_weight_label.text = 'Объёмный вес: '
+            dad.ids.volume_weight.text = VALUES['volume_weight'] + ' г/см[sup]3[/sup]'
         else:
+            dad.ids.volume_weight_label.text = ''
             dad.ids.volume_weight.text = ''
 
         if VALUES['weight']:
-            dad.ids.weight_value.text = 'Вес изделия: ' + VALUES['weight'] + 'грамм'
+            dad.ids.weight_label.text = 'Вес изделия: '
+            dad.ids.weight_value.text = VALUES['weight'] + ' грамм'
 
 
 class SelectionOptionPopup(Popup):

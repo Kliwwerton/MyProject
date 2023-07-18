@@ -215,10 +215,13 @@ class Second(Screen):
         self.ids.label_S_pressing_value.text = ''
         self.ids.volume_label.text = ''
         self.ids.volume_value.text = ''
+        self.ids.gost_label.text = ''
         self.ids.gost_text.text = ''
         self.ids.stamp_text.text = ''
         self.ids.stamp_label.text = ''
+        self.ids.volume_weight_label.text = ''
         self.ids.volume_weight.text = ''
+        self.ids.weight_label.text = ''
         self.ids.weight_value.text = ''
         VALUES.clear()
         EngineerApp.sound_reset.play()
