@@ -153,14 +153,26 @@
                 halign: 'left'
                 valign: 'middle'
 
-        Label:
-            id: gost_text
-            text: ''
+        BoxLayout:
             size_hint: 1, 0.06
-            color: 64/255,64/255,64/255,1
-            text_size: self.size
-            halign: 'left'
-            valign: 'middle'
+
+            Label:
+                id: gost_label
+                text: ''
+                size_hint: 0.4, 1
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
+                id: gost_text
+                text: ''
+                size_hint: 0.6, 1
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
 
         BoxLayout:
             size_hint: 1, 0.06
@@ -188,8 +200,32 @@
             size_hint: 1, 0.06
 
             Label:
+                id: weight_label
+                markup: True
+                size_hint: 0.4, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            Label:
                 id: weight_value
                 markup: True
+                size_hint: 0.6, 1
+                text: ''
+                color: 64/255,64/255,64/255,1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+        BoxLayout:
+            size_hint: 1, 0.06
+
+            Label:
+                id: volume_weight_label
+                markup: True
+                size_hint: 0.4, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
@@ -199,6 +235,7 @@
             Label:
                 id: volume_weight
                 markup: True
+                size_hint: 0.6, 1
                 text: ''
                 color: 64/255,64/255,64/255,1
                 text_size: self.size
@@ -244,7 +281,7 @@
 
 # Функциональные кнопки
         Button:
-            size_hint: 0.6, 0.12
+            size_hint: 0.5, 0.12
             text: 'СБРОС'
             font_size: '20sp'
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
