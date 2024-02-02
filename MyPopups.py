@@ -312,11 +312,10 @@ class Rectangle(Popup):
 
             if self.ids.thickness_value.text:
                 volume = round((square * float(self.ids.thickness_value.text)) / 1000, 2)
-                VALUES['volume'] = volume
-                VALUES['size'].append(self.ids.thickness_value.text)
 
                 if self.ids.weight_product.text:
-                    if float(self.ids.weight_product.text) != float(VALUES['weight']):
+                    if float(self.ids.weight_product.text) != float(VALUES['weight']) or \
+                            int(VALUES['volume']) != int(volume):
                         volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
                         VALUES['volume_weight'] = str(volume_weight)
                         self.ids.volume_weight_product.text = str(volume_weight)
@@ -325,6 +324,9 @@ class Rectangle(Popup):
                         pass
                 else:
                     pass
+
+                VALUES['volume'] = volume
+                VALUES['size'].append(self.ids.thickness_value.text)
 
                 if self.ids.volume_weight_product.text:
                     if float(self.ids.volume_weight_product.text) != float(VALUES['volume_weight']):
@@ -337,6 +339,12 @@ class Rectangle(Popup):
                 pass
         else:
             pass
+
+    # def calculation_volume_weight(self):
+    #     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+    #     VALUES['volume_weight'] = str(volume_weight)
+    #     self.ids.volume_weight_product.text = str(volume_weight)
+    #     VALUES['weight'] = self.ids.weight_product.text
 
     def calculation_weight_product(self):
         if self.ids.length_value.text and self.ids.width_value.text and \
@@ -621,13 +629,13 @@ class Ribbed(Popup):
                 VALUES['size'].append(self.ids.thickness_value_2.text)
 
                 if self.ids.weight_product.text:
-                    if float(self.ids.weight_product.text) != float(VALUES['weight']):
-                        volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
-                        self.ids.volume_weight_product.text = str(volume_weight)
-                        VALUES['volume_weight'] = str(volume_weight)
-                        VALUES['weight'] = self.ids.weight_product.text
-                    else:
-                        pass
+                    # if float(self.ids.weight_product.text) != float(VALUES['weight']):
+                    volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+                    self.ids.volume_weight_product.text = str(volume_weight)
+                    VALUES['volume_weight'] = str(volume_weight)
+                    VALUES['weight'] = self.ids.weight_product.text
+                    # else:
+                    #     pass
                 else:
                     pass
 

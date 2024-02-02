@@ -1,110 +1,37 @@
 <Fifth>:
+    name: 'Fifth'
 
     BoxLayout:
+        size: 1.0, 0.87
         id: main_box
         orientation: 'vertical'
         padding: 5
 
-        AnchorLayout:
-            anchor_x: 'center'
-            anchor_y: 'top'
-            size_hint: 1, 0.2
-            padding: 10,10,10,10
-
-            LabelGray:
-                text: 'Расчёт состава смеси.'
-
         Button:
-            text: 'Добавить компонент'
-            size_hint: 1, 0.1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
-                root.add_new_component()
-
-        BoxLayout:
-            id: first_box
-            name: ''
-            size_hint: 1, 0.18
-            on_touch_down:
-                root.open_component(self)
-
-        BoxLayout:
-            id: second_box
-            name: ''
-            size_hint: 1, 0.18
-            on_touch_down:
-                root.open_component(self)
-
-        BoxLayout:
-            id: third_box
-            size_hint: 1, 0.18
-
-        BoxLayout:
-            id: fourth_box
-            size_hint: 1, 0.18
-
-        BoxLayout:
-            id: fifth_box
-            size_hint: 1, 0.18
-
-        BoxLayout:
-            size_hint: 1, 0.13
-
-            Label:
-                size_hint: 0.6, 1
-
-            RelativeLayout:
-                size_hint: 1, 1
-
-
-                Button:
-                    text: 'РАССЧИТАТЬ'
-                    font_size: '20sp'
-#                    size_hint: 0.5, 1
-                    on_release:
-                        root.calculate()
-
-            RelativeLayout:
-                size_hint: 0.6, 1
-
-                Button:
-                    text: '#'
-                    size_hint: 0.25, 0.5
-                    pos_hint: {'center_x': 0.75, 'center_y': 0.5}
-                    on_release:
-                        root.manager.current = 'Fourth'
-
-        BoxLayout:
-            id: box_result
-            size_hint: 1, 0.25
-
-        Button:
-            size_hint: 0.6, 0.12
-            text: 'СБРОС'
+            text: 'ИЗДЕЛИЯ (форма и размеры)'
             font_size: '20sp'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            on_press:
-                root.open_ressetPopup()
 
-        FloatLayout:
-            size_hint: 0.8, 0.13
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
-            Button:
-                size_hint: 0.25, 0.6
-                text: 'НАЗАД'
-                font_size: '10sp'
-                pos_hint: {'center_x': 0.25, 'center_y': 0.4}
-                background_color: 1,0,0,1
-                on_release:
-                    root.manager.current = 'First'
 
-            Button:
-                id: button_exit
-                text: 'ВЫХОД'
-                font_size: '10sp'
-                background_color: 1,0,0,1
-                size_hint: 0.25, 0.6
-                pos_hint: {'center_x': 0.75, 'center_y': 0.4}
-                on_release:
-                    app.close_app()
+    FloatLayout:
+        size_hint: 0.8, 0.13
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        Button:
+            size_hint: 0.25, 0.6
+            text: 'НАЗАД'
+            font_size: '10sp'
+            pos_hint: {'center_x': 0.25, 'center_y': 0.4}
+            background_color: 1,0,0,1
+            on_release:
+                root.manager.current = 'First'
+
+        Button:
+            id: button_exit
+            text: 'ВЫХОД'
+            font_size: '10sp'
+            background_color: 1,0,0,1
+            size_hint: 0.25, 0.6
+            pos_hint: {'center_x': 0.75, 'center_y': 0.4}
+            on_release:
+                app.close_app()
