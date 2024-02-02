@@ -454,9 +454,12 @@ class Fourth(Screen):
 
 
 class Fifth(Screen):
-    pass
-    # def __init__(self):
-    #     super().__init__()
+
+    def __init__(self):
+        super().__init__()
+
+    def open_selection_option_popup(self):
+        open_option_popup(self)
 
 #     """Fourth Screen. Screen of calculation chemical composition."""
 #     def __init__(self):

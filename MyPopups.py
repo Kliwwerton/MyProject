@@ -102,6 +102,8 @@ def change_text(dad):
         pass
     elif not dad:
         pass
+    elif dad.name == 'Fifth':
+        pass
 
     elif VALUES:
         if VALUES['square']:

@@ -2,36 +2,37 @@
     name: 'Fifth'
 
     BoxLayout:
-        size: 1.0, 0.87
-        id: main_box
+        size: 1.0, 0.93
         orientation: 'vertical'
         padding: 5
 
         Button:
             text: 'ИЗДЕЛИЯ (форма и размеры)'
             font_size: '20sp'
+            size_hint: 1,0.12
+#            background_color: 0.2, 1, 0.7, 1
+            on_press:
+                root.open_selection_option_popup()
 
+        FloatLayout:
+            size_hint: 0.8, 0.07
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
+            Button:
+                size_hint: 0.25, 0.6
+                text: 'НАЗАД'
+                font_size: '10sp'
+                pos_hint: {'center_x': 0.25, 'center_y': 0.4}
+                background_color: 1,0,0,1
+                on_release:
+                    root.manager.current = 'First'
 
-    FloatLayout:
-        size_hint: 0.8, 0.13
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-
-        Button:
-            size_hint: 0.25, 0.6
-            text: 'НАЗАД'
-            font_size: '10sp'
-            pos_hint: {'center_x': 0.25, 'center_y': 0.4}
-            background_color: 1,0,0,1
-            on_release:
-                root.manager.current = 'First'
-
-        Button:
-            id: button_exit
-            text: 'ВЫХОД'
-            font_size: '10sp'
-            background_color: 1,0,0,1
-            size_hint: 0.25, 0.6
-            pos_hint: {'center_x': 0.75, 'center_y': 0.4}
-            on_release:
-                app.close_app()
+            Button:
+                id: button_exit
+                text: 'ВЫХОД'
+                font_size: '10sp'
+                background_color: 1,0,0,1
+                size_hint: 0.25, 0.6
+                pos_hint: {'center_x': 0.75, 'center_y': 0.4}
+                on_release:
+                    app.close_app()
