@@ -340,6 +340,12 @@ class Rectangle(Popup):
         else:
             pass
 
+    # def calculation_volume_weight(self):
+    #     volume_weight = round(float(self.ids.weight_product.text) / volume, 2)
+    #     VALUES['volume_weight'] = str(volume_weight)
+    #     self.ids.volume_weight_product.text = str(volume_weight)
+    #     VALUES['weight'] = self.ids.weight_product.text
+
     def calculation_weight_product(self):
         if self.ids.length_value.text and self.ids.width_value.text and \
                 self.ids.thickness_value.text and self.ids.volume_weight_product.text:

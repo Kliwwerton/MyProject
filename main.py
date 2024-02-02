@@ -453,7 +453,11 @@ class Fourth(Screen):
         self.ids.interim_result.add_widget(box)
 
 
-# class Fifth(Screen):
+class Fifth(Screen):
+    pass
+    # def __init__(self):
+    #     super().__init__()
+
 #     """Fourth Screen. Screen of calculation chemical composition."""
 #     def __init__(self):
 #         super().__init__()
@@ -549,7 +553,7 @@ class EngineerApp(App):
         self.Second = Second()
         self.Third = Third()
         self.Fourth = Fourth()
-        # self.Fifth = Fifth()
+        self.Fifth = Fifth()
         self.References = References()
         self.Gost_standards = GostStandards()
         self.Cows_and_bulls = CowsAndBulls()
@@ -563,7 +567,7 @@ class EngineerApp(App):
         self.container.add_widget(self.Second)
         self.container.add_widget(self.Third)
         self.container.add_widget(self.Fourth)
-        # self.container.add_widget(self.Fifth)
+        self.container.add_widget(self.Fifth)
         self.container.add_widget(self.References)
         self.container.add_widget(self.Gost_standards)
         self.container.add_widget(self.Cows_and_bulls)
@@ -585,7 +589,7 @@ class EngineerApp(App):
                 ClosePopup().open()
                 return True
 
-            elif self.container.current == 'Second' or 'Third' or 'Fourth':
+            elif self.container.current == 'Second' or 'Third' or 'Fourth' or 'Fifth':
                 self.container.current = 'First'
                 print('I`m here')
                 return True

@@ -81,8 +81,16 @@
 #                app.Fourth.create_new_composition()
                 root.manager.current = 'Fourth'
 
+        Button:
+            text: 'СПРАВОЧНИК'
+            font_size: '20sp'
+            size_hint: 1, 0.25
+            on_release:
+                root.manager.current = 'Fifth'
+
+
         AnchorLayout:
-            size_hint: 1.0, 0.25
+            size_hint: 1.0, 0.1
 
 #            Button:
 #                id: button_guide
